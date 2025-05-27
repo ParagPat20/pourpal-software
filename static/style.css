@@ -1,0 +1,2385 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"); */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nunito,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+input,
+textarea,
+select {
+  font-family: "Nunito", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #000;
+}
+
+/* Root variables */
+:root {
+  --primary-color: #3d3229;
+  --secondary-color: #359267;
+  --background-gradient: linear-gradient(135deg, #e3d7c1, #9eb395);
+  --text-color: #000;
+  --white-transparent: rgba(255, 255, 255, 0.5);
+  --border-radius: 15px;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  background: var(--background-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg {
+  background: #ffffff30;
+}
+
+.app-content {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-topbar {
+  width: 100%;
+  height: 20%;
+  /* background: #ffffff30; */
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.picker-setting {
+  position: absolute;
+  top: 33%;
+  right: 1.5%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+.picker-setting:hover {
+  cursor: pointer;
+}
+.picker-setting img {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.update-setting {
+  position: absolute;
+  top: 67%;
+  right: 1.5%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+.update-setting:hover {
+  cursor: pointer;
+}
+.update-setting img {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.app-logo img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: invert(1);
+}
+
+.app-body {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  overflow: hidden;
+  padding-top: 15px;
+}
+
+.app-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  /* background: #ffffff30; */
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.navbar a {
+  /* background: #ffffff30; */
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  /* color: #57492c; */
+  transition: background 0.3s ease;
+}
+.navbar .active,
+.navbar a:hover {
+  /* background: #57492c; */
+  /* color: #fff; */
+  font-weight: 500;
+}
+
+.app-pageview {
+  flex-grow: 1;
+  margin-left: 15px;
+  /* background: #ffffff30; */
+  border-radius: 15px;
+  height: 100%;
+  overflow: hidden;
+}
+.find-ing {
+  width: 100%;
+  height: 100%;
+  padding: 15px 0px;
+  display: block;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  height: auto;
+}
+.search-box svg {
+  width: 5%;
+  height: 23px;
+}
+.search-box .searchbar {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 5px;
+}
+.search-box .searchbar input {
+  width: 70%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+}
+.search-box .searchbar input:focus,
+.search-box .searchbar input:focus-visible,
+.search-box .searchbar input:focus-within {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+.search-box .searchbar p {
+  width: 25%;
+  text-align: right;
+  padding-right: 15px;
+}
+.search-box .searchbar p span {
+  color: #57492c;
+  font-weight: 700;
+}
+.search-box a {
+  width: 15%;
+  /* background: #57492c; */
+  border-radius: 10px;
+  /* color: #fff; */
+  text-align: center;
+  padding: 15px 25px;
+}
+.search-box a:hover {
+  background: #359267;
+}
+.search-box a svg {
+  font-weight: bold;
+}
+.ing-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  height: auto;
+}
+.ing-filter a {
+  /* background: #ffffff30; */
+  border-radius: 10px;
+  padding: 15px 25px;
+  text-align: center;
+  /* color: #57492c; */
+  font-size: 20px;
+  transition: background 0.3s ease;
+}
+.ing-filter .active,
+.ing-filter a:hover {
+  /* background: #57492c; */
+  /* color: #fff; */
+  font-weight: 500;
+}
+.ing-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  height: 92%;
+  overflow: hidden;
+}
+.ing-grid {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding: 0px 15px;
+  padding-bottom: 100px;
+}
+.fi-top {
+  width: 100%;
+  height: auto;
+  padding: 0px 15px;
+}
+.fi-bottom {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 70px;
+}
+/* Styles for the scrollbar in WebKit browsers */
+.ing-grid::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the scrollbar */
+}
+
+.ing-grid::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: rgba(245, 222, 179, 0.1); /* Color of the track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.ing-grid::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background: #4b3d2e; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.ing-grid::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+  background: #3d3229; /* Darker color on hover */
+}
+
+/* For Firefox */
+.ing-grid {
+  scrollbar-width: thin; /* Make the scrollbar thin */
+  scrollbar-color: #4b3d2e rgba(245, 222, 179, 0.1); /* Thumb color and track color */
+}
+
+div#ingredients-container {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(125px, auto)); */
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 15px;
+  width: 100%;
+  height: auto;
+  padding-top: 5px;
+}
+
+div#cocktail-ingredients-container {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(125px, auto)); */
+  grid-template-columns: repeat(auto-fill, minmax(157px, 1fr));
+  gap: 15px;
+  width: 100%;
+  height: auto;
+  padding-top: 5px;
+}
+.ing-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #ffffff50;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #00000010;
+  height: auto;
+  min-height: 170px;
+}
+label.btn-checkbox {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  /* justify-content: center; */
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 0px;
+}
+label.btn-checkbox:hover {
+  /* background: #4caf5075; */
+  background: var(--bg-color, #4caf5075);
+  cursor: pointer;
+}
+
+label.btn-checkbox img {
+  /* padding: 10px 0px; */
+  width: 100%;
+  height: 75px;
+  object-fit: contain;
+  object-position: center;
+}
+label.btn-checkbox p {
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+}
+label.btn-checkbox:hover p {
+  color: #fff;
+}
+label.btn-checkbox:hover input {
+  border-color: #fff;
+}
+input[type="checkbox"] {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  /* background-color: #f0f0f0; */
+  border: 1px solid #57492c;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--bg-color, #4caf50);
+  border-color: var(--bg-color, #4caf50);
+}
+
+input[type="checkbox"]:checked::before {
+  content: "✔";
+  display: block;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  line-height: normal;
+}
+
+.btn {
+  background: #3d3229;
+  color: #fff;
+}
+.btn:hover {
+  background: #000;
+  color: #fff;
+}
+.btn.active {
+  background: #3d3229;
+}
+.btn.deactive {
+  background: rgba(255, 255, 255, 0.5);
+  color: #000;
+}
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto; /* Center modal vertically */
+  padding: 25px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  width: 50%;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.mod-left,
+.mod-right {
+  width: 50%;
+}
+
+.modl-txt h2,
+.gp-txt h3,
+.ap-txt h4,
+.mr-btn-txt h2 {
+  font-size: 20px;
+  color: #359267;
+  margin-bottom: 25px;
+}
+/* Close Button */
+.close {
+  color: #fff;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #fff; /* Darker on hover */
+  /* background: #000; */
+}
+
+/* Color Picker and Gradient Styles */
+.color-picker,
+.gradient-picker,
+.mr-btn,
+.mr-btn-tx {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+}
+.mr-btn,
+.mr-btn-tx {
+  margin-bottom: 15px;
+}
+.mrc {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+.color-picker,
+.gp-picker {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+}
+.color-picker label,
+.gp-picker label,
+.mrc label {
+  width: 50%;
+  margin: 0;
+  padding-right: 15px;
+  font-size: 20px;
+}
+.mrc label {
+  width: 100%;
+  padding-bottom: 5px;
+}
+.color-picker input,
+.gp-picker input,
+.mrc input {
+  width: 50px;
+  margin: 0;
+  padding: 0px;
+  background: transparent;
+  border: none;
+  border-radius: 0px;
+  height: 35px;
+}
+.gradient-picker {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+h2,
+h3,
+h4 {
+  font-weight: 600; /* Semi-bold for headings */
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 14px; /* Smaller font size */
+  margin-bottom: 5px; /* Space below labels */
+}
+
+/* Modern Input Styles */
+.modern-color-input {
+  border: none;
+  border-radius: 5px;
+  height: 40px; /* Height for input fields */
+  width: 100%; /* Full width */
+  margin-bottom: 15px; /* Space below inputs */
+  padding: 0 10px; /* Padding for input */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Input shadow */
+  transition: box-shadow 0.2s; /* Smooth transition */
+}
+
+.modern-color-input:focus {
+  outline: none; /* Remove outline */
+  box-shadow: 0 0 5px rgba(0, 102, 204, 0.8); /* Highlight on focus */
+}
+
+/* Button Styles */
+.modern-button {
+  border: none;
+  border-radius: 5px;
+  height: 40px; /* Height for button */
+  cursor: pointer;
+  transition: background-color 0.2s; /* Smooth transition */
+}
+
+/* Angle Picker Styles */
+.angle-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.angle-slider {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Ensure the circle stays circular */
+
+  /* Set the background to transparent */
+  background: transparent;
+
+  /* Apply gradient to border using border-image */
+  border: 8px solid transparent; /* Make the border transparent */
+  border-image: linear-gradient(
+      var(--gradient-angle, 131deg),
+      var(--gradient-color1, #e3d7c1),
+      var(--gradient-color2, #9eb395)
+    )
+    1; /* Apply gradient to the border */
+
+  /* margin: 15px 0; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.angle-knob {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(
+    var(--gradient-angle, 130deg),
+    var(--gradient-color1, #e3d7c1),
+    var(--gradient-color2, #9eb395)
+  );
+
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer; /* Cursor change */
+  transition: background 0.2s; /* Smooth color transition */
+}
+.predefined-colors {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.predefined-color {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Optional: Add hover effect */
+.predefined-color:hover {
+  transform: scale(1.1);
+}
+
+.mod-close {
+  position: absolute;
+  top: 3%;
+  right: 1.5%;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: var(--bg-color, #359267);
+  box-shadow: 0px 0px 5px #00000025;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+.mod-close:hover {
+  background: #000;
+}
+.btn-rest {
+  position: absolute;
+  bottom: 3%;
+  right: 2%;
+}
+button#reset-defaults {
+  background: var(--bg-color, #359267);
+  box-shadow: 0px 0px 5px #00000025;
+  color: #fff;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 20px;
+}
+button#reset-defaults:hover {
+  background: #000;
+  cursor: pointer;
+}
+
+.add-ing,
+.add-cocktail,
+.select-pipeline,
+.all-cocktail,
+.available-cocktails,
+.assign-pipe {
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  position: relative;
+}
+.add-cocktail-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  overflow: hidden;
+}
+.add-cocktail-form {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: #ffffff50;
+  padding: 25px;
+  border-radius: 15px;
+}
+.add-cocktail-find-ing {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: #ffffff50;
+  padding: 25px;
+  border-radius: 15px;
+}
+.add-cocktail-find-ing .cocktail-fi-top,
+.add-cocktail-find-ing .ing-grid {
+  padding: 0px;
+}
+
+/* Add grid layout for ingredients in Add Cocktail section */
+.add-cocktail-find-ing div#ingredients-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, auto));
+  gap: 15px;
+  width: 100%;
+  height: auto;
+  padding-top: 5px;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.form-group label {
+  width: 175px;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 300px;
+  border-radius: 5px;
+  background: #fff;
+  border: none;
+  height: 35px;
+  padding: 5px;
+  box-shadow: 0px 0px 5px #00000025;
+}
+.form-group textarea {
+  min-height: 100px;
+}
+.form-group input[type="file"] {
+  background: transparent;
+  box-shadow: none;
+}
+.footer-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding: 25px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+.add-cocktail-form .footer-btn {
+  padding: 8px 25px;
+}
+button#submit-button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+button#serial-out-button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+button#add-cocktail-button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.btns {
+  border: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+button#back-button {
+  background: #fff;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+button#back-button1 {
+  background: #fff;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+button#back-button2 {
+  background: #fff;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+button#back-button3 {
+  background: #fff;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+button#back-button-all-cocktail {
+  background: #fff;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.footer-btn button:hover {
+  cursor: pointer;
+}
+.navbar a {
+  margin-bottom: 15px;
+}
+.navbar a:last-child {
+  margin-bottom: 0px;
+}
+.cocktail-fi-top .search-box .searchbar {
+  width: 100%;
+}
+.sp-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 100%;
+  height: auto;
+  padding-top: 5px;
+}
+.sp-form-grid .form-group {
+  gap: 15px;
+  margin-top: 15px;
+}
+.sp-form-grid .form-group label {
+  width: 30%;
+}
+.sp-form-grid .form-group select {
+  width: 60%;
+}
+.sp-form-grid .form-group button {
+  width: 6%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  border-radius: 5px;
+  background: #fff;
+}
+.sp-form-grid .form-group button:hover {
+  background: #000;
+  cursor: pointer;
+}
+.sp-form-grid .form-group button svg {
+  font-size: 16px;
+  fill: #000;
+}
+.sp-form-grid .form-group button:hover svg path {
+  fill: #fff;
+}
+.find-ing .fi-bottom {
+  position: relative;
+}
+.find-ing .footer-btn {
+  bottom: 14%;
+  /* background: #ffffff25;
+  backdrop-filter: blur(5px); */
+  padding: 15px;
+  position: relative;
+  z-index: 3;
+}
+.find-ing .footer-btn::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #ffffff25;
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  border: none;
+  outline: none;
+}
+.cocktail-list,
+.cocktail-list2 {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(125px, auto)); */
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 15px;
+  width: 100%;
+  height: auto;
+}
+.cl-item {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 10px;
+  background: #ffffff50;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #00000010;
+  padding: 15px;
+  height: auto;
+  min-height: 215px;
+}
+.cl-item:hover {
+  background: var(--bg-color, #4caf5075);
+  cursor: pointer;
+}
+.cl-item:hover p {
+  color: #fff;
+}
+.cl-item img {
+  padding: 10px 0px;
+  padding-top: 0px;
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  object-position: center;
+}
+.cl-item p {
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+}
+.add-cocktail-form .form-group label {
+  width: 30%;
+}
+.add-cocktail-form .form-group input,
+.add-cocktail-form .form-group select,
+.add-cocktail-form .form-group textarea {
+  width: 70%;
+}
+.cocktail-details {
+  width: 100%;
+  height: 100%;
+}
+.cd-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  overflow: hidden;
+}
+.cd-left {
+  width: 35%;
+  height: 100%;
+}
+.cdl-img {
+  width: 100%;
+  height: 100%;
+}
+.cdl-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.cd-right {
+  width: 65%;
+  height: 100%;
+  position: relative;
+  /* overflow-y: scroll; */
+  /* padding-right: 15px; */
+}
+.cd-right .footer-btn {
+  padding: 0px 15px;
+}
+.cd-right .fi-bottom {
+  padding-bottom: 0px;
+}
+.cd-right .ing-grid {
+  padding: 0px;
+}
+.cdr-txt {
+  padding-bottom: 15px;
+}
+.cdr-txt:last-child {
+  padding-bottom: 0px;
+}
+.cdr-txt h2 {
+  color: var(--bg-color, #359267);
+}
+form.drink-type .drink-form-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 15px;
+}
+.drink-form-grid .form-group label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: #ffffff50;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #00000010;
+}
+.drink-form-grid .form-group label span {
+  font-size: 15px;
+}
+.drink-form-grid .form-group input {
+  width: max-content;
+  margin-right: 10px;
+  box-shadow: none;
+}
+.form-group label {
+  width: 15%;
+}
+.form-group span,
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 35%;
+  margin: 0px;
+}
+form#cocktail-form {
+  width: 100%;
+}
+.form-group-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+}
+.form-group-flex input#product-image {
+  padding: 0px;
+  padding-top: 6px;
+}
+form.drink-type input,
+form.drink-type span,
+form.drink-type textarea,
+form.drink-type select {
+  width: max-content;
+}
+
+@media (max-width: 768px) {
+  .app-body {
+    flex-direction: column;
+  }
+
+  .app-sidebar {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .app-pageview {
+    margin-left: 0;
+  }
+
+  .search-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box .searchbar input {
+    width: 100%;
+  }
+
+  .search-box a {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .modal-content {
+    width: 90%; /* Full width on smaller screens */
+  }
+
+  .angle-slider {
+    width: 70px; /* Smaller angle slider */
+    height: 70px; /* Smaller angle slider */
+  }
+}
+
+.selected-ingredients-container {
+  /* Styles for the container */
+  padding: 15px;
+  border-radius: 8px; /* Corrected border radius (removed space) */
+}
+
+.ingredient-item {
+  /* Styles for each ingredient item */
+  margin-bottom: 20px; /* Increased space between items (adjust as needed) */
+  padding: 10px; /* Padding inside each item */
+  border: 1px solid #ccc; /* Border for each item */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #fff; /* Background color for each item */
+  display: flex; /* Flexbox for layout */
+  align-items: center; /* Center items vertically */
+  position: relative; /* Ensure the dropdown can be positioned relative to this item */
+}
+
+.ingredient-item span {
+  /* Styles for the ingredient label */
+  font-weight: bold; /* Bold text for ingredient name */
+  font-size: 18px; /* Increase font size (adjust as needed) */
+  color: #333; /* Optional: change text color for better visibility */
+  margin-right: 50px; /* Space between the label and dropdown */
+}
+
+select {
+  /* Styles for the dropdown */
+  padding: 5px; /* Padding inside the dropdown */
+  border: 2px solid #ccc; /* Thin border for the dropdown (adjust thickness as needed) */
+  border-radius: 10px; /* Rounded corners with a radius of 20px */
+  width: 500px; /* Set a specific width for the dropdown (adjust as needed) */
+  margin-right: 500px; /* Push the dropdown to the left with a margin of 100px */
+}
+
+/* CSS for Active Button */
+.active-class {
+  background-color: #3d3229; /* Background color for active state */
+  color: #ffffff; /* Text color for active state */
+  border: 2px solid #ffffff; /* Optional border for active state */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* CSS for Deactive Button */
+.deactive-class {
+  background-color: rgba(
+    61,
+    50,
+    41,
+    0.5
+  ); /* Background color for deactivated state */
+  color: #000000; /* Text color for deactivated state */
+  border: 2px solid rgba(61, 50, 41, 0.5); /* Optional border for deactivated state */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover Effects for Active Buttons */
+.active-class:hover {
+  background-color: #000; /* Darker background on hover */
+  color: #ffffff; /* Keep text color white on hover */
+}
+
+/* Hover Effects for Deactive Buttons */
+.deactive-class:hover {
+  background-color: rgba(255, 255, 255, 0.7); /* Lighter background on hover */
+  color: #000; /* Change text color to black on hover */
+}
+
+.cdr-txt {
+  margin-bottom: 20px; /* Space below the section */
+}
+
+.cdr-txt h2,
+.sp-txt h2,
+.txc {
+  font-size: 20px; /* Font size for the heading */
+  margin-bottom: 10px; /* Space below the heading */
+  color: #359267; /* Heading color */
+}
+
+.cdr-txt label {
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Center vertically */
+  margin-right: 15px; /* Space between radio buttons */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.cdr-txt input[type="radio"] {
+  margin-right: 5px; /* Space between radio button and label text */
+  accent-color: #359267; /* Change radio button color */
+}
+
+/* Optional: Add hover effect on label */
+.cdr-txt label:hover {
+  color: #2a6b5d; /* Darker color on hover */
+}
+
+#loading-page {
+  display: none; /* Initially hidden */
+  position: fixed; /* Stay in place */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background: rgba(0, 0, 0, 0.8); /* Dark background with opacity */
+  color: white; /* White text color for all text */
+  text-align: center; /* Center text */
+  padding-top: 20%; /* Space from the top */
+  z-index: 1000; /* Sit on top */
+  font-family: "Nunito", sans-serif; /* Font family for better typography */
+}
+
+#loading-page h1 {
+  font-size: 36px; /* Larger font size for the heading */
+  margin-bottom: 20px; /* Space below the heading */
+  color: white; /* Ensure heading text is white */
+}
+
+#loading-page p {
+  font-size: 18px; /* Font size for the message */
+  margin-bottom: 30px; /* Space below the message */
+  color: white; /* Ensure paragraph text is white */
+}
+
+#loading-page button {
+  background-color: #359267; /* Green background for the button */
+  color: white; /* White text color for the button */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 16px; /* Font size for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+#loading-page button:hover {
+  background-color: #2a6b5d; /* Darker green on hover */
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #359267;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#product-list-container {
+  display: block; /* Ensure it is visible */
+}
+
+/* Custom Alert Modal Styles */
+#custom-alert {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto; /* Center modal vertically */
+  padding: 25px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  width: 80%; /* Width of the modal */
+  max-width: 400px; /* Max width */
+  text-align: center; /* Center text */
+}
+
+#alert-ok {
+  background-color: #359267; /* Button background */
+  color: white; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding inside the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+  margin-top: 15px;
+}
+
+#alert-ok:hover {
+  background-color: #2a6b5d; /* Darker green on hover */
+}
+
+.col-pop {
+  margin: 0 auto !important;
+  max-width: unset;
+  text-align: left;
+  width: 45%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.all-product,
+.cocktail-details {
+  background: #ffffff30;
+  border-radius: 15px;
+}
+.cdr-txt label {
+  margin-right: 0px;
+}
+.drink-type {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.drink-type label {
+  border-radius: 10px;
+  background: #ffffff50;
+  box-shadow: 0px 0px 5px #00000010;
+  width: max-content;
+  padding: 15px 25px;
+}
+.add-cocktail-find-ing div#cocktail-ingredients-container1 {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(115px, auto)); */
+  grid-template-columns: repeat(auto-fill, minmax(134px, 1fr));
+  gap: 15px;
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  padding-top: 5px;
+}
+.add-cocktail-find-ing div#cocktail-ingredients-container1 .ing-item {
+  height: auto;
+  min-height: 170px;
+}
+.add-cocktail-find-ing .ing-box {
+  height: 88%;
+}
+div#custom-alert .modal-content {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  max-width: 350px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+div#custom-alert {
+  height: 100vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+button#assignPipeline {
+  background-color: #3d3229 !important;
+}
+.act-bg {
+  background-color: #3d3229 !important;
+}
+.new-bg {
+  background: #ffffff30;
+  border-radius: 15px;
+}
+.cdr-txt {
+  margin-bottom: 5px;
+}
+.add-cocktail-form input#product-id {
+  background: transparent;
+  box-shadow: none;
+}
+.add-cocktail-form {
+  overflow: hidden;
+  padding: 15px;
+}
+form#cocktail-form {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 10px;
+  padding-bottom: 50px;
+}
+.add-cocktail-form .form-group textarea {
+  width: 70% !important;
+}
+.add-cocktail-form .footer-btn {
+  background: #ffffff50;
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+  border-radius: 0px 0px 15px 15px;
+}
+select:focus-visible {
+  outline: none;
+}
+.all-cocktail .footer-btn,
+.blurx {
+  /* background: #ffffff25;
+  backdrop-filter: blur(5px); */
+  padding: 15px;
+  z-index: 3;
+}
+.all-cocktail .footer-btn::after,
+.blurx::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #ffffff25;
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.all-cocktail {
+  overflow: hidden;
+}
+div#cocktail-ingredients-container .ing-item {
+  min-height: 157px;
+}
+div#cocktail-ingredients-container .ing-item label {
+  justify-content: space-evenly;
+}
+label {
+  font-size: 20px;
+}
+.all-cocktail button#back-button {
+  background: #3d3229 !important;
+}
+.cdr-txt input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+}
+button#serial-out-button,
+button#submit-button,
+button#add-cocktail-button {
+  padding: 15px 25px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+span#ingredient-id,
+input#product-id {
+  color: crimson;
+  font-weight: 500;
+}
+.add-cocktail-form .footer-btn {
+  padding: 10px;
+}
+
+.selected-ingredients-container {
+  padding: 0px;
+  border-radius: unset;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 15px;
+  grid-column-gap: 50px;
+  width: 100%;
+  height: auto;
+  margin-top: 25px;
+}
+.selected-ingredients-container div {
+  margin-bottom: 0px;
+  width: 100%;
+}
+.selected-ingredients-container div span {
+  width: 30%;
+}
+.selected-ingredients-container div select {
+  width: 70%;
+  margin: 0px;
+}
+/* .form-group label {
+  font-family: "Lato", sans-serif !important;
+} */
+
+/* Assign Pipeline Dropdown */
+
+.pipe-dropdown-container {
+  position: relative;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.pipe-dropdown-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.pipe-dropdown-search {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.clear-pipe-search {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  padding: 0 5px;
+}
+
+.clear-pipe-search:hover {
+  color: #000;
+}
+
+.pipe-dropdown-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  z-index: 1000;
+  margin-top: 2px;
+}
+
+.pipe-dropdown-options .option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.pipe-dropdown-options .option:hover {
+  background: #f0f0f0;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 15px;
+}
+
+.default-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.default-num-btn {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.default-num-btn:hover {
+  background-color: #0056b3;
+}
+
+/* .assign-pipe {
+  overflow-y: scroll;
+} */
+
+.num-pipes {
+  /* padding: 25px; */
+  background: #ffffff50;
+  border-radius: 15px;
+  /* margin-bottom: 25px; */
+}
+.aspi-div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 35px;
+  gap: 25px;
+  flex-direction: column;
+}
+.num-pipes-genrate {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin: 0;
+  height: 50px;
+}
+.num-pipes-genrate input {
+  width: 70%;
+  height: 100%;
+  padding: 0px 15px;
+}
+.num-pipes-genrate button {
+  width: 30%;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  height: 100%;
+  background: #3d3229;
+  color: #fff;
+}
+.default-buttons {
+  width: 100%;
+  height: 50px;
+}
+.default-num-btn {
+  width: 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  height: 100%;
+  background: #3d3229;
+  /* background: linear-gradient(
+    var(--gradient-angle, 130deg),
+    var(--gradient-color1, #e3d7c1),
+    var(--gradient-color2, #9eb395)
+  ); */
+  color: #fff;
+}
+.num-pipes-genrate button:hover,
+.default-num-btn:hover {
+  background: #4caf50;
+  cursor: pointer;
+}
+.dropdowns-parent-container {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(302px, 1fr));
+  gap: 25px;
+  width: 100%;
+  height: auto;
+  padding-top: 5px;
+  margin-bottom: 25px;
+}
+.pipe-dropdown-container {
+  padding: 25px;
+  border-radius: 15px;
+  background: #ffffff50;
+}
+.pipe-dropdown-container label {
+  text-transform: uppercase;
+  color: #359267;
+}
+.pipe-dropdown-wrapper {
+  margin-top: 15px;
+}
+.pipe-dropdown-options {
+  border-radius: 0px 0px 5px 5px;
+}
+input.pipe-dropdown {
+  outline: none;
+}
+input.pipe-dropdown:hover {
+  cursor: pointer;
+}
+button.default-num-btn.selected {
+  background: #4caf50;
+}
+.assign-pipe,
+.available-cocktails {
+  padding: 0px;
+}
+.aspi-box,
+.cocktail-box2 {
+  padding: 25px;
+  overflow-y: scroll;
+  height: 100%;
+}
+.pipe-assign {
+  padding-bottom: 60px;
+}
+.cocktail-list2 {
+  padding-bottom: 75px;
+}
+#selectIngBtn {
+  display: none !important;
+}
+
+.popupx2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-contentx2 {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 500px;
+  text-align: left;
+  position: relative;
+  margin: auto;
+}
+
+.note-popup .popup-contentx2 {
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+.remark-popup .popup-contentx2 {
+  transform: none;
+  top: auto;
+}
+
+.closex2 {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 25px;
+  cursor: pointer;
+  background: #3d3229;
+  border-radius: 50%;
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.closex2:hover {
+  background: #000;
+}
+
+.aspi-txt {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 25px;
+}
+.ax-txt {
+  width: 50%;
+  text-align: left;
+}
+.ax-btn {
+  width: 50%;
+  text-align: right;
+}
+.ax-btn button:hover {
+  cursor: pointer;
+}
+
+.search-box {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+}
+
+#clear-search {
+  background-color: #71b093; /* Background color for the button */
+  color: white; /* Text color for the X */
+  border: none; /* No border */
+  border-radius: 50%; /* Make it circular */
+  width: 30px; /* Width of the button */
+  height: 30px; /* Height of the button */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Make the X bold */
+  cursor: pointer; /* Pointer cursor on hover */
+  display: none; /* Initially hidden */
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+  position: relative; /* For positioning */
+  outline: none; /* Remove outline */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+#clear-search:hover {
+  background-color: #2a6b5d; /* Darker background on hover */
+}
+
+.no-cocktail-message {
+  font-size: 18px; /* Font size */
+  color: crimson; /* Text color */
+  text-align: center; /* Center the text */
+  padding: 20px; /* Padding around the message */
+  background-color: rgba(
+    255,
+    228,
+    228,
+    0.8
+  ); /* Light red background with transparency */
+  border: 1px solid crimson; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  margin: 20px; /* Margin around the message */
+}
+
+label.btn-checkbox p.not-selected {
+  color: red !important; /* Use !important to ensure it overrides other styles */
+  font-weight: bold; /* Make it bold */
+}
+
+.pipe-dropdown-options .option.disabled {
+  color: #999;
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.pipe-dropdown-options .option.disabled:hover {
+  background: #f5f5f5;
+}
+
+.pipe-error {
+  box-shadow: 0 0 5px 2px #ff0000;
+  animation: errorShake 0.4s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Add subtle animations */
+.btn,
+.modal-content {
+  transition: all 0.3s ease;
+}
+
+/* Enhance button styles */
+.btn {
+  background: linear-gradient(135deg, #3d3229, #57492c);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #57492c, #3d3229);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Improve typography */
+.cdr-txt h2,
+.sp-txt h2,
+.txc {
+  font-size: 22px;
+  font-weight: bold;
+  color: #359267;
+}
+
+/* Use consistent spacing */
+.modal-content {
+  padding: 30px;
+  margin: 10% auto;
+}
+
+/* Add hover effects */
+.navbar a:hover {
+  color: #fff;
+  background: #57492c;
+  border-radius: 10px;
+}
+
+/* Add these touch-optimized styles */
+
+/* Increase touch targets */
+.btn,
+.navbar a,
+.ingredient-item,
+.color-picker input,
+.predefined-color {
+  min-height: 44px; /* Minimum touch target size */
+  min-width: 44px;
+  padding: 12px 20px;
+}
+
+/* Add touch feedback */
+.btn:active,
+.navbar a:active,
+.ingredient-item:active {
+  transform: scale(0.98);
+  transition: transform 0.1s;
+}
+
+/* Improve touch scrolling */
+.ing-grid,
+.cocktail-list,
+.app-pageview {
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scroll-behavior: smooth;
+}
+
+/* Enhanced touch slider styles */
+.angle-slider {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+  border: 0px solid rgba(0, 0, 0, 0.2);
+  /* background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2); */
+  touch-action: none; /* Prevent default touch behaviors */
+  /* margin: 20px auto; */
+  margin: 0px;
+}
+
+.angle-knob {
+  width: 30px;
+  height: 30px;
+  background: #00ff9d;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fff;
+}
+
+/* Improve color picker inputs for touch */
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none; /* Add standard property */
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  border: 1px solid lightgrey;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 50%;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* Improve dropdown menus for touch */
+select,
+.pipe-dropdown {
+  height: 44px;
+  padding: 10px 15px;
+  font-size: 16px; /* Prevent iOS zoom on focus */
+  border-radius: 8px;
+}
+
+/* Add visual feedback for touch interactions */
+.ingredient-item:active,
+.cocktail-item:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Improve modal interactions */
+.modal-content {
+  padding: 20px;
+  border-radius: 15px;
+  max-height: 80vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Enhance buttons for touch */
+.predefined-color {
+  width: 60px;
+  height: 60px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Add ripple effect for touch feedback */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.btn:active::after {
+  animation: ripple 0.4s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(40, 40);
+    opacity: 0;
+  }
+}
+
+/* Improve scrollbar for touch devices */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+/* Add momentum scrolling for touch devices */
+.scrollable {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Exit Button Styles */
+.exit-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #ff4444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.exit-btn:hover {
+  background-color: #cc0000;
+  transform: scale(1.1);
+}
+
+.exit-btn i {
+  color: white;
+  font-size: 20px;
+}
+
+/* New Changes */
+
+.additional-option {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.alc-pre label {
+  gap: 15px;
+  border-radius: 10px;
+  background: #ffffff50;
+  box-shadow: 0px 0px 5px #00000010;
+  width: max-content;
+  padding: 15px 15px;
+}
+.alc-pre label input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+}
+.assign-pipe .footer-btn {
+  justify-content: space-between;
+}
+/* Styles for the remark popup and related elements */
+.selected-ingredients-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 20px 0;
+}
+
+.ingredient-remark-item {
+  background: #ffffff50;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 5px #00000010;
+}
+
+.ingredient-remark-item h3 {
+  color: #359267;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.ingredient-remark-textarea {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.ingredient-remark-textarea:focus {
+  outline: none;
+  border-color: #359267;
+  box-shadow: 0 0 5px rgba(53, 146, 103, 0.3);
+}
+
+.remark-badge {
+  display: inline-block;
+  background: #359267;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.remark-text {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+  border-left: 3px solid #359267;
+}
+
+.popup-contentx2 {
+  max-width: 600px;
+  width: 90%;
+}
+
+.remark-container {
+  width: 100%;
+}
+
+.remark-container h2 {
+  margin-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .popup-contentx2 {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .ingredient-remark-item {
+    padding: 10px;
+  }
+}
+
+.remark-popup .popup-contentx2 {
+  max-width: 75%;
+  width: 75%;
+}
+.remark-popup .selected-ingredients-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px;
+  align-items: center;
+  margin: 0px;
+  /* min-height: 550px; */
+}
+.remark-popup .ingredient-remark-item {
+  margin: 0px;
+  background: #f6f6f6;
+}
+.show-remark {
+  background: rgb(42 107 93 / 54%);
+  padding: 15px;
+  border-radius: 10px;
+}
+.show-remark p,
+.show-remark span {
+  /* color: #ff4600; */
+  color: #fff;
+}
+.cd-right .footer-btn {
+  width: max-content;
+}
+/* .cd-right {
+  overflow: none !important;
+} */
+.cdr-box {
+  overflow-y: scroll;
+  height: 100%;
+  padding-right: 15px;
+}
+
+/* Add Note Button Styles */
+.add-note-btn {
+  background-color: #359267;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.add-note-btn:hover {
+  background-color: #2a6b5d;
+}
+
+/* Note Popup Styles */
+.note-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.note-popup .popup-contentx2 {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 500px;
+  text-align: left;
+  position: relative;
+  margin: auto;
+}
+
+.note-container {
+  width: 100%;
+}
+
+.note-container h2 {
+  margin-bottom: 25px;
+}
+
+.note-input-container {
+  margin-bottom: 15px;
+}
+
+/* Note Indicator Styles */
+.note-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 12px;
+  height: 12px;
+  background-color: #ff4444;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.note-indicator:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+/* Make pipe container position relative for proper indicator positioning */
+.pipe-dropdown-container {
+  position: relative;
+}
+
+.note-popup .footer-btn {
+  position: unset;
+  bottom: unset;
+  right: unset;
+  padding: 0px;
+}
+
+/* Update Popup Styles */
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+.popup-content p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.popup-buttons button {
+  min-width: 120px;
+}
+
+.popup-buttons button.cancel {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.popup-buttons button.cancel:hover {
+  background-color: #e0e0e0;
+}
+.add-cocktail .ing-item .remark-text {
+  display: none;
+}
+.remark-popup .remark-container .footer-btn {
+  width: max-content;
+  padding: 0px 25px 25px 0px;
+}
+
+
+.all-cocktail .cocktail-box {
+  max-height: 500px; /* Adjust height as needed */
+  overflow-y: auto;
+}
+
+
+
+.all-cocktail .cocktail-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.all-cocktail .cocktail-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}

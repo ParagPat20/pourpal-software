@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cocktail Order Management System</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="exit-button" class="exit-btn">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="app">
+      <div class="app-content">
+        <div class="app-topbar bg">
+          <div class="app-logo">
+            <img src="img/logo.png" alt="Logo" />
+          </div>
+          <!-- <button id="open-color-picker" class="modern-button btn">
+          Change Background
+          </button> -->
+          <div class="picker-setting" id="open-color-picker">
+            <img src="img/color-picker.png" alt="" />
+          </div>
+          <div class="update-setting" id="update">
+            <img src="img/update.png" alt="" />
+          </div>
+        </div>
+        <div class="app-body">
+          <div class="app-sidebar bg">
+            <div class="navbar">
+              <a href="#" class="btn active" id="availableCocktailsBtn">
+                Available Cocktails
+              </a>
+              <a href="#" class="btn deactive" id="assignPipeBtn">
+                Assign Pipeline
+              </a>
+              <a href="#" class="btn deactive" id="selectIngBtn">
+                Select Ingredients
+              </a>
+              <a href="#" class="btn deactive" id="allCocktailsBtn">
+                All Cocktails
+              </a>
+              <a href="#" class="btn deactive" id="addIngredientsBtn">
+                Add Ingredients
+              </a>
+              <a href="#" class="btn deactive" id="addCocktailBtn">
+                Add Cocktail
+              </a>
+            </div>
+          </div>
+          <div class="app-pageview bg">
+            <!-- Available Cocktails -->
+            <div class="available-cocktails">
+              <div class="cocktail-box2">
+                <div class="cocktail-list2">
+                  <div class="cl-item" id="cotailInfo"></div>
+                </div>
+              </div>
+              <div class="footer-btn blurx">
+                <div class="save-button-container"></div>
+              </div>
+            </div>
+
+            <!-- Find Ingredeint / Select ingredeint -->
+            <div class="find-ing">
+              <div class="fi-top">
+                <div class="search-box">
+                  <div class="searchbar">
+                    <i class="fa-solid fa-magnifying-glass"> </i>
+                    <input
+                      type="text"
+                      placeholder="Search Ingredients..."
+                      name="search"
+                      id="ingredient-search"
+                    />
+                    <button id="clear-search" style="display: none">X</button>
+                    <!-- Clear button -->
+                    <p>
+                      Selected Ingredients :
+                      <span> 0 </span>
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    class="btn"
+                    id="add-new-btn"
+                    onclick="showAddIngredients()"
+                  >
+                    <i class="fa-solid fa-plus"> </i>
+                    Add New
+                  </a>
+                </div>
+                <div class="ing-filter" id="ing-filterfind">
+                  <a href="#" class="btn active" data-type="all">
+                    All Ingredients
+                  </a>
+                  <a href="#" class="btn deactive" data-type="Liquid">
+                    Liquid
+                  </a>
+                  <a href="#" class="btn deactive" data-type="Liquor">
+                    Liquor
+                  </a>
+                  <a href="#" class="btn deactive" data-type="Garnish">
+                    Garnish
+                  </a>
+                  <a href="#" class="btn deactive" data-type="Other"> Other </a>
+                </div>
+              </div>
+              <div class="fi-bottom">
+                <div class="ing-box">
+                  <div class="ing-grid">
+                    <div id="ingredients-container"></div>
+                  </div>
+                  <div class="footer-btn">
+                    <button
+                      id="back-button"
+                      class="btn active btns"
+                      onclick="showAvailableCocktails()"
+                    >
+                      Back
+                    </button>
+                    <button id="clear-all-button" class="btn active btns">
+                      Clear All
+                    </button>
+                    <button id="showProducts" class="btn active btns">
+                      Assign Pipeline
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add Ingredients -->
+            <div class="add-ing">
+              <div class="add-ing-box">
+                <div class="add-ing-form">
+                  <form id="ingredient-form">
+                    <div class="form-group">
+                      <label for="ingredient-id"> Ingredient ID: </label>
+                      <span id="ingredient-id" name="ingredient-id" required>
+                      </span>
+                    </div>
+                    <div class="form-group">
+                      <label for="ingredient-name"> Ingredient Name: </label>
+                      <input
+                        type="text"
+                        id="ingredient-name"
+                        name="ingredient-name"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="ingredient-type"> Ingredient Type: </label>
+                      <select id="ingredient-type" name="ingredient-type">
+                        <option value="Liquid">Liquid</option>
+                        <option value="liquor">Liquor</option>
+                        <option value="garnish">Garnish</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="ingredient-image"> Ingredient Image: </label>
+                      <input
+                        type="file"
+                        id="ingredient-image"
+                        name="ingredient-image"
+                        accept="image/*"
+                        onchange="displayImageName()"
+                      />
+                      <span id="image-name"> </span>
+                    </div>
+                    <div class="form-group">
+                      <label for="ingredient-remark">
+                        Remark (Optional):
+                      </label>
+                      <input
+                        type="text"
+                        id="ingredient-remark"
+                        name="ingredient-remark"
+                      />
+                    </div>
+                  </form>
+                  <div class="footer-btn">
+                    <button
+                      id="back-button"
+                      class="btn deactive"
+                      onclick="showAvailableCocktails()"
+                    >
+                      Back
+                    </button>
+                    <button id="submit-button" class="btn active">
+                      Add Ingredient
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add Cocktails -->
+            <div class="add-cocktail">
+              <div class="add-cocktail-box">
+                <div class="add-cocktail-form">
+                  <form id="cocktail-form">
+                    <div class="form-group">
+                      <label for="product-id"> Product ID: </label>
+                      <input
+                        type="text"
+                        id="product-id"
+                        name="product-id"
+                        required
+                        readonly
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="product-name"> Product Name: </label>
+                      <input
+                        type="text"
+                        id="product-name"
+                        name="product-name"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="product-image"> Product Image: </label>
+                      <div class="form-group-flex">
+                        <input
+                          type="file"
+                          id="product-image"
+                          name="product-image"
+                          accept="image/*"
+                          onchange="displayImageName()"
+                        />
+                        <span id="image-name"> </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="product-type"> Product Type: </label>
+                      <select id="product-type" name="product-type">
+                        <option value="Cocktail">Cocktail</option>
+                        <option value="Mocktail">Mocktail</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="product-description"
+                        >Product Description:</label
+                      >
+                      <textarea
+                        id="product-description"
+                        name="product-description"
+                        rows="4"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="how-to-make">How to Make:</label>
+                      <textarea
+                        id="how-to-make"
+                        name="how-to-make"
+                        rows="4"
+                        required
+                      ></textarea>
+                    </div>
+                  </form>
+                  <div class="footer-btn">
+                    <button
+                      id="back-button2"
+                      class="btn deactive"
+                      onclick="showAvailableCocktails()"
+                    >
+                      Back
+                    </button>
+                    <button id="clear-all-add-cocktail" class="btn active btns">
+                      Clear All
+                    </button>
+                    <button id="add-cocktail-button" class="btn active">
+                      Add Cocktail
+                    </button>
+                  </div>
+                </div>
+                <div class="add-cocktail-find-ing">
+                  <div class="fi-top cocktail-fi-top">
+                    <div class="search-box">
+                      <div class="searchbar">
+                        <i class="fa-solid fa-magnifying-glass"> </i>
+                        <input
+                          type="text"
+                          placeholder="Search Ingredients..."
+                          name="search"
+                          id="cocktail-ingredient-search"
+                        />
+                        <p id="cicount">
+                          <span> 0 </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="ing-filter" id="ing-filter-cocktail">
+                      <a href="#" class="btn" data-type="all">
+                        All Ingredients
+                      </a>
+                      <a href="#" class="btn deactive" data-type="Liquid">
+                        Liquid
+                      </a>
+                      <a href="#" class="btn deactive" data-type="Liquor">
+                        Liquor
+                      </a>
+                      <a href="#" class="btn deactive" data-type="Garnish">
+                        Garnish
+                      </a>
+                      <a href="#" class="btn deactive" data-type="Other">
+                        Other
+                      </a>
+                    </div>
+                  </div>
+                  <div class="fi-bottom cocktail-fi-bottom">
+                    <div class="ing-box">
+                      <div class="ing-grid">
+                        <div id="cocktail-ingredients-container1">
+                          <!-- Ingredients will be dynamically populated here -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assign Pipeline Section -->
+            <div class="assign-pipe">
+              <div class="aspi-box">
+                <div class="aspi-txt">
+                  <div class="ax-txt">
+                    <p class="txc">Assign Ingredients To The Pipelines</p>
+                  </div>
+                  <div class="ax-btn">
+                    <button
+                      id="Reload"
+                      class="btn deactive btns"
+                      onclick="loadConfig()"
+                    >
+                      Reload
+                    </button>
+                    <button id="customize" class="btn active btns">
+                      Customize
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="pipe-assign dropdowns-parent-container"
+                  id="pipeAssignContainer"
+                  style="display: none"
+                >
+                  <!-- Dropdowns will be dynamically added here -->
+                </div>
+              </div>
+              <div class="footer-btn blurx">
+                <div class="fi-fl-btn">
+                  <button id="add-remark-button" class="btn active btns">
+                    Add Remark
+                  </button>
+                </div>
+                <div class="fi-fr-btn">
+                  <div class="save-button-container">
+                    <button
+                      id="changeIngredients"
+                      class="btn deactive btns"
+                      onclick="showSelectIng()"
+                    >
+                      Change Ingredients
+                    </button>
+                    <button id="save" class="btn active btns">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- All Cocktails Section -->
+          <div class="all-cocktail new-bg">
+            <div class="cocktail-box">
+              <div class="cocktail-list">
+                <div id="product-list-container"></div>
+                <div class="cl-item" id="cotailInfo">
+                  <img src="img/product_1.png" alt="" />
+                  <p>Aperol Spritz</p>
+                </div>
+              </div>
+              <div class="footer-btn">
+                <button
+                  id="back-button-all-cocktail"
+                  class="btn deactive"
+                  onclick="showAvailableCocktails()"
+                >
+                  Back
+                </button>
+                <button class="btn active btns" onclick="showSelectIng()">
+                  Change Ingredients
+                </button>
+              </div>
+              <div id="extra-selected-ingredients"></div>
+              <div id="extra-selected-ingredients"></div>
+            </div>
+          </div>
+
+          <!-- All Cocktail Details -->
+          <div class="cocktail-details" style="display: none">
+            <!-- Initially hidden -->
+            <div class="cd-box">
+              <div class="cd-left">
+                <div class="cdl-img">
+                  <img src="" alt="" id="cocktail-image" />
+                  <!-- Image will be dynamically updated -->
+                </div>
+              </div>
+              <div class="cd-right">
+                <div class="cdr-box">
+                  <div class="cdr-txt">
+                    <h2 id="cocktail-name">Cocktail Name</h2>
+                    <!-- Name will be dynamically updated -->
+                    <p id="cocktail-description"></p>
+                    <!-- Description will be dynamically populated -->
+                  </div>
+                  <div class="cdr-txt">
+                    <h2>Ingredients</h2>
+                    <div class="fi-bottom cocktail-fi-bottom">
+                      <div class="ing-box">
+                        <div class="ing-grid">
+                          <div id="cocktail-ingredients-container">
+                            <!-- Ingredients will be dynamically populated -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cdr-txt">
+                    <div class="show-remark">
+                      <p>
+                        <span>Remark : </span>Show Upper Selected Ingredient
+                        Remark Here
+                      </p>
+                    </div>
+                  </div>
+                  <div style="display: none">
+                    <p id="cocktail-id">1</p>
+                  </div>
+                  <div class="cdr-txt" id="htm-title">
+                    <h2>How to Make</h2>
+                    <p id="htm"></p>
+                    <!-- Instructions will be dynamically populated -->
+                  </div>
+                  <div class="cdr-txt">
+                    <h2>Select Drink Intensity</h2>
+                    <div class="drink-type">
+                      <label>
+                        <input
+                          type="radio"
+                          id="drink-type-light"
+                          name="drink-type"
+                          value="light"
+                          checked
+                        />
+                        Light
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          id="drink-type-medium"
+                          name="drink-type"
+                          value="medium"
+                        />
+                        Medium
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          id="drink-type-strong"
+                          name="drink-type"
+                          value="strong"
+                        />
+                        Strong
+                      </label>
+                    </div>
+                  </div>
+                  <div class="cdr-txt">
+                    <h2>Alcohol Preference</h2>
+                    <div class="additional-option alc-pre">
+                      <label>
+                        <input
+                          type="checkbox"
+                          id="alcoholic"
+                          name="alcoholic"
+                          value="yes"
+                          checked
+                          onclick="toggleCheckbox(this)"
+                        />
+                        Alcoholic
+                      </label>
+                      <label>
+                        <input
+                          type="checkbox"
+                          id="non-alcoholic"
+                          name="non-alcoholic"
+                          value="yes"
+                          onclick="toggleCheckbox(this)"
+                        />
+                        Non-Alcoholic
+                      </label>
+                    </div>
+                  </div>
+                  <div class="footer-btn">
+                    <button
+                      id="back-button1"
+                      class="btn deactive"
+                      onclick="showAvailableCocktails()"
+                    >
+                      Back
+                    </button>
+                    <button id="serial-out-button" class="btn active btns">
+                      Start Making
+                    </button>
+                  </div>
+                  <div id="loading-page">
+                    <h1>Processing Image...</h1>
+                    <p>Please wait while we process and save your image.</p>
+                    <div class="loading-spinner"></div>
+                    <button id="cancel-button">Cancel</button>
+                    <div id="progress-status"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Remark Popup -->
+    <div id="remarkPopup" class="popupx2 remark-popup" style="display: none">
+      <div class="popup-contentx2">
+        <span id="closeRemarkPopup" class="closex2">&times;</span>
+        <div class="remark-container">
+          <h2 class="txc">Add Remarks To Selected Ingredients</h2>
+          <div id="selected-ingredients-list" class="selected-ingredients-list">
+            <!-- Selected ingredients will be dynamically added here -->
+          </div>
+          <div class="footer-btn">
+            <button id="save-remarks" class="btn active btns">
+              Save Remarks
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add this at the end of the body, after the existing popups -->
+    <div id="notePopup" class="popupx2 note-popup" style="display: none">
+      <div class="popup-contentx2">
+        <span id="closeNotePopup" class="closex2">&times;</span>
+        <div class="note-container">
+          <h2 class="txc">
+            Add Note For <span id="currentPipeName" class="txc"></span>
+          </h2>
+          <div class="note-input-container">
+            <textarea
+              id="pipeNoteTextarea"
+              class="ingredient-remark-textarea"
+              placeholder="Add note for this pipeline ingredeint"
+            ></textarea>
+          </div>
+          <div class="footer-btn">
+            <button id="save-note" class="btn active btns">Save Note</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup for customization assign pipes-->
+    <div id="customizePopup" class="popupx2" style="display: none">
+      <div class="popup-contentx2">
+        <span id="closePopup" class="closex2">&times;</span>
+        <div class="num-pipes">
+          <label for="numPipes" class="txc"
+            >Select Number of Pipes to Assign:</label
+          >
+          <div class="aspi-div">
+            <div class="num-pipes-genrate form-group">
+              <input
+                type="number"
+                id="numPipes"
+                min="1"
+                max="100"
+                placeholder="Enter Number"
+              />
+              <button id="generate">Generate</button>
+            </div>
+
+            <div class="default-buttons">
+              <button class="default-num-btn" data-value="5">5</button>
+              <button class="default-num-btn" data-value="10">10</button>
+              <button class="default-num-btn" data-value="15">15</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- alert -->
+    <div id="custom-alert" class="modal">
+      <div class="modal-content">
+        <p id="alert-message">This is a custom alert message.</p>
+        <button id="alert-ok" class="btn">OK</button>
+      </div>
+    </div>
+
+    <!-- Color Picker Modal -->
+    <div id="color-picker-modal" class="modal">
+      <div class="modal-content col-pop">
+        <div class="mod-close">
+          <span id="close-modal" class="close"> &times; </span>
+        </div>
+        <div class="mod-left">
+          <div class="modl-txt">
+            <h2>Select Background Color</h2>
+          </div>
+          <div class="color-picker">
+            <label for="bg-color-picker"> Select Color : </label>
+            <input
+              type="color"
+              id="bg-color-picker"
+              class="modern-color-input"
+              value="#e3d7c1"
+            />
+          </div>
+          <div class="gradient-picker">
+            <div class="gp-txt">
+              <h3>Select Gradient Color</h3>
+            </div>
+            <div class="gp-picker">
+              <label for="color1"> Select Color 1 : </label>
+              <input
+                type="color"
+                id="color1"
+                class="modern-color-input"
+                value="#e3d7c1"
+              />
+            </div>
+            <div class="gp-picker">
+              <label for="color2"> Select Color 2 : </label>
+              <input
+                type="color"
+                id="color2"
+                class="modern-color-input"
+                value="#9eb395"
+              />
+            </div>
+            <div class="angle-picker">
+              <div class="ap-txt">
+                <h4>Pick Gradient Color Direction</h4>
+              </div>
+              <div id="angle-slider" class="angle-slider">
+                <div id="angle-knob" class="angle-knob"></div>
+              </div>
+              <div class="ap-ang">
+                <p>
+                  Angle:
+                  <span id="angle-output"> 135 </span>
+                  °
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mod-right">
+          <div class="mr-btn-txt">
+            <h2>Select Button Background Color</h2>
+          </div>
+          <!-- New option for Button Background Color -->
+          <div class="mr-btn">
+            <div class="btn-col mrc">
+              <label for="btnBackgroundColor"> Button Color </label>
+              <input
+                type="color"
+                id="btnBackgroundColor"
+                name="btnBackgroundColor"
+                value="#3d3229"
+              />
+            </div>
+            <!-- New option for Button Hover Background Color -->
+            <div class="btn-hcol mrc">
+              <label for="btnHoverBackgroundColor"> Button Hover Color </label>
+              <input
+                type="color"
+                id="btnHoverBackgroundColor"
+                name="btnHoverBackgroundColor"
+                value="#000000"
+              />
+            </div>
+          </div>
+          <div class="mr-btn-txt">
+            <h2>Select Button Text Color</h2>
+          </div>
+          <div class="mr-btn-tx">
+            <!-- Button Text Color Pickers -->
+            <div class="btn-txt-col mrc">
+              <label for="btnTextColor"> Text Color </label>
+              <input type="color" id="btnTextColor" value="#ffffff" />
+            </div>
+            <div class="btn-txt-hcol mrc">
+              <label for="btnHoverTextColor"> Hover Text Color </label>
+              <input type="color" id="btnHoverTextColor" value="#ffffff" />
+            </div>
+          </div>
+          <div class="mr-btn-txt">
+            <h2>Select Predefined Background Colors</h2>
+          </div>
+          <!-- New option for predefined background color/gradient buttons -->
+          <div class="predefined-colors">
+            <button
+              class="predefined-color"
+              data-color=" linear-gradient(62deg, rgba(17,57,85,1) 0%, rgba(17,83,85,1) 100%)"
+            ></button>
+            <button
+              class="predefined-color"
+              data-color="linear-gradient(45deg, rgba(255,197,89,1) 0%, rgba(255,128,48,1) 100%)"
+            ></button>
+            <button
+              class="predefined-color"
+              data-color="linear-gradient(45deg, rgba(107,230,252,1) 0%, rgba(255,109,151,1) 100%)"
+            ></button>
+            <button
+              class="predefined-color"
+              data-color="linear-gradient(45deg, rgba(255,229,229,1) 0%, rgba(212,162,68,1) 100%)"
+            ></button>
+            <button
+              class="predefined-color"
+              data-color="linear-gradient(45deg, rgba(158,179,149,1) 0%, rgba(227,215,193,1) 100%)"
+            ></button>
+          </div>
+        </div>
+        <div class="btn-rest">
+          <button id="reset-defaults" class="reset-button">
+            Reset Default
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Update Popup -->
+    <div id="updatePopup" class="popupx2" style="display: none">
+      <div class="popup-contentx2">
+        <span id="closeUpdatePopup" class="closex2">&times;</span>
+        <div id="updatePopupContent"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    <script src="script.js"></script>
+    <script src="colorPicker.js"></script>
+  </body>
+</html>
