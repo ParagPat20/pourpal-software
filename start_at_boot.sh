@@ -5,7 +5,7 @@ export DISPLAY=:0
 
 # Function to start the loading screen
 start_loading_screen() {
-    python3 /home/jecon/new-repo/loading_screen.py &
+    python3 /home/jecon/pourpal-software/loading_screen.py &
     echo $!  # Return the PID of the last background command
 }
 
@@ -32,7 +32,7 @@ while true; do
 
         # Launch the Python application in a new tmux session
         echo "Launching the Python application in tmux session 'myapp'..."
-        tmux new-session -d -s myapp 'cd /home/jecon/new-repo && python3 app.py'
+        tmux new-session -d -s myapp 'cd /home/jecon/pourpal-software && python3 app.py'
         
         # Wait 4 seconds before killing the loading screen
         echo "Waiting 4 seconds before terminating the loading screen..."

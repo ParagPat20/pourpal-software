@@ -37,7 +37,7 @@ class ModernLoadingScreen:
         # Load and display logo with fade effect
         try:
             if platform.system() == "Linux":
-                logo_path = "/home/jecon/new-repo/static/img/logo.png"
+                logo_path = "/home/jecon/pourpal-software/static/img/logo.png"
             else:
                 logo_path = os.path.join(os.path.dirname(__file__), "static", "img", "logo.png")
             

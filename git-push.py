@@ -18,7 +18,7 @@ def update_remote_url():
                 "remote",
                 "set-url",
                 "origin",
-                "https://github.com/DeamonKing/new-repo.git",
+                "https://github.com/ParagPat20/pourpal-software.git",
             ],
             check=True,
         )
