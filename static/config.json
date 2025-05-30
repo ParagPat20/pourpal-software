@@ -26,6 +26,7 @@
   },
   "ingredientRemarks": {
     "Cointreau": "Alias: triple_sec",
+    "Gin": "Gin, IDK, Like a Gin",
     "Scotch Whisky": "Alias: whiskey",
     "Rye Whiskey": "Alias: whiskey",
     "Bourbon": "Alias: whiskey",
@@ -78,7 +79,7 @@
     "bgColor": "#e3d7c1",
     "color1": "#6be6fc",
     "color2": "#ff6d97",
-    "btnBackgroundColor": "#17dae8",
+    "btnBackgroundColor": "#377276",
     "btnHoverBackgroundColor": "#fbc1f6",
     "btnTextColor": "#ffffff",
     "btnHoverTextColor": "#ffffff",

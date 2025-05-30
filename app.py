@@ -289,43 +289,43 @@ class CustomHandler(SimpleHTTPRequestHandler):
             
     def add_cocktail(self, post_data):
         try:
+            new_cocktail = json.loads(post_data)
+            
+            # Validate required fields
+            required_fields = ["PID", "PNID", "PName", "PImage", "PCat", "PDesc", "PHtm", "PIng"]
+            for field in required_fields:
+                if field not in new_cocktail:
+                    return f"Missing required field: {field}", 400
+
+            # Validate ingredient measurements
+            for ingredient in new_cocktail["PIng"]:
+                if "ING_ML" not in ingredient:
+                    ingredient["ING_ML"] = "0"  # Default to 0 if not specified
+
+            # Read existing cocktails
             products_path = os.path.join(web_dir, "products.json")
-            print("Starting to add cocktail")
             if not os.path.exists(products_path):
                 print(f"products.json not found at {products_path}")
-                self.send_response(500)
-                self.end_headers()
-                self.wfile.write(b"Error: products.json file not found")
-                return
+                return "Error: products.json file not found", 500
 
-            # Load existing cocktails from products.json
-            with open(products_path, "r") as file:
-                file_content = file.read()
-                if not file_content:
-                    cocktails = []
-                else:
-                    cocktails = json.loads(file_content)
+            with open(products_path, "r") as f:
+                cocktails = json.load(f)
 
-            # Parse the new cocktail data
-            new_cocktail = json.loads(post_data)
+            # Check if PID already exists
+            if any(cocktail["PID"] == new_cocktail["PID"] for cocktail in cocktails):
+                return "Cocktail ID already exists", 400
 
-            # Append the new cocktail to the existing data
+            # Add the new cocktail
             cocktails.append(new_cocktail)
 
-            # Write the updated data back to products.json
-            with open(os.path.join(web_dir, "products.json"), "w") as file:
-                json.dump(cocktails, file, indent=2)
+            # Save updated cocktails
+            with open(products_path, "w") as f:
+                json.dump(cocktails, f, indent=2)
 
-            # Send success response immediately after saving JSON
-            self.send_response(201)
-            self.end_headers()
-            self.wfile.write(b"Cocktail added successfully")
-            print("Cocktail added successfully")
+            return "Cocktail added successfully", 200
         except Exception as e:
             print(f"Error adding cocktail: {e}")
-            self.send_response(500)
-            self.end_headers()
-            self.wfile.write(f"Error saving cocktail: {str(e)}".encode())
+            return str(e), 500
 
     def add_ingredient(self, post_data):
         try:

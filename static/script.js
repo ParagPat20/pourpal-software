@@ -537,13 +537,12 @@ async function fetchIngredientsForCocktail(searchTerm = "") {
             (ing) => ing.ING_Name === ingredient.ING_Name
           )
         ) {
-          checkbox.checked = true; // Set checkbox to checked if selected
-          selectedingforcocktail.push(ingredient.ING_Name); // Add to selectedingforcocktail
+          checkbox.checked = true;
+          selectedingforcocktail.push(ingredient.ING_Name);
           console.log(`Ingredient ${ingredient.ING_Name} is already selected.`);
         }
         checkbox.addEventListener("change", (event) => {
           handleCocktailIngredientSelection(event, ingredient);
-          // Update selectedingforcocktail array
           if (event.target.checked) {
             if (!selectedingforcocktail.includes(ingredient.ING_Name)) {
               selectedingforcocktail.push(ingredient.ING_Name);
@@ -561,19 +560,34 @@ async function fetchIngredientsForCocktail(searchTerm = "") {
           console.log(
             `selectedingforcocktail ${selectedingforcocktail.length}`
           );
-          // Update remarks display in the container
           updateRemarksDisplay();
         });
         const img = document.createElement("img");
-
         img.src = ingredient.ING_IMG || "img/ing2.gif";
         img.alt = `Ingredient - ${ingredient.ING_Name}`;
-        const para = document.createElement("p");
-        para.textContent = ingredient.ING_Name;
+        
+        const namePara = document.createElement("p");
+        namePara.textContent = ingredient.ING_Name;
+
+        // Create measurement input
+        const measurementInput = document.createElement("input");
+        measurementInput.type = "text";
+        measurementInput.className = "ingredient-measurement-input";
+        measurementInput.setAttribute("data-ingredient", ingredient.ING_Name);
+        measurementInput.placeholder = "Enter measurement (ml)";
+        
+        // Set initial value if ingredient is already selected
+        const selectedIng = selectedCocktailIngredients.find(
+          ing => ing.ING_Name === ingredient.ING_Name
+        );
+        if (selectedIng && selectedIng.ING_ML) {
+          measurementInput.value = selectedIng.ING_ML;
+        }
 
         label.appendChild(checkbox);
         label.appendChild(img);
-        label.appendChild(para);
+        label.appendChild(namePara);
+        label.appendChild(measurementInput);
         ingDiv.appendChild(label);
 
         // Add remark if available
@@ -588,7 +602,6 @@ async function fetchIngredientsForCocktail(searchTerm = "") {
       }
     });
 
-    // Update remarks display after loading all ingredients
     updateRemarksDisplay();
   } catch (error) {
     console.error("Error fetching ingredients for cocktail:", error);
@@ -1616,20 +1629,26 @@ async function fetchIngredientsTypes() {
   try {
     const response = await fetch("db.json");
     const data = await response.json();
-    const types = new Set(); // Use a Set to avoid duplicates
-
-    // Loop through each ingredient to collect types
-    data.forEach((ingredient) => {
-      types.add(ingredient.ING_Type);
-    });
-
-    // Create filter buttons based on the types
+    
+    // Define the order of types we want to display
+    const orderedTypes = ['Strong', 'Soft', 'Other', 'Juice', 'Fruit', 'Beverage'];
+    
+    // Create filter buttons based on the ordered types
     const filterContainer = document.getElementById("ing-filterfind");
-    types.forEach((type) => {
+    
+    // First add the "All" button
+    const allButton = document.createElement("a");
+    allButton.className = "btn active";
+    allButton.setAttribute("data-type", "all");
+    allButton.textContent = "All Ingredients";
+    filterContainer.appendChild(allButton);
+    
+    // Then add the ordered type buttons
+    orderedTypes.forEach((type) => {
       const button = document.createElement("a");
       button.className = "btn deactive";
       button.setAttribute("data-type", type);
-      button.textContent = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize first letter
+      button.textContent = type;
       filterContainer.appendChild(button);
 
       // Add click event to filter by type
@@ -1880,6 +1899,7 @@ async function wshowCocktailDetails(cocktail) {
       <label class="btn-checkbox">
         <img src="${fullIngredient.ING_IMG || 'img/ing2.gif'}" alt="Ingredient - ${ingredient.ING_Name}" />
         <p class="${className}">${ingredient.ING_Name}</p>
+        <p class="ingredient-measurement">${ingredient.ING_ML || 'Not Specified'}</p>
       </label>
     `;
 
@@ -1966,20 +1986,38 @@ document.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.readAsDataURL(cocktailImage);
       reader.onload = async () => {
+        // Generate PNID (Product NID) - using timestamp for uniqueness
+        const pnid = Date.now().toString();
+
+        // Get ingredient measurements from the form
+        const ingredientMeasurements = {};
+        const measurementInputs = document.querySelectorAll('.ingredient-measurement-input');
+        measurementInputs.forEach(input => {
+          const ingredientName = input.getAttribute('data-ingredient');
+          const measurement = input.value.trim();
+          if (measurement) {
+            ingredientMeasurements[ingredientName] = measurement;
+          }
+        });
+
+        // Update selectedCocktailIngredients with measurements
+        const ingredientsWithMeasurements = selectedCocktailIngredients.map(ing => ({
+          ...ing,
+          ING_ML: ingredientMeasurements[ing.ING_Name] || '0'
+        }));
+
         const newCocktail = {
           PID: parseInt(cocktailId),
+          PNID: pnid,
           PName: cocktailName,
           PImage: reader.result,
           PCat: cocktailType,
           PDesc: cocktailDesc,
           PHtm: cocktailHtm,
-          PIng: selectedCocktailIngredients,
+          PIng: ingredientsWithMeasurements
         };
 
-        console.log(
-          "Submitting cocktail with ingredients:",
-          selectedCocktailIngredients
-        );
+        console.log("Submitting cocktail with ingredients:", ingredientsWithMeasurements);
 
         try {
           const response = await fetch("/addCocktail", {
@@ -2000,8 +2038,8 @@ document.addEventListener("DOMContentLoaded", () => {
             showCustomAlert("Cocktail added successfully!");
             // Reset form and fetch new ID
             resetCocktailForm();
-            await updateNextCocktailId(); // Update the ID first
-            await fetchNextCocktailId(); // Refresh the ID again to ensure accuracy
+            await updateNextCocktailId();
+            await fetchNextCocktailId();
             // Clear selected ingredients
             clearaddcocktailform();
           } else {
@@ -2718,8 +2756,28 @@ function updateAllDropdowns() {
 document
   .getElementById("exit-button")
   .addEventListener("click", async function () {
-    // Show confirmation dialog
-    if (confirm("Are you sure you want to exit?")) {
+    // Show custom alert with exit confirmation
+    const alertMessage = document.getElementById("alert-message");
+    const alertOk = document.getElementById("alert-ok");
+    const alertCancel = document.createElement("button");
+    alertCancel.className = "btn active";  // Added 'active' class to match OK button
+    alertCancel.textContent = "Cancel";
+    
+    // Store original OK button click handler
+    const originalOkHandler = alertOk.onclick;
+    
+    // Set up new alert content
+    alertMessage.innerHTML = "Are you sure you want to exit?";
+    
+    // Add cancel button
+    const modalContent = document.querySelector(".modal-content");
+    modalContent.appendChild(alertCancel);
+    
+    // Show the alert
+    document.getElementById("custom-alert").style.display = "block";
+    
+    // Handle exit confirmation
+    alertOk.onclick = async function() {
       try {
         const response = await fetch("/shutdown", {
           method: "POST",
@@ -2734,12 +2792,23 @@ document
             window.close();
           }, 500);
         } else {
-          console.error("Failed to shutdown server");
+          showCustomAlert("Failed to shutdown server");
         }
       } catch (error) {
         console.error("Error during shutdown:", error);
+        showCustomAlert("Error during shutdown: " + error.message);
       }
-    }
+    };
+    
+    // Handle cancel
+    alertCancel.onclick = function() {
+      // Restore original OK button handler
+      alertOk.onclick = originalOkHandler;
+      // Remove cancel button
+      modalContent.removeChild(alertCancel);
+      // Hide the alert
+      document.getElementById("custom-alert").style.display = "none";
+    };
   });
 
 // New Changes
