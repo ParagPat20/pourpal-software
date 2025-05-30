@@ -1115,9 +1115,20 @@ function sendPipesToPython(assignedPipes) {
   // Get the alcoholic/non-alcoholic status
   const isAlcoholic = document.getElementById("alcoholic").checked;
   
+  // Get the selected cocktail details
+  const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
+  
   const dataToSend = {
     productId: selectedCocktailID,
-    ingredients: assignedPipes,
+    productNid: selectedCocktail.PNID,
+    ingredients: assignedPipes.map(pipe => {
+      const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
+      return {
+        ...pipe,
+        ingNid: ingredient.ING_NID,
+        ingMl: ingredient.ING_ML
+      };
+    }),
     drinkType: drinkType,
     isAlcoholic: isAlcoholic
   };

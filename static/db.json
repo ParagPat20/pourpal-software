@@ -1,184 +1,1458 @@
 [
-  {"ING_ID": "1", "ING_Name": "Absinthe", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_absinthe.png", "ING_Remark": ""},
-  {"ING_ID": "2", "ING_Name": "Apple Schnapps", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_apple_schnapps.png", "ING_Remark": ""},
-  {"ING_ID": "3", "ING_Name": "Brandy", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_brandy.png", "ING_Remark": ""},
-  {"ING_ID": "4", "ING_Name": "Tequila Blanco", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_tequila_bianco.png", "ING_Remark": ""},
-  {"ING_ID": "5", "ING_Name": "Tequila Gold", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_tequila_gold.png", "ING_Remark": ""},
-  {"ING_ID": "6", "ING_Name": "Cachaça", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_cachasa.png", "ING_Remark": ""},
-  {"ING_ID": "7", "ING_Name": "Cognac", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_cognac.png", "ING_Remark": ""},
-  {"ING_ID": "8", "ING_Name": "Cointreau", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_cointreau.png", "ING_Remark": "Alias: triple_sec"},
-  {"ING_ID": "9", "ING_Name": "Drambuie", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_drambuie.png", "ING_Remark": ""},
-  {"ING_ID": "10", "ING_Name": "White Rum", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_rum_light.png", "ING_Remark": ""},
-  {"ING_ID": "11", "ING_Name": "Dark Rum", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_rum_dark.png", "ING_Remark": ""},
-  {"ING_ID": "12", "ING_Name": "Gold Rum", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_rum_gold.png", "ING_Remark": ""},
-  {"ING_ID": "13", "ING_Name": "Gin", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_gin.png", "ING_Remark": ""},
-  {"ING_ID": "14", "ING_Name": "Old Tom Gin", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_gin_old_tom.png", "ING_Remark": ""},
-  {"ING_ID": "15", "ING_Name": "Scotch Whisky", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_scotch.png", "ING_Remark": "Alias: whiskey"},
-  {"ING_ID": "16", "ING_Name": "Peach Schnapps", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_peach_schnapps.png", "ING_Remark": ""},
-  {"ING_ID": "17", "ING_Name": "Whiskey", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_whiskey.png", "ING_Remark": ""},
-  {"ING_ID": "18", "ING_Name": "Rye Whiskey", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_rye_whiskey.png", "ING_Remark": "Alias: whiskey"},
-  {"ING_ID": "19", "ING_Name": "Bourbon", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_bourbon.png", "ING_Remark": "Alias: whiskey"},
-  {"ING_ID": "20", "ING_Name": "Vodka", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_vodka.png", "ING_Remark": ""},
-  {"ING_ID": "21", "ING_Name": "Vodka Citron", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_vodka_citron.png", "ING_Remark": ""},
-  {"ING_ID": "22", "ING_Name": "Vodka Vanilla", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_vodka_vanilla.png", "ING_Remark": ""},
-  {"ING_ID": "23", "ING_Name": "Kirsch", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_kirsch.png", "ING_Remark": ""},
-  {"ING_ID": "24", "ING_Name": "Jack Daniels", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_jack_daniels.png", "ING_Remark": ""},
-  {"ING_ID": "25", "ING_Name": "Jägermeister", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_jagermeister.png", "ING_Remark": ""},
-  {"ING_ID": "26", "ING_Name": "Overproof Rum", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_rum_151.png", "ING_Remark": ""},
-  {"ING_ID": "27", "ING_Name": "Hennessy", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_hennessy.png", "ING_Remark": ""},
-  {"ING_ID": "28", "ING_Name": "Sloe Gin", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_sloe_gin.png", "ING_Remark": ""},
-  {"ING_ID": "29", "ING_Name": "Sambuca", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_sambuca.png", "ING_Remark": ""},
-  {"ING_ID": "30", "ING_Name": "Calvados", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_calvados.png", "ING_Remark": ""},
-  {"ING_ID": "31", "ING_Name": "Pisco", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_pisco.png", "ING_Remark": ""},
-  {"ING_ID": "32", "ING_Name": "Goldschläger", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_goldschlager.png", "ING_Remark": ""},
-  {"ING_ID": "33", "ING_Name": "Benedictine", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_benedictine.png", "ING_Remark": ""},
-  {"ING_ID": "34", "ING_Name": "Chartreuse green", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_chartreuse_green.png", "ING_Remark": ""},
-  {"ING_ID": "35", "ING_Name": "Amaretto", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_amaretto.png", "ING_Remark": ""},
-  {"ING_ID": "36", "ING_Name": "Aperol", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_aperol.png", "ING_Remark": ""},
-  {"ING_ID": "37", "ING_Name": "Apple Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_apple_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "38", "ING_Name": "Peach Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_peach_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "39", "ING_Name": "Apricot Brandy", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_apricot_brandy.png", "ING_Remark": ""},
-  {"ING_ID": "40", "ING_Name": "Butterscotch Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_butterscotch_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "41", "ING_Name": "Cherry Brandy", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_cherry_brandy.png", "ING_Remark": ""},
-  {"ING_ID": "42", "ING_Name": "Campari", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_campari.png", "ING_Remark": ""},
-  {"ING_ID": "43", "ING_Name": "Creme de Cacao Brown", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_creme_de_cacao_brown.png", "ING_Remark": ""},
-  {"ING_ID": "44", "ING_Name": "Creme de Cassis", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_creme_de_cassis.png", "ING_Remark": ""},
-  {"ING_ID": "45", "ING_Name": "Coffee Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_coffee_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "46", "ING_Name": "Galliano", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_galliano.png", "ING_Remark": ""},
-  {"ING_ID": "47", "ING_Name": "Grand Marnier", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_grand_marinier.png", "ING_Remark": ""},
-  {"ING_ID": "48", "ING_Name": "Orange Curaçao", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_orange_curacao.png", "ING_Remark": ""},
-  {"ING_ID": "49", "ING_Name": "Maraschino Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_maraschino_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "50", "ING_Name": "Blackberry Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_blackberry_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "51", "ING_Name": "Red Wine", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_wine_red.png", "ING_Remark": ""},
-  {"ING_ID": "52", "ING_Name": "White Wine", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_wine_white.png", "ING_Remark": ""},
-  {"ING_ID": "53", "ING_Name": "Sparkling Wine", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_sparkling_wine.png", "ING_Remark": ""},
-  {"ING_ID": "54", "ING_Name": "White Vermouth", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_vermouth_white.png", "ING_Remark": ""},
-  {"ING_ID": "55", "ING_Name": "Red Vermouth", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_vermouth_red.png", "ING_Remark": ""},
-  {"ING_ID": "56", "ING_Name": "Rose Vermouth", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_vermouth_rose.png", "ING_Remark": ""},
-  {"ING_ID": "57", "ING_Name": "Dry Vermouth", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_vermouth_dry.png", "ING_Remark": ""},
-  {"ING_ID": "58", "ING_Name": "Kahlua", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_kahlua.png", "ING_Remark": ""},
-  {"ING_ID": "59", "ING_Name": "Baileys", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_baileys.png", "ING_Remark": ""},
-  {"ING_ID": "60", "ING_Name": "Creme de Menthe Green", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_creme_de_menthe_green.png", "ING_Remark": ""},
-  {"ING_ID": "61", "ING_Name": "Creme de Menthe White", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_creme_de_menthe_white.png", "ING_Remark": ""},
-  {"ING_ID": "62", "ING_Name": "Creme de Cacao White", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_creme_de_cacao_white.png", "ING_Remark": ""},
-  {"ING_ID": "63", "ING_Name": "Red Port", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_red_port.png", "ING_Remark": ""},
-  {"ING_ID": "64", "ING_Name": "Midori", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_midori.png", "ING_Remark": ""},
-  {"ING_ID": "65", "ING_Name": "Blue Curaçao", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_blue_curacao.png", "ING_Remark": ""},
-  {"ING_ID": "66", "ING_Name": "Hpnotiq", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_hpnotiq.png", "ING_Remark": ""},
-  {"ING_ID": "67", "ING_Name": "Irish Stout", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_irish_stout.png", "ING_Remark": ""},
-  {"ING_ID": "68", "ING_Name": "Southern Comfort", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_southern_comfort.png", "ING_Remark": ""},
-  {"ING_ID": "69", "ING_Name": "Beer", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_beer.png", "ING_Remark": ""},
-  {"ING_ID": "70", "ING_Name": "Ginger Beer", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_ginger_beer.png", "ING_Remark": ""},
-  {"ING_ID": "71", "ING_Name": "Creme De Violette", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_creme_de_violette.png", "ING_Remark": ""},
-  {"ING_ID": "72", "ING_Name": "Lillet Blanc", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_lillet_blonde.png", "ING_Remark": ""},
-  {"ING_ID": "73", "ING_Name": "Triple Sec", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_triple_sec.png", "ING_Remark": "Alias: cointreau"},
-  {"ING_ID": "74", "ING_Name": "Malibu Coconut Rum", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_malibu.png", "ING_Remark": ""},
-  {"ING_ID": "75", "ING_Name": "Egg Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_egg_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "76", "ING_Name": "Strawberry Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_strawberry_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "77", "ING_Name": "Frangelico", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_frangelico.png", "ING_Remark": ""},
-  {"ING_ID": "78", "ING_Name": "Pimm's No. 1", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_pimms.png", "ING_Remark": ""},
-  {"ING_ID": "79", "ING_Name": "Dubonnet", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_dubonnet.png", "ING_Remark": ""},
-  {"ING_ID": "80", "ING_Name": "Grenadine", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_grenadine.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "81", "ING_Name": "Almond Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_almond.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "82", "ING_Name": "Coconut Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_coconut.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "83", "ING_Name": "Rock Candy Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_rock_candy.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "84", "ING_Name": "Sugar Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_sugar.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "85", "ING_Name": "Honey Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_honey.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "86", "ING_Name": "Raspberry Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_raspberry.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "87", "ING_Name": "Strawberry Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_strawberry.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "88", "ING_Name": "Chocolate Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_chocolate.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "89", "ING_Name": "Maple Syrup", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_syrup_maple.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "90", "ING_Name": "Orange Flower Water", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_orange_flower_water.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "91", "ING_Name": "Vanilla Extract", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_vanilla_extract.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "92", "ING_Name": "Agave Nectar", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_agave_nectar.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "93", "ING_Name": "Cranberry Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_cranberry.png", "ING_Remark": ""},
-  {"ING_ID": "94", "ING_Name": "Grapefruit Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_grapefruit.png", "ING_Remark": ""},
-  {"ING_ID": "95", "ING_Name": "Orange Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_orange.png", "ING_Remark": ""},
-  {"ING_ID": "96", "ING_Name": "Tomato Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_tomato.png", "ING_Remark": ""},
-  {"ING_ID": "97", "ING_Name": "Pineapple Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_pineapple.png", "ING_Remark": ""},
-  {"ING_ID": "98", "ING_Name": "Papaya Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_papaya.png", "ING_Remark": ""},
-  {"ING_ID": "99", "ING_Name": "Pomegranate Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_pomegranate.png", "ING_Remark": ""},
-  {"ING_ID": "100", "ING_Name": "Olive Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_olive.png", "ING_Remark": ""},
-  {"ING_ID": "101", "ING_Name": "Passion Fruit Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_passion_fruit.png", "ING_Remark": ""},
-  {"ING_ID": "102", "ING_Name": "Apple Juice", "ING_Type": "Juice", "ING_IMG": "img/upload/ingredient_juice_apple.png", "ING_Remark": ""},
-  {"ING_ID": "103", "ING_Name": "Maraschino Cherry", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_cherry.png", "ING_Remark": ""},
-  {"ING_ID": "104", "ING_Name": "Lime", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_lime.png", "ING_Remark": ""},
-  {"ING_ID": "105", "ING_Name": "Lemon", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_lemon.png", "ING_Remark": ""},
-  {"ING_ID": "106", "ING_Name": "Orange", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_orange.png", "ING_Remark": ""},
-  {"ING_ID": "107", "ING_Name": "Pineapple", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_pineapple.png", "ING_Remark": ""},
-  {"ING_ID": "108", "ING_Name": "Apple", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_apple.png", "ING_Remark": ""},
-  {"ING_ID": "109", "ING_Name": "Peach", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_peach.png", "ING_Remark": ""},
-  {"ING_ID": "110", "ING_Name": "Banana", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_banana.png", "ING_Remark": ""},
-  {"ING_ID": "111", "ING_Name": "Honeydew melon", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_honeydew_melon.png", "ING_Remark": ""},
-  {"ING_ID": "112", "ING_Name": "Strawberry", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_strawberry.png", "ING_Remark": ""},
-  {"ING_ID": "113", "ING_Name": "Blackberry", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_blackberry.png", "ING_Remark": ""},
-  {"ING_ID": "114", "ING_Name": "Cola", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_cola.png", "ING_Remark": ""},
-  {"ING_ID": "115", "ING_Name": "Milk", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_milk.png", "ING_Remark": ""},
-  {"ING_ID": "116", "ING_Name": "Cream", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_cream.png", "ING_Remark": ""},
-  {"ING_ID": "117", "ING_Name": "Ginger Ale", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_ginger_ale.png", "ING_Remark": ""},
-  {"ING_ID": "118", "ING_Name": "Soda", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_soda.png", "ING_Remark": ""},
-  {"ING_ID": "119", "ING_Name": "7-Up", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_seven_up.png", "ING_Remark": ""},
-  {"ING_ID": "120", "ING_Name": "Water", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_water.png", "ING_Remark": ""},
-  {"ING_ID": "121", "ING_Name": "Red Bull", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_red_bull.png", "ING_Remark": ""},
-  {"ING_ID": "122", "ING_Name": "Tonic", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_tonic.png", "ING_Remark": ""},
-  {"ING_ID": "123", "ING_Name": "Lemonade", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_lemonade.png", "ING_Remark": ""},
-  {"ING_ID": "124", "ING_Name": "Coffee", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_coffee.png", "ING_Remark": ""},
-  {"ING_ID": "125", "ING_Name": "Coconut Milk", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_coconut_milk.png", "ING_Remark": ""},
-  {"ING_ID": "126", "ING_Name": "Black Tea", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_black_tea.png", "ING_Remark": ""},
-  {"ING_ID": "127", "ING_Name": "Ice Cream", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_ice_cream.png", "ING_Remark": ""},
-  {"ING_ID": "128", "ING_Name": "Peach Puree", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_peach_puree.png", "ING_Remark": ""},
-  {"ING_ID": "129", "ING_Name": "Egg", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_egg.png", "ING_Remark": ""},
-  {"ING_ID": "130", "ING_Name": "Coffee Beans", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_coffee_beans.png", "ING_Remark": ""},
-  {"ING_ID": "131", "ING_Name": "Beef Bouillon", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_beef_bouillon.png", "ING_Remark": ""},
-  {"ING_ID": "132", "ING_Name": "Celery", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_celery.png", "ING_Remark": ""},
-  {"ING_ID": "133", "ING_Name": "Onion", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_onion.png", "ING_Remark": ""},
-  {"ING_ID": "134", "ING_Name": "Silverskin Onion", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_silverskin_onion.png", "ING_Remark": ""},
-  {"ING_ID": "135", "ING_Name": "Mint", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_mint.png", "ING_Remark": ""},
-  {"ING_ID": "136", "ING_Name": "Angostura Bitters", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_angostura_bitter.png", "ING_Remark": "Type: bitters"},
-  {"ING_ID": "137", "ING_Name": "Peach Bitters", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_peach_bitter.png", "ING_Remark": "Type: bitters"},
-  {"ING_ID": "138", "ING_Name": "Orange Bitters", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_orange_bitter.png", "ING_Remark": "Type: bitters"},
-  {"ING_ID": "139", "ING_Name": "Olive", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_olive.png", "ING_Remark": "Type: garnish"},
-  {"ING_ID": "140", "ING_Name": "Ice", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_ice.png", "ING_Remark": ""},
-  {"ING_ID": "141", "ING_Name": "Sugar", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_sugar.png", "ING_Remark": "Type: sweetener"},
-  {"ING_ID": "142", "ING_Name": "Salt", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_salt.png", "ING_Remark": "Type: seasoning"},
-  {"ING_ID": "143", "ING_Name": "Black Pepper", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_black_pepper.png", "ING_Remark": "Type: seasoning"},
-  {"ING_ID": "144", "ING_Name": "Tabasco", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_tabasco.png", "ING_Remark": "Type: sauce"},
-  {"ING_ID": "145", "ING_Name": "Worcestershire Sauce", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_worchestershire_sauce.png", "ING_Remark": "Type: sauce"},
-  {"ING_ID": "146", "ING_Name": "Grated Cinnamon", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_cinnamon.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "147", "ING_Name": "Cinnamon sticks", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_cinnamon_sticks.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "148", "ING_Name": "Vanilla Pods", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_vanilla_pods.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "149", "ING_Name": "Clove", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_clove.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "150", "ING_Name": "Grated Nutmeg", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_grated_nutmeg.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "151", "ING_Name": "Whipped cream", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_whipped_cream.png", "ING_Remark": ""},
-  {"ING_ID": "152", "ING_Name": "Peychaud's Bitters", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_peychauds_bitter.png", "ING_Remark": "Type: bitters"},
-  {"ING_ID": "153", "ING_Name": "Chili", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_chili.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "154", "ING_Name": "Honey", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_honey.png", "ING_Remark": "Type: sweetener"},
-  {"ING_ID": "155", "ING_Name": "Chocolate", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_chocolate.png", "ING_Remark": ""},
-  {"ING_ID": "156", "ING_Name": "Coconut Cream", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_coconut_cream.png", "ING_Remark": ""},
-  {"ING_ID": "157", "ING_Name": "Basil", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_basil.png", "ING_Remark": "Type: herb"},
-  {"ING_ID": "158", "ING_Name": "Butter", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_butter.png", "ING_Remark": ""},
-  {"ING_ID": "159", "ING_Name": "Banana Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_banana_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "160", "ING_Name": "Dry Sherry", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_dry_sherry.png", "ING_Remark": ""},
-  {"ING_ID": "161", "ING_Name": "Grapefruit", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_grapefruit.png", "ING_Remark": ""},
-  {"ING_ID": "162", "ING_Name": "Raspberry Liqueur", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_raspberry_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "163", "ING_Name": "Fernet", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_fernet.png", "ING_Remark": "Type: amaro"},
-  {"ING_ID": "164", "ING_Name": "Ginger", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_ginger.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "165", "ING_Name": "Pink grapefruit soda", "ING_Type": "Beverage", "ING_IMG": "img/upload/ingredient_pink_grapefruit_soda.png", "ING_Remark": ""},
-  {"ING_ID": "166", "ING_Name": "Falernum", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_falernum.png", "ING_Remark": "Type: liqueur_syrup"},
-  {"ING_ID": "167", "ING_Name": "Chartreuse yellow", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_chartreuse_yellow.png", "ING_Remark": ""},
-  {"ING_ID": "168", "ING_Name": "Amaro Nonino", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_amaro_nonino.png", "ING_Remark": "Type: amaro"},
-  {"ING_ID": "169", "ING_Name": "Elderflower Cordial", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_elderflower_cordial.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "170", "ING_Name": "Grappa", "ING_Type": "Strong", "ING_IMG": "img/upload/ingredient_grappa.png", "ING_Remark": ""},
-  {"ING_ID": "171", "ING_Name": "Chamomile Cordial", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_chamomile_cordial.png", "ING_Remark": "Type: syrup"},
-  {"ING_ID": "172", "ING_Name": "Passion fruit liqueur", "ING_Type": "Mild", "ING_IMG": "img/upload/ingredient_passion_fruit_liqueur.png", "ING_Remark": ""},
-  {"ING_ID": "173", "ING_Name": "Passion fruit", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_passion_fruit.png", "ING_Remark": ""},
-  {"ING_ID": "174", "ING_Name": "Sour Mix", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_sour_mix.png", "ING_Remark": ""},
-  {"ING_ID": "175", "ING_Name": "Chili Powder", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_chili_powder.png", "ING_Remark": "Type: spice"},
-  {"ING_ID": "176", "ING_Name": "Limoncello", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_limoncello.png", "ING_Remark": ""},
-  {"ING_ID": "177", "ING_Name": "Raspberry", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_raspberry.png", "ING_Remark": ""},
-  {"ING_ID": "178", "ING_Name": "Suze", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_suze.png", "ING_Remark": "Type: gentian_liqueur; Tag: new"},
-  {"ING_ID": "179", "ING_Name": "Pedro Ximenez", "ING_Type": "Soft", "ING_IMG": "img/upload/ingredient_pedro_ximenez.png", "ING_Remark": "Type: sherry; Tag: new"},
-  {"ING_ID": "180", "ING_Name": "Orange Marmalade", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_orange_marmalade.png", "ING_Remark": "Tag: new"},
-  {"ING_ID": "181", "ING_Name": "Cucumber", "ING_Type": "Fruit", "ING_IMG": "img/upload/ingredient_cucumber.png", "ING_Remark": "Type: vegetable; Tag: new"},
-  {"ING_ID": "182", "ING_Name": "Cocoa Powder", "ING_Type": "Other", "ING_IMG": "img/upload/ingredient_cocoa_powder.png", "ING_Remark": "Tag: new"}
+    {
+        "ING_ID": "1",
+        "ING_Name": "Absinthe",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_absinthe.png",
+        "ING_Remark": "",
+        "ING_NID": "absinthe"
+    },
+    {
+        "ING_ID": "2",
+        "ING_Name": "Apple Schnapps",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_apple_schnapps.png",
+        "ING_Remark": "",
+        "ING_NID": "apple_schnapps"
+    },
+    {
+        "ING_ID": "3",
+        "ING_Name": "Brandy",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_brandy.png",
+        "ING_Remark": "",
+        "ING_NID": "brandy"
+    },
+    {
+        "ING_ID": "4",
+        "ING_Name": "Tequila Blanco",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_tequila_bianco.png",
+        "ING_Remark": "",
+        "ING_NID": "blanco_tequila"
+    },
+    {
+        "ING_ID": "5",
+        "ING_Name": "Tequila Gold",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_tequila_gold.png",
+        "ING_Remark": "",
+        "ING_NID": "tequila"
+    },
+    {
+        "ING_ID": "6",
+        "ING_Name": "Cachaça",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_cachasa.png",
+        "ING_Remark": "",
+        "ING_NID": "cachasa"
+    },
+    {
+        "ING_ID": "7",
+        "ING_Name": "Cognac",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_cognac.png",
+        "ING_Remark": "",
+        "ING_NID": "cognac"
+    },
+    {
+        "ING_ID": "8",
+        "ING_Name": "Cointreau",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_cointreau.png",
+        "ING_Remark": "Alias: triple_sec",
+        "ING_NID": "cointreau"
+    },
+    {
+        "ING_ID": "9",
+        "ING_Name": "Drambuie",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_drambuie.png",
+        "ING_Remark": "",
+        "ING_NID": "drambuie"
+    },
+    {
+        "ING_ID": "10",
+        "ING_Name": "White Rum",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_rum_light.png",
+        "ING_Remark": "",
+        "ING_NID": "rum"
+    },
+    {
+        "ING_ID": "11",
+        "ING_Name": "Dark Rum",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_rum_dark.png",
+        "ING_Remark": "",
+        "ING_NID": "rum"
+    },
+    {
+        "ING_ID": "12",
+        "ING_Name": "Gold Rum",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_rum_gold.png",
+        "ING_Remark": "",
+        "ING_NID": "rum"
+    },
+    {
+        "ING_ID": "13",
+        "ING_Name": "Gin",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_gin.png",
+        "ING_Remark": "",
+        "ING_NID": "gin"
+    },
+    {
+        "ING_ID": "14",
+        "ING_Name": "Old Tom Gin",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_gin_old_tom.png",
+        "ING_Remark": "",
+        "ING_NID": "gin_old_tom"
+    },
+    {
+        "ING_ID": "15",
+        "ING_Name": "Scotch Whisky",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_scotch.png",
+        "ING_Remark": "Alias: whiskey",
+        "ING_NID": "scotch_whisky"
+    },
+    {
+        "ING_ID": "16",
+        "ING_Name": "Peach Schnapps",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_peach_schnapps.png",
+        "ING_Remark": "",
+        "ING_NID": "peach_schnapps"
+    },
+    {
+        "ING_ID": "17",
+        "ING_Name": "Whiskey",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_whiskey.png",
+        "ING_Remark": "",
+        "ING_NID": "whiskey"
+    },
+    {
+        "ING_ID": "18",
+        "ING_Name": "Rye Whiskey",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_rye_whiskey.png",
+        "ING_Remark": "Alias: whiskey",
+        "ING_NID": "rye_whiskey"
+    },
+    {
+        "ING_ID": "19",
+        "ING_Name": "Bourbon",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_bourbon.png",
+        "ING_Remark": "Alias: whiskey",
+        "ING_NID": "bourbon"
+    },
+    {
+        "ING_ID": "20",
+        "ING_Name": "Vodka",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_vodka.png",
+        "ING_Remark": "",
+        "ING_NID": "vodka"
+    },
+    {
+        "ING_ID": "21",
+        "ING_Name": "Vodka Citron",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_vodka_citron.png",
+        "ING_Remark": "",
+        "ING_NID": "vodka_citron"
+    },
+    {
+        "ING_ID": "22",
+        "ING_Name": "Vodka Vanilla",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_vodka_vanilla.png",
+        "ING_Remark": "",
+        "ING_NID": "vodka_vanilla"
+    },
+    {
+        "ING_ID": "23",
+        "ING_Name": "Kirsch",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_kirsch.png",
+        "ING_Remark": "",
+        "ING_NID": "kirsch"
+    },
+    {
+        "ING_ID": "24",
+        "ING_Name": "Jack Daniels",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_jack_daniels.png",
+        "ING_Remark": "",
+        "ING_NID": "jack_daniels"
+    },
+    {
+        "ING_ID": "25",
+        "ING_Name": "Jägermeister",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_jagermeister.png",
+        "ING_Remark": "",
+        "ING_NID": "jagermeister"
+    },
+    {
+        "ING_ID": "26",
+        "ING_Name": "Overproof Rum",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_rum_151.png",
+        "ING_Remark": "",
+        "ING_NID": "overproof_rum"
+    },
+    {
+        "ING_ID": "27",
+        "ING_Name": "Hennessy",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_hennessy.png",
+        "ING_Remark": "",
+        "ING_NID": "hennessy"
+    },
+    {
+        "ING_ID": "28",
+        "ING_Name": "Sloe Gin",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_sloe_gin.png",
+        "ING_Remark": "",
+        "ING_NID": "sloe_gin"
+    },
+    {
+        "ING_ID": "29",
+        "ING_Name": "Sambuca",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_sambuca.png",
+        "ING_Remark": "",
+        "ING_NID": "sambuca"
+    },
+    {
+        "ING_ID": "30",
+        "ING_Name": "Calvados",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_calvados.png",
+        "ING_Remark": "",
+        "ING_NID": "calvados"
+    },
+    {
+        "ING_ID": "31",
+        "ING_Name": "Pisco",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_pisco.png",
+        "ING_Remark": "",
+        "ING_NID": "pisco"
+    },
+    {
+        "ING_ID": "32",
+        "ING_Name": "Goldschläger",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_goldschlager.png",
+        "ING_Remark": "",
+        "ING_NID": "schläger"
+    },
+    {
+        "ING_ID": "33",
+        "ING_Name": "Benedictine",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_benedictine.png",
+        "ING_Remark": "",
+        "ING_NID": "benedictine"
+    },
+    {
+        "ING_ID": "34",
+        "ING_Name": "Chartreuse green",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_chartreuse_green.png",
+        "ING_Remark": "",
+        "ING_NID": "chartreuse"
+    },
+    {
+        "ING_ID": "35",
+        "ING_Name": "Amaretto",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_amaretto.png",
+        "ING_Remark": "",
+        "ING_NID": "amaretto"
+    },
+    {
+        "ING_ID": "36",
+        "ING_Name": "Aperol",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_aperol.png",
+        "ING_Remark": "",
+        "ING_NID": "aperol"
+    },
+    {
+        "ING_ID": "37",
+        "ING_Name": "Apple Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_apple_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "apple"
+    },
+    {
+        "ING_ID": "38",
+        "ING_Name": "Peach Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_peach_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "peach"
+    },
+    {
+        "ING_ID": "39",
+        "ING_Name": "Apricot Brandy",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_apricot_brandy.png",
+        "ING_Remark": "",
+        "ING_NID": "apricot_brandy"
+    },
+    {
+        "ING_ID": "40",
+        "ING_Name": "Butterscotch Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_butterscotch_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "butterscotch"
+    },
+    {
+        "ING_ID": "41",
+        "ING_Name": "Cherry Brandy",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_cherry_brandy.png",
+        "ING_Remark": "",
+        "ING_NID": "cherry_brandy"
+    },
+    {
+        "ING_ID": "42",
+        "ING_Name": "Campari",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_campari.png",
+        "ING_Remark": "",
+        "ING_NID": "campari"
+    },
+    {
+        "ING_ID": "43",
+        "ING_Name": "Creme de Cacao Brown",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_creme_de_cacao_brown.png",
+        "ING_Remark": "",
+        "ING_NID": "creme_de_cacao_brown"
+    },
+    {
+        "ING_ID": "44",
+        "ING_Name": "Creme de Cassis",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_creme_de_cassis.png",
+        "ING_Remark": "",
+        "ING_NID": "creme_de_cassis"
+    },
+    {
+        "ING_ID": "45",
+        "ING_Name": "Coffee Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_coffee_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "coffee"
+    },
+    {
+        "ING_ID": "46",
+        "ING_Name": "Galliano",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_galliano.png",
+        "ING_Remark": "",
+        "ING_NID": "galliano"
+    },
+    {
+        "ING_ID": "47",
+        "ING_Name": "Grand Marnier",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_grand_marinier.png",
+        "ING_Remark": "",
+        "ING_NID": "grand_marinier"
+    },
+    {
+        "ING_ID": "48",
+        "ING_Name": "Orange Curaçao",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_orange_curacao.png",
+        "ING_Remark": "",
+        "ING_NID": "curaçao_orange"
+    },
+    {
+        "ING_ID": "49",
+        "ING_Name": "Maraschino Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_maraschino_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "maraschino"
+    },
+    {
+        "ING_ID": "50",
+        "ING_Name": "Blackberry Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_blackberry_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "blackberry"
+    },
+    {
+        "ING_ID": "51",
+        "ING_Name": "Red Wine",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_wine_red.png",
+        "ING_Remark": "",
+        "ING_NID": "wine"
+    },
+    {
+        "ING_ID": "52",
+        "ING_Name": "White Wine",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_wine_white.png",
+        "ING_Remark": "",
+        "ING_NID": "wine"
+    },
+    {
+        "ING_ID": "53",
+        "ING_Name": "Sparkling Wine",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_sparkling_wine.png",
+        "ING_Remark": "",
+        "ING_NID": "sparkling_wine"
+    },
+    {
+        "ING_ID": "54",
+        "ING_Name": "White Vermouth",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_vermouth_white.png",
+        "ING_Remark": "",
+        "ING_NID": "vermouth"
+    },
+    {
+        "ING_ID": "55",
+        "ING_Name": "Red Vermouth",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_vermouth_red.png",
+        "ING_Remark": "",
+        "ING_NID": "vermouth"
+    },
+    {
+        "ING_ID": "56",
+        "ING_Name": "Rose Vermouth",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_vermouth_rose.png",
+        "ING_Remark": "",
+        "ING_NID": "rose_vermouth"
+    },
+    {
+        "ING_ID": "57",
+        "ING_Name": "Dry Vermouth",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_vermouth_dry.png",
+        "ING_Remark": "",
+        "ING_NID": "vermouth"
+    },
+    {
+        "ING_ID": "58",
+        "ING_Name": "Kahlua",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_kahlua.png",
+        "ING_Remark": "",
+        "ING_NID": "kahlua"
+    },
+    {
+        "ING_ID": "59",
+        "ING_Name": "Baileys",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_baileys.png",
+        "ING_Remark": "",
+        "ING_NID": "baileys"
+    },
+    {
+        "ING_ID": "60",
+        "ING_Name": "Creme de Menthe Green",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_creme_de_menthe_green.png",
+        "ING_Remark": "",
+        "ING_NID": "creme_de_menthe_white"
+    },
+    {
+        "ING_ID": "61",
+        "ING_Name": "Creme de Menthe White",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_creme_de_menthe_white.png",
+        "ING_Remark": "",
+        "ING_NID": "creme_de_menthe_white"
+    },
+    {
+        "ING_ID": "62",
+        "ING_Name": "Creme de Cacao White",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_creme_de_cacao_white.png",
+        "ING_Remark": "",
+        "ING_NID": "creme_de_cacao_brown"
+    },
+    {
+        "ING_ID": "63",
+        "ING_Name": "Red Port",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_red_port.png",
+        "ING_Remark": "",
+        "ING_NID": "port"
+    },
+    {
+        "ING_ID": "64",
+        "ING_Name": "Midori",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_midori.png",
+        "ING_Remark": "",
+        "ING_NID": "midori"
+    },
+    {
+        "ING_ID": "65",
+        "ING_Name": "Blue Curaçao",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_blue_curacao.png",
+        "ING_Remark": "",
+        "ING_NID": "blue_curacao"
+    },
+    {
+        "ING_ID": "66",
+        "ING_Name": "Hpnotiq",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_hpnotiq.png",
+        "ING_Remark": "",
+        "ING_NID": "hpnotiq"
+    },
+    {
+        "ING_ID": "67",
+        "ING_Name": "Irish Stout",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_irish_stout.png",
+        "ING_Remark": "",
+        "ING_NID": "irish_stout"
+    },
+    {
+        "ING_ID": "68",
+        "ING_Name": "Southern Comfort",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_southern_comfort.png",
+        "ING_Remark": "",
+        "ING_NID": "southern_comfort"
+    },
+    {
+        "ING_ID": "69",
+        "ING_Name": "Beer",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_beer.png",
+        "ING_Remark": "",
+        "ING_NID": "beer"
+    },
+    {
+        "ING_ID": "70",
+        "ING_Name": "Ginger Beer",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_ginger_beer.png",
+        "ING_Remark": "",
+        "ING_NID": "ginger_beer"
+    },
+    {
+        "ING_ID": "71",
+        "ING_Name": "Creme De Violette",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_creme_de_violette.png",
+        "ING_Remark": "",
+        "ING_NID": "creme_de_violette"
+    },
+    {
+        "ING_ID": "72",
+        "ING_Name": "Lillet Blanc",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_lillet_blonde.png",
+        "ING_Remark": "",
+        "ING_NID": "blanc_lillet"
+    },
+    {
+        "ING_ID": "73",
+        "ING_Name": "Triple Sec",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_triple_sec.png",
+        "ING_Remark": "Alias: cointreau",
+        "ING_NID": "triple_sec"
+    },
+    {
+        "ING_ID": "74",
+        "ING_Name": "Malibu Coconut Rum",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_malibu.png",
+        "ING_Remark": "",
+        "ING_NID": "coconut_malibu_rum"
+    },
+    {
+        "ING_ID": "75",
+        "ING_Name": "Egg Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_egg_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "egg"
+    },
+    {
+        "ING_ID": "76",
+        "ING_Name": "Strawberry Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_strawberry_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "strawberry"
+    },
+    {
+        "ING_ID": "77",
+        "ING_Name": "Frangelico",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_frangelico.png",
+        "ING_Remark": "",
+        "ING_NID": "frangelico"
+    },
+    {
+        "ING_ID": "78",
+        "ING_Name": "Pimm's No. 1",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_pimms.png",
+        "ING_Remark": "",
+        "ING_NID": "1_no._pimm's"
+    },
+    {
+        "ING_ID": "79",
+        "ING_Name": "Dubonnet",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_dubonnet.png",
+        "ING_Remark": "",
+        "ING_NID": "dubonnet"
+    },
+    {
+        "ING_ID": "80",
+        "ING_Name": "Grenadine",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_grenadine.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "grenadine"
+    },
+    {
+        "ING_ID": "81",
+        "ING_Name": "Almond Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_almond.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_almond"
+    },
+    {
+        "ING_ID": "82",
+        "ING_Name": "Coconut Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_coconut.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_coconut"
+    },
+    {
+        "ING_ID": "83",
+        "ING_Name": "Rock Candy Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_rock_candy.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "candy_rock_syrup"
+    },
+    {
+        "ING_ID": "84",
+        "ING_Name": "Sugar Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_sugar.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_sugar"
+    },
+    {
+        "ING_ID": "85",
+        "ING_Name": "Honey Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_honey.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_honey"
+    },
+    {
+        "ING_ID": "86",
+        "ING_Name": "Raspberry Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_raspberry.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_raspberry"
+    },
+    {
+        "ING_ID": "87",
+        "ING_Name": "Strawberry Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_strawberry.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_strawberry"
+    },
+    {
+        "ING_ID": "88",
+        "ING_Name": "Chocolate Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_chocolate.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_chocolate"
+    },
+    {
+        "ING_ID": "89",
+        "ING_Name": "Maple Syrup",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_syrup_maple.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "syrup_maple"
+    },
+    {
+        "ING_ID": "90",
+        "ING_Name": "Orange Flower Water",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_orange_flower_water.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "orange_flower_water"
+    },
+    {
+        "ING_ID": "91",
+        "ING_Name": "Vanilla Extract",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_vanilla_extract.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "vanilla_extract"
+    },
+    {
+        "ING_ID": "92",
+        "ING_Name": "Agave Nectar",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_agave_nectar.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "agave_nectar"
+    },
+    {
+        "ING_ID": "93",
+        "ING_Name": "Cranberry Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_cranberry.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_cranberry"
+    },
+    {
+        "ING_ID": "94",
+        "ING_Name": "Grapefruit Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_grapefruit.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_grapefruit"
+    },
+    {
+        "ING_ID": "95",
+        "ING_Name": "Orange Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_orange.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_orange"
+    },
+    {
+        "ING_ID": "96",
+        "ING_Name": "Tomato Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_tomato.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_tomato"
+    },
+    {
+        "ING_ID": "97",
+        "ING_Name": "Pineapple Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_pineapple.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_pineapple"
+    },
+    {
+        "ING_ID": "98",
+        "ING_Name": "Papaya Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_papaya.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_papaya"
+    },
+    {
+        "ING_ID": "99",
+        "ING_Name": "Pomegranate Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_pomegranate.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_pomegranate"
+    },
+    {
+        "ING_ID": "100",
+        "ING_Name": "Olive Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_olive.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_olive"
+    },
+    {
+        "ING_ID": "101",
+        "ING_Name": "Passion Fruit Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_passion_fruit.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_passion_fruit"
+    },
+    {
+        "ING_ID": "102",
+        "ING_Name": "Apple Juice",
+        "ING_Type": "Juice",
+        "ING_IMG": "img/upload/ingredient_juice_apple.png",
+        "ING_Remark": "",
+        "ING_NID": "juice_apple"
+    },
+    {
+        "ING_ID": "103",
+        "ING_Name": "Maraschino Cherry",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_cherry.png",
+        "ING_Remark": "",
+        "ING_NID": "cherry_maraschino"
+    },
+    {
+        "ING_ID": "104",
+        "ING_Name": "Lime",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_lime.png",
+        "ING_Remark": "",
+        "ING_NID": "lime"
+    },
+    {
+        "ING_ID": "105",
+        "ING_Name": "Lemon",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_lemon.png",
+        "ING_Remark": "",
+        "ING_NID": "lemon"
+    },
+    {
+        "ING_ID": "106",
+        "ING_Name": "Orange",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_orange.png",
+        "ING_Remark": "",
+        "ING_NID": "orange"
+    },
+    {
+        "ING_ID": "107",
+        "ING_Name": "Pineapple",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_pineapple.png",
+        "ING_Remark": "",
+        "ING_NID": "pineapple"
+    },
+    {
+        "ING_ID": "108",
+        "ING_Name": "Apple",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_apple.png",
+        "ING_Remark": "",
+        "ING_NID": "apple"
+    },
+    {
+        "ING_ID": "109",
+        "ING_Name": "Peach",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_peach.png",
+        "ING_Remark": "",
+        "ING_NID": "peach"
+    },
+    {
+        "ING_ID": "110",
+        "ING_Name": "Banana",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_banana.png",
+        "ING_Remark": "",
+        "ING_NID": "banana"
+    },
+    {
+        "ING_ID": "111",
+        "ING_Name": "Honeydew melon",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_honeydew_melon.png",
+        "ING_Remark": "",
+        "ING_NID": "honeydew_melon"
+    },
+    {
+        "ING_ID": "112",
+        "ING_Name": "Strawberry",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_strawberry.png",
+        "ING_Remark": "",
+        "ING_NID": "strawberry"
+    },
+    {
+        "ING_ID": "113",
+        "ING_Name": "Blackberry",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_blackberry.png",
+        "ING_Remark": "",
+        "ING_NID": "blackberry"
+    },
+    {
+        "ING_ID": "114",
+        "ING_Name": "Cola",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_cola.png",
+        "ING_Remark": "",
+        "ING_NID": "cola"
+    },
+    {
+        "ING_ID": "115",
+        "ING_Name": "Milk",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_milk.png",
+        "ING_Remark": "",
+        "ING_NID": "milk"
+    },
+    {
+        "ING_ID": "116",
+        "ING_Name": "Cream",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_cream.png",
+        "ING_Remark": "",
+        "ING_NID": "cream"
+    },
+    {
+        "ING_ID": "117",
+        "ING_Name": "Ginger Ale",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_ginger_ale.png",
+        "ING_Remark": "",
+        "ING_NID": "ginger_ale"
+    },
+    {
+        "ING_ID": "118",
+        "ING_Name": "Soda",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_soda.png",
+        "ING_Remark": "",
+        "ING_NID": "soda"
+    },
+    {
+        "ING_ID": "119",
+        "ING_Name": "7-Up",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_seven_up.png",
+        "ING_Remark": "",
+        "ING_NID": "7-up"
+    },
+    {
+        "ING_ID": "120",
+        "ING_Name": "Water",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_water.png",
+        "ING_Remark": "",
+        "ING_NID": "water"
+    },
+    {
+        "ING_ID": "121",
+        "ING_Name": "Red Bull",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_red_bull.png",
+        "ING_Remark": "",
+        "ING_NID": "bull"
+    },
+    {
+        "ING_ID": "122",
+        "ING_Name": "Tonic",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_tonic.png",
+        "ING_Remark": "",
+        "ING_NID": "tonic"
+    },
+    {
+        "ING_ID": "123",
+        "ING_Name": "Lemonade",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_lemonade.png",
+        "ING_Remark": "",
+        "ING_NID": "lemonade"
+    },
+    {
+        "ING_ID": "124",
+        "ING_Name": "Coffee",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_coffee.png",
+        "ING_Remark": "",
+        "ING_NID": "coffee"
+    },
+    {
+        "ING_ID": "125",
+        "ING_Name": "Coconut Milk",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_coconut_milk.png",
+        "ING_Remark": "",
+        "ING_NID": "coconut_milk"
+    },
+    {
+        "ING_ID": "126",
+        "ING_Name": "Black Tea",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_black_tea.png",
+        "ING_Remark": "",
+        "ING_NID": "black_tea"
+    },
+    {
+        "ING_ID": "127",
+        "ING_Name": "Ice Cream",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_ice_cream.png",
+        "ING_Remark": "",
+        "ING_NID": "ice_cream"
+    },
+    {
+        "ING_ID": "128",
+        "ING_Name": "Peach Puree",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_peach_puree.png",
+        "ING_Remark": "",
+        "ING_NID": "peach_puree"
+    },
+    {
+        "ING_ID": "129",
+        "ING_Name": "Egg",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_egg.png",
+        "ING_Remark": "",
+        "ING_NID": "egg"
+    },
+    {
+        "ING_ID": "130",
+        "ING_Name": "Coffee Beans",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_coffee_beans.png",
+        "ING_Remark": "",
+        "ING_NID": "coffee_beans"
+    },
+    {
+        "ING_ID": "131",
+        "ING_Name": "Beef Bouillon",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_beef_bouillon.png",
+        "ING_Remark": "",
+        "ING_NID": "beef_bouillon"
+    },
+    {
+        "ING_ID": "132",
+        "ING_Name": "Celery",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_celery.png",
+        "ING_Remark": "",
+        "ING_NID": "celery"
+    },
+    {
+        "ING_ID": "133",
+        "ING_Name": "Onion",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_onion.png",
+        "ING_Remark": "",
+        "ING_NID": "onion"
+    },
+    {
+        "ING_ID": "134",
+        "ING_Name": "Silverskin Onion",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_silverskin_onion.png",
+        "ING_Remark": "",
+        "ING_NID": "silverskin_onion"
+    },
+    {
+        "ING_ID": "135",
+        "ING_Name": "Mint",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_mint.png",
+        "ING_Remark": "",
+        "ING_NID": "mint"
+    },
+    {
+        "ING_ID": "136",
+        "ING_Name": "Angostura Bitters",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_angostura_bitter.png",
+        "ING_Remark": "Type: bitters",
+        "ING_NID": "angostura_bitter"
+    },
+    {
+        "ING_ID": "137",
+        "ING_Name": "Peach Bitters",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_peach_bitter.png",
+        "ING_Remark": "Type: bitters",
+        "ING_NID": "bitters_peach"
+    },
+    {
+        "ING_ID": "138",
+        "ING_Name": "Orange Bitters",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_orange_bitter.png",
+        "ING_Remark": "Type: bitters",
+        "ING_NID": "bitters_orange"
+    },
+    {
+        "ING_ID": "139",
+        "ING_Name": "Olive",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_olive.png",
+        "ING_Remark": "Type: garnish",
+        "ING_NID": "olive"
+    },
+    {
+        "ING_ID": "140",
+        "ING_Name": "Ice",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_ice.png",
+        "ING_Remark": "",
+        "ING_NID": "ice"
+    },
+    {
+        "ING_ID": "141",
+        "ING_Name": "Sugar",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_sugar.png",
+        "ING_Remark": "Type: sweetener",
+        "ING_NID": "sugar"
+    },
+    {
+        "ING_ID": "142",
+        "ING_Name": "Salt",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_salt.png",
+        "ING_Remark": "Type: seasoning",
+        "ING_NID": "salt"
+    },
+    {
+        "ING_ID": "143",
+        "ING_Name": "Black Pepper",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_black_pepper.png",
+        "ING_Remark": "Type: seasoning",
+        "ING_NID": "black_pepper"
+    },
+    {
+        "ING_ID": "144",
+        "ING_Name": "Tabasco",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_tabasco.png",
+        "ING_Remark": "Type: sauce",
+        "ING_NID": "tabasco"
+    },
+    {
+        "ING_ID": "145",
+        "ING_Name": "Worcestershire Sauce",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_worchestershire_sauce.png",
+        "ING_Remark": "Type: sauce",
+        "ING_NID": "sauce_worcestershire"
+    },
+    {
+        "ING_ID": "146",
+        "ING_Name": "Grated Cinnamon",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_cinnamon.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "cinnamon_grated"
+    },
+    {
+        "ING_ID": "147",
+        "ING_Name": "Cinnamon sticks",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_cinnamon_sticks.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "cinnamon_sticks"
+    },
+    {
+        "ING_ID": "148",
+        "ING_Name": "Vanilla Pods",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_vanilla_pods.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "vanilla_pods"
+    },
+    {
+        "ING_ID": "149",
+        "ING_Name": "Clove",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_clove.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "clove"
+    },
+    {
+        "ING_ID": "150",
+        "ING_Name": "Grated Nutmeg",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_grated_nutmeg.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "grated_nutmeg"
+    },
+    {
+        "ING_ID": "151",
+        "ING_Name": "Whipped cream",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_whipped_cream.png",
+        "ING_Remark": "",
+        "ING_NID": "whipped_cream"
+    },
+    {
+        "ING_ID": "152",
+        "ING_Name": "Peychaud's Bitters",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_peychauds_bitter.png",
+        "ING_Remark": "Type: bitters",
+        "ING_NID": "bitters_peychaud's"
+    },
+    {
+        "ING_ID": "153",
+        "ING_Name": "Chili",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_chili.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "chili"
+    },
+    {
+        "ING_ID": "154",
+        "ING_Name": "Honey",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_honey.png",
+        "ING_Remark": "Type: sweetener",
+        "ING_NID": "honey"
+    },
+    {
+        "ING_ID": "155",
+        "ING_Name": "Chocolate",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_chocolate.png",
+        "ING_Remark": "",
+        "ING_NID": "chocolate"
+    },
+    {
+        "ING_ID": "156",
+        "ING_Name": "Coconut Cream",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_coconut_cream.png",
+        "ING_Remark": "",
+        "ING_NID": "coconut_cream"
+    },
+    {
+        "ING_ID": "157",
+        "ING_Name": "Basil",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_basil.png",
+        "ING_Remark": "Type: herb",
+        "ING_NID": "basil"
+    },
+    {
+        "ING_ID": "158",
+        "ING_Name": "Butter",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_butter.png",
+        "ING_Remark": "",
+        "ING_NID": "butter"
+    },
+    {
+        "ING_ID": "159",
+        "ING_Name": "Banana Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_banana_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "banana"
+    },
+    {
+        "ING_ID": "160",
+        "ING_Name": "Dry Sherry",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_dry_sherry.png",
+        "ING_Remark": "",
+        "ING_NID": "cherry"
+    },
+    {
+        "ING_ID": "161",
+        "ING_Name": "Grapefruit",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_grapefruit.png",
+        "ING_Remark": "",
+        "ING_NID": "grapefruit"
+    },
+    {
+        "ING_ID": "162",
+        "ING_Name": "Raspberry Liqueur",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_raspberry_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "raspberry"
+    },
+    {
+        "ING_ID": "163",
+        "ING_Name": "Fernet",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_fernet.png",
+        "ING_Remark": "Type: amaro",
+        "ING_NID": "fernet"
+    },
+    {
+        "ING_ID": "164",
+        "ING_Name": "Ginger",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_ginger.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "ginger"
+    },
+    {
+        "ING_ID": "165",
+        "ING_Name": "Pink grapefruit soda",
+        "ING_Type": "Beverage",
+        "ING_IMG": "img/upload/ingredient_pink_grapefruit_soda.png",
+        "ING_Remark": "",
+        "ING_NID": "pink_grapefruit_soda"
+    },
+    {
+        "ING_ID": "166",
+        "ING_Name": "Falernum",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_falernum.png",
+        "ING_Remark": "Type: liqueur_syrup",
+        "ING_NID": "falernum"
+    },
+    {
+        "ING_ID": "167",
+        "ING_Name": "Chartreuse yellow",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_chartreuse_yellow.png",
+        "ING_Remark": "",
+        "ING_NID": "chartreuse_yellow"
+    },
+    {
+        "ING_ID": "168",
+        "ING_Name": "Amaro Nonino",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_amaro_nonino.png",
+        "ING_Remark": "Type: amaro",
+        "ING_NID": "amaro_nonino"
+    },
+    {
+        "ING_ID": "169",
+        "ING_Name": "Elderflower Cordial",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_elderflower_cordial.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "elderflower_cordial"
+    },
+    {
+        "ING_ID": "170",
+        "ING_Name": "Grappa",
+        "ING_Type": "Strong",
+        "ING_IMG": "img/upload/ingredient_grappa.png",
+        "ING_Remark": "",
+        "ING_NID": "grappa"
+    },
+    {
+        "ING_ID": "171",
+        "ING_Name": "Chamomile Cordial",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_chamomile_cordial.png",
+        "ING_Remark": "Type: syrup",
+        "ING_NID": "chamomile_cordial"
+    },
+    {
+        "ING_ID": "172",
+        "ING_Name": "Passion fruit liqueur",
+        "ING_Type": "Mild",
+        "ING_IMG": "img/upload/ingredient_passion_fruit_liqueur.png",
+        "ING_Remark": "",
+        "ING_NID": "passion_fruit"
+    },
+    {
+        "ING_ID": "173",
+        "ING_Name": "Passion fruit",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_passion_fruit.png",
+        "ING_Remark": "",
+        "ING_NID": "passion_fruit"
+    },
+    {
+        "ING_ID": "174",
+        "ING_Name": "Sour Mix",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_sour_mix.png",
+        "ING_Remark": "",
+        "ING_NID": "mix_sour"
+    },
+    {
+        "ING_ID": "175",
+        "ING_Name": "Chili Powder",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_chili_powder.png",
+        "ING_Remark": "Type: spice",
+        "ING_NID": "chili_powder"
+    },
+    {
+        "ING_ID": "176",
+        "ING_Name": "Limoncello",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_limoncello.png",
+        "ING_Remark": "",
+        "ING_NID": "limoncello"
+    },
+    {
+        "ING_ID": "177",
+        "ING_Name": "Raspberry",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_raspberry.png",
+        "ING_Remark": "",
+        "ING_NID": "raspberry"
+    },
+    {
+        "ING_ID": "178",
+        "ING_Name": "Suze",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_suze.png",
+        "ING_Remark": "Type: gentian_liqueur; Tag: new",
+        "ING_NID": "suze"
+    },
+    {
+        "ING_ID": "179",
+        "ING_Name": "Pedro Ximenez",
+        "ING_Type": "Soft",
+        "ING_IMG": "img/upload/ingredient_pedro_ximenez.png",
+        "ING_Remark": "Type: sherry; Tag: new",
+        "ING_NID": "pedro_ximenez"
+    },
+    {
+        "ING_ID": "180",
+        "ING_Name": "Orange Marmalade",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_orange_marmalade.png",
+        "ING_Remark": "Tag: new",
+        "ING_NID": "orange_marmalade"
+    },
+    {
+        "ING_ID": "181",
+        "ING_Name": "Cucumber",
+        "ING_Type": "Fruit",
+        "ING_IMG": "img/upload/ingredient_cucumber.png",
+        "ING_Remark": "Type: vegetable; Tag: new",
+        "ING_NID": "cucumber"
+    },
+    {
+        "ING_ID": "182",
+        "ING_Name": "Cocoa Powder",
+        "ING_Type": "Other",
+        "ING_IMG": "img/upload/ingredient_cocoa_powder.png",
+        "ING_Remark": "Tag: new",
+        "ING_NID": "cocoa_powder"
+    }
 ]

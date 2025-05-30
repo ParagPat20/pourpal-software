@@ -1,0 +1,4394 @@
+Found 347 recipes:
+
+Recipe: Margarita (ID: margarita)
+Glass: margarita
+Tags: strong_recipe, official
+
+Ingredients:
+- 50ml of tequila_bianco
+- 30ml of cointreau
+  Substitutes: triple_sec
+- 1half of lime
+- 2gr of salt
+  (Garnish)
+- 100gr of ice
+
+Recipe: Americano (ID: americano)
+Glass: rocks
+Tags: soft_recipe, official
+
+Ingredients:
+- 30ml of campari
+- 30ml of vermouth_red
+  Substitutes: vermouth_red
+- 30ml of soda
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Alexander (ID: alexander)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 30ml of cognac
+  Substitutes: brandy
+- 30ml of creme_de_cacao_brown
+- 30ml of cream
+- 2gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: French Connection (ID: french_connection)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 35ml of cognac
+- 35ml of amaretto
+- 100gr of ice
+
+Recipe: Horse's Neck (ID: horses_neck)
+Glass: rocks
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 40ml of cognac
+  Substitutes: brandy
+- 120ml of ginger_ale
+- 1dash of angostura_bitter
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Orgasm (ID: orgasm)
+Glass: rocks
+Tags: mild, shooter
+
+Ingredients:
+- 30ml of cointreau
+- 30ml of baileys
+- 20ml of grand_marinier
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Orgasm #2 (ID: orgasm2)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of amaretto
+- 15ml of coffee_liqueur
+  Substitutes: kahlua
+- 15ml of baileys
+
+Recipe: Screaming Orgasm (ID: screaming_orgasm)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 10ml of vodka
+- 10ml of amaretto
+- 10ml of coffee_liqueur
+- 10ml of baileys
+- 100gr of ice
+
+Recipe: Paradise (ID: paradise)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of gin
+- 20ml of apricot_brandy
+- 15ml of juice_orange
+- 100gr of ice
+
+Recipe: Singapore Sling (ID: singapore_sling)
+Glass: hurricane
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 30ml of gin
+- 15ml of cherry_brandy
+- 7ml of cointreau
+- 7ml of benedictine
+- 10ml of grenadine
+- 120ml of juice_pineapple
+- 1half of lemon
+- 1dash of angostura_bitter
+- 1slice of pineapple
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Caipirinha (ID: caipirinha)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 60ml of cachasa
+  Substitutes: rum_light
+- 1none of lime
+- 4teaspoon of sugar
+  Substitutes: syrup_sugar
+- 100gr of ice
+
+Recipe: Caipiroska (ID: caipiroska)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of vodka
+- 1half of lime
+- 2teaspoon of sugar
+  Substitutes: syrup_sugar
+- 100gr of ice
+
+Recipe: Bronx (ID: bronx)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of gin
+- 15ml of vermouth_red
+- 10ml of vermouth_dry
+- 15ml of juice_orange
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Gibson (ID: gibson)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of gin
+- 10ml of vermouth_dry
+- 1peel of silverskin_onion
+  (Garnish)
+- 100gr of ice
+
+Recipe: Gin Fizz (ID: gin_fizz)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 45ml of gin
+- 1half of lemon
+- 10ml of syrup_sugar
+- 80ml of soda
+- 100gr of ice
+
+Recipe: Long Island Ice Tea (ID: long_island)
+Glass: highball
+Tags: mild, official, long
+
+Ingredients:
+- 15ml of vodka
+- 15ml of tequila_bianco
+  Substitutes: tequila_gold
+- 15ml of rum_light
+- 15ml of gin
+- 15ml of cointreau
+  Substitutes: triple_sec
+- 1half of lemon
+- 20ml of syrup_sugar
+- 10ml of cola
+- 1slice of lemon
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Martini Dry (ID: martini)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 60ml of gin
+- 10ml of vermouth_dry
+- 1none of olive
+  (Garnish)
+- 100gr of ice
+
+Recipe: Martini Vodka (ID: vodka_martini)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 55ml of vodka
+- 15ml of vermouth_dry
+- 1peel of lemon
+  (Optional)
+- 1none of olive
+  (Garnish)
+- 100gr of ice
+
+Recipe: Martini Perfect (ID: perfect_martini)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 55ml of gin
+- 10ml of vermouth_dry
+- 10ml of vermouth_red
+- 1peel of lemon
+  (Garnish)
+  (Optional)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Martini Sweet (ID: sweet_martini)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 55ml of vodka
+- 15ml of vermouth_red
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Negroni (ID: negroni)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of gin
+- 30ml of vermouth_red
+- 30ml of campari
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Tom Collins (ID: tom_collins)
+Glass: collins
+Tags: mild
+
+Ingredients:
+- 45ml of gin_old_tom
+- 1half of lemon
+- 15ml of syrup_sugar
+- 60ml of soda
+- 1slice of cherry
+  Substitutes: orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Cuba Libre (ID: cuba_libre)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 50ml of rum_light
+- 120ml of cola
+- 1half of lime
+  (Optional)
+- 1slice of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Frozen Daiquiri (ID: frozen_daiquiri)
+Glass: goblet
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of rum_light
+- 1half of lime
+  Substitutes: lemon
+- 5ml of syrup_sugar
+- 1scoop of ice_cream
+- 100gr of ice
+
+Recipe: Banana Daiquiri (ID: banana_daiquiri)
+Glass: goblet
+Tags: mild
+
+Ingredients:
+- 45ml of rum_light
+- 1half of lime
+  Substitutes: lemon
+- 5ml of syrup_sugar
+- 1half of banana
+- 100gr of ice
+
+Recipe: Daiquiri (ID: daiquiri)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 60ml of rum_light
+- 1half of lime
+- 10ml of syrup_sugar
+  Substitutes: sugar
+- 100gr of ice
+
+Recipe: Mai Tai (ID: mai_tai)
+Glass: highball
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of rum_light
+- 30ml of rum_dark
+- 15ml of orange_curacao
+  Substitutes: triple_sec, cointreau
+- 15ml of syrup_almond
+- 8ml of syrup_sugar
+- 1half of lime
+- 100gr of ice
+
+Recipe: Mojito (ID: mojito)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 45ml of rum_light
+- 1half of lime
+- 6springs of mint
+- 2teaspoon of sugar
+- 50ml of soda
+- 100gr of ice
+
+Recipe: Mojito Pomegranate (ID: mojito_pomegranate)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 40ml of rum_light
+- 1half of lime
+- 4springs of mint
+- 2teaspoon of sugar
+- 50ml of juice_pomegranate
+- 50ml of soda
+- 100gr of ice
+
+Recipe: Pina Colada (ID: pina_colada)
+Glass: goblet
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 50ml of rum_light
+- 30ml of coconut_cream
+  Substitutes: syrup_coconut
+- 50ml of juice_pineapple
+- 1wedge of pineapple
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Planter's Punch (ID: planters_punch)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 45ml of rum_dark
+- 1half of lemon
+  Substitutes: lime
+- 30ml of syrup_sugar
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+  Substitutes: water
+
+Recipe: Tequila Sunrise (ID: tequila_sunrise)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 45ml of tequila_bianco
+  Substitutes: tequila_gold
+- 90ml of juice_orange
+- 15ml of grenadine
+- 1slice of orange
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Appletini (ID: appletini)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 40ml of vodka
+  Substitutes: rum_light
+- 15ml of apple_schnapps
+  Substitutes: apple_liqueur
+- 15ml of cointreau
+  Substitutes: triple_sec
+- 1slice of apple
+  (Garnish)
+- 100gr of ice
+
+Recipe: Black Russian (ID: black_russian)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 50ml of vodka
+- 20ml of coffee_liqueur
+  Substitutes: kahlua
+- 100gr of ice
+
+Recipe: Bloody Mary (ID: bloody_mary)
+Glass: highball
+Tags: mild, official
+
+Ingredients:
+- 45ml of vodka
+- 90ml of juice_tomato
+- 1quarter of lemon
+- 1dash of tabasco
+- 2dash of worchestershire_sauce
+- 1dash_dry of salt
+- 1dash_dry of black_pepper
+- 1stalk of celery
+  (Garnish)
+- 100gr of ice
+
+Recipe: Bull Shot (ID: bull_shot)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of vodka
+- 60ml of beef_bouillon
+- 1quarter of lemon
+- 1dash of tabasco
+- 1dash of worchestershire_sauce
+- 1dash_dry of salt
+- 1dash_dry of black_pepper
+- 1stalk of celery
+  (Garnish)
+- 100gr of ice
+
+Recipe: Cosmopolitan (ID: cosmopolitan)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 40ml of vodka_citron
+  Substitutes: vodka
+- 15ml of cointreau
+  Substitutes: triple_sec
+- 1quarter of lime
+- 30ml of juice_cranberry
+- 1slice of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Godmother (ID: godmother)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 35ml of vodka
+- 35ml of amaretto
+- 100gr of ice
+
+Recipe: Godfather (ID: godfather)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 35ml of scotch
+  Substitutes: whiskey
+- 35ml of amaretto
+- 100gr of ice
+
+Recipe: Harvey Wallbanger (ID: harvey_wallbanger)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 45ml of vodka
+  Substitutes: whiskey
+- 90ml of juice_orange
+- 15ml of galliano
+- 1slice of orange
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Kamikaze (ID: kamikaze)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of vodka
+- 30ml of triple_sec
+  Substitutes: cointreau
+- 1half of lime
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Salty Dog (ID: salty_dog)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 40ml of gin
+  Substitutes: vodka
+- 100ml of juice_grapefruit
+- 10gr of salt
+- 100gr of ice
+
+Recipe: Screwdriver (ID: screwdriver)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 50ml of vodka
+- 100ml of juice_orange
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Sea Breeze (ID: sea_breeze)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 40ml of vodka
+- 120ml of juice_cranberry
+- 30ml of juice_grapefruit
+- 1peel of orange
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Sex on the Beach (ID: sex_on_the_beach)
+Glass: highball
+Tags: mild, official
+
+Ingredients:
+- 40ml of vodka
+- 20ml of peach_schnapps
+  Substitutes: peach_liqueur
+- 40ml of juice_orange
+  Substitutes: juice_pineapple
+- 40ml of juice_cranberry
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: White Russian (ID: white_russian)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 50ml of vodka
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of cream
+- 100gr of ice
+
+Recipe: Irish Coffee (ID: irish_coffee)
+Glass: irish_coffee
+Tags: soft_recipe, official
+
+Ingredients:
+- 50ml of whiskey
+- 120ml of coffee
+- 50ml of cream
+- 1teaspoon of sugar
+  Substitutes: syrup_sugar
+
+Recipe: Manhattan (ID: manhattan)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 50ml of rye_whiskey
+- 20ml of vermouth_red
+- 1dash of angostura_bitter
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Manhattan Dry (ID: manhattan_dry)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of rye_whiskey
+  Substitutes: whiskey
+- 20ml of vermouth_dry
+- 1dash of angostura_bitter
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Manhattan Medium (ID: manhattan_medium)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of rye_whiskey
+  Substitutes: whiskey
+- 10ml of vermouth_red
+- 10ml of vermouth_dry
+- 1dash of angostura_bitter
+- 1none of cherry
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Old Fashioned (ID: old_fashioned)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 1cube of sugar
+- 45ml of rye_whiskey
+  Substitutes: bourbon, whiskey
+- 2dash of angostura_bitter
+- 4dash of orange_bitter
+  (Optional)
+- 10ml of water
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Rob Roy (ID: rob_roy)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of scotch
+- 25ml of vermouth_red
+- 1dash of angostura_bitter
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Rusty Nail (ID: rusty_nail)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 45ml of scotch
+- 25ml of drambuie
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Whiskey Sour (ID: whiskey_sour)
+Glass: rocks
+Tags: mild, official
+
+Ingredients:
+- 50ml of bourbon
+  Substitutes: whiskey
+- 1half of lemon
+- 20ml of syrup_sugar
+- 1none of egg
+  (Optional)
+- 1dash of angostura_bitter
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Bellini (ID: bellini)
+Glass: champagne_flute
+Tags: mild, official, long
+
+Ingredients:
+- 100ml of sparkling_wine
+- 50ml of peach_puree
+  Substitutes: peach
+- 1slice of peach
+  (Garnish)
+
+Recipe: Buck's Fizz (ID: bucks_fizz)
+Glass: champagne_flute
+Tags: soft_recipe, long
+
+Ingredients:
+- 100ml of sparkling_wine
+- 50ml of juice_orange
+- 1twist of orange
+  (Garnish)
+
+Recipe: Champagne Cocktail (ID: champagne_cocktail)
+Glass: champagne_flute
+Tags: mild, official, long
+
+Ingredients:
+- 10ml of cognac
+  Substitutes: brandy
+- 90ml of sparkling_wine
+- 2dash of angostura_bitter
+- 1cube of sugar
+- 1slice of orange
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+
+Recipe: Kir (ID: kir)
+Glass: champagne_flute
+Tags: mild, official, long
+
+Ingredients:
+- 10ml of creme_de_cassis
+- 90ml of wine_white
+
+Recipe: Kir Royale (ID: kir_royale)
+Glass: champagne_flute
+Tags: mild, long
+
+Ingredients:
+- 10ml of creme_de_cassis
+- 90ml of sparkling_wine
+
+Recipe: Mimosa (ID: mimosa)
+Glass: champagne_flute
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 75ml of juice_orange
+- 75ml of sparkling_wine
+- 1twist of orange
+  (Garnish)
+  (Optional)
+
+Recipe: B-52 (ID: b52)
+Glass: shooter
+Tags: mild, official, shooter
+
+Ingredients:
+- 20ml of kahlua
+  Substitutes: coffee_liqueur
+- 20ml of baileys
+- 20ml of grand_marinier
+  Substitutes: triple_sec, cointreau
+
+Recipe: Grasshopper (ID: grasshopper)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 20ml of creme_de_menthe_green
+- 20ml of creme_de_cacao_white
+- 20ml of cream
+- 1none of mint
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Bacardi Cocktail (ID: bacardi_cocktail)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 45ml of rum_light
+- 1half of lime
+  Substitutes: lemon
+- 10ml of grenadine
+- 100gr of ice
+
+Recipe: Rose (ID: rose)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 40ml of vermouth_dry
+- 20ml of kirsch
+- 3dash of syrup_strawberry
+- 100gr of ice
+
+Recipe: Golden Cadillac (ID: golden_cadillac)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 20ml of galliano
+- 20ml of creme_de_cacao_white
+- 20ml of cream
+- 100gr of ice
+
+Recipe: Golden Dream (ID: golden_dream)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 20ml of galliano
+- 20ml of triple_sec
+  Substitutes: cointreau
+- 20ml of juice_orange
+- 10ml of cream
+- 100gr of ice
+
+Recipe: Porto Flip (ID: porto_flip)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 15ml of brandy
+  Substitutes: cognac
+- 45ml of red_port
+- 1none of egg
+- 2gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: Brandy Eggnog (ID: brandy_egg_nog)
+Glass: highball
+Tags: mild, long
+
+Ingredients:
+- 40ml of brandy
+  Substitutes: cognac
+- 50ml of milk
+- 10ml of syrup_sugar
+- 1none of egg
+- 2gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: Japanese Slipper (ID: japanese_slipper)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of midori
+- 30ml of cointreau
+  Substitutes: triple_sec
+- 1half of lemon
+- 1slice of honeydew_melon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Jägerbomb (ID: jager_bomb)
+Glass: pub
+Tags: mild
+
+Ingredients:
+- 50ml of jagermeister
+- 125ml of red_bull
+
+Recipe: Jack and Coke (ID: jack_coke)
+Glass: collins
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of jack_daniels
+  Substitutes: whiskey
+- 150ml of cola
+- 100gr of ice
+
+Recipe: 7 & 7 (ID: seven_seven)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of whiskey
+- 150ml of seven_up
+- 1wedge of lemon
+  (Garnish)
+- 150gr of ice
+
+Recipe: Irish Car Bomb (ID: irish_car_bomb)
+Glass: pub
+Tags: mild
+
+Ingredients:
+- 20ml of whiskey
+- 30ml of baileys
+- 250ml of irish_stout
+
+Recipe: Midori Sour (ID: midori_sour)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 50ml of midori
+- 1half of lemon
+- 20ml of syrup_sugar
+- 100gr of ice
+
+Recipe: Zombie (ID: zombie)
+Glass: highball
+Tags: mild, long
+
+Ingredients:
+- 50ml of rum_gold
+  Substitutes: rum_light
+- 50ml of rum_light
+- 50ml of rum_dark
+- 50ml of apricot_brandy
+- 50ml of juice_pineapple
+- 50ml of juice_papaya
+  Substitutes: juice_pineapple
+- 20ml of rum_151
+  Substitutes: rum_light, rum_gold
+- 1dash of grenadine
+  (Optional)
+- 100gr of ice
+
+Recipe: Incredible Hulk (ID: incredible_hulk)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of hpnotiq
+- 50ml of hennessy
+  Substitutes: cognac
+- 100gr of ice
+
+Recipe: Alabama Slammer (ID: alabama_slammer)
+Glass: collins
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 20ml of amaretto
+- 20ml of southern_comfort
+- 20ml of sloe_gin
+- 50ml of juice_orange
+- 200gr of ice
+
+Recipe: Blue Hawaii (ID: blue_hawaii)
+Glass: hurricane
+Tags: soft_recipe, long
+
+Ingredients:
+- 20ml of rum_light
+- 20ml of vodka
+  Substitutes: rum_light
+- 15ml of blue_curacao
+- 90ml of juice_pineapple
+- 15ml of lemon
+- 15ml of syrup_sugar
+- 1none of cherry
+  (Garnish)
+- 1wedge of pineapple
+  (Garnish)
+- 200gr of ice
+
+Recipe: Bumbo (ID: bumbo)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 2cube of sugar
+- 60ml of rum_light
+  Substitutes: rum_dark
+- 30ml of water
+- 1gr of cinnamon
+  (Optional)
+- 1gr of grated_nutmeg
+  (Optional)
+
+Recipe: Culto A La Vida (ID: culto_a_la_vida)
+Glass: collins
+Tags: soft_recipe, long
+
+Ingredients:
+- 60ml of rum_light
+- 1teaspoon of sugar
+- 1half of lime
+- 120ml of juice_cranberry
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Flaming Dr Pepper (ID: flaming_dr_pepper)
+Glass: pub
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 600ml of beer
+- 30ml of amaretto
+- 15ml of rum_151
+
+Recipe: Lemon Drop (ID: lemon_drop)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 50ml of vodka
+- 1half of lemon
+- 1teaspoon of syrup_sugar
+- 1twist of lemon
+  (Garnish)
+
+Recipe: Martinez (ID: martinez)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 45ml of gin
+- 45ml of vermouth_red
+- 1bsp of maraschino_liqueur
+- 2dash of orange_bitter
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Sidecar (ID: sidecar)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of cognac
+  Substitutes: bourbon
+- 30ml of cointreau
+  Substitutes: triple_sec
+- 1quarter of lemon
+- 1twist of lemon
+  (Garnish)
+- 10gr of sugar
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: B-55 (ID: b55)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 20ml of kahlua
+  Substitutes: coffee_liqueur
+- 20ml of baileys
+- 15ml of absinthe
+
+Recipe: Banana Fantasy (ID: banana_fantasy)
+Glass: hurricane
+Tags: soft_recipe, nonalcohol, long
+
+Ingredients:
+- 1none of banana
+- 50ml of rum_light
+  (Optional)
+- 30ml of syrup_coconut
+- 100ml of juice_pineapple
+- 1none of cherry
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Flaming Volcano (ID: flaming_volcano)
+Glass: bowl
+Tags: mild, long
+
+Ingredients:
+- 30ml of rum_light
+  Substitutes: rum_dark, vodka
+- 30ml of brandy
+  Substitutes: cognac
+- 30ml of rum_151
+  Substitutes: rum_dark, rum_light
+- 120ml of juice_orange
+- 2none of lemon
+- 60ml of syrup_almond
+- 100gr of ice
+
+Recipe: Jagertee (ID: jagertee)
+Glass: cup
+Tags: soft_recipe
+
+Ingredients:
+- 200ml of black_tea
+- 40ml of rum_151
+- 10gr of sugar
+  (Optional)
+
+Recipe: Mulled Wine (ID: mulled_wine)
+Glass: cup
+Tags: mild
+
+Ingredients:
+- 750ml of wine_red
+- 2none of cinnamon_sticks
+  (Optional)
+- 1gr of clove
+  (Optional)
+- 10gr of sugar
+  (Optional)
+- 1gr of vanilla_pods
+  (Optional)
+- 1none of lemon
+  (Optional)
+
+Recipe: Painkiller (ID: painkiller)
+Glass: highball
+Tags: soft_recipe
+
+Ingredients:
+- 60ml of rum_dark
+  Substitutes: rum_light
+- 30ml of coconut_milk
+  Substitutes: coconut_cream
+- 120ml of juice_pineapple
+- 30ml of juice_orange
+- 1gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: Brave Bull (ID: brave_bull)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of tequila_bianco
+- 30ml of kahlua
+  Substitutes: coffee_liqueur
+- 100gr of ice
+
+Recipe: Chupacabra (ID: chupacabra)
+Glass: shooter
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of tequila_bianco
+  Substitutes: tequila_gold
+- 3drop of tabasco
+
+Recipe: Tequila Slammer (ID: tequila_slammer)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 50ml of tequila_bianco
+  Substitutes: tequila_gold
+- 50ml of seven_up
+  Substitutes: ginger_ale
+
+Recipe: Blow Job (ID: blow_job)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 20ml of amaretto
+- 20ml of baileys
+- 20ml of whipped_cream
+  (Optional)
+
+Recipe: Sazerac (ID: sazerac)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of rye_whiskey
+- 3dash of peychauds_bitter
+  Substitutes: angostura_bitter
+- 10gr of sugar
+  Substitutes: syrup_sugar
+- 5ml of absinthe
+- 1peel of lemon
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Aviation (ID: aviation)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 45ml of gin
+- 1quarter of lemon
+- 15ml of maraschino_liqueur
+- 1bsp of creme_de_violette
+  (Optional)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Gin Tonic (ID: gin_tonic)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of gin
+- 100ml of tonic
+- 1wedge of lime
+  Substitutes: lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Strawberry Daiquiri (ID: strawberry_daiquiri)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 120gr of strawberry
+- 170ml of rum_light
+- 25ml of lime
+  (Optional)
+- 100ml of lemon
+- 50gr of sugar
+- 50ml of lemonade
+  (Optional)
+
+Recipe: Gimlet (ID: gimlet)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 60ml of gin
+  Substitutes: vodka
+- 1half of lime
+- 15ml of syrup_sugar
+  (Optional)
+- 1wedge of lime
+  (Garnish)
+- 50gr of ice
+
+Recipe: Death In The Afternoon (ID: death_in_the_afternoon)
+Glass: champagne_flute
+Tags: mild
+
+Ingredients:
+- 30ml of absinthe
+- 100ml of sparkling_wine
+
+Recipe: ABC (ID: abc)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of amaretto
+- 15ml of baileys
+- 15ml of cognac
+
+Recipe: Green Vesper (ID: green_vesper)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of gin
+- 20ml of vodka
+- 10ml of absinthe
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Panama (ID: panama)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of cognac
+  Substitutes: brandy
+- 30ml of creme_de_cacao_white
+- 30ml of cream
+- 2gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: Blue Lagoon (ID: blue_lagoon)
+Glass: hurricane
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of vodka
+- 30ml of blue_curacao
+- 120ml of lemonade
+  Substitutes: seven_up
+- 1wedge of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Cape Cod (ID: cape_cod)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 40ml of vodka
+- 120ml of juice_cranberry
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Ambassador (ID: ambassador)
+Glass: rocks
+Tags: soft_recipe
+
+Ingredients:
+- 30ml of tequila_bianco
+- 50ml of juice_orange
+- 15ml of syrup_sugar
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Bay Breeze (ID: bay_breeze)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 40ml of vodka
+- 90ml of juice_cranberry
+- 30ml of juice_pineapple
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Between The Sheets (ID: between_the_sheets)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 20ml of brandy
+- 20ml of rum_light
+- 20ml of triple_sec
+  Substitutes: cointreau
+- 1half of lemon
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Brain Tumor (ID: brain_tumor)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 20ml of peach_schnapps
+- 20ml of baileys
+- 5ml of grenadine
+
+Recipe: Fuzzy Navel (ID: fuzzy_navel)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of peach_schnapps
+- 100ml of juice_orange
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Hairy Navel (ID: hairy_navel)
+Glass: highball
+Tags: mild, long
+
+Ingredients:
+- 50ml of peach_schnapps
+- 30ml of vodka
+- 70ml of juice_orange
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Flatliner (ID: flatliner)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 20ml of sambuca
+- 25ml of tequila_bianco
+  Substitutes: tequila_gold
+- 1dash of tabasco
+
+Recipe: Silver Bullet (ID: silver_bullet)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of scotch
+  Substitutes: whiskey
+- 60ml of gin
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Red Square (ID: red_square)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 20ml of sambuca
+- 25ml of vodka
+- 1dash of tabasco
+
+Recipe: Slippery Nipple (ID: slippery_nipple)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 20ml of sambuca
+- 25ml of baileys
+- 1dash of grenadine
+  (Optional)
+
+Recipe: Delta Sunset (ID: delta_sunset)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 20ml of sambuca
+- 25ml of cointreau
+  Substitutes: triple_sec
+- 1none of lemon
+- 100gr of ice
+
+Recipe: Barbarella (ID: barbarella)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of sambuca
+- 60ml of cointreau
+  Substitutes: triple_sec
+- 100gr of ice
+
+Recipe: Angel's Kiss (ID: angels_kiss)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of creme_de_cacao_white
+- 10ml of sloe_gin
+- 10ml of brandy
+  Substitutes: cognac
+- 10ml of cream
+  Substitutes: whipped_cream
+
+Recipe: Angel's Tit (ID: angels_tit)
+Glass: cocktail
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of creme_de_cacao_white
+  Substitutes: creme_de_cacao_brown
+  (Optional)
+- 30ml of maraschino_liqueur
+- 30ml of whipped_cream
+- 1none of cherry
+  (Garnish)
+
+Recipe: Innocent Sex (ID: innocent_sex)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 20ml of sambuca
+- 15ml of cointreau
+- 15ml of baileys
+
+Recipe: Sambuca (ID: sambuca)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of sambuca
+- 3none of coffee_beans
+
+Recipe: Acapulco (ID: acapulco)
+Glass: hurricane
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of tequila_bianco
+  Substitutes: tequila_gold
+- 50ml of rum_light
+  Substitutes: vodka
+- 75ml of juice_pineapple
+- 50ml of juice_grapefruit
+- 1quarter of lime
+  (Optional)
+- 10ml of syrup_sugar
+- 100gr of ice
+
+Recipe: Amaretto sour (ID: amaretto_sour)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 60ml of amaretto
+- 1none of lemon
+- 1none of egg
+  (Optional)
+- 100gr of ice
+
+Recipe: Doralto (ID: doralto)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of tequila_bianco
+  Substitutes: tequila_gold
+- 1none of lemon
+- 15ml of syrup_sugar
+- 1dash of angostura_bitter
+- 100ml of tonic
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Tropic Dream (ID: tropic_dream)
+Glass: hurricane
+Tags: nonalcohol
+
+Ingredients:
+- 1none of banana
+- 50gr of strawberry
+- 150ml of juice_pineapple
+- 30ml of syrup_coconut
+- 30ml of whipped_cream
+- 50gr of ice
+
+Recipe: Banana Flash (ID: banana_flash)
+Glass: hurricane
+Tags: nonalcohol
+
+Ingredients:
+- 1none of banana
+- 1none of peach
+- 150ml of juice_orange
+- 50gr of ice
+
+Recipe: Virgin Colada (ID: virgin_colada)
+Glass: hurricane
+Tags: nonalcohol
+
+Ingredients:
+- 30ml of coconut_milk
+  Substitutes: syrup_coconut, coconut_cream
+- 120ml of juice_pineapple
+- 1wedge of pineapple
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 30ml of whipped_cream
+  (Optional)
+- 100gr of ice
+
+Recipe: Hiroshima (ID: hiroshima)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 20ml of sambuca
+- 15ml of baileys
+- 15ml of absinthe
+- 1dash of grenadine
+
+Recipe: Drunk Melon (ID: drunk_melon)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of sambuca
+- 10ml of midori
+- 1half of lemon
+- 10ml of gin
+
+Recipe: Scarlett O'Hara (ID: scarlett_o_hara)
+Glass: collins
+Tags: mild, long
+
+Ingredients:
+- 60ml of southern_comfort
+- 1half of lime
+- 50ml of juice_cranberry
+- 100gr of ice
+
+Recipe: Flaming Lamborghini (ID: flaming_lamborghini)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of kahlua
+  Substitutes: coffee_liqueur
+- 30ml of sambuca
+- 30ml of baileys
+- 30ml of blue_curacao
+
+Recipe: Mint Julep (ID: mint_julep)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of bourbon
+  Substitutes: vodka
+- 1teaspoon of sugar
+- 2springs of mint
+- 50gr of ice
+
+Recipe: Rossini (ID: rossini)
+Glass: champagne_flute
+Tags: mild, long
+
+Ingredients:
+- 100ml of sparkling_wine
+- 1quarter of lemon
+  (Optional)
+- 30gr of strawberry
+- 50gr of ice
+
+Recipe: Tintoretto (ID: tintoretto)
+Glass: champagne_flute
+Tags: mild, long
+
+Ingredients:
+- 100ml of sparkling_wine
+- 50ml of juice_pomegranate
+- 50gr of ice
+
+Recipe: Galliano Hotshot (ID: galliano_hotshot)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 20ml of galliano
+- 20ml of coffee
+- 10ml of cream
+
+Recipe: Blood and Sand (ID: blood_sand)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of scotch
+  Substitutes: whiskey
+- 30ml of juice_orange
+- 25ml of vermouth_red
+- 25ml of cherry_brandy
+- 100gr of ice
+
+Recipe: Highball (ID: highball)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 60ml of rye_whiskey
+  Substitutes: whiskey
+- 150ml of ginger_ale
+  Substitutes: soda
+- 100gr of ice
+
+Recipe: Lynchburg Lemonade (ID: lynchburg_lemonade)
+Glass: collins
+Tags: mild
+
+Ingredients:
+- 30ml of jack_daniels
+  Substitutes: whiskey
+- 15ml of triple_sec
+  Substitutes: cointreau
+- 1half of lemon
+- 15ml of syrup_sugar
+- 100ml of lemonade
+- 1wedge of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Colorado Bulldog (ID: colorado_bulldog)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 30ml of vodka
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 20ml of milk
+  Substitutes: cream
+- 30ml of cola
+- 50gr of ice
+
+Recipe: Mudslide (ID: mugslide)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 30ml of vodka
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of baileys
+- 50gr of ice
+
+Recipe: Sneaky Pete (ID: sneaky_pete)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 30ml of rye_whiskey
+  Substitutes: whiskey
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of milk
+  Substitutes: cream
+- 50gr of ice
+
+Recipe: Toasted Almond (ID: toasted_almond)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 45ml of amaretto
+- 45ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of cream
+  Substitutes: milk
+- 100gr of ice
+
+Recipe: Roasted Toasted Almond (ID: roasted_toasted_almond)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 30ml of amaretto
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of vodka
+- 10ml of cream
+  Substitutes: milk
+- 50gr of ice
+
+Recipe: Angel Face (ID: angel_face)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of gin
+- 30ml of apricot_brandy
+- 30ml of calvados
+- 100gr of ice
+
+Recipe: Casino (ID: casino)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 40ml of gin_old_tom
+  Substitutes: gin
+- 10ml of maraschino_liqueur
+- 2dash of orange_bitter
+- 1quarter of lemon
+- 1peel of lemon
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Clover Club (ID: clover_club)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 45ml of gin
+- 15ml of syrup_raspberry
+  Substitutes: grenadine
+- 1half of lemon
+- 1none of egg
+- 100gr of ice
+
+Recipe: Derby IBA (ID: derby_iba)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 60ml of gin
+- 5ml of peach_bitter
+- 2leaf of mint
+  (Garnish)
+- 100gr of ice
+
+Recipe: Derby Popular (ID: derby_popular)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of bourbon
+- 10ml of benedictine
+- 2dash of angostura_bitter
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: John Collins (ID: john_collins)
+Glass: highball
+Tags: mild, official, long
+
+Ingredients:
+- 45ml of gin
+  Substitutes: bourbon
+- 1none of lemon
+- 15ml of syrup_sugar
+- 60ml of soda
+- 1slice of lemon
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Mary Pickford (ID: mary_pickford)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 45ml of rum_light
+- 8ml of maraschino_liqueur
+- 45ml of juice_pineapple
+- 5ml of grenadine
+- 100gr of ice
+
+Recipe: Monkey Gland (ID: monkey_gland)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 50ml of gin
+- 30ml of juice_orange
+- 5ml of absinthe
+  (Optional)
+- 5ml of grenadine
+  (Optional)
+- 100gr of ice
+
+Recipe: Ramos Fizz (ID: ramos_fizz)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 45ml of gin
+- 1half of lime
+- 1half of lemon
+- 30ml of syrup_sugar
+- 60ml of cream
+- 1none of egg
+- 3dash of orange_flower_water
+- 2drop of vanilla_extract
+  (Optional)
+- 25ml of soda
+- 100gr of ice
+
+Recipe: Stinger (ID: stinger)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 50ml of cognac
+- 20ml of creme_de_menthe_white
+- 100gr of ice
+- 1leaf of mint
+  (Garnish)
+  (Optional)
+
+Recipe: White Lady (ID: white_lady)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 40ml of gin
+- 30ml of triple_sec
+  Substitutes: cointreau
+- 1half of lemon
+- 100gr of ice
+
+Recipe: Tuxedo (ID: tuxedo)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of gin_old_tom
+  Substitutes: gin
+- 30ml of vermouth_dry
+- 2ml of maraschino_liqueur
+- 1ml of absinthe
+- 3dash of orange_bitter
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: French 75 (ID: french_75)
+Glass: champagne_flute
+Tags: mild, official, long
+
+Ingredients:
+- 30ml of gin
+- 1half of lemon
+- 15ml of syrup_sugar
+- 60ml of sparkling_wine
+- 100gr of ice
+
+Recipe: Hemingway Special (ID: hemingway_special)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 60ml of rum_light
+- 40ml of juice_grapefruit
+- 15ml of maraschino_liqueur
+- 1half of lime
+- 100gr of ice
+
+Recipe: Moscow Mule (ID: moscow_mule)
+Glass: copper_mug
+Tags: mild, official
+
+Ingredients:
+- 45ml of vodka
+- 120ml of ginger_beer
+- 1quarter of lime
+- 1slice of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Barracuda (ID: barracuda)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 45ml of rum_gold
+  Substitutes: rum_light
+- 15ml of galliano
+- 60ml of juice_pineapple
+- 1quarter of lime
+- 40ml of sparkling_wine
+- 100gr of ice
+
+Recipe: Bramble (ID: bramble)
+Glass: rocks
+Tags: mild, official
+
+Ingredients:
+- 50ml of gin
+- 12ml of syrup_sugar
+- 15ml of blackberry_liqueur
+- 1half of lemon
+- 1slice of lemon
+  (Garnish)
+  (Optional)
+- 1none of blackberry
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Dark 'N' Stormy (ID: dark_and_stormy)
+Glass: highball
+Tags: soft_recipe, official
+
+Ingredients:
+- 60ml of rum_dark
+- 100ml of ginger_beer
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Martini Dirty (ID: dirty_martini)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 60ml of vodka
+- 10ml of vermouth_dry
+- 10ml of juice_olive
+- 1none of olive
+  (Garnish)
+- 100gr of ice
+
+Recipe: Martini Espresso (ID: espresso_martini)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 50ml of vodka
+- 30ml of kahlua
+  Substitutes: coffee_liqueur
+- 30ml of coffee
+- 10ml of syrup_sugar
+- 100gr of ice
+
+Recipe: Martini French (ID: french_martini)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 45ml of vodka
+- 15ml of raspberry_liqueur
+- 15ml of juice_pineapple
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Martini Lemon Drop (ID: lemon_drop_martini)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 30ml of vodka_citron
+  Substitutes: vodka
+- 20ml of triple_sec
+  Substitutes: cointreau
+- 1half of lemon
+- 5gr of sugar
+  (Garnish)
+- 100gr of ice
+
+Recipe: Pisco Sour (ID: pisco_sour)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 60ml of pisco
+- 20ml of syrup_sugar
+- 1none of lemon
+- 1none of egg
+- 1dash of angostura_bitter
+  (Optional)
+- 100gr of ice
+
+Recipe: Russian Spring Punch (ID: russian_spring_punch)
+Glass: highball
+Tags: mild, official, long
+
+Ingredients:
+- 25ml of vodka
+- 1none of lemon
+- 15ml of creme_de_cassis
+- 10ml of syrup_sugar
+- 50ml of sparkling_wine
+- 1slice of lemon
+  (Garnish)
+- 1none of blackberry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Spritz Veneziano (ID: spritz_veneziano)
+Glass: wine_glass
+Tags: mild, official
+
+Ingredients:
+- 90ml of sparkling_wine
+- 60ml of aperol
+- 10ml of soda
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Tommy's Margarita (ID: tommys_margarita)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 60ml of tequila_bianco
+- 1half of lime
+- 15ml of agave_nectar
+- 1slice of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Vampiro (ID: vampiro)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 50ml of tequila_bianco
+- 70ml of juice_tomato
+- 30ml of juice_orange
+- 1half of lime
+- 1teaspoon of honey
+- 1slice of onion
+- 2slice of chili
+- 3drop of worchestershire_sauce
+- 1gr of salt
+- 1none of chili
+  (Garnish)
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Vesper (ID: vesper)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 45ml of gin
+- 15ml of vodka
+- 8ml of lillet_blonde
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Yellow Bird (ID: yellow_bird)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 30ml of rum_light
+- 15ml of galliano
+- 15ml of triple_sec
+  Substitutes: cointreau
+- 1half of lime
+- 100gr of ice
+
+Recipe: Midori Illusion (ID: midori_illusion)
+Glass: highball
+Tags: mild
+
+Ingredients:
+- 45ml of midori
+- 15ml of vodka
+- 15ml of triple_sec
+  Substitutes: cointreau
+- 1half of lemon
+- 45ml of juice_pineapple
+- 50ml of lemonade
+  (Optional)
+- 100gr of ice
+
+Recipe: Garibaldi (ID: garibaldi)
+Glass: rocks
+Tags: soft_recipe
+
+Ingredients:
+- 70ml of juice_orange
+- 30ml of campari
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Weng Weng (ID: wengweng)
+Glass: collins
+Tags: strong_recipe, long
+
+Ingredients:
+- 20ml of vodka
+- 20ml of tequila_bianco
+  Substitutes: tequila_gold
+- 20ml of brandy
+  Substitutes: cognac
+- 20ml of bourbon
+  Substitutes: whiskey
+- 20ml of scotch
+  Substitutes: whiskey
+- 20ml of rum_light
+  Substitutes: rum_dark, rum_gold
+- 20ml of juice_orange
+- 20ml of juice_pineapple
+- 5ml of grenadine
+- 100gr of ice
+
+Recipe: Alexander's sister (ID: alexander_sister)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 40ml of gin
+- 30ml of creme_de_menthe_green
+- 30ml of cream
+- 100gr of ice
+
+Recipe: Alexander's brother (ID: alexander_brother)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of gin
+- 30ml of creme_de_cacao_brown
+  Substitutes: creme_de_cacao_white
+- 30ml of cream
+- 2gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: Miami beach (ID: miami_beach)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of scotch
+  Substitutes: whiskey
+- 30ml of vermouth_dry
+- 30ml of juice_grapefruit
+- 100gr of ice
+
+Recipe: AMF (ID: amf)
+Glass: collins
+Tags: strong_recipe, long
+
+Ingredients:
+- 15ml of vodka
+- 15ml of rum_light
+  Substitutes: rum_dark, rum_gold
+- 15ml of tequila_bianco
+  Substitutes: tequila_gold
+- 15ml of gin
+- 15ml of blue_curacao
+- 1none of lemon
+- 30ml of syrup_sugar
+- 30ml of seven_up
+- 100gr of ice
+
+Recipe: Strawberry Margarita (ID: strawberry_margarita)
+Glass: margarita
+Tags: strong_recipe
+
+Ingredients:
+- 120gr of strawberry
+- 170ml of tequila_bianco
+- 100ml of cointreau
+  Substitutes: triple_sec
+- 3none of lime
+- 100gr of ice
+
+Recipe: Vegas Bomb (ID: vegas_bomb)
+Glass: pub
+Tags: mild
+
+Ingredients:
+- 25ml of rye_whiskey
+- 25ml of peach_schnapps
+- 125ml of red_bull
+
+Recipe: Bullfrog (ID: bullfrog)
+Glass: pub
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of rum_light
+  Substitutes: rum_dark, rum_gold
+- 30ml of vodka
+- 30ml of tequila_bianco
+  Substitutes: tequila_gold
+- 30ml of blue_curacao
+- 30ml of gin
+- 250ml of red_bull
+- 100gr of ice
+
+Recipe: Car crash (ID: car_crash)
+Glass: collins
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of peach_liqueur
+  Substitutes: southern_comfort
+- 30ml of amaretto
+- 1none of lemon
+- 30ml of syrup_sugar
+- 70ml of juice_orange
+- 1dash of grenadine
+- 100gr of ice
+
+Recipe: Martini Chocolate (ID: chocolate_martini)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 45ml of vodka
+  Substitutes: gin
+- 45ml of creme_de_cacao_brown
+  Substitutes: creme_de_cacao_white
+- 1shaving of chocolate
+  (Garnish)
+- 100gr of ice
+
+Recipe: Blue Kamikaze (ID: blue_kamikaze)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 50ml of vodka
+- 50ml of blue_curacao
+- 2none of lime
+- 100gr of ice
+
+Recipe: Liquid Cocaine (ID: liquid_cocaine)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 50ml of rum_151
+- 50ml of goldschlager
+  Substitutes: tequila_gold, apple_schnapps, peach_schnapps
+- 50ml of jagermeister
+- 100gr of ice
+
+Recipe: Redheaded slut (ID: redheaded_slut)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 40ml of jagermeister
+- 40ml of peach_schnapps
+  Substitutes: peach_liqueur
+- 70ml of juice_cranberry
+- 100gr of ice
+
+Recipe: Anaconda (ID: anaconda)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 75ml of jack_daniels
+  Substitutes: whiskey
+- 75ml of sambuca
+- 100gr of ice
+
+Recipe: Fireball (ID: fireball)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 75ml of rum_light
+  Substitutes: rum_dark
+- 75ml of goldschlager
+- 3dash of tabasco
+- 100gr of ice
+
+Recipe: Gladiator (ID: gladiator)
+Glass: shooter
+Tags: soft_recipe, shooter, long
+
+Ingredients:
+- 25ml of amaretto
+- 25ml of peach_schnapps
+- 70ml of seven_up
+  Substitutes: lemonade
+- 70ml of juice_orange
+
+Recipe: Irish Flag (ID: irish_flag)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 20ml of creme_de_menthe_green
+- 15ml of baileys
+- 15ml of grand_marinier
+  Substitutes: brandy
+
+Recipe: Irish Frog (ID: irish_frog)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 25ml of midori
+- 25ml of baileys
+
+Recipe: Jelly Bean (ID: jelly_bean)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of grenadine
+- 15ml of sambuca
+- 15ml of southern_comfort
+
+Recipe: Cherry Hooker (ID: cherry_hooker)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of cherry_brandy
+- 80ml of juice_orange
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Gin Rickey (ID: gin_rickey)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of gin
+- 1none of lime
+- 70ml of soda
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Horny Bull (long) (ID: horny_bull_long)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of tequila_bianco
+  Substitutes: tequila_gold
+- 100ml of juice_orange
+- 100gr of ice
+
+Recipe: Horny Bull (shot) (ID: horny_bull_shot)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 20ml of tequila_bianco
+  Substitutes: tequila_gold
+- 20ml of rum_light
+- 20ml of vodka
+  (Optional)
+- 100gr of ice
+
+Recipe: Buck cocktails (ID: buck)
+Glass: collins
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of rum_light
+  Substitutes: rum_dark, vodka, gin, whiskey
+- 1none of lime
+  Substitutes: lemon
+- 100ml of ginger_ale
+  Substitutes: ginger_beer
+- 100gr of ice
+
+Recipe: Rickey cocktails (ID: rickey)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of rum_light
+  Substitutes: vodka, bourbon, rye_whiskey, gin, whiskey
+- 1none of lime
+- 100ml of soda
+- 100gr of ice
+
+Recipe: Virgin Mary (ID: virgin_mary)
+Glass: highball
+Tags: nonalcohol
+
+Ingredients:
+- 90ml of juice_tomato
+- 1quarter of lemon
+- 1dash of tabasco
+- 2dash of worchestershire_sauce
+- 1dash_dry of salt
+- 1dash_dry of black_pepper
+- 1stalk of celery
+  (Garnish)
+- 100gr of ice
+
+Recipe: Woo Woo (ID: woo_woo)
+Glass: highball
+Tags: mild, long
+
+Ingredients:
+- 60ml of vodka
+- 30ml of peach_schnapps
+- 120ml of juice_cranberry
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Caribou Lou (ID: caribou_lou)
+Glass: highball
+Tags: mild, long
+
+Ingredients:
+- 45ml of rum_151
+- 30ml of malibu
+- 150ml of juice_pineapple
+- 100gr of ice
+
+Recipe: Tootsie Roll (ID: tootsie_roll)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 45ml of coffee_liqueur
+  Substitutes: kahlua
+- 45ml of juice_orange
+- 45ml of vodka
+  (Optional)
+- 100gr of ice
+
+Recipe: Lava Flow (ID: lava_flow)
+Glass: hurricane
+Tags: soft_recipe, long
+
+Ingredients:
+- 180gr of strawberry
+- 90ml of rum_light
+- 180ml of malibu
+- 3none of banana
+- 180ml of coconut_cream
+  Substitutes: coconut_milk
+- 180ml of juice_pineapple
+- 1wedge of pineapple
+  (Garnish)
+- 100gr of ice
+
+Recipe: Asian Hooker (ID: asian_hooker)
+Glass: hurricane
+Tags: soft_recipe, long
+
+Ingredients:
+- 10ml of rum_151
+- 45ml of malibu
+- 15ml of midori
+- 80ml of juice_pineapple
+- 80ml of soda
+  Substitutes: seven_up
+- 100gr of ice
+
+Recipe: Rocket Fuel (ID: rocket_fuel)
+Glass: highball
+Tags: strong_recipe, long
+
+Ingredients:
+- 30ml of vodka
+- 30ml of triple_sec
+- 30ml of rum_light
+- 30ml of gin
+- 30ml of tequila_bianco
+  Substitutes: tequila_gold
+- 50ml of lemonade
+- 100gr of ice
+
+Recipe: BMW (ID: bmw)
+Glass: rocks
+Tags: strong_recipe, long
+
+Ingredients:
+- 45ml of baileys
+- 45ml of malibu
+- 45ml of whiskey
+- 100gr of ice
+
+Recipe: Gin and Sin (ID: gin_and_sin)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of gin
+- 30ml of juice_orange
+- 1none of lemon
+- 1dash of grenadine
+- 100gr of ice
+
+Recipe: Charlie Chaplin (ID: charlie_chaplin)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of apricot_brandy
+- 30ml of sloe_gin
+- 1none of lime
+- 1peel of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Pink Lady (ID: pink_lady)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of gin
+- 15ml of grenadine
+- 1none of egg
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Ward 8 (ID: ward_8)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of rye_whiskey
+  Substitutes: whiskey
+- 1half of lemon
+- 15ml of juice_orange
+- 1dash of grenadine
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Corpse Reviver (ID: corpse_reviver)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of cognac
+- 30ml of calvados
+- 30ml of vermouth_white
+  Substitutes: vermouth_red
+- 100gr of ice
+
+Recipe: Corpse Reviver 2 (ID: corpse_reviver_2)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of gin
+- 1none of lemon
+- 30ml of cointreau
+  Substitutes: triple_sec
+- 30ml of lillet_blonde
+- 1dash of absinthe
+- 100gr of ice
+
+Recipe: Swimming Pool (ID: swimming_pool)
+Glass: hurricane
+Tags: mild, long
+
+Ingredients:
+- 30ml of vodka
+- 60ml of rum_light
+- 15ml of cream
+- 30ml of coconut_milk
+- 60ml of juice_pineapple
+- 15ml of blue_curacao
+- 1wedge of pineapple
+  (Garnish)
+- 100gr of ice
+
+Recipe: Shirley Temple (ID: shirley_temple)
+Glass: collins
+Tags: nonalcohol
+
+Ingredients:
+- 60ml of ginger_ale
+- 60ml of lemonade
+  (Optional)
+- 1dash of grenadine
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Tom and Jerry (ID: tom_and_jerry)
+Glass: irish_coffee
+Tags: mild, long
+
+Ingredients:
+- 1none of egg
+- 15ml of syrup_sugar
+  Substitutes: sugar
+- 30ml of rum_dark
+  Substitutes: vodka, rum_light
+- 30ml of cognac
+  Substitutes: brandy
+- 100ml of milk
+- 2gr of grated_nutmeg
+  (Garnish)
+
+Recipe: Hot Toddy (ID: hot_toddy)
+Glass: irish_coffee
+Tags: mild, long
+
+Ingredients:
+- 1teaspoon of honey
+  Substitutes: sugar
+- 45ml of whiskey
+  Substitutes: rum_dark, rum_light, brandy
+- 1quarter of lemon
+  (Optional)
+- 100ml of water
+  Substitutes: black_tea
+
+Recipe: Boyarskiy (ID: boyarskiy)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 25ml of grenadine
+- 25ml of vodka
+- 5drop of tabasco
+
+Recipe: Green Mexican (ID: green_mexican)
+Glass: collins
+Tags: strong_recipe, long
+
+Ingredients:
+- 90ml of tequila_bianco
+  Substitutes: tequila_gold
+- 90ml of midori
+- 1half of lemon
+- 45ml of syrup_sugar
+- 100gr of ice
+
+Recipe: Green Mexican (shot) (ID: green_mexican_shot)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 90ml of tequila_bianco
+  Substitutes: tequila_gold
+- 20ml of midori
+- 1quarter of lime
+
+Recipe: Snowball (ID: snowball)
+Glass: collins
+Tags: mild, long
+
+Ingredients:
+- 60ml of egg_liqueur
+- 1half of lime
+  (Optional)
+- 90ml of lemonade
+
+Recipe: Sexy Alligator (ID: sexy_alligator)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of midori
+- 30ml of juice_pineapple
+- 30ml of amaretto
+- 15ml of jagermeister
+- 100gr of ice
+
+Recipe: Washington Apple (ID: washington_apple)
+Glass: highball
+Tags: mild, long
+
+Ingredients:
+- 60ml of rye_whiskey
+- 60ml of apple_liqueur
+- 60ml of juice_cranberry
+- 100gr of ice
+
+Recipe: Long Beach Iced Tea (ID: long_beach)
+Glass: highball
+Tags: mild, long
+
+Ingredients:
+- 15ml of vodka
+- 15ml of tequila_bianco
+  Substitutes: tequila_gold
+- 15ml of rum_light
+- 15ml of triple_sec
+  Substitutes: cointreau
+- 15ml of gin
+- 1third of lemon
+- 30ml of syrup_sugar
+- 10ml of juice_cranberry
+- 100gr of ice
+
+Recipe: Strawberry Colada (ID: strawberry_colada)
+Glass: goblet
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of rum_light
+- 20ml of strawberry_liqueur
+- 50gr of strawberry
+- 30ml of coconut_cream
+- 90ml of juice_pineapple
+- 1wedge of pineapple
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Jellyfish (ID: jellyfish)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 25ml of creme_de_cacao_white
+- 10ml of amaretto
+- 10ml of baileys
+- 4drop of grenadine
+
+Recipe: Jellyfish 2 (ID: jellyfish2)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of sambuca
+- 15ml of blue_curacao
+- 15ml of baileys
+- 4drop of grenadine
+
+Recipe: Jellyfish 3 (ID: jellyfish3)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 15ml of blue_curacao
+- 15ml of tequila_bianco
+- 15ml of absinthe
+- 1drop of baileys
+
+Recipe: Sangria (ID: sangria)
+Glass: pitcher
+Tags: soft_recipe, long
+
+Ingredients:
+- 750ml of wine_red
+  Substitutes: wine_white
+- 1none of orange
+- 1none of lemon
+  (Optional)
+- 50ml of brandy
+- 20gr of sugar
+  Substitutes: honey
+- 200ml of ginger_ale
+  Substitutes: seven_up, soda
+  (Optional)
+- 100gr of ice
+  (Optional)
+
+Recipe: Chocolate Espresso Martini (ID: espresso_martini2)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 45ml of vodka_vanilla
+  Substitutes: vodka
+- 45ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of coffee
+- 30ml of creme_de_cacao_white
+  Substitutes: creme_de_cacao_brown
+  (Optional)
+- 10ml of syrup_chocolate
+  (Garnish)
+  (Optional)
+- 20gr of sugar
+  (Garnish)
+  (Optional)
+- 1shaving of chocolate
+  (Garnish)
+- 100gr of ice
+  (Optional)
+
+Recipe: Yorsh (ID: yorsh)
+Glass: collins
+Tags: strong_recipe
+
+Ingredients:
+- 40ml of vodka
+- 200ml of beer
+
+Recipe: Bahama Mama (ID: bahama_mama)
+Glass: hurricane
+Tags: soft_recipe, long
+
+Ingredients:
+- 45ml of rum_light
+- 30ml of malibu
+- 15ml of cherry_brandy
+- 1half of lemon
+- 60ml of juice_orange
+- 60ml of juice_pineapple
+- 10ml of grenadine
+- 100gr of ice
+
+Recipe: Malibu Bay Breeze (ID: malibu_bay_breeze)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 45ml of malibu
+- 60ml of juice_cranberry
+- 60ml of juice_pineapple
+- 1slice of pineapple
+  (Garnish)
+- 100gr of ice
+
+Recipe: Water Moccasin (ID: water_moccasin)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 30ml of peach_schnapps
+- 30ml of rye_whiskey
+- 1half of lemon
+- 15ml of syrup_sugar
+- 1dash of triple_sec
+  Substitutes: cointreau
+- 100gr of ice
+
+Recipe: Mind eraser (ID: mind_eraser)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of vodka
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of tonic
+- 100gr of ice
+
+Recipe: Brandy Separator (ID: brandy_separator)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 30ml of brandy
+  Substitutes: cognac
+- 15ml of coffee_liqueur
+  Substitutes: kahlua
+- 100ml of milk
+- 100gr of ice
+
+Recipe: Roy Rogers (ID: roy_rogers)
+Glass: highball
+Tags: nonalcohol
+
+Ingredients:
+- 10ml of grenadine
+- 200ml of cola
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Sangrita (ID: sangrita)
+Glass: pitcher
+Tags: nonalcohol
+
+Ingredients:
+- 600ml of juice_tomato
+- 300ml of juice_orange
+- 3none of lime
+- 20ml of tabasco
+- 1teaspoon of black_pepper
+- 1teaspoon of salt
+- 1slice of orange
+  (Garnish)
+- 1none of celery
+  (Garnish)
+
+Recipe: Fluffy Duck (ID: fluffy_duck)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 30ml of rum_light
+- 30ml of egg_liqueur
+- 10ml of cream
+- 1none of strawberry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Fluffy Duck 2 (ID: fluffy_duck2)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of egg_liqueur
+- 30ml of creme_de_cacao_white
+- 100ml of seven_up
+- 100gr of ice
+
+Recipe: Jolly Rancher (ID: jolly_rancher)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of vodka
+- 30ml of midori
+- 90ml of juice_cranberry
+- 100gr of ice
+
+Recipe: California Root Beer (ID: california_root_beer)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of coffee_liqueur
+- 30ml of galliano
+- 60ml of soda
+- 30ml of cola
+- 1dash of beer
+- 100gr of ice
+
+Recipe: Dirty Girl Scout (ID: dirty_girl_scout)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 30ml of vodka
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of baileys
+- 30ml of creme_de_menthe_white
+  Substitutes: creme_de_menthe_green
+- 100gr of ice
+
+Recipe: Buttery Nipple (ID: buttery_nipple)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 25ml of butterscotch_liqueur
+- 25ml of baileys
+- 1dash of grenadine
+  (Optional)
+
+Recipe: Oatmeal Cookie (ID: oatmeal_cookie)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 30ml of goldschlager
+- 30ml of butterscotch_liqueur
+- 30ml of baileys
+- 30ml of jagermeister
+  (Optional)
+- 100gr of ice
+
+Recipe: Butter Cream (ID: butter_cream)
+Glass: rocks
+Tags: soft_recipe
+
+Ingredients:
+- 30ml of baileys
+- 30ml of butterscotch_liqueur
+- 60ml of milk
+- 100gr of ice
+
+Recipe: El Presidente (ID: el_presidente)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of rum_light
+- 30ml of vermouth_dry
+- 30ml of orange_curacao
+  Substitutes: triple_sec, cointreau
+- 1dash of grenadine
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Alien Brain Hemorrhage (ID: alien_brain_hemorrage)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 30ml of peach_schnapps
+  Substitutes: peach_liqueur
+- 15ml of baileys
+- 1dash of blue_curacao
+- 1dash of grenadine
+
+Recipe: Greyhound (ID: greyhound)
+Glass: collins
+Tags: soft_recipe, long
+
+Ingredients:
+- 50ml of gin
+  Substitutes: vodka
+- 200ml of juice_grapefruit
+- 100gr of ice
+- 1wedge of lemon
+  (Garnish)
+
+Recipe: B&B (ID: b_b)
+Glass: snifter
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of brandy
+- 50ml of benedictine
+- 100gr of ice
+  (Optional)
+
+Recipe: Naked Lady (ID: naked_lady)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of rum_light
+- 50ml of vermouth_white
+- 10ml of apricot_brandy
+- 10ml of grenadine
+- 1quarter of lemon
+- 100gr of ice
+
+Recipe: Vieux Carre (ID: vieux_carre)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 20ml of rye_whiskey
+- 20ml of cognac
+  Substitutes: brandy
+- 20ml of vermouth_white
+- 1teaspoon of benedictine
+- 1dash of peychauds_bitter
+- 1dash of angostura_bitter
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Boulevardier (ID: boulevardier)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of bourbon
+  Substitutes: rye_whiskey
+- 30ml of vermouth_red
+- 30ml of campari
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Last Word (ID: last_word)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 20ml of gin
+- 20ml of chartreuse_green
+- 20ml of maraschino_liqueur
+- 1half of lime
+- 1twist of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Hurricane (ID: hurricane)
+Glass: hurricane
+Tags: mild
+
+Ingredients:
+- 60ml of rum_light
+- 60ml of rum_dark
+- 30ml of rum_151
+  (Optional)
+- 60ml of juice_passion_fruit
+- 30ml of juice_orange
+- 1half of lime
+- 15ml of grenadine
+- 15ml of syrup_sugar
+- 1slice of orange
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Southside (ID: southside)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 60ml of gin
+- 1half of lime
+- 20ml of syrup_sugar
+- 2springs of mint
+- 100gr of ice
+
+Recipe: Stay Sober (ID: stay_sober)
+Glass: highball
+Tags: nonalcohol
+
+Ingredients:
+- 30ml of juice_apple
+- 30ml of juice_cranberry
+- 90ml of ginger_beer
+- 100gr of ice
+
+Recipe: Melon Ball (ID: melon_ball)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 30ml of vodka
+- 60ml of midori
+- 90ml of juice_orange
+  Substitutes: juice_pineapple
+- 100gr of ice
+
+Recipe: Bushwacker (ID: bushwacker)
+Glass: hurricane
+Tags: soft_recipe, long
+
+Ingredients:
+- 90ml of rum_dark
+- 90ml of coffee_liqueur
+  Substitutes: kahlua
+- 90ml of creme_de_cacao_white
+  Substitutes: creme_de_cacao_brown
+- 180ml of coconut_cream
+- 180ml of milk
+- 100gr of ice
+- 3none of cherry
+  (Garnish)
+
+Recipe: Ladykiller (ID: ladykiller)
+Glass: highball
+Tags: mild
+
+Ingredients:
+- 30ml of gin
+- 15ml of cointreau
+  Substitutes: triple_sec
+- 15ml of apricot_brandy
+- 60ml of juice_passion_fruit
+- 60ml of juice_pineapple
+- 1peel of orange
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 2leaf of mint
+  (Garnish)
+- 100gr of ice
+
+Recipe: Brandy Daisy (ID: brandy_daisy)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of brandy
+- 2dash of rum_light
+- 3dash of orange_curacao
+- 3dash of syrup_sugar
+- 1half of lemon
+- 15ml of soda
+- 100gr of ice
+
+Recipe: Bolo Cocktail (ID: bolo_cocktail)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 60ml of rum_light
+- 1none of lime
+- 30ml of juice_orange
+- 2dash of angostura_bitter
+- 100gr of ice
+
+Recipe: Basil Smash (ID: basil_smash)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 50ml of gin
+- 1half of lemon
+- 15ml of syrup_sugar
+- 3springs of basil
+- 100gr of ice
+
+Recipe: Basil Julep (ID: basil_julep)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of bourbon
+  Substitutes: rye_whiskey, whiskey
+- 15ml of syrup_sugar
+- 3springs of basil
+- 100gr of ice
+
+Recipe: Lucien Gaudin (ID: lucien_gaudin)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 30ml of gin
+- 15ml of vermouth_dry
+- 15ml of cointreau
+- 15ml of campari
+- 1twist of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Hazelnut Martini (ID: hazelnut_martini)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 60ml of vodka
+- 15ml of frangelico
+- 15ml of creme_de_cacao_white
+- 100gr of ice
+
+Recipe: Nutty Irishman (ID: nutty_irishman)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of frangelico
+- 30ml of baileys
+- 30ml of cream
+- 20ml of whipped_cream
+  (Optional)
+- 2gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: Hellboy (ID: hellboy)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of whiskey
+- 10ml of frangelico
+- 1none of chili
+- 1dash of honey
+- 100gr of ice
+
+Recipe: Whiskey Rebellion (ID: whiskey_rebellion)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 30ml of whiskey
+- 30ml of pimms
+- 1half of lemon
+- 15ml of syrup_sugar
+- 100gr of ice
+
+Recipe: Apple Cart (ID: apple_cart)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of calvados
+- 30ml of triple_sec
+  Substitutes: cointreau
+- 1half of lemon
+- 1wedge of apple
+  (Garnish)
+- 100gr of ice
+
+Recipe: Blue Ocean (ID: blue_ocean)
+Glass: rocks
+Tags: soft_recipe
+
+Ingredients:
+- 30ml of vodka
+- 15ml of blue_curacao
+- 15ml of syrup_sugar
+- 30ml of juice_grapefruit
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Rattlesnake (ID: rattlesnake)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of rye_whiskey
+- 1quarter of lemon
+- 2teaspoon of syrup_sugar
+- 1dash of absinthe
+- 1none of egg
+- 100gr of ice
+
+Recipe: Liquid Marijuana Long (ID: liquid_marijuana_long)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 15ml of rum_dark
+  Substitutes: rum_light
+- 15ml of blue_curacao
+- 15ml of malibu
+- 15ml of midori
+- 60ml of juice_pineapple
+- 1half of lemon
+- 15ml of syrup_sugar
+- 100gr of ice
+
+Recipe: Liquid Marijuana Shot (ID: liquid_marijuana_shot)
+Glass: shooter
+Tags: strong_recipe, shooter
+
+Ingredients:
+- 30ml of rum_dark
+  Substitutes: rum_light
+- 30ml of blue_curacao
+- 30ml of malibu
+- 30ml of midori
+- 30ml of juice_pineapple
+- 1half of lemon
+- 15ml of syrup_sugar
+- 100gr of ice
+
+Recipe: New York Sour (ID: new_york_sour)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 60ml of rye_whiskey
+  Substitutes: bourbon, whiskey
+- 20ml of syrup_sugar
+- 1half of lemon
+- 1none of egg
+  (Optional)
+- 15ml of wine_red
+- 1peel of lemon
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Milano Torino (ID: milano_torino)
+Glass: rocks
+Tags: soft_recipe
+
+Ingredients:
+- 30ml of campari
+- 30ml of vermouth_red
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Bee's knees (ID: bees_knees)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 50ml of gin
+- 2teaspoon of honey
+  Substitutes: syrup_honey
+- 1half of lemon
+- 20ml of juice_orange
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Gold rush (ID: gold_rush)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 60ml of bourbon
+  Substitutes: whiskey
+- 1half of lemon
+- 20ml of syrup_honey
+- 1half of lemon
+- 1wedge of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Bijou (ID: bijou)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of gin
+- 30ml of vermouth_red
+  Substitutes: vermouth_white
+- 20ml of chartreuse_green
+- 1dash of orange_bitter
+- 1peel of lemon
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Smoky Whisky Sour (ID: smoky_whisky_sour)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 60ml of scotch
+- 1half of lemon
+- 20ml of syrup_maple
+- 1dash of angostura_bitter
+- 1none of egg
+  (Optional)
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Suburban (ID: suburban)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of bourbon
+  Substitutes: rye_whiskey
+- 25ml of rum_dark
+- 25ml of red_port
+- 1dash of angostura_bitter
+- 1dash of orange_bitter
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Chilcano de Pisco (ID: chilcano_pisco)
+Glass: collins
+Tags: soft_recipe
+
+Ingredients:
+- 60ml of pisco
+- 1quarter of lime
+- 3dash of angostura_bitter
+- 1wedge of lime
+  (Garnish)
+- 100ml of ginger_ale
+- 100gr of ice
+
+Recipe: Final Ward (ID: final_ward)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 20ml of rye_whiskey
+- 20ml of chartreuse_green
+- 20ml of maraschino_liqueur
+- 1half of lemon
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Blueberry tea (ID: blueberry_tea)
+Glass: irish_coffee
+Tags: soft_recipe
+
+Ingredients:
+- 25ml of amaretto
+- 25ml of grand_marinier
+- 150ml of black_tea
+- 1slice of lemon
+  Substitutes: orange
+  (Garnish)
+- 1none of cinnamon_sticks
+  (Garnish)
+
+Recipe: Boilermaker (ID: boilermaker)
+Glass: pub
+Tags: soft_recipe
+
+Ingredients:
+- 400ml of beer
+- 50ml of whiskey
+  Substitutes: bourbon, rye_whiskey, scotch
+
+Recipe: Hot Buttered Rum (ID: hot_buttered_rum)
+Glass: irish_coffee
+Tags: soft_recipe
+
+Ingredients:
+- 1teaspoon of butter
+- 1teaspoon of sugar
+  Substitutes: honey
+- 1dash_dry of cinnamon
+- 1dash_dry of grated_nutmeg
+- 50ml of rum_dark
+  Substitutes: rum_light, rum_gold
+- 150ml of water
+- 1slice of lemon
+  (Garnish)
+  (Optional)
+
+Recipe: Beach Blonde (ID: beach_blonde)
+Glass: collins
+Tags: long
+
+Ingredients:
+- 1half of banana
+- 90ml of egg_liqueur
+- 30ml of rum_151
+- 90ml of juice_orange
+- 100gr of ice
+
+Recipe: Canary Flip (ID: canary_flip)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 60ml of egg_liqueur
+- 60ml of wine_white
+- 1half of lemon
+- 100gr of ice
+
+Recipe: Squashed frog (ID: squashed_frog)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 15ml of egg_liqueur
+- 15ml of grenadine
+- 15ml of midori
+
+Recipe: Creme Anglaise (ID: creme_anglaise)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of vodka
+- 60ml of egg_liqueur
+- 15ml of cream
+- 2gr of chocolate
+  (Garnish)
+- 100gr of ice
+
+Recipe: Jack Rose (ID: jack_rose)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of calvados
+- 1half of lemon
+- 2dash of grenadine
+- 1half of egg
+  (Optional)
+- 1slice of apple
+  Substitutes: lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Apple Sunrise (ID: apple_sunrise)
+Glass: collins
+Tags: soft_recipe
+
+Ingredients:
+- 1half of lemon
+  (Optional)
+- 15ml of creme_de_cassis
+- 50ml of calvados
+- 100ml of juice_orange
+- 1slice of apple
+  (Garnish)
+- 100gr of ice
+
+Recipe: Bentley (ID: bentley)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of calvados
+- 45ml of dubonnet
+- 2dash of peychauds_bitter
+  Substitutes: orange_bitter
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Dandy (ID: dandy)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of bourbon
+  Substitutes: whiskey
+- 45ml of dubonnet
+- 15ml of cointreau
+  Substitutes: triple_sec
+- 1dash of angostura_bitter
+- 1peel of orange
+  (Garnish)
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Dubonnet (ID: dubonnet)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of dubonnet
+- 50ml of gin
+- 1quarter of lemon
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Dubonnet-Cassis (ID: dubonnet_cassis)
+Glass: highball
+Tags: long
+
+Ingredients:
+- 30ml of creme_de_cassis
+- 50ml of dubonnet
+  Substitutes: vermouth_dry
+- 60ml of soda
+- 100gr of ice
+
+Recipe: Rum Old Fashioned (ID: rum_old_fashioned)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 1cube of sugar
+- 45ml of rum_dark
+- 10ml of rum_151
+  (Optional)
+- 2dash of angostura_bitter
+- 2dash of orange_bitter
+  (Optional)
+- 10ml of water
+- 1peel of orange
+  Substitutes: lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Jungle Bird (ID: jungle_bird)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of rum_dark
+- 15ml of campari
+- 45ml of juice_pineapple
+- 1half of lime
+- 15ml of syrup_sugar
+- 1wedge of pineapple
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Dirty Banana (ID: dirty_banana)
+Glass: hurricane
+Tags: mild, long
+
+Ingredients:
+- 60ml of rum_light
+  Substitutes: rum_dark
+- 30ml of coffee_liqueur
+  Substitutes: kahlua
+- 30ml of banana_liqueur
+- 60ml of cream
+  Substitutes: milk
+- 1none of banana
+- 150gr of ice
+
+Recipe: Banana Colada (ID: banana_colada)
+Glass: hurricane
+Tags: mild, long
+
+Ingredients:
+- 60ml of rum_light
+  Substitutes: rum_dark
+- 30ml of coconut_cream
+- 15ml of banana_liqueur
+- 120ml of juice_pineapple
+- 1none of banana
+- 150gr of ice
+
+Recipe: London Calling (ID: london_calling)
+Glass: nick_nora
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of gin
+- 15ml of dry_sherry
+  Substitutes: vermouth_dry
+- 1half of lemon
+- 10ml of syrup_sugar
+- 2dash of angostura_bitter
+- 1twist of grapefruit
+  (Garnish)
+- 100gr of ice
+
+Recipe: Banana Calling (ID: banana_calling)
+Glass: nick_nora
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of gin
+- 10ml of dry_sherry
+  Substitutes: vermouth_dry
+- 15ml of banana_liqueur
+- 1half of lemon
+- 10ml of syrup_sugar
+- 150gr of ice
+
+Recipe: Bamboo (classic) (ID: bamboo_classic)
+Glass: nick_nora
+Tags: strong_recipe
+
+Ingredients:
+- 50ml of dry_sherry
+- 50ml of vermouth_dry
+- 2dash of orange_bitter
+- 2drop of angostura_bitter
+- 1peel of lemon
+- 1none of olive
+  (Garnish)
+- 150gr of ice
+
+Recipe: Bamboo (modern) (ID: bamboo_modern)
+Glass: coupe
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of dry_sherry
+- 30ml of vermouth_red
+  Substitutes: vermouth_white
+- 20ml of vermouth_dry
+- 1dash of orange_bitter
+- 1twist of orange
+  (Garnish)
+- 150gr of ice
+
+Recipe: Adonis (ID: adonis)
+Glass: coupe
+Tags: mild
+
+Ingredients:
+- 45ml of dry_sherry
+- 45ml of vermouth_red
+  Substitutes: vermouth_white
+- 2dash of orange_bitter
+- 1peel of orange
+  (Garnish)
+- 150gr of ice
+
+Recipe: Banshee (ID: banshee)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 50ml of banana_liqueur
+- 50ml of creme_de_cacao_white
+  Substitutes: creme_de_cacao_brown
+- 50ml of cream
+- 150gr of ice
+
+Recipe: Brandy Crusta (ID: brandy_crusta)
+Glass: cocktail
+Tags: mild, official
+
+Ingredients:
+- 50ml of brandy
+- 8ml of maraschino_liqueur
+- 1half of lemon
+- 5ml of orange_curacao
+  Substitutes: triple_sec, cointreau
+- 5ml of syrup_sugar
+- 2dash of angostura_bitter
+- 1peel of orange
+  Substitutes: lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Hanky Panky (ID: hanky_panky)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 45ml of gin
+- 45ml of vermouth_red
+- 8ml of fernet
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Canchanchara (ID: cachanchara)
+Glass: rocks
+Tags: strong_recipe, official
+
+Ingredients:
+- 60ml of rum_light
+- 15ml of honey
+  Substitutes: syrup_honey
+- 1half of lime
+- 50ml of water
+- 100gr of ice
+
+Recipe: Fernandito (ID: fernandito)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 50ml of fernet
+- 150ml of cola
+- 100gr of ice
+
+Recipe: Penicillin (ID: penicillin)
+Glass: rocks
+Tags: mild, official
+
+Ingredients:
+- 60ml of scotch
+- 1half of lemon
+- 22ml of syrup_honey
+- 3none of ginger
+- 100gr of ice
+
+Recipe: Paloma (ID: paloma)
+Glass: highball
+Tags: soft_recipe, official, long
+
+Ingredients:
+- 50ml of tequila_bianco
+- 1quarter of lime
+- 1pinch of salt
+- 100ml of pink_grapefruit_soda
+- 100gr of ice
+
+Recipe: Illegal (ID: illegal)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of tequila_bianco
+  Substitutes: tequila_gold
+- 10ml of rum_151
+- 15ml of falernum
+- 5ml of maraschino_liqueur
+- 1half of lime
+- 15ml of syrup_sugar
+- 1none of egg
+  (Optional)
+- 100gr of ice
+
+Recipe: Naked and Famous (ID: naked_and_famous)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 22ml of tequila_bianco
+  Substitutes: tequila_gold
+- 22ml of chartreuse_yellow
+- 22ml of aperol
+- 1half of lime
+- 100gr of ice
+
+Recipe: Old Cuban (ID: old_cuban)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 6springs of mint
+- 1half of lime
+- 30ml of syrup_sugar
+- 45ml of rum_dark
+- 2dash of angostura_bitter
+- 60ml of sparkling_wine
+- 100gr of ice
+
+Recipe: Paper Plane (ID: paper_plane)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 30ml of bourbon
+  Substitutes: whiskey
+- 30ml of amaro_nonino
+  Substitutes: jagermeister
+- 30ml of aperol
+- 1half of lemon
+- 100gr of ice
+
+Recipe: Spicy Fifty (ID: spicy_fifty)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 50ml of vodka_vanilla
+- 15ml of elderflower_cordial
+- 1half of lime
+- 10ml of syrup_honey
+  Substitutes: honey
+- 2none of chili
+- 100gr of ice
+
+Recipe: Suffering Bastard (ID: suffering_bastard)
+Glass: tiki
+Tags: soft_recipe, official
+
+Ingredients:
+- 30ml of brandy
+  Substitutes: cognac
+- 30ml of gin
+- 1half of lime
+- 2dash of angostura_bitter
+- 100ml of ginger_beer
+- 2springs of mint
+  (Garnish)
+- 1slice of orange
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Tipperary (ID: tipperary)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 50ml of whiskey
+  Substitutes: scotch
+- 25ml of vermouth_red
+- 15ml of chartreuse_green
+- 2dash of angostura_bitter
+- 1peel of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Ve.n.to (ID: vento)
+Glass: cocktail
+Tags: strong_recipe, official
+
+Ingredients:
+- 40ml of grappa
+- 1half of lemon
+- 15ml of syrup_honey
+- 15ml of chamomile_cordial
+- 1none of egg
+  (Optional)
+- 100gr of ice
+
+Recipe: Porn Star Martini (ID: porn_star_martini)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 45ml of vodka_vanilla
+- 15ml of passion_fruit_liqueur
+- 15ml of juice_passion_fruit
+  Substitutes: passion_fruit
+- 15ml of syrup_sugar
+- 1half of lime
+- 1slice of passion_fruit
+  (Garnish)
+- 60ml of sparkling_wine
+- 100gr of ice
+
+Recipe: Michelada (ID: michelada)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 355ml of beer
+- 30ml of juice_tomato
+  (Optional)
+- 1none of lime
+- 2dash of worchestershire_sauce
+- 2dash of tabasco
+- 2gr of salt
+  (Garnish)
+- 2gr of chili_powder
+  (Garnish)
+  (Optional)
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: San Francisco (ID: san_francisco)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of sloe_gin
+- 30ml of vermouth_dry
+- 30ml of vermouth_red
+- 1dash of angostura_bitter
+- 1dash of orange_bitter
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Neptune's Wrath (ID: neptunes_wrath)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of gin
+- 1none of lemon
+- 20ml of syrup_sugar
+- 1none of egg
+- 7ml of absinthe
+- 7ml of chartreuse_green
+- 100gr of ice
+
+Recipe: Electric Lemonade (ID: electric_lemonade)
+Glass: highball
+Tags: long
+
+Ingredients:
+- 45ml of vodka
+- 1none of lemon
+- 20ml of syrup_sugar
+- 60ml of seven_up
+- 15ml of blue_curacao
+- 1wedge of lemon
+  (Garnish)
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Champs Elysees (ID: champs_elysees)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of cognac
+  Substitutes: brandy
+- 15ml of chartreuse_green
+- 1half of lemon
+- 15ml of syrup_sugar
+- 2dash of angostura_bitter
+- 1twist of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Creamsicle (ID: creamsicle)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 30ml of vodka_citron
+  Substitutes: vodka_vanilla
+- 30ml of cointreau
+  Substitutes: triple_sec
+- 30ml of cream
+- 10ml of syrup_sugar
+  (Optional)
+- 1twist of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Dan Sabo's Whiskey Sour (ID: dan_sabo_whiskey_sour)
+Glass: rocks
+Tags: mild
+
+Ingredients:
+- 60ml of rye_whiskey
+- 1half of lemon
+- 15ml of juice_orange
+- 20ml of syrup_sugar
+- 1none of egg
+- 1slice of orange
+  (Garnish)
+  (Optional)
+- 1none of cherry
+  (Garnish)
+  (Optional)
+- 2dash of angostura_bitter
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Adriatique (ID: adriatique)
+Glass: cocktail
+Tags: soft_recipe
+
+Ingredients:
+- 30ml of amaro_nonino
+- 15ml of aperol
+- 30ml of juice_orange
+- 1twist of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Baby Guinness (ID: baby_guinness)
+Glass: shooter
+Tags: mild, shooter
+
+Ingredients:
+- 30ml of coffee_liqueur
+- 15ml of baileys
+
+Recipe: Cantaritos (ID: cantaritos)
+Glass: highball
+Tags: soft_recipe, long
+
+Ingredients:
+- 60ml of tequila_bianco
+- 15ml of juice_orange
+- 1half of lemon
+- 1half of lime
+- 60ml of pink_grapefruit_soda
+- 2gr of salt
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Gin Sour (ID: gin_sour)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of gin
+- 1half of lemon
+- 15ml of syrup_sugar
+- 1none of egg
+  (Optional)
+- 1slice of lemon
+  (Garnish)
+  (Optional)
+- 1none of cherry
+  (Garnish)
+  (Optional)
+- 3dash of angostura_bitter
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Mexican Mule (ID: mexican_mule)
+Glass: copper_mug
+Tags: long
+
+Ingredients:
+- 60ml of tequila_bianco
+- 1half of lime
+- 90ml of ginger_beer
+- 15ml of syrup_sugar
+  (Optional)
+- 1slice of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Pantera Rosa (ID: pantera_rosa)
+Glass: cocktail
+Tags: mild
+
+Ingredients:
+- 45ml of gin
+- 15ml of limoncello
+- 1none of lemon
+- 20ml of syrup_sugar
+- 2none of raspberry
+- 1springs of mint
+  (Garnish)
+- 100gr of ice
+
+Recipe: Devil's Margarita (ID: devils_margarita)
+Glass: cocktail
+Tags: strong_recipe
+
+Ingredients:
+- 45ml of tequila_bianco
+- 1none of lime
+- 20ml of syrup_sugar
+- 15ml of wine_red
+- 1wedge of lime
+  (Garnish)
+- 100gr of ice
+
+Recipe: Almond Old Fashioned (ID: almond_old_fashioned)
+Glass: rocks
+Tags: strong_recipe
+
+Ingredients:
+- 60ml of bourbon
+- 10ml of amaretto
+- 5ml of syrup_sugar
+- 1dash of angostura_bitter
+- 1twist of orange
+  (Garnish)
+  (Optional)
+- 100gr of ice
+
+Recipe: Breakfast Martini (ID: breakfast_martini)
+Glass: cocktail
+Tags: new, strong_recipe
+
+Ingredients:
+- 50ml of gin
+- 15ml of triple_sec
+- 1half of lemon
+- 1teaspoon of orange_marmalade
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice
+
+Recipe: Contessa (ID: contessa)
+Glass: rocks
+Tags: new, strong_recipe
+
+Ingredients:
+- 30ml of gin
+- 30ml of vermouth_dry
+- 30ml of aperol
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: White Negroni (ID: white_negroni)
+Glass: rocks
+Tags: new, strong_recipe
+
+Ingredients:
+- 30ml of gin
+- 30ml of suze
+- 30ml of lillet_blonde
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Negroni Sbagliato (ID: negroni_sbagliato)
+Glass: rocks
+Tags: new, strong_recipe
+
+Ingredients:
+- 30ml of campari
+- 30ml of vermouth_red
+- 40ml of sparkling_wine
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Eastside (ID: eastside)
+Glass: cocktail
+Tags: new, mild
+
+Ingredients:
+- 60ml of gin
+- 20ml of syrup_sugar
+- 1none of lime
+- 6none of mint
+- 3slice of cucumber
+- 1springs of mint
+  (Garnish)
+- 1slice of cucumber
+  (Garnish)
+- 100gr of ice
+
+Recipe: Pedro Manhattan (ID: pedro_manhattan)
+Glass: cocktail
+Tags: new, strong_recipe
+
+Ingredients:
+- 50ml of bourbon
+- 20ml of pedro_ximenez
+- 1dash of angostura_bitter
+- 2dash of peychauds_bitter
+- 1none of cherry
+  (Garnish)
+- 100gr of ice
+
+Recipe: Agavoni (ID: agavoni)
+Glass: rocks
+Tags: new, strong_recipe
+
+Ingredients:
+- 30ml of tequila_bianco
+- 30ml of vermouth_red
+- 30ml of campari
+- 1slice of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: Amaro Paloma (ID: amaro_paloma)
+Glass: rocks
+Tags: new, mild
+
+Ingredients:
+- 30ml of tequila_bianco
+- 23ml of amaro_nonino
+- 1quarter of grapefruit
+- 1half of lime
+- 5ml of syrup_sugar
+- 2dash of angostura_bitter
+- 10ml of soda
+- 1slice of grapefruit
+  (Garnish)
+- 100gr of ice
+
+Recipe: Campari Gin Tonic (ID: campari_gin_tonic)
+Glass: highball
+Tags: new, soft_recipe, long
+
+Ingredients:
+- 40ml of gin
+- 20ml of campari
+- 100ml of tonic
+- 1wedge of orange
+  (Garnish)
+- 100gr of ice
+
+Recipe: 20th Century Cocktail (ID: 20th_century_cocktail)
+Glass: cocktail
+Tags: new, strong_recipe
+
+Ingredients:
+- 30ml of gin
+- 20ml of lillet_blonde
+- 20ml of creme_de_cacao_white
+- 1half of lime
+- 2gr of cocoa_powder
+  (Garnish)
+- 2gr of grated_nutmeg
+  (Garnish)
+- 100gr of ice
+
+Recipe: Bobby Burns (ID: bobby_burns)
+Glass: cocktail
+Tags: new, strong_recipe
+
+Ingredients:
+- 45ml of scotch
+- 45ml of vermouth_red
+- 22ml of benedictine
+- 1peel of lemon
+  (Garnish)
+- 100gr of ice

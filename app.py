@@ -388,6 +388,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             
             # Get the data
             product_id = data['productId']
+            product_nid = data['productNid']
             ingredients = data['ingredients']
             drink_type = data['drinkType']
             is_alcoholic = data.get('isAlcoholic', True)  # Default to True if not specified
@@ -413,6 +414,10 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     ser.write(f"ID:{product_id}\n".encode())
                     time.sleep(0.1)  # Small delay between writes
                     
+                    # Send product NID
+                    ser.write(f"NID:{product_nid}\n".encode())
+                    time.sleep(0.1)
+                    
                     # Send drink type (light, medium, strong)
                     ser.write(f"TYPE:{drink_type}\n".encode())
                     time.sleep(0.1)
@@ -421,9 +426,9 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     ser.write(f"ALCOHOL:{1 if is_alcoholic else 0}\n".encode())
                     time.sleep(0.1)
                     
-                    # Send each ingredient with its pipe number
+                    # Send each ingredient with its pipe number and additional details
                     for ing in ingredients:
-                        message = f"PIPE{ing['pipe']}:{ing['name']}\n"
+                        message = f"PIPE{ing['pipe']}:{ing['name']}|{ing['ingNid']}|{ing['ingMl']}\n"
                         ser.write(message.encode())
                         time.sleep(0.1)
                     
