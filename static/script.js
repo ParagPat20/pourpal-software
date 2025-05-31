@@ -1117,8 +1117,7 @@ async function sendPipesToPython(assignedPipes) {
       console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
       return {
         ...pipe,
-        ingNid: ingredient.ING_NID,
-        ingMl: ingredient.ING_ML
+        ingMl: ingredient ? ingredient.ING_ML : "0"  // Use 0 if ingredient not found
       };
     }),
     drinkType: drinkType,
