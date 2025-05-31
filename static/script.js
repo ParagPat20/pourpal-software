@@ -1087,13 +1087,27 @@ async function sendPipesToPython(assignedPipes) {
   
   const isAlcoholic = document.getElementById("alcoholic").checked;
   console.log('Is alcoholic:', isAlcoholic);
+
+  // Get the cocktail details from products.json
+  const response = await fetch('products.json');
+  const cocktails = await response.json();
+  const selectedCocktail = cocktails.find(cocktail => cocktail.PID === selectedCocktailID);
+  
+  if (!selectedCocktail) {
+    throw new Error('Selected cocktail not found');
+  }
+
+  // Create a map of ingredient names to their measurements
+  const ingredientMeasurements = {};
+  selectedCocktail.PIng.forEach(ingredient => {
+    ingredientMeasurements[ingredient.ING_Name] = ingredient.ING_ML;
+  });
   
   const dataToSend = {
     productId: selectedCocktailID,
-    productNid: selectedCocktailID.toString(),
     ingredients: assignedPipes.map(pipe => ({
       ...pipe,
-      ingMl: "50"  // Default value for all ingredients
+      ingMl: ingredientMeasurements[pipe.name] || "50"  // Get measurement from cocktail ingredients, default to "50" if not found
     })),
     drinkType: drinkType,
     isAlcoholic: isAlcoholic
