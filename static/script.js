@@ -1082,50 +1082,24 @@ async function sendPipesToPython(assignedPipes) {
   
   const drinkType = document.querySelector(
     'input[name="drink-type"]:checked'
-  ).value; // Get the selected drink type
+  ).value;
   console.log('Selected drink type:', drinkType);
   
-  // Get the alcoholic/non-alcoholic status
   const isAlcoholic = document.getElementById("alcoholic").checked;
   console.log('Is alcoholic:', isAlcoholic);
   
-  // Fetch products if not already loaded
-  let products;
-  try {
-    const response = await fetch('/products.json');
-    products = await response.json();
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    displayErrorMessage('Error loading cocktail data');
-    return;
-  }
-  
-  // Get the selected cocktail details
-  const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
-  if (!selectedCocktail) {
-    console.error('Selected cocktail not found:', selectedCocktailID);
-    displayErrorMessage('Selected cocktail not found');
-    return;
-  }
-  console.log('Selected cocktail:', selectedCocktail);
-  
   const dataToSend = {
     productId: selectedCocktailID,
-    productNid: selectedCocktail.PNID,
-    ingredients: assignedPipes.map(pipe => {
-      const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
-      console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
-      return {
-        ...pipe,
-        ingMl: ingredient ? ingredient.ING_ML : "0"  // Use 0 if ingredient not found
-      };
-    }),
+    productNid: selectedCocktailID.toString(),
+    ingredients: assignedPipes.map(pipe => ({
+      ...pipe,
+      ingMl: "50"  // Default value for all ingredients
+    })),
     drinkType: drinkType,
     isAlcoholic: isAlcoholic
   };
   console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
   
-  // Show loading page before sending data
   showLoadingPage();
   console.log('Loading page displayed');
   
@@ -1144,7 +1118,6 @@ async function sendPipesToPython(assignedPipes) {
       console.log('Response data:', data);
       if (data.trim() === "OK") {
         console.log("Received OK from Python. Starting completion check...");
-        // Start checking for completion
         checkCompletionStatus();
       }
     } else {
