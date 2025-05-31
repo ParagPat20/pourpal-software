@@ -3,11 +3,11 @@
 
 // PourPal Controller
 // Controls 8 DC pumps through relays based on ingredient measurements
-// Uses Hardware Serial for communication with Python
+// Uses Hardware Serial1 for communication with Python
 
 // Pin definitions for relays
 const int NUM_RELAYS = 8;  // Total number of pumps/relays in the system
-const int RELAY_PINS[NUM_RELAYS] = {22, 24, 26, 28, 30, 32, 34, 36}; // Arduino pins connected to relay control
+const int RELAY_PINS[NUM_RELAYS] = {2, 3, 4, 5, 6, 7, 8, 9}; // Arduino pins connected to relay control
 
 // Structure to hold pump data
 struct PumpData {
@@ -31,11 +31,11 @@ bool isPouring = false;      // Whether pumps are currently active
 
 /**
  * Setup function - runs once when Arduino starts
- * Initializes serial communication and relay pins
+ * Initializes Serial1 communication and relay pins
  */
 void setup() {
-  // Initialize Serial communication
-  Serial.begin(9600);
+  // Initialize Serial1 
+  Serial1.begin(9600);
   
   // Initialize relay pins
   for (int i = 0; i < NUM_RELAYS; i++) {
@@ -53,11 +53,11 @@ void setup() {
 
 /**
  * Main loop - runs continuously
- * Checks for incoming serial commands and manages pump states
+ * Checks for incoming Serial1 commands and manages pump states
  */
 void loop() {
-  if (Serial.available() > 0) {
-    String input = Serial.readStringUntil('\n');
+  if (Serial1.available() > 0) {
+    String input = Serial1.readStringUntil('\n');
     processCommand(input);
   }
   
@@ -86,7 +86,7 @@ void processCommand(String command) {
   DeserializationError error = deserializeJson(doc, command);
 
   if (error) {
-    Serial.println("ERROR");
+    Serial1.println("ERROR");
     return;
   }
 
@@ -111,7 +111,7 @@ void processCommand(String command) {
 
   // Start pouring immediately after processing all ingredients
   startPouring();
-  Serial.println("OK");
+  Serial1.println("OK");
 }
 
 /**
@@ -156,13 +156,13 @@ void updatePumps() {
   // If all pumps have stopped, reset the pouring state
   if (allPumpsStopped) {
     isPouring = false;
-    Serial.println("COMPLETED");
+    Serial1.println("COMPLETED");
   }
 }
 
 /**
  * Manual pump control function
- * Can be called from Serial Monitor to test pumps
+ * Can be called from Serial1 Monitor to test pumps
  * Format: numPour(pipe1, ml1, pipe2, ml2, ..., 0)
  * Example: numPour(1, 30, 2, 45, 0) - Pump 1: 30ml, Pump 2: 45ml
  * 
