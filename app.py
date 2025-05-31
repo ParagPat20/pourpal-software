@@ -482,9 +482,10 @@ class CustomHandler(SimpleHTTPRequestHandler):
                             response = ser.readline().decode().strip()
                             print(f"Arduino status: {response}")
                             if response == "COMPLETED":
+                                processing_complete.set()  # Set the completion flag
                                 self.send_response(200)
                                 self.end_headers()
-                                self.wfile.write(json.dumps({"status": "completed"}).encode())
+                                self.wfile.write(json.dumps({"status": "COMPLETED"}).encode())
                                 break
                             elif response == "ERROR":
                                 raise Exception("Arduino reported an error")

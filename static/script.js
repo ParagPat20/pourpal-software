@@ -1114,9 +1114,13 @@ async function sendPipesToPython(assignedPipes) {
     
     console.log('Received response from server:', response.status);
     if (response.ok) {
-      const data = await response.text();
+      const data = await response.json();
       console.log('Response data:', data);
-      if (data.trim() === "OK") {
+      if (data.status === "COMPLETED") {
+        console.log("Drink preparation completed");
+        hideLoadingPage();
+        showCustomAlert("Your drink is ready!");
+      } else {
         console.log("Received OK from Python. Starting completion check...");
         checkCompletionStatus();
       }
