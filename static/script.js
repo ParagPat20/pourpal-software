@@ -1146,6 +1146,10 @@ function sendPipesToPython(assignedPipes) {
     isAlcoholic: isAlcoholic
   };
   console.log(`assigned pipes ${JSON.stringify(dataToSend)}`);
+  
+  // Show loading page before sending data
+  showLoadingPage();
+  
   fetch("/send-pipes", {
     method: "POST",
     headers: {
@@ -1164,8 +1168,9 @@ function sendPipesToPython(assignedPipes) {
     })
     .then((data) => {
       if (data.trim() === "OK") {
-        console.log("Received OK from Python. Continuing...");
-        hideLoadingPage();
+        console.log("Received OK from Python. Starting completion check...");
+        // Start checking for completion
+        checkCompletionStatus();
       }
     })
     .catch((error) => {
@@ -1175,16 +1180,73 @@ function sendPipesToPython(assignedPipes) {
     });
 }
 
-// Function to show the loading page
-function showLoadingPage() {
-  const loadingPage = document.getElementById("loading-page");
-  loadingPage.style.display = "block"; // Show loading page
+// Function to check completion status
+function checkCompletionStatus() {
+  fetch('/check-completion')
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'completed') {
+        // Drink is ready, hide loading page
+        hideLoadingPage();
+        showCustomAlert("Your drink is ready!");
+        // Clear the completion status for next time
+        fetch('/delete_processing_flag', { method: 'POST' });
+      } else {
+        // Still processing, check again after a short delay
+        setTimeout(checkCompletionStatus, 1000);
+      }
+    })
+    .catch(error => {
+      console.error('Error checking completion:', error);
+      hideLoadingPage();
+      displayErrorMessage("Error checking drink status");
+    });
 }
 
-// Function to hide the loading page
+// Function to show the loading page
+function showLoadingPage() {
+    const loadingPage = document.getElementById('loading-page');
+    loadingPage.style.display = 'flex';
+    
+    // Add click handler for cancel button
+    const cancelButton = document.getElementById('cancel-drink-button');
+    cancelButton.onclick = cancelDrink;
+}
+
+function cancelDrink() {
+    // Send cancel request to server
+    fetch('/cancel-drink', { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                // Hide loading page
+                hideLoadingPage();
+                // Show cancelled message
+                showMessage('Drink preparation cancelled', 'error');
+            } else {
+                throw new Error('Failed to cancel drink');
+            }
+        })
+        .catch(error => {
+            console.error('Error cancelling drink:', error);
+            showMessage('Failed to cancel drink', 'error');
+        });
+}
+
 function hideLoadingPage() {
-  const loadingPage = document.getElementById("loading-page");
-  loadingPage.style.display = "none"; // Hide loading page
+    const loadingPage = document.getElementById('loading-page');
+    loadingPage.style.display = 'none';
+}
+
+function showMessage(message, type = 'success') {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${type}`;
+    messageDiv.textContent = message;
+    document.body.appendChild(messageDiv);
+    
+    // Remove message after 3 seconds
+    setTimeout(() => {
+        messageDiv.remove();
+    }, 3000);
 }
 
 // Function to display error message on the loading page

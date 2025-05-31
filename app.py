@@ -52,6 +52,26 @@ class CustomHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(str(e).encode())
             return
 
+        if self.path == "/check-completion":
+            try:
+                # Check if processing is complete by checking the event
+                if processing_complete.is_set():
+                    self.send_response(200)
+                    self.send_no_cache_headers()
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "completed"}).encode())
+                else:
+                    self.send_response(200)
+                    self.send_no_cache_headers()
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "processing"}).encode())
+            except Exception as e:
+                self.send_response(500)
+                self.send_no_cache_headers()
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": str(e)}).encode())
+            return
+
         # For db.json and image requests, prevent caching
         if (
             self.path.endswith(".json")
@@ -136,6 +156,45 @@ class CustomHandler(SimpleHTTPRequestHandler):
                 self.send_response(500)
                 self.end_headers()
                 self.wfile.write(str(e).encode())
+            return
+
+        elif self.path == "/cancel-drink":
+            try:
+                # Find the appropriate serial port
+                port = None
+                available_ports = serial.tools.list_ports.comports()
+                
+                for p in available_ports:
+                    if p.device == "/dev/ttyACM0" or p.device == "/dev/ttyUSB0":
+                        port = p.device
+                        break
+
+                if port is None:
+                    self.send_response(500)
+                    self.end_headers()
+                    self.wfile.write(b"Error: No suitable serial port found")
+                    return
+
+                try:
+                    with serial.Serial(port, 9600, timeout=5) as ser:
+                        # Send cancel command to Arduino
+                        ser.write(b"CANCEL\n")
+                        
+                        # Clear the processing complete flag
+                        processing_complete.clear()
+                        
+                        self.send_response(200)
+                        self.end_headers()
+                        self.wfile.write(b"Drink cancelled successfully")
+                except serial.SerialException as e:
+                    self.send_response(500)
+                    self.end_headers()
+                    self.wfile.write(f"Serial error: {str(e)}".encode())
+                    
+            except Exception as e:
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(f"Error: {str(e)}".encode())
             return
 
         elif self.path == "/shutdown":
@@ -434,6 +493,15 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     
                     # Send end marker
                     ser.write(b"END\n")
+                    
+                    # Wait for completion message
+                    while True:
+                        if ser.in_waiting:
+                            response = ser.readline().decode().strip()
+                            if response == "COMPLETED":
+                                # Set the processing complete event
+                                processing_complete.set()
+                                break
                     
                 self.send_response(200)
                 self.end_headers()

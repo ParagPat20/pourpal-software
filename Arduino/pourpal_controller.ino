@@ -73,6 +73,7 @@ void loop() {
  * - ALCOHOL: Alcoholic status
  * - PIPE: Pump configuration with ingredient details
  * - END: Start pouring process
+ * - CANCEL: Cancel the pouring process
  * 
  * @param command The command string received from Python
  */
@@ -119,6 +120,16 @@ void processCommand(String command) {
     startPouring();
     Serial.println("OK");
   }
+  else if (command == "CANCEL") {
+    // Stop all pumps
+    for (int i = 0; i < NUM_RELAYS; i++) {
+      digitalWrite(RELAY_PINS[i], LOW);
+      pumps[i].isActive = false;
+      pumps[i].duration = 0;
+    }
+    isPouring = false;
+    Serial.println("CANCELLED");
+  }
 }
 
 /**
@@ -142,7 +153,7 @@ void startPouring() {
  * Update pump states during pouring
  * Checks if each pump's duration has elapsed
  * Deactivates pumps when their time is up
- * Sends "DONE" when all pumps have finished
+ * Sends "COMPLETED" when all pumps have finished
  */
 void updatePumps() {
   unsigned long currentTime = millis();
@@ -163,7 +174,7 @@ void updatePumps() {
   // If all pumps have stopped, reset the pouring state
   if (allPumpsStopped) {
     isPouring = false;
-    Serial.println("DONE");
+    Serial.println("COMPLETED");
   }
 }
 
