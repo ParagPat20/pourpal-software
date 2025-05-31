@@ -1077,7 +1077,7 @@ document.getElementById("serial-out-button").addEventListener("click", () => {
 });
 
 // Function to send assigned pipelines to the Python script
-function sendPipesToPython(assignedPipes) {
+async function sendPipesToPython(assignedPipes) {
   console.log('Starting sendPipesToPython with assigned pipes:', assignedPipes);
   
   const drinkType = document.querySelector(
@@ -1089,62 +1089,67 @@ function sendPipesToPython(assignedPipes) {
   const isAlcoholic = document.getElementById("alcoholic").checked;
   console.log('Is alcoholic:', isAlcoholic);
   
-  // Get the selected cocktail details
-  const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
-  console.log('Selected cocktail:', selectedCocktail);
-  
-  const dataToSend = {
-    productId: selectedCocktailID,
-    productNid: selectedCocktail.PNID,
-    ingredients: assignedPipes.map(pipe => {
-      const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
-      console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
-      return {
-        ...pipe,
-        ingNid: ingredient.ING_NID,
-        ingMl: ingredient.ING_ML
-      };
-    }),
-    drinkType: drinkType,
-    isAlcoholic: isAlcoholic
-  };
-  console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
-  
-  // Show loading page before sending data
-  showLoadingPage();
-  console.log('Loading page displayed');
-  
-  fetch("/send-pipes", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(dataToSend), // Send the entire object
-  })
-    .then((response) => {
-      console.log('Received response from server:', response.status);
-      if (response.ok) {
-        return response.text();
-      } else {
-        return response.text().then((errorText) => {
-          console.error('Server returned error:', errorText);
-          throw new Error(errorText);
-        });
-      }
-    })
-    .then((data) => {
+  try {
+    // Fetch products data
+    const response = await fetch("products.json");
+    const products = await response.json();
+    
+    // Get the selected cocktail details
+    const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
+    console.log('Selected cocktail:', selectedCocktail);
+    
+    if (!selectedCocktail) {
+      throw new Error('Selected cocktail not found');
+    }
+    
+    const dataToSend = {
+      productId: selectedCocktailID,
+      productNid: selectedCocktail.PNID,
+      ingredients: assignedPipes.map(pipe => {
+        const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
+        console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
+        return {
+          ...pipe,
+          ingNid: ingredient.ING_NID,
+          ingMl: ingredient.ING_ML
+        };
+      }),
+      drinkType: drinkType,
+      isAlcoholic: isAlcoholic
+    };
+    console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
+    
+    // Show loading page before sending data
+    showLoadingPage();
+    console.log('Loading page displayed');
+    
+    const sendResponse = await fetch("/send-pipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend), // Send the entire object
+    });
+    
+    console.log('Received response from server:', sendResponse.status);
+    if (sendResponse.ok) {
+      const data = await sendResponse.text();
       console.log('Response data:', data);
       if (data.trim() === "OK") {
         console.log("Received OK from Python. Starting completion check...");
         // Start checking for completion
         checkCompletionStatus();
       }
-    })
-    .catch((error) => {
-      console.error("Error sending data to Python:", error);
-      hideLoadingPage();
-      displayErrorMessage(error.message);
-    });
+    } else {
+      const errorText = await sendResponse.text();
+      console.error('Server returned error:', errorText);
+      throw new Error(errorText);
+    }
+  } catch (error) {
+    console.error("Error sending data to Python:", error);
+    hideLoadingPage();
+    displayErrorMessage(error.message);
+  }
 }
 
 // Function to check completion status
