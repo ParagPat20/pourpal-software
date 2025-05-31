@@ -445,17 +445,51 @@ class CustomHandler(SimpleHTTPRequestHandler):
         try:
             data = json.loads(post_data)
             
-            # Directly use ttyUSB0
-            port = "/dev/ttyUSB0"
+            # Find the correct serial port
+            port = None
+            if platform.system() == "Windows":
+                # On Windows, look for COM ports
+                for i in range(10):  # Check COM0 through COM9
+                    try:
+                        test_port = f"COM{i}"
+                        with serial.Serial(test_port, 9600, timeout=1) as ser:
+                            port = test_port
+                            break
+                    except serial.SerialException:
+                        continue
+            else:
+                # On Linux, use ttyUSB0
+                port = "/dev/ttyUSB0"
+
+            if port is None:
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(b"Error: No suitable serial port found")
+                return
 
             try:
                 with serial.Serial(port, 9600, timeout=5) as ser:
                     # Send the entire data as JSON
                     ser.write(json.dumps(data).encode() + b"\n")
                     
-                self.send_response(200)
-                self.end_headers()
-                self.wfile.write(b"OK")
+                    # Wait for and read the response
+                    response = ser.readline().decode().strip()
+                    print(f"Arduino response: {response}")
+                    
+                    if response == "OK":
+                        # Wait for the COMPLETED response
+                        while True:
+                            response = ser.readline().decode().strip()
+                            print(f"Arduino status: {response}")
+                            if response == "COMPLETED":
+                                self.send_response(200)
+                                self.end_headers()
+                                self.wfile.write(json.dumps({"status": "completed"}).encode())
+                                break
+                            elif response == "ERROR":
+                                raise Exception("Arduino reported an error")
+                    else:
+                        raise Exception(f"Unexpected response from Arduino: {response}")
                 
             except serial.SerialException as e:
                 self.send_response(500)
@@ -463,6 +497,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(f"Serial error: {str(e)}".encode())
                 
         except Exception as e:
+            print(f"Error in handle_send_pipes: {e}")
             self.send_response(500)
             self.end_headers()
             self.wfile.write(f"Error: {str(e)}".encode())

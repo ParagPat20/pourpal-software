@@ -34,13 +34,20 @@ bool isPouring = false;      // Whether pumps are currently active
  * Initializes Serial1 communication and relay pins
  */
 void setup() {
+  // Initialize Serial for debugging
+  Serial.begin(9600);
+  Serial.println("PourPal Controller Starting...");
+  
   // Initialize Serial1 
   Serial1.begin(9600);
+  Serial.println("Serial1 initialized for Python communication");
   
   // Initialize relay pins
   for (int i = 0; i < NUM_RELAYS; i++) {
     pinMode(RELAY_PINS[i], OUTPUT);
     digitalWrite(RELAY_PINS[i], HIGH);  // Ensure pumps are off initially
+    Serial.print("Initialized relay pin: ");
+    Serial.println(RELAY_PINS[i]);
   }
   
   // Initialize pump data
@@ -49,6 +56,7 @@ void setup() {
     pumps[i].duration = 0;
     pumps[i].isActive = false;
   }
+  Serial.println("All pumps initialized");
 }
 
 /**
@@ -58,6 +66,8 @@ void setup() {
 void loop() {
   if (Serial1.available() > 0) {
     String input = Serial1.readStringUntil('\n');
+    Serial.print("Received command: ");
+    Serial.println(input);
     processCommand(input);
   }
   
@@ -81,11 +91,29 @@ void loop() {
  * @param command The command string received from Python
  */
 void processCommand(String command) {
+  Serial.println("Processing command...");
+  
+  // Handle CANCEL command
+  if (command == "CANCEL") {
+    Serial.println("Cancelling pour process...");
+    // Stop all pumps
+    for (int i = 0; i < NUM_RELAYS; i++) {
+      digitalWrite(RELAY_PINS[i], HIGH);
+      pumps[i].isActive = false;
+      pumps[i].duration = 0;
+    }
+    isPouring = false;
+    Serial1.println("COMPLETED");
+    return;
+  }
+
   // Parse the JSON data
   StaticJsonDocument<1024> doc;
   DeserializationError error = deserializeJson(doc, command);
 
   if (error) {
+    Serial.print("JSON parsing failed: ");
+    Serial.println(error.c_str());
     Serial1.println("ERROR");
     return;
   }
@@ -96,11 +124,30 @@ void processCommand(String command) {
   drinkType = doc["drinkType"].as<String>();
   isAlcoholic = doc["isAlcoholic"] | false;
 
+  Serial.print("Product ID: ");
+  Serial.println(productId);
+  Serial.print("Product Name: ");
+  Serial.println(productNid);
+  Serial.print("Drink Type: ");
+  Serial.println(drinkType);
+  Serial.print("Is Alcoholic: ");
+  Serial.println(isAlcoholic ? "Yes" : "No");
+
   // Process each ingredient
   JsonArray ingredients = doc["ingredients"];
+  Serial.print("Number of ingredients: ");
+  Serial.println(ingredients.size());
+  
   for (JsonObject ingredient : ingredients) {
-    int pipeNumber = ingredient["pipe"] | 0;
-    int ml = ingredient["ingMl"] | 0;  // Get the measurement in ml
+    // Convert string values to integers
+    int pipeNumber = ingredient["pipe"].as<String>().toInt();
+    int ml = ingredient["ingMl"].as<String>().toInt();
+    
+    Serial.print("Setting pump ");
+    Serial.print(pipeNumber);
+    Serial.print(" to pour ");
+    Serial.print(ml);
+    Serial.println("ml");
     
     if (pipeNumber > 0 && pipeNumber <= NUM_RELAYS) {
       int pipeIndex = pipeNumber - 1;
@@ -120,12 +167,18 @@ void processCommand(String command) {
  * Records the start time for timing calculations
  */
 void startPouring() {
+  Serial.println("Starting pour process...");
   startTime = millis();
   isPouring = true;
   
   // Activate all pumps that have a duration
   for (int i = 0; i < NUM_RELAYS; i++) {
     if (pumps[i].duration > 0) {
+      Serial.print("Activating pump ");
+      Serial.print(i + 1);
+      Serial.print(" for ");
+      Serial.print(pumps[i].duration);
+      Serial.println("ms");
       digitalWrite(RELAY_PINS[i], LOW);
     }
   }
@@ -144,6 +197,8 @@ void updatePumps() {
   for (int i = 0; i < NUM_RELAYS; i++) {
     if (pumps[i].isActive) {
       if (currentTime - startTime >= pumps[i].duration) {
+        Serial.print("Stopping pump ");
+        Serial.println(i + 1);
         digitalWrite(RELAY_PINS[i], HIGH);
         pumps[i].isActive = false;
         pumps[i].duration = 0;
@@ -155,6 +210,7 @@ void updatePumps() {
   
   // If all pumps have stopped, reset the pouring state
   if (allPumpsStopped) {
+    Serial.println("All pumps completed");
     isPouring = false;
     Serial1.println("COMPLETED");
   }
