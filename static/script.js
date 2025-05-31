@@ -9,7 +9,7 @@ let selectedIngredients = [];
 let savedIngredients = []; // New global array for saved ingredients
 let activeMenu = "availableCocktails";
 
-let selectedCocktailID = 1;
+let selectedCocktailID = null;
 
 // Global variable for cocktail ingredients
 let selectedCocktailIngredients = [];
@@ -1047,6 +1047,19 @@ function showAddCocktail() {
 }
 
 document.getElementById("serial-out-button").addEventListener("click", () => {
+  // Get the cocktail ID from the hidden element
+  const cocktailIDElement = document.getElementById("cocktail-id");
+  if (!cocktailIDElement) {
+    showCustomAlert("No cocktail selected");
+    return;
+  }
+  
+  selectedCocktailID = parseInt(cocktailIDElement.textContent);
+  if (!selectedCocktailID) {
+    showCustomAlert("Invalid cocktail ID");
+    return;
+  }
+
   // Get the cocktail's ingredients and their assigned pipes
   const cocktailIngredients = [];
   const cocktail = document.querySelector(".cocktail-details");
@@ -1891,6 +1904,7 @@ async function wshowCocktailDetails(cocktail) {
 
   cocktailImage.src = cocktail.PImage || 'img/upload/extra_cocktail.png'; // Set the image source with fallback
   cocktailID.textContent = cocktail.PID;
+  selectedCocktailID = parseInt(cocktail.PID); // Set the global selectedCocktailID
   cocktailName.textContent = cocktail.PName; // Set the cocktail name
   cocktailDescription.textContent = cocktail.PDesc;
   cocktailHtm.textContent = cocktail.PHtm;
