@@ -1090,9 +1090,17 @@ async function sendPipesToPython(assignedPipes) {
   console.log('Is alcoholic:', isAlcoholic);
   
   try {
+    // Show loading page before fetching data
+    showLoadingPage();
+    console.log('Loading page displayed');
+    
     // Fetch products data
     const response = await fetch("products.json");
+    if (!response.ok) {
+      throw new Error('Failed to fetch products data');
+    }
     const products = await response.json();
+    console.log('Fetched products:', products);
     
     // Get the selected cocktail details
     const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
@@ -1108,6 +1116,9 @@ async function sendPipesToPython(assignedPipes) {
       ingredients: assignedPipes.map(pipe => {
         const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
         console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
+        if (!ingredient) {
+          throw new Error(`Ingredient ${pipe.name} not found in cocktail recipe`);
+        }
         return {
           ...pipe,
           ingNid: ingredient.ING_NID,
@@ -1119,16 +1130,12 @@ async function sendPipesToPython(assignedPipes) {
     };
     console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
     
-    // Show loading page before sending data
-    showLoadingPage();
-    console.log('Loading page displayed');
-    
     const sendResponse = await fetch("/send-pipes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataToSend), // Send the entire object
+      body: JSON.stringify(dataToSend),
     });
     
     console.log('Received response from server:', sendResponse.status);
@@ -1139,6 +1146,8 @@ async function sendPipesToPython(assignedPipes) {
         console.log("Received OK from Python. Starting completion check...");
         // Start checking for completion
         checkCompletionStatus();
+      } else {
+        throw new Error('Unexpected response from server: ' + data);
       }
     } else {
       const errorText = await sendResponse.text();
