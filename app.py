@@ -445,20 +445,8 @@ class CustomHandler(SimpleHTTPRequestHandler):
         try:
             data = json.loads(post_data)
             
-            # Find the appropriate serial port
-            port = None
-            available_ports = serial.tools.list_ports.comports()
-            
-            for p in available_ports:
-                if p.device == "/dev/ttyACM0" or p.device == "/dev/ttyUSB0":
-                    port = p.device
-                    break
-
-            if port is None:
-                self.send_response(500)
-                self.end_headers()
-                self.wfile.write(b"Error: No suitable serial port found")
-                return
+            # Directly use ttyUSB0
+            port = "/dev/ttyUSB0"
 
             try:
                 with serial.Serial(port, 9600, timeout=5) as ser:

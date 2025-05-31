@@ -40,7 +40,7 @@ void setup() {
   // Initialize relay pins
   for (int i = 0; i < NUM_RELAYS; i++) {
     pinMode(RELAY_PINS[i], OUTPUT);
-    digitalWrite(RELAY_PINS[i], LOW);  // Ensure pumps are off initially
+    digitalWrite(RELAY_PINS[i], HIGH);  // Ensure pumps are off initially
   }
   
   // Initialize pump data
@@ -126,7 +126,7 @@ void startPouring() {
   // Activate all pumps that have a duration
   for (int i = 0; i < NUM_RELAYS; i++) {
     if (pumps[i].duration > 0) {
-      digitalWrite(RELAY_PINS[i], HIGH);
+      digitalWrite(RELAY_PINS[i], LOW);
     }
   }
 }
@@ -144,7 +144,7 @@ void updatePumps() {
   for (int i = 0; i < NUM_RELAYS; i++) {
     if (pumps[i].isActive) {
       if (currentTime - startTime >= pumps[i].duration) {
-        digitalWrite(RELAY_PINS[i], LOW);
+        digitalWrite(RELAY_PINS[i], HIGH);
         pumps[i].isActive = false;
         pumps[i].duration = 0;
       } else {
@@ -178,7 +178,7 @@ void numPour(int pipe, int ml, ...) {
   for (int i = 0; i < NUM_RELAYS; i++) {
     pumps[i].duration = 0;
     pumps[i].isActive = false;
-    digitalWrite(RELAY_PINS[i], LOW);
+    digitalWrite(RELAY_PINS[i], HIGH);
   }
   
   // Set first pump
