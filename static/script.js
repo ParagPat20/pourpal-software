@@ -864,7 +864,7 @@ async function showAvailableCocktails() {
   addCocktailBtn.classList.add("deactive");
   allCocktailsBtn.classList.remove("active");
   allCocktailsBtn.classList.add("deactive");
-  cotailInfoBtn.classList.remove("active"); // Remove active from Cocktail Info
+  cotailInfoBtn.classList.remove("active");
   cotailInfoBtn.classList.add("deactive");
   document.getElementById("back-button-all-cocktail").style.display = "none";
   updateButtonStyles();
@@ -881,14 +881,23 @@ async function showAvailableCocktails() {
     ingredientTypes[ing.ING_Name] = ing.ING_Type;
   });
 
-  // Filter cocktails based on saved ingredients, ignoring garnish ingredients
+  // Filter cocktails based on saved ingredients, only checking ml measurements
   const filteredCocktails = cocktails.filter((cocktail) => {
     return cocktail.PIng.every((ingredient) => {
       // If it's a garnish ingredient, don't check if it's available
       if (ingredientTypes[ingredient.ING_Name] === "Garnish") {
         return true;
       }
-      // For non-garnish ingredients, check if they're available
+      
+      // Check if the ingredient has ml measurement
+      const hasMLMeasurement = ingredient.ING_ML && ingredient.ING_ML.toLowerCase().includes('ml');
+      
+      // If it's not measured in ml, treat it as optional
+      if (!hasMLMeasurement) {
+        return true;
+      }
+      
+      // For ml measurements, check if the ingredient is available
       return savedIngredients.includes(ingredient.ING_Name);
     });
   });
@@ -899,10 +908,9 @@ async function showAvailableCocktails() {
   // Check if there are any filtered cocktails
   if (filteredCocktails.length === 0) {
     const noCocktailMessage = document.createElement("p");
-    noCocktailMessage.className = "no-cocktail-message"; // Apply the CSS class
-    noCocktailMessage.textContent =
-      "No Cocktails Found, Please Assign Proper Ingredients"; // Set the message
-    cocktailListContainer.appendChild(noCocktailMessage); // Append the message to the container
+    noCocktailMessage.className = "no-cocktail-message";
+    noCocktailMessage.textContent = "No Cocktails Found, Please Assign Proper Ingredients";
+    cocktailListContainer.appendChild(noCocktailMessage);
   } else {
     // Display filtered cocktails
     displayCocktails(filteredCocktails);
