@@ -2539,7 +2539,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "20ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -2662,7 +2662,7 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "triple_sec"
             },
             {
@@ -2674,7 +2674,7 @@
             {
                 "ING_Name": "Honeydew melon",
                 "ING_ID": "111",
-                "ING_ML": null,
+                "ING_ML": "1slice",
                 "ING_NID": "honeydew_melon"
             },
             {
@@ -2746,15 +2746,9 @@
         "PHtm": "1. Fill a shaker with ice cubes.\n2. Add 30ml of gin, 15ml of lemon juice and 15ml of sugar syrup.\n3. Shake well and strain into a champagne flute.\n4. Top with 60ml of champagne.",
         "PIng": [
             {
-                "ING_Name": "Bourbon",
-                "ING_ID": "19",
-                "ING_ML": null,
-                "ING_NID": "bourbon"
-            },
-            {
                 "ING_Name": "7-Up",
                 "ING_ID": "119",
-                "ING_ML": null,
+                "ING_ML": "150ml",
                 "ING_NID": "7-up"
             },
             {
@@ -2777,13 +2771,13 @@
         "PName": "Irish Car Bomb",
         "PImage": "img/upload/recipe_irish_car_bomb.png",
         "PCat": "Cocktail",
-        "PDesc": "Named so because of its Irish ingredients – Guinness stout, Baileys and Jameson – the cocktail refers to car bombings that took place during the Northern Island conflict. We do not recommend asking for this cocktail in Ireland.",
+        "PDesc": "Named so because of its Irish ingredients Guinness stout, Baileys and Jameson – the cocktail refers to car bombings that took place during the Northern Island conflict. We do not recommend asking for this cocktail in Ireland.",
         "PHtm": "1. Pour 250ml of Irish stout into a pub glass.\n2. Pour 30ml of Baileys into a shot glass, and gently add 20ml of whiskey.\n3. Drop the shot into the stout.",
         "PIng": [
             {
-                "ING_Name": "Bourbon",
-                "ING_ID": "19",
-                "ING_ML": null,
+                "ING_Name": "Whiskey",
+                "ING_ID": "17",
+                "ING_ML": "20ml",
                 "ING_NID": "bourbon"
             },
             {
@@ -2847,7 +2841,7 @@
             {
                 "ING_Name": "Tequila Gold",
                 "ING_ID": "5",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "tequila"
             },
             {
@@ -2855,12 +2849,6 @@
                 "ING_ID": "10",
                 "ING_ML": "50ml",
                 "ING_NID": "rum"
-            },
-            {
-                "ING_Name": "Sugar Syrup",
-                "ING_ID": "84",
-                "ING_ML": null,
-                "ING_NID": "syrup_sugar"
             },
             {
                 "ING_Name": "Apricot Brandy",
@@ -2871,19 +2859,19 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_pineapple"
             },
             {
                 "ING_Name": "Papaya Juice",
                 "ING_ID": "98",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_papaya"
             },
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "overproof_rum"
             },
             {
@@ -2959,7 +2947,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -3015,12 +3003,7 @@
                 "ING_ML": "15ml",
                 "ING_NID": "syrup_sugar"
             },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
-            },
+
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
@@ -3106,7 +3089,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "120ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -3147,7 +3130,7 @@
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "15ml",
                 "ING_NID": "overproof_rum"
             }
         ],
@@ -3217,7 +3200,7 @@
             {
                 "ING_Name": "Orange Bitters",
                 "ING_ID": "138",
-                "ING_ML": null,
+                "ING_ML": "2dash",
                 "ING_NID": "bitters_orange"
             },
             {
@@ -3252,7 +3235,7 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "triple_sec"
             },
             {
@@ -3340,14 +3323,8 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "100ml",
                 "ING_NID": "juice_pineapple"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Ice",
@@ -3381,13 +3358,13 @@
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "overproof_rum"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "120ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -3428,7 +3405,7 @@
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "40ml",
                 "ING_NID": "overproof_rum"
             },
             {
@@ -3449,10 +3426,10 @@
         "PHtm": "1. Heat a bottle or more of red wine in a pan.\n2. Add cinnamon sticks, clove, sugar and vanilla pods.\n3. Add lemon wedges, and wait 10 minutes.\n4. Heat until the wine almost boils, and serve in cups.",
         "PIng": [
             {
-                "ING_Name": "White Rum",
-                "ING_ID": "10",
-                "ING_ML": null,
-                "ING_NID": "rum"
+                "ING_Name": "Red Wine",
+                "ING_ID": "51",
+                "ING_ML": "750ml",
+                "ING_NID": "wine"
             },
             {
                 "ING_Name": "Cinnamon sticks",
@@ -3498,7 +3475,7 @@
             {
                 "ING_Name": "Sugar Syrup",
                 "ING_ID": "84",
-                "ING_ML": null,
+                "ING_ML": "10gr",
                 "ING_NID": "syrup_sugar"
             },
             {
@@ -3510,13 +3487,13 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "120ml",
                 "ING_NID": "juice_pineapple"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "120ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -3603,7 +3580,7 @@
             {
                 "ING_Name": "7-Up",
                 "ING_ID": "119",
-                "ING_ML": null,
+                "ING_ML": "100ml",
                 "ING_NID": "7-up"
             }
         ],
@@ -3655,7 +3632,7 @@
             {
                 "ING_Name": "Peychaud's Bitters",
                 "ING_ID": "152",
-                "ING_ML": null,
+                "ING_ML": "3dash",
                 "ING_NID": "bitters_peychaud's"
             },
             {
@@ -3720,7 +3697,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "100ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -3965,7 +3942,7 @@
             {
                 "ING_Name": "Creme de Cacao White",
                 "ING_ID": "43",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "creme_de_cacao_brown"
             },
             {
@@ -4047,7 +4024,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "120ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -4082,7 +4059,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -4094,7 +4071,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -4123,13 +4100,13 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "90ml",
                 "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -4240,13 +4217,13 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -4281,13 +4258,13 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -4438,7 +4415,7 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "triple_sec"
             },
             {
@@ -4473,7 +4450,7 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "triple_sec"
             },
             {
@@ -4496,7 +4473,7 @@
             {
                 "ING_Name": "Creme de Cacao White",
                 "ING_ID": "43",
-                "ING_ML": null,
+                "ING_ML": "15ml",
                 "ING_NID": "creme_de_cacao_brown"
             },
             {
@@ -4531,7 +4508,7 @@
             {
                 "ING_Name": "Creme de Cacao White",
                 "ING_ID": "43",
-                "ING_ML": null,
+                "ING_ML": "15ml",
                 "ING_NID": "creme_de_cacao_brown"
             },
             {
@@ -4545,12 +4522,6 @@
                 "ING_ID": "151",
                 "ING_ML": "30ml",
                 "ING_NID": "whipped_cream"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             }
         ],
         "PNID": "angels_tit"
@@ -4572,7 +4543,7 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "15ml",
                 "ING_NID": "triple_sec"
             },
             {
@@ -4630,13 +4601,13 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "75ml",
                 "ING_NID": "juice_pineapple"
             },
             {
                 "ING_Name": "Grapefruit Juice",
                 "ING_ID": "94",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_grapefruit"
             },
             {
@@ -4771,7 +4742,7 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "150ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -4818,7 +4789,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "150ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -4855,12 +4826,6 @@
                 "ING_ID": "97",
                 "ING_ML": "1wedge",
                 "ING_NID": "juice_pineapple"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Whipped cream",
@@ -4970,7 +4935,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -5104,7 +5069,7 @@
             {
                 "ING_Name": "Pomegranate Juice",
                 "ING_ID": "99",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "juice_pomegranate"
             },
             {
@@ -5162,7 +5127,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -5513,7 +5478,7 @@
             {
                 "ING_Name": "Orange Bitters",
                 "ING_ID": "138",
-                "ING_ML": null,
+                "ING_ML": "2dash",
                 "ING_NID": "bitters_orange"
             },
             {
@@ -5527,12 +5492,6 @@
                 "ING_ID": "105",
                 "ING_ML": "1peel",
                 "ING_NID": "lemon"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Ice",
@@ -5601,7 +5560,7 @@
             {
                 "ING_Name": "Peach Bitters",
                 "ING_ID": "137",
-                "ING_ML": null,
+                "ING_ML": "2dash",
                 "ING_NID": "bitters_peach"
             },
             {
@@ -5699,12 +5658,6 @@
                 "ING_NID": "lemon"
             },
             {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
-            },
-            {
                 "ING_Name": "Ice",
                 "ING_ID": "140",
                 "ING_ML": "100gr",
@@ -5736,7 +5689,7 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "45ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -5771,7 +5724,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -5971,14 +5924,8 @@
             {
                 "ING_Name": "Orange Bitters",
                 "ING_ID": "138",
-                "ING_ML": null,
+                "ING_ML": "3dash",
                 "ING_NID": "bitters_orange"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Ice",
@@ -6047,7 +5994,7 @@
             {
                 "ING_Name": "Grapefruit Juice",
                 "ING_ID": "94",
-                "ING_ML": null,
+                "ING_ML": "40ml",
                 "ING_NID": "juice_grapefruit"
             },
             {
@@ -6123,7 +6070,7 @@
             {
                 "ING_Name": "Tequila Gold",
                 "ING_ID": "5",
-                "ING_ML": null,
+                "ING_ML": "45ml",
                 "ING_NID": "tequila"
             },
             {
@@ -6135,7 +6082,7 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -6223,7 +6170,7 @@
             {
                 "ING_Name": "Sugar Syrup",
                 "ING_ID": "84",
-                "ING_ML": null,
+                "ING_ML": "10ml",
                 "ING_NID": "syrup_sugar"
             },
             {
@@ -6352,7 +6299,7 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "10ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -6546,7 +6493,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "10ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -6610,19 +6557,19 @@
             {
                 "ING_Name": "Tequila Blanco",
                 "ING_ID": "4",
-                "ING_ML": "15ml",
+                "ING_ML": "50ml",
                 "ING_NID": "blanco_tequila"
             },
             {
                 "ING_Name": "Tomato Juice",
                 "ING_ID": "96",
-                "ING_ML": null,
+                "ING_ML": "70ml",
                 "ING_NID": "juice_tomato"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -6640,19 +6587,19 @@
             {
                 "ING_Name": "Onion",
                 "ING_ID": "133",
-                "ING_ML": null,
+                "ING_ML": "1slice",
                 "ING_NID": "onion"
             },
             {
                 "ING_Name": "Chili",
                 "ING_ID": "153",
-                "ING_ML": "1none",
+                "ING_ML": "2slices",
                 "ING_NID": "chili"
             },
             {
                 "ING_Name": "Worcestershire Sauce",
                 "ING_ID": "145",
-                "ING_ML": null,
+                "ING_ML": "3drop",
                 "ING_NID": "sauce_worcestershire"
             },
             {
@@ -6660,12 +6607,6 @@
                 "ING_ID": "142",
                 "ING_ML": "1gr",
                 "ING_NID": "salt"
-            },
-            {
-                "ING_Name": "Chili",
-                "ING_ID": "153",
-                "ING_ML": "1none",
-                "ING_NID": "chili"
             },
             {
                 "ING_Name": "Lime",
@@ -6705,7 +6646,7 @@
             {
                 "ING_Name": "Lillet Blanc",
                 "ING_ID": "72",
-                "ING_ML": null,
+                "ING_ML": "8ml",
                 "ING_NID": "blanc_lillet"
             },
             {
@@ -6799,7 +6740,7 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "45ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -6828,7 +6769,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "70ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -6836,12 +6777,6 @@
                 "ING_ID": "42",
                 "ING_ML": "30ml",
                 "ING_NID": "campari"
-            },
-            {
-                "ING_Name": "Orange Juice",
-                "ING_ID": "95",
-                "ING_ML": null,
-                "ING_NID": "juice_orange"
             },
             {
                 "ING_Name": "Ice",
@@ -6899,13 +6834,13 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -6940,7 +6875,7 @@
             {
                 "ING_Name": "Creme de Menthe Green",
                 "ING_ID": "60",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "creme_de_menthe_white"
             },
             {
@@ -7022,7 +6957,7 @@
             {
                 "ING_Name": "Grapefruit Juice",
                 "ING_ID": "94",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_grapefruit"
             },
             {
@@ -7087,7 +7022,7 @@
             {
                 "ING_Name": "7-Up",
                 "ING_ID": "119",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "7-up"
             },
             {
@@ -7122,7 +7057,7 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "100ml",
                 "ING_NID": "triple_sec"
             },
             {
@@ -7257,7 +7192,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "70ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -7356,13 +7291,13 @@
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "overproof_rum"
             },
             {
                 "ING_Name": "Goldschläger",
                 "ING_ID": "32",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "schläger"
             },
             {
@@ -7403,7 +7338,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "70ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -7461,7 +7396,7 @@
             {
                 "ING_Name": "Goldschläger",
                 "ING_ID": "32",
-                "ING_ML": null,
+                "ING_ML": "75ml",
                 "ING_NID": "schläger"
             },
             {
@@ -7502,13 +7437,13 @@
             {
                 "ING_Name": "7-Up",
                 "ING_ID": "119",
-                "ING_ML": null,
+                "ING_ML": "70ml",
                 "ING_NID": "7-up"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "70ml",
                 "ING_NID": "juice_orange"
             }
         ],
@@ -7525,7 +7460,7 @@
             {
                 "ING_Name": "Creme de Menthe Green",
                 "ING_ID": "60",
-                "ING_ML": null,
+                "ING_ML": "20ml",
                 "ING_NID": "creme_de_menthe_white"
             },
             {
@@ -7612,7 +7547,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "80ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -7682,13 +7617,13 @@
             {
                 "ING_Name": "Tequila Blanco",
                 "ING_ID": "4",
-                "ING_ML": "15ml",
+                "ING_ML": "50ml",
                 "ING_NID": "blanco_tequila"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "100ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -7717,13 +7652,13 @@
             {
                 "ING_Name": "White Rum",
                 "ING_ID": "10",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "rum"
             },
             {
                 "ING_Name": "Vodka",
                 "ING_ID": "20",
-                "ING_ML": null,
+                "ING_ML": "50ml",
                 "ING_NID": "vodka"
             },
             {
@@ -7811,12 +7746,12 @@
         "PImage": "img/upload/recipe_virgin_mary.png",
         "PCat": "Cocktail",
         "PDesc": "The non-alcoholic version of the \"Bloody Mary\" cocktail. It is also called the \"Bloody Shame,\" \"Bloody Virgin\" or \"Bloody Barbara.\"",
-        "PHtm": "1. Put ice cubes into a highball glass.\n2. Add 2–3 dashes of Worcestershire sauce, 1 dash of Tabasco, salt and pepper.\n3. Pour 90ml of tomato juice and 15ml of lemon juice over the ice.\n4. Stir gently and garnish with a celery stalk or lemon wedge.",
+        "PHtm": "1. Put ice cubes into a highball glass.\n2. Add 2-3 dashes of Worcestershire sauce, 1 dash of Tabasco, salt and pepper.\n3. Pour 90ml of tomato juice and 15ml of lemon juice over the ice.\n4. Stir gently and garnish with a celery stalk or lemon wedge.",
         "PIng": [
             {
                 "ING_Name": "Tomato Juice",
                 "ING_ID": "96",
-                "ING_ML": null,
+                "ING_ML": "90ml",
                 "ING_NID": "juice_tomato"
             },
             {
@@ -7834,7 +7769,7 @@
             {
                 "ING_Name": "Worcestershire Sauce",
                 "ING_ID": "145",
-                "ING_ML": null,
+                "ING_ML": "10ml",
                 "ING_NID": "sauce_worcestershire"
             },
             {
@@ -7887,7 +7822,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "120ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -7916,7 +7851,7 @@
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "45ml",
                 "ING_NID": "overproof_rum"
             },
             {
@@ -7928,7 +7863,7 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "150ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -7957,7 +7892,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "45ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -8045,7 +7980,7 @@
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "10ml",
                 "ING_NID": "overproof_rum"
             },
             {
@@ -8063,7 +7998,7 @@
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "80ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -8155,10 +8090,10 @@
                 "ING_NID": "coconut_malibu_rum"
             },
             {
-                "ING_Name": "Bourbon",
-                "ING_ID": "19",
-                "ING_ML": null,
-                "ING_NID": "bourbon"
+                "ING_Name": "Whiskey",
+                "ING_ID": "17",
+                "ING_ML": "45ml",
+                "ING_NID": "whiskey"
             },
             {
                 "ING_Name": "Ice",
@@ -8186,7 +8121,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -8278,12 +8213,6 @@
                 "ING_NID": "egg"
             },
             {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
-            },
-            {
                 "ING_Name": "Ice",
                 "ING_ID": "140",
                 "ING_ML": "100gr",
@@ -8315,7 +8244,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "15ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -8323,12 +8252,6 @@
                 "ING_ID": "80",
                 "ING_ML": "1dash",
                 "ING_NID": "grenadine"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Ice",
@@ -8397,13 +8320,13 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "triple_sec"
             },
             {
                 "ING_Name": "Lillet Blanc",
                 "ING_ID": "72",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "blanc_lillet"
             },
             {
@@ -8507,12 +8430,6 @@
                 "ING_NID": "grenadine"
             },
             {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
-            },
-            {
                 "ING_Name": "Ice",
                 "ING_ID": "140",
                 "ING_ML": "100gr",
@@ -8583,10 +8500,10 @@
                 "ING_NID": "honey"
             },
             {
-                "ING_Name": "Bourbon",
-                "ING_ID": "19",
-                "ING_ML": null,
-                "ING_NID": "bourbon"
+                "ING_Name": "Whiskey",
+                "ING_ID": "17",
+                "ING_ML": "45ml",
+                "ING_NID": "whiskey"
             },
             {
                 "ING_Name": "Lemon",
@@ -8690,13 +8607,13 @@
             {
                 "ING_Name": "Midori",
                 "ING_ID": "64",
-                "ING_ML": null,
+                "ING_ML": "20ml",
                 "ING_NID": "midori"
             },
             {
                 "ING_Name": "Lime",
                 "ING_ID": "104",
-                "ING_ML": null,
+                "ING_ML": "1quarter",
                 "ING_NID": "lime"
             }
         ],
@@ -8795,7 +8712,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -8860,7 +8777,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "10ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -8917,12 +8834,6 @@
                 "ING_NID": "juice_pineapple"
             },
             {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
-            },
-            {
                 "ING_Name": "Ice",
                 "ING_ID": "140",
                 "ING_ML": "100gr",
@@ -8942,7 +8853,7 @@
             {
                 "ING_Name": "Creme de Cacao White",
                 "ING_ID": "43",
-                "ING_ML": null,
+                "ING_ML": "25ml",
                 "ING_NID": "creme_de_cacao_brown"
             },
             {
@@ -9045,12 +8956,6 @@
         "PHtm": "1. Pour one bottle of red or white wine into a pitcher.\n2. Cut an orange and a lemon into wedges, and slightly squeeze them into the wine.\n3. Add other fruits according to your taste!\n4. Add 3–4 teaspoons of sugar or honey.\n5. Pour 50ml of brandy and, optionally, 200ml of ginger ale or soda if you want the drink to be softer.\n6. Optionally, add some ice cubes and stir.",
         "PIng": [
             {
-                "ING_Name": "White Rum",
-                "ING_ID": "10",
-                "ING_ML": null,
-                "ING_NID": "rum"
-            },
-            {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
                 "ING_ML": "1none",
@@ -9118,7 +9023,7 @@
             {
                 "ING_Name": "Creme de Cacao White",
                 "ING_ID": "43",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "creme_de_cacao_brown"
             },
             {
@@ -9206,13 +9111,13 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_orange"
             },
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -9247,19 +9152,13 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
-                "ING_NID": "juice_pineapple"
-            },
-            {
-                "ING_Name": "Pineapple Juice",
-                "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -9409,12 +9308,6 @@
                 "ING_NID": "cola"
             },
             {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
-            },
-            {
                 "ING_Name": "Ice",
                 "ING_ID": "140",
                 "ING_ML": "100gr",
@@ -9434,13 +9327,13 @@
             {
                 "ING_Name": "Tomato Juice",
                 "ING_ID": "96",
-                "ING_ML": null,
+                "ING_ML": "600ml",
                 "ING_NID": "juice_tomato"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "300ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -9466,12 +9359,6 @@
                 "ING_ID": "142",
                 "ING_ML": "1teaspoon",
                 "ING_NID": "salt"
-            },
-            {
-                "ING_Name": "Orange Juice",
-                "ING_ID": "95",
-                "ING_ML": null,
-                "ING_NID": "juice_orange"
             },
             {
                 "ING_Name": "Celery",
@@ -9540,13 +9427,13 @@
             {
                 "ING_Name": "Creme de Cacao White",
                 "ING_ID": "43",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "creme_de_cacao_brown"
             },
             {
                 "ING_Name": "7-Up",
                 "ING_ID": "119",
-                "ING_ML": null,
+                "ING_ML": "100ml",
                 "ING_NID": "7-up"
             },
             {
@@ -9581,7 +9468,7 @@
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "90ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -9721,7 +9608,7 @@
             {
                 "ING_Name": "Goldschläger",
                 "ING_ID": "32",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "schläger"
             },
             {
@@ -9885,7 +9772,7 @@
             {
                 "ING_Name": "Grapefruit Juice",
                 "ING_ID": "94",
-                "ING_ML": null,
+                "ING_ML": "200ml",
                 "ING_NID": "juice_grapefruit"
             },
             {
@@ -10014,7 +9901,7 @@
             {
                 "ING_Name": "Peychaud's Bitters",
                 "ING_ID": "152",
-                "ING_ML": null,
+                "ING_ML": "1dash",
                 "ING_NID": "bitters_peychaud's"
             },
             {
@@ -10149,19 +10036,19 @@
             {
                 "ING_Name": "Overproof Rum",
                 "ING_ID": "26",
-                "ING_ML": null,
+                "ING_ML": "15ml",
                 "ING_NID": "overproof_rum"
             },
             {
                 "ING_Name": "Passion Fruit Juice",
                 "ING_ID": "101",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_passion_fruit"
             },
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -10255,13 +10142,13 @@
             {
                 "ING_Name": "Apple Juice",
                 "ING_ID": "102",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_apple"
             },
             {
                 "ING_Name": "Cranberry Juice",
                 "ING_ID": "93",
-                "ING_ML": null,
+                "ING_ML": "30ml",
                 "ING_NID": "juice_cranberry"
             },
             {
@@ -10302,7 +10189,7 @@
             {
                 "ING_Name": "Orange Juice",
                 "ING_ID": "95",
-                "ING_ML": null,
+                "ING_ML": "90ml",
                 "ING_NID": "juice_orange"
             },
             {
@@ -10323,12 +10210,6 @@
         "PHtm": "1. Put a cup of ice cubes into a blender.\n2. Pour 90ml of dark rum, 90ml of coffee liqueur and 90ml of crème de cacao.\n3. Add 180ml of coconut cream and 180ml of milk.\n4. Blend until smooth, and strain into hurricane glasses.\n5. Garnish with a maraschino cherry.",
         "PIng": [
             {
-                "ING_Name": "Sugar Syrup",
-                "ING_ID": "84",
-                "ING_ML": null,
-                "ING_NID": "syrup_sugar"
-            },
-            {
                 "ING_Name": "Coffee Liqueur",
                 "ING_ID": "45",
                 "ING_ML": "90ml",
@@ -10337,7 +10218,7 @@
             {
                 "ING_Name": "Creme de Cacao White",
                 "ING_ID": "43",
-                "ING_ML": null,
+                "ING_ML": "90ml",
                 "ING_NID": "creme_de_cacao_brown"
             },
             {
@@ -10357,12 +10238,6 @@
                 "ING_ID": "140",
                 "ING_ML": "100gr",
                 "ING_NID": "ice"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             }
         ],
         "PNID": "bushwacker"
@@ -10384,7 +10259,7 @@
             {
                 "ING_Name": "Triple Sec",
                 "ING_ID": "73",
-                "ING_ML": null,
+                "ING_ML": "15ml",
                 "ING_NID": "triple_sec"
             },
             {
@@ -10396,13 +10271,13 @@
             {
                 "ING_Name": "Passion Fruit Juice",
                 "ING_ID": "101",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_passion_fruit"
             },
             {
                 "ING_Name": "Pineapple Juice",
                 "ING_ID": "97",
-                "ING_ML": null,
+                "ING_ML": "60ml",
                 "ING_NID": "juice_pineapple"
             },
             {
@@ -10410,12 +10285,6 @@
                 "ING_ID": "95",
                 "ING_ML": "1peel",
                 "ING_NID": "juice_orange"
-            },
-            {
-                "ING_Name": "Cranberry Juice",
-                "ING_ID": "93",
-                "ING_ML": null,
-                "ING_NID": "juice_cranberry"
             },
             {
                 "ING_Name": "Mint",

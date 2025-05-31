@@ -2338,7 +2338,7 @@ Recipe: Gladiator (ID: gladiator)
 Glass: shooter
 Tags: soft_recipe, shooter, long
 
-Ingredients:
+Ingredients:  
 - 25ml of amaretto
 - 25ml of peach_schnapps
 - 70ml of seven_up
