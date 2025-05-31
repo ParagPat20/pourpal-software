@@ -1089,48 +1089,49 @@ async function sendPipesToPython(assignedPipes) {
   const isAlcoholic = document.getElementById("alcoholic").checked;
   console.log('Is alcoholic:', isAlcoholic);
   
+  // Fetch products if not already loaded
+  let products;
   try {
-    // Show loading page before fetching data
-    showLoadingPage();
-    console.log('Loading page displayed');
-    
-    // Fetch products data
-    const response = await fetch("products.json");
-    if (!response.ok) {
-      throw new Error('Failed to fetch products data');
-    }
-    const products = await response.json();
-    console.log('Fetched products:', products);
-    
-    // Get the selected cocktail details
-    const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
-    console.log('Selected cocktail:', selectedCocktail);
-    
-    if (!selectedCocktail) {
-      throw new Error('Selected cocktail not found');
-    }
-    
-    const dataToSend = {
-      productId: selectedCocktailID,
-      productNid: selectedCocktail.PNID,
-      ingredients: assignedPipes.map(pipe => {
-        const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
-        console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
-        if (!ingredient) {
-          throw new Error(`Ingredient ${pipe.name} not found in cocktail recipe`);
-        }
-        return {
-          ...pipe,
-          ingNid: ingredient.ING_NID,
-          ingMl: ingredient.ING_ML
-        };
-      }),
-      drinkType: drinkType,
-      isAlcoholic: isAlcoholic
-    };
-    console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
-    
-    const sendResponse = await fetch("/send-pipes", {
+    const response = await fetch('/products.json');
+    products = await response.json();
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    displayErrorMessage('Error loading cocktail data');
+    return;
+  }
+  
+  // Get the selected cocktail details
+  const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
+  if (!selectedCocktail) {
+    console.error('Selected cocktail not found:', selectedCocktailID);
+    displayErrorMessage('Selected cocktail not found');
+    return;
+  }
+  console.log('Selected cocktail:', selectedCocktail);
+  
+  const dataToSend = {
+    productId: selectedCocktailID,
+    productNid: selectedCocktail.PNID,
+    ingredients: assignedPipes.map(pipe => {
+      const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
+      console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
+      return {
+        ...pipe,
+        ingNid: ingredient.ING_NID,
+        ingMl: ingredient.ING_ML
+      };
+    }),
+    drinkType: drinkType,
+    isAlcoholic: isAlcoholic
+  };
+  console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
+  
+  // Show loading page before sending data
+  showLoadingPage();
+  console.log('Loading page displayed');
+  
+  try {
+    const response = await fetch("/send-pipes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1138,19 +1139,17 @@ async function sendPipesToPython(assignedPipes) {
       body: JSON.stringify(dataToSend),
     });
     
-    console.log('Received response from server:', sendResponse.status);
-    if (sendResponse.ok) {
-      const data = await sendResponse.text();
+    console.log('Received response from server:', response.status);
+    if (response.ok) {
+      const data = await response.text();
       console.log('Response data:', data);
       if (data.trim() === "OK") {
         console.log("Received OK from Python. Starting completion check...");
         // Start checking for completion
         checkCompletionStatus();
-      } else {
-        throw new Error('Unexpected response from server: ' + data);
       }
     } else {
-      const errorText = await sendResponse.text();
+      const errorText = await response.text();
       console.error('Server returned error:', errorText);
       throw new Error(errorText);
     }
