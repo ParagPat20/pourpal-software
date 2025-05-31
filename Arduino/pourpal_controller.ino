@@ -1,3 +1,6 @@
+#include <Arduino.h>
+#include <ArduinoJson.h>
+
 // PourPal Controller
 // Controls 8 DC pumps through relays based on ingredient measurements
 // Uses Hardware Serial for communication with Python
@@ -78,58 +81,37 @@ void loop() {
  * @param command The command string received from Python
  */
 void processCommand(String command) {
-  if (command.startsWith("ID:")) {
-    productId = command.substring(3).toInt();
-    Serial.println("OK");
+  // Parse the JSON data
+  StaticJsonDocument<1024> doc;
+  DeserializationError error = deserializeJson(doc, command);
+
+  if (error) {
+    Serial.println("ERROR");
+    return;
   }
-  else if (command.startsWith("NID:")) {
-    productNid = command.substring(4);
-    Serial.println("OK");
-  }
-  else if (command.startsWith("TYPE:")) {
-    drinkType = command.substring(5);
-    Serial.println("OK");
-  }
-  else if (command.startsWith("ALCOHOL:")) {
-    isAlcoholic = (command.substring(8).toInt() == 1);
-    Serial.println("OK");
-  }
-  else if (command.startsWith("PIPE")) {
-    // Format: PIPE1:IngredientName|ingNid|30ml
-    int pipeIndex = command.substring(4, 5).toInt() - 1;
-    if (pipeIndex >= 0 && pipeIndex < NUM_RELAYS) {
-      // Extract measurement from the command
-      int mlIndex = command.lastIndexOf('|') + 1;
-      String measurement = command.substring(mlIndex);
-      
-      // Remove all non-numeric characters to get just the number
-      String numericValue = "";
-      for (int i = 0; i < measurement.length(); i++) {
-        if (isDigit(measurement[i])) {
-          numericValue += measurement[i];
-        }
-      }
-      
-      // Convert measurement to duration (1ml = 100ms)
-      pumps[pipeIndex].duration = numericValue.toInt() * 100;
+
+  // Extract basic cocktail info
+  productId = doc["productId"] | 0;
+  productNid = doc["productNid"].as<String>();
+  drinkType = doc["drinkType"].as<String>();
+  isAlcoholic = doc["isAlcoholic"] | false;
+
+  // Process each ingredient
+  JsonArray ingredients = doc["ingredients"];
+  for (JsonObject ingredient : ingredients) {
+    int pipeNumber = ingredient["pipe"] | 0;
+    int ml = ingredient["ingMl"] | 0;  // Get the measurement in ml
+    
+    if (pipeNumber > 0 && pipeNumber <= NUM_RELAYS) {
+      int pipeIndex = pipeNumber - 1;
+      pumps[pipeIndex].duration = ml * 100;  // Convert ml to milliseconds
       pumps[pipeIndex].isActive = true;
     }
-    Serial.println("OK");
   }
-  else if (command == "END") {
-    startPouring();
-    Serial.println("OK");
-  }
-  else if (command == "CANCEL") {
-    // Stop all pumps
-    for (int i = 0; i < NUM_RELAYS; i++) {
-      digitalWrite(RELAY_PINS[i], LOW);
-      pumps[i].isActive = false;
-      pumps[i].duration = 0;
-    }
-    isPouring = false;
-    Serial.println("CANCELLED");
-  }
+
+  // Start pouring immediately after processing all ingredients
+  startPouring();
+  Serial.println("OK");
 }
 
 /**

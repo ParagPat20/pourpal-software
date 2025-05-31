@@ -1047,15 +1047,6 @@ function showAddCocktail() {
 }
 
 document.getElementById("serial-out-button").addEventListener("click", () => {
-  // Get the selected cocktail details
-  const cocktailId = document.getElementById("cocktail-id").textContent;
-  const drinkType = document.querySelector(
-    'input[name="drink-type"]:checked'
-  ).value;
-
-  // Get the alcoholic/non-alcoholic status
-  const isAlcoholic = document.getElementById("alcoholic").checked;
-
   // Get the cocktail's ingredients and their assigned pipes
   const cocktailIngredients = [];
   const cocktail = document.querySelector(".cocktail-details");
@@ -1081,61 +1072,33 @@ document.getElementById("serial-out-button").addEventListener("click", () => {
     }
   });
 
-  // Prepare data for serial output
-  const serialData = {
-    productId: parseInt(cocktailId),
-    ingredients: cocktailIngredients,
-    drinkType: drinkType,
-    isAlcoholic: isAlcoholic
-  };
-
-  // Show loading page
-  showLoadingPage();
-
-  // Send the data to Python
-  fetch("/send-pipes", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(serialData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.text();
-      } else {
-        throw new Error("Failed to send data to serial port");
-      }
-    })
-    .then((data) => {
-      if (data === "OK") {
-        hideLoadingPage();
-        showCustomAlert("Drink making started successfully!");
-      }
-    })
-    .catch((error) => {
-      hideLoadingPage();
-      showCustomAlert("Error: " + error.message);
-    });
+  // Call the sendPipesToPython function with the prepared ingredients
+  sendPipesToPython(cocktailIngredients);
 });
 
 // Function to send assigned pipelines to the Python script
 function sendPipesToPython(assignedPipes) {
+  console.log('Starting sendPipesToPython with assigned pipes:', assignedPipes);
+  
   const drinkType = document.querySelector(
     'input[name="drink-type"]:checked'
   ).value; // Get the selected drink type
+  console.log('Selected drink type:', drinkType);
   
   // Get the alcoholic/non-alcoholic status
   const isAlcoholic = document.getElementById("alcoholic").checked;
+  console.log('Is alcoholic:', isAlcoholic);
   
   // Get the selected cocktail details
   const selectedCocktail = products.find(p => p.PID === selectedCocktailID);
+  console.log('Selected cocktail:', selectedCocktail);
   
   const dataToSend = {
     productId: selectedCocktailID,
     productNid: selectedCocktail.PNID,
     ingredients: assignedPipes.map(pipe => {
       const ingredient = selectedCocktail.PIng.find(ing => ing.ING_Name === pipe.name);
+      console.log('Processing ingredient:', pipe.name, 'Found:', ingredient);
       return {
         ...pipe,
         ingNid: ingredient.ING_NID,
@@ -1145,10 +1108,11 @@ function sendPipesToPython(assignedPipes) {
     drinkType: drinkType,
     isAlcoholic: isAlcoholic
   };
-  console.log(`assigned pipes ${JSON.stringify(dataToSend)}`);
+  console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
   
   // Show loading page before sending data
   showLoadingPage();
+  console.log('Loading page displayed');
   
   fetch("/send-pipes", {
     method: "POST",
@@ -1158,15 +1122,18 @@ function sendPipesToPython(assignedPipes) {
     body: JSON.stringify(dataToSend), // Send the entire object
   })
     .then((response) => {
+      console.log('Received response from server:', response.status);
       if (response.ok) {
         return response.text();
       } else {
         return response.text().then((errorText) => {
+          console.error('Server returned error:', errorText);
           throw new Error(errorText);
         });
       }
     })
     .then((data) => {
+      console.log('Response data:', data);
       if (data.trim() === "OK") {
         console.log("Received OK from Python. Starting completion check...");
         // Start checking for completion

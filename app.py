@@ -445,13 +445,6 @@ class CustomHandler(SimpleHTTPRequestHandler):
         try:
             data = json.loads(post_data)
             
-            # Get the data
-            product_id = data['productId']
-            product_nid = data['productNid']
-            ingredients = data['ingredients']
-            drink_type = data['drinkType']
-            is_alcoholic = data.get('isAlcoholic', True)  # Default to True if not specified
-            
             # Find the appropriate serial port
             port = None
             available_ports = serial.tools.list_ports.comports()
@@ -469,39 +462,8 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
             try:
                 with serial.Serial(port, 9600, timeout=5) as ser:
-                    # Send product ID
-                    ser.write(f"ID:{product_id}\n".encode())
-                    time.sleep(0.1)  # Small delay between writes
-                    
-                    # Send product NID
-                    ser.write(f"NID:{product_nid}\n".encode())
-                    time.sleep(0.1)
-                    
-                    # Send drink type (light, medium, strong)
-                    ser.write(f"TYPE:{drink_type}\n".encode())
-                    time.sleep(0.1)
-                    
-                    # Send alcoholic status
-                    ser.write(f"ALCOHOL:{1 if is_alcoholic else 0}\n".encode())
-                    time.sleep(0.1)
-                    
-                    # Send each ingredient with its pipe number and additional details
-                    for ing in ingredients:
-                        message = f"PIPE{ing['pipe']}:{ing['name']}|{ing['ingNid']}|{ing['ingMl']}\n"
-                        ser.write(message.encode())
-                        time.sleep(0.1)
-                    
-                    # Send end marker
-                    ser.write(b"END\n")
-                    
-                    # Wait for completion message
-                    while True:
-                        if ser.in_waiting:
-                            response = ser.readline().decode().strip()
-                            if response == "COMPLETED":
-                                # Set the processing complete event
-                                processing_complete.set()
-                                break
+                    # Send the entire data as JSON
+                    ser.write(json.dumps(data).encode() + b"\n")
                     
                 self.send_response(200)
                 self.end_headers()
