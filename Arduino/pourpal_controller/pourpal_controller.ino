@@ -1,262 +1,66 @@
-#include <Arduino.h>
-#include <ArduinoJson.h>
+// MR72  –  ultra‑minimal reader
+// GPIO 6 = RX2 (radar TX)   GPIO 7 = TX2 (not used)
+#define RX2 6
+#define TX2 7
 
-// PourPal Controller
-// Controls 8 DC pumps through relays based on ingredient measurements
-// Uses Hardware Serial1 for communication with Python
+HardwareSerial radar(2);          // use Serial2
 
-// Pin definitions for relays
-const int NUM_RELAYS = 8;  // Total number of pumps/relays in the system
-const int RELAY_PINS[NUM_RELAYS] = {2, 3, 4, 5, 6, 7, 8, 9}; // Arduino pins connected to relay control
-
-// Structure to hold pump data
-struct PumpData {
-  int pipeNumber;    // Pump number (1-8)
-  int duration;      // How long the pump should run (in milliseconds)
-  bool isActive;     // Whether the pump is currently running
+// CRC‑8 lookup table (Dallas/CRC‑8 poly 0x07)
+const uint8_t CRC8[256] PROGMEM = {
+  0x00,0x07,0x0E,0x09,0x1C,0x1B,0x12,0x15,0x38,0x3F,0x36,0x31,0x24,0x23,0x2A,0x2D,
+  0x70,0x77,0x7E,0x79,0x6C,0x6B,0x62,0x65,0x48,0x4F,0x46,0x41,0x54,0x53,0x5A,0x5D,
+  0xE0,0xE7,0xEE,0xE9,0xFC,0xFB,0xF2,0xF5,0xD8,0xDF,0xD6,0xD1,0xC4,0xC3,0xCA,0xCD,
+  0x90,0x97,0x9E,0x99,0x8C,0x8B,0x82,0x85,0xA8,0xAF,0xA6,0xA1,0xB4,0xB3,0xBA,0xBD,
+  0xC7,0xC0,0xC9,0xCE,0xDB,0xDC,0xD5,0xD2,0xFF,0xF8,0xF1,0xF6,0xE3,0xE4,0xED,0xEA,
+  0xB7,0xB0,0xB9,0xBE,0xAB,0xAC,0xA5,0xA2,0x8F,0x88,0x81,0x86,0x93,0x94,0x9D,0x9A,
+  0x27,0x20,0x29,0x2E,0x3B,0x3C,0x35,0x32,0x1F,0x18,0x11,0x16,0x03,0x04,0x0D,0x0A,
+  0x57,0x50,0x59,0x5E,0x4B,0x4C,0x45,0x42,0x6F,0x68,0x61,0x66,0x73,0x74,0x7D,0x7A,
+  0x89,0x8E,0x87,0x80,0x95,0x92,0x9B,0x9C,0xB1,0xB6,0xBF,0xB8,0xAD,0xAA,0xA3,0xA4,
+  0xF9,0xFE,0xF7,0xF0,0xE5,0xE2,0xEB,0xEC,0xC1,0xC6,0xCF,0xC8,0xDD,0xDA,0xD3,0xD4,
+  0x69,0x6E,0x67,0x60,0x75,0x72,0x7B,0x7C,0x51,0x56,0x5F,0x58,0x4D,0x4A,0x43,0x44,
+  0x19,0x1E,0x17,0x10,0x05,0x02,0x0B,0x0C,0x21,0x26,0x2F,0x28,0x3D,0x3A,0x33,0x34,
+  0x4E,0x49,0x40,0x47,0x52,0x55,0x5C,0x5B,0x76,0x71,0x78,0x7F,0x6A,0x6D,0x64,0x63,
+  0x3E,0x39,0x30,0x37,0x22,0x25,0x2C,0x2B,0x06,0x01,0x08,0x0F,0x1A,0x1D,0x14,0x13,
+  0xAE,0xA9,0xA0,0xA7,0xB2,0xB5,0xBC,0xBB,0x96,0x91,0x98,0x9F,0x8A,0x8D,0x84,0x83,
+  0xDE,0xD9,0xD0,0xD7,0xC2,0xC5,0xCC,0xCB,0xE6,0xE1,0xE8,0xEF,0xFA,0xFD,0xF4,0xF3
 };
 
-// Array to store pump data for all 8 pumps
-PumpData pumps[NUM_RELAYS];
+inline uint8_t CRC(const uint8_t* p, uint8_t len) {
+  uint8_t crc = 0;
+  while (len--) crc = pgm_read_byte(&CRC8[(crc ^ *p++) & 0xFF]);
+  return crc;
+}
 
-// Variables to store cocktail data received from Python
-int productId = 0;           // Unique identifier for the cocktail
-String productNid = "";      // Product name/identifier
-String drinkType = "";       // Type of drink (e.g., "strong", "weak")
-bool isAlcoholic = false;    // Whether the drink contains alcohol
-
-// Timing variables for pump control
-unsigned long startTime = 0; // When the pouring process started
-bool isPouring = false;      // Whether pumps are currently active
-
-/**
- * Setup function - runs once when Arduino starts
- * Initializes Serial1 communication and relay pins
- */
 void setup() {
-  // Initialize Serial for debugging
-  Serial.begin(9600);
-  Serial.println("PourPal Controller Starting...");
-  
-  // Initialize Serial1 
-  Serial1.begin(9600);
-  Serial.println("Serial1 initialized for Python communication");
-  
-  // Initialize relay pins
-  for (int i = 0; i < NUM_RELAYS; i++) {
-    pinMode(RELAY_PINS[i], OUTPUT);
-    digitalWrite(RELAY_PINS[i], HIGH);  // Ensure pumps are off initially
-    Serial.print("Initialized relay pin: ");
-    Serial.println(RELAY_PINS[i]);
-  }
-  
-  // Initialize pump data
-  for (int i = 0; i < NUM_RELAYS; i++) {
-    pumps[i].pipeNumber = i + 1;
-    pumps[i].duration = 0;
-    pumps[i].isActive = false;
-  }
-  Serial.println("All pumps initialized");
+  Serial.begin(115200);
+  radar.begin(115200, SERIAL_8N1, RX2, TX2);
+  Serial.println("\nS1 / S2 / S3 reader");
 }
 
-/**
- * Main loop - runs continuously
- * Checks for incoming Serial1 commands and manages pump states
- */
+uint8_t frame[20];
+uint8_t pos = 0;
+
 void loop() {
-  if (Serial1.available() > 0) {
-    String input = Serial1.readStringUntil('\n');
-    Serial.print("Received command: ");
-    Serial.println(input);
-    processCommand(input);
-  }
-  
-  // Handle pouring process
-  if (isPouring) {
-    updatePumps();
+  while (radar.available()) {
+    uint8_t b = radar.read();
+
+    // Sync on header 0x54 0x48
+    if (pos == 0 && b != 0x54) continue;
+    if (pos == 1 && b != 0x48) { pos = 0; continue; }
+
+    frame[pos++] = b;
+    if (pos < 20) continue;
+
+    // 20‑byte frame ready
+    if (CRC(frame, 19) == frame[19]) {
+      uint16_t d1 = (frame[2]  << 8) | frame[3];   // D1
+      uint16_t d2 = (frame[4]  << 8) | frame[5];   // D2
+      uint16_t d8 = (frame[16] << 8) | frame[17];  // D8
+
+      Serial.print(" S2:");
+      Serial.print(d2 == 0xFFFF ? -1 : d2 / 100.0, 2);
+      Serial.println(" m ");
+    }
+    pos = 0;   // re‑sync
   }
 }
-
-/**
- * Process incoming commands from Python
- * Handles different command types:
- * - ID: Product ID
- * - NID: Product name
- * - TYPE: Drink type
- * - ALCOHOL: Alcoholic status
- * - PIPE: Pump configuration with ingredient details
- * - END: Start pouring process
- * - CANCEL: Cancel the pouring process
- * 
- * @param command The command string received from Python
- */
-void processCommand(String command) {
-  Serial.println("Processing command...");
-  
-  // Handle CANCEL command
-  if (command == "CANCEL") {
-    Serial.println("Cancelling pour process...");
-    // Stop all pumps
-    for (int i = 0; i < NUM_RELAYS; i++) {
-      digitalWrite(RELAY_PINS[i], HIGH);
-      pumps[i].isActive = false;
-      pumps[i].duration = 0;
-    }
-    isPouring = false;
-    Serial1.println("COMPLETED");
-    return;
-  }
-
-  // Parse the JSON data
-  StaticJsonDocument<1024> doc;
-  DeserializationError error = deserializeJson(doc, command);
-
-  if (error) {
-    Serial.print("JSON parsing failed: ");
-    Serial.println(error.c_str());
-    Serial1.println("ERROR");
-    return;
-  }
-
-  // Extract basic cocktail info
-  productId = doc["productId"] | 0;
-  productNid = doc["productNid"].as<String>();
-  drinkType = doc["drinkType"].as<String>();
-  isAlcoholic = doc["isAlcoholic"] | false;
-
-  Serial.print("Product ID: ");
-  Serial.println(productId);
-  Serial.print("Product Name: ");
-  Serial.println(productNid);
-  Serial.print("Drink Type: ");
-  Serial.println(drinkType);
-  Serial.print("Is Alcoholic: ");
-  Serial.println(isAlcoholic ? "Yes" : "No");
-
-  // Process each ingredient
-  JsonArray ingredients = doc["ingredients"];
-  Serial.print("Number of ingredients: ");
-  Serial.println(ingredients.size());
-  
-  for (JsonObject ingredient : ingredients) {
-    // Convert string values to integers
-    int pipeNumber = ingredient["pipe"].as<String>().toInt();
-    int ml = ingredient["ingMl"].as<String>().toInt();
-    
-    Serial.print("Setting pump ");
-    Serial.print(pipeNumber);
-    Serial.print(" to pour ");
-    Serial.print(ml);
-    Serial.println("ml");
-    
-    if (pipeNumber > 0 && pipeNumber <= NUM_RELAYS) {
-      int pipeIndex = pipeNumber - 1;
-      pumps[pipeIndex].duration = ml * 100;  // Convert ml to milliseconds
-      pumps[pipeIndex].isActive = true;
-    }
-  }
-
-  // Start pouring immediately after processing all ingredients
-  startPouring();
-  Serial1.println("OK");
-}
-
-/**
- * Start the pouring process
- * Activates all pumps that have a duration set
- * Records the start time for timing calculations
- */
-void startPouring() {
-  Serial.println("Starting pour process...");
-  startTime = millis();
-  isPouring = true;
-  
-  // Activate all pumps that have a duration
-  for (int i = 0; i < NUM_RELAYS; i++) {
-    if (pumps[i].duration > 0) {
-      Serial.print("Activating pump ");
-      Serial.print(i + 1);
-      Serial.print(" for ");
-      Serial.print(pumps[i].duration);
-      Serial.println("ms");
-      digitalWrite(RELAY_PINS[i], LOW);
-    }
-  }
-}
-
-/**
- * Update pump states during pouring
- * Checks if each pump's duration has elapsed
- * Deactivates pumps when their time is up
- * Sends "COMPLETED" when all pumps have finished
- */
-void updatePumps() {
-  unsigned long currentTime = millis();
-  bool allPumpsStopped = true;
-  
-  for (int i = 0; i < NUM_RELAYS; i++) {
-    if (pumps[i].isActive) {
-      if (currentTime - startTime >= pumps[i].duration) {
-        Serial.print("Stopping pump ");
-        Serial.println(i + 1);
-        digitalWrite(RELAY_PINS[i], HIGH);
-        pumps[i].isActive = false;
-        pumps[i].duration = 0;
-      } else {
-        allPumpsStopped = false;
-      }
-    }
-  }
-  
-  // If all pumps have stopped, reset the pouring state
-  if (allPumpsStopped) {
-    Serial.println("All pumps completed");
-    isPouring = false;
-    Serial1.println("COMPLETED");
-  }
-}
-
-/**
- * Manual pump control function
- * Can be called from Serial1 Monitor to test pumps
- * Format: numPour(pipe1, ml1, pipe2, ml2, ..., 0)
- * Example: numPour(1, 30, 2, 45, 0) - Pump 1: 30ml, Pump 2: 45ml
- * 
- * @param pipe First pump number (1-8)
- * @param ml First pump measurement in ml
- * @param ... Additional pipe/ml pairs, end with 0
- */
-void numPour(int pipe, int ml, ...) {
-  va_list args;
-  va_start(args, ml);
-  
-  // Reset all pumps
-  for (int i = 0; i < NUM_RELAYS; i++) {
-    pumps[i].duration = 0;
-    pumps[i].isActive = false;
-    digitalWrite(RELAY_PINS[i], HIGH);
-  }
-  
-  // Set first pump
-  if (pipe > 0 && pipe <= NUM_RELAYS) {
-    pumps[pipe-1].duration = ml * 100;  // Convert ml to milliseconds
-    pumps[pipe-1].isActive = true;
-  }
-  
-  // Process additional pump arguments
-  while (true) {
-    pipe = va_arg(args, int);
-    if (pipe == 0) break;  // End of arguments
-    
-    ml = va_arg(args, int);
-    if (pipe > 0 && pipe <= NUM_RELAYS) {
-      pumps[pipe-1].duration = ml * 100;
-      pumps[pipe-1].isActive = true;
-    }
-  }
-  
-  va_end(args);
-  
-  // Start pouring
-  startPouring();
-} 

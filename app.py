@@ -575,17 +575,47 @@ def start_electron_app():
         electron_executable = os.path.join(users_base_path, user_identifier, r"AppData/Roaming/npm/node_modules/electron/dist/electron.exe")
 
     elif platform.system() == "Linux":
-        electron_executable = "/usr/local/bin/electron"
+        # Try to find electron in common locations
+        possible_paths = [
+            "/usr/local/bin/electron",
+            "/usr/bin/electron",
+            os.path.expanduser("~/.local/bin/electron"),
+            os.path.expanduser("~/node_modules/.bin/electron"),
+            os.path.expanduser("~/pourpal-software/node_modules/.bin/electron")
+        ]
+        
+        electron_executable = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                electron_executable = path
+                break
+        
+        # If not found in common locations, try using npx
+        if electron_executable is None:
+            try:
+                # Check if npx is available
+                subprocess.run(["which", "npx"], check=True, capture_output=True)
+                electron_executable = "npx"
+            except subprocess.CalledProcessError:
+                raise EnvironmentError("Electron not found in common locations and npx is not available")
     else:
         raise EnvironmentError("Unsupported operating system")
 
     # Disable caching by adding the --no-cache flag to the Electron process
-    electron_process = subprocess.Popen(
-        [
-            electron_executable,
-            os.path.join(web_dir, "main.js"),
-        ]
-    )
+    if electron_executable == "npx":
+        electron_process = subprocess.Popen(
+            [
+                "npx", "electron",
+                os.path.join(web_dir, "main.js"),
+            ]
+        )
+    else:
+        electron_process = subprocess.Popen(
+            [
+                electron_executable,
+                os.path.join(web_dir, "main.js"),
+            ]
+        )
     electron_process.communicate()
 
 def start_image_handler():

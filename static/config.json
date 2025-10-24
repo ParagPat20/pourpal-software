@@ -82,12 +82,12 @@
   },
   "theme": {
     "bgColor": "#e3d7c1",
-    "color1": "#0098b3",
+    "color1": "#6be6fc",
     "color2": "#ff6d97",
     "btnBackgroundColor": "#377276",
     "btnHoverBackgroundColor": "#68b1a2",
     "btnTextColor": "#ffffff",
     "btnHoverTextColor": "#ffffff",
-    "angle": 297.7271770695727
+    "angle": 278.6591292017616
   }
 }
