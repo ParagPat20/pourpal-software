@@ -1,15 +1,18 @@
 # loading_screen.py
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, scrolledtext
 from PIL import Image, ImageTk
 import math
 import os
 import platform
+import subprocess
+import threading
+import time
 
 class ModernLoadingScreen:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("Loading...")
+        self.root.title("PourPal - Loading...")
         self.root.attributes("-fullscreen", True)
         self.root.configure(bg="#1a1a1a")  # Dark background
         
@@ -24,9 +27,20 @@ class ModernLoadingScreen:
         self.angle = 0
         self.alpha = 0
         self.progress = 0
+        self.current_message = ""
+        self.messages = []
+        self.message_index = 0
+        self.fade_alpha = 0
+        self.fade_direction = 1
+        
+        # Status variables
+        self.display_info = ""
+        self.system_info = ""
+        self.loading_status = "Initializing..."
         
         self.setup_ui()
         self.start_animations()
+        self.start_status_monitoring()
         
     def setup_ui(self):
         # Create canvas for spinning animation
@@ -37,7 +51,7 @@ class ModernLoadingScreen:
         # Load and display logo with fade effect
         try:
             if platform.system() == "Linux":
-                logo_path = "/home/jecon/pourpal-software/static/img/logo.png"
+                logo_path = "/home/ppl/pourpal-software/static/img/logo.png"
             else:
                 logo_path = os.path.join(os.path.dirname(__file__), "static", "img", "logo.png")
             

@@ -5,7 +5,7 @@ export DISPLAY=:0
 
 # Function to start the loading screen
 start_loading_screen() {
-    python3 /home/ppl/pourpal-software/loading_screen.py &
+    python3 /home/ppl/pourpal-software/enhanced_loading_screen.py &
     echo $!  # Return the PID of the last background command
 }
 
