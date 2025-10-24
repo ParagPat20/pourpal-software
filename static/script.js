@@ -1607,14 +1607,18 @@ async function fetchIngredients(searchTerm = "") {
             if (!selectedIngredients.includes(ingredientName)) {
               selectedIngredients.push(ingredientName);
             }
+            // Update states immediately after adding
+            updateSelectedCount();
+            updateCheckboxStates();
           } else {
             // If unchecked, remove from selectedIngredients
             selectedIngredients = selectedIngredients.filter(
               (name) => name !== ingredientName
             );
+            // Update states immediately after removing
+            updateSelectedCount();
+            updateCheckboxStates();
           }
-          updateSelectedCount(); // Update the selected count
-          updateCheckboxStates(); // Update disabled states of other checkboxes
         });
 
         const imgSrc =
@@ -1665,15 +1669,18 @@ function handleCheckboxChange(event) {
     if (!selectedIngredients.includes(ingredientName)) {
       selectedIngredients.push(ingredientName);
     }
+    // Update states immediately after adding
+    updateSelectedCount();
+    updateCheckboxStates();
   } else {
     // If unchecked, remove from selectedIngredients (no limit check needed for deselection)
     selectedIngredients = selectedIngredients.filter(
       (name) => name !== ingredientName
     );
+    // Update states immediately after removing
+    updateSelectedCount();
+    updateCheckboxStates();
   }
-
-  updateSelectedCount(); // Update the selected count
-  updateCheckboxStates(); // Update disabled states of other checkboxes
 }
 
 // Function to update the selected count
