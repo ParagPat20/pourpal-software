@@ -1595,6 +1595,13 @@ async function fetchIngredients(searchTerm = "") {
         checkbox.addEventListener("change", (event) => {
           const ingredientName = ingredient.ING_Name;
           if (event.target.checked) {
+            // Check if ingredient is already selected first
+            if (selectedIngredients.includes(ingredientName)) {
+              // Already selected, just update states
+              updateSelectedCount();
+              updateCheckboxStates();
+              return;
+            }
             // Check if we've reached the maximum limit BEFORE adding
             if (selectedIngredients.length >= MAX_INGREDIENTS_LIMIT) {
               // Uncheck the checkbox
@@ -1604,9 +1611,7 @@ async function fetchIngredients(searchTerm = "") {
               return;
             }
             // If checked, add to selectedIngredients
-            if (!selectedIngredients.includes(ingredientName)) {
-              selectedIngredients.push(ingredientName);
-            }
+            selectedIngredients.push(ingredientName);
             // Update states immediately after adding
             updateSelectedCount();
             updateCheckboxStates();
@@ -1658,6 +1663,13 @@ function handleCheckboxChange(event) {
     .querySelector("p").textContent;
 
   if (event.target.checked) {
+    // Check if ingredient is already selected first
+    if (selectedIngredients.includes(ingredientName)) {
+      // Already selected, just update states
+      updateSelectedCount();
+      updateCheckboxStates();
+      return;
+    }
     // Check if we've reached the maximum limit BEFORE adding
     if (selectedIngredients.length >= MAX_INGREDIENTS_LIMIT) {
       // Uncheck the checkbox
@@ -1666,9 +1678,8 @@ function handleCheckboxChange(event) {
       showCustomAlert(`Maximum ${MAX_INGREDIENTS_LIMIT} ingredients allowed. Please deselect an ingredient first.`);
       return;
     }
-    if (!selectedIngredients.includes(ingredientName)) {
-      selectedIngredients.push(ingredientName);
-    }
+    // Add to selectedIngredients
+    selectedIngredients.push(ingredientName);
     // Update states immediately after adding
     updateSelectedCount();
     updateCheckboxStates();
