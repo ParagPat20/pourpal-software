@@ -1,5 +1,6 @@
 // Constants
 const DEBOUNCE_DELAY = 300;
+const MAX_INGREDIENTS_LIMIT = 8; // Maximum number of ingredients that can be selected
 
 let numberOfPipes = 0;
 
@@ -1576,6 +1577,12 @@ async function fetchIngredients(searchTerm = "") {
         // Check if this ingredient was previously selected
         if (selectedIngredients.includes(ingredient.ING_Name)) {
           checkbox.checked = true; // Keep it checked
+        } else {
+          // Disable checkbox if limit is reached and ingredient is not selected
+          if (selectedIngredients.length >= MAX_INGREDIENTS_LIMIT) {
+            checkbox.disabled = true;
+            checkbox.title = `Maximum ${MAX_INGREDIENTS_LIMIT} ingredients allowed. Please deselect an ingredient first.`;
+          }
         }
 
         updateSelectedCount();
@@ -1584,6 +1591,14 @@ async function fetchIngredients(searchTerm = "") {
         checkbox.addEventListener("change", (event) => {
           const ingredientName = ingredient.ING_Name;
           if (event.target.checked) {
+            // Check if we've reached the maximum limit
+            if (selectedIngredients.length >= MAX_INGREDIENTS_LIMIT) {
+              // Uncheck the checkbox
+              event.target.checked = false;
+              // Show limit exceeded dialog
+              showCustomAlert(`Maximum ${MAX_INGREDIENTS_LIMIT} ingredients allowed. Please deselect an ingredient first.`);
+              return;
+            }
             // If checked, add to selectedIngredients
             if (!selectedIngredients.includes(ingredientName)) {
               selectedIngredients.push(ingredientName);
@@ -1595,6 +1610,7 @@ async function fetchIngredients(searchTerm = "") {
             );
           }
           updateSelectedCount(); // Update the selected count
+          updateCheckboxStates(); // Update disabled states of other checkboxes
         });
 
         const imgSrc =
@@ -1617,6 +1633,7 @@ async function fetchIngredients(searchTerm = "") {
     });
 
     updateSelectedCount(); // Update the selected count
+    updateCheckboxStates(); // Update checkbox states based on current selection
     
     // Update the UI to display the loaded remarks
     updateRemarksDisplay();
@@ -1633,6 +1650,14 @@ function handleCheckboxChange(event) {
     .querySelector("p").textContent;
 
   if (event.target.checked) {
+    // Check if we've reached the maximum limit
+    if (selectedIngredients.length >= MAX_INGREDIENTS_LIMIT) {
+      // Uncheck the checkbox
+      event.target.checked = false;
+      // Show limit exceeded dialog
+      showCustomAlert(`Maximum ${MAX_INGREDIENTS_LIMIT} ingredients allowed. Please deselect an ingredient first.`);
+      return;
+    }
     if (!selectedIngredients.includes(ingredientName)) {
       selectedIngredients.push(ingredientName);
     }
@@ -1643,6 +1668,7 @@ function handleCheckboxChange(event) {
   }
 
   updateSelectedCount(); // Update the selected count
+  updateCheckboxStates(); // Update disabled states of other checkboxes
 }
 
 // Function to update the selected count
@@ -1650,8 +1676,43 @@ function updateSelectedCount() {
   const selectedCount = selectedIngredients.length; // Get count from selectedIngredients array
   const selectedCountElement = document.querySelector(".fi-top p span");
 
-  // Update displayed count
-  selectedCountElement.textContent = `${selectedCount}`;
+  // Update displayed count with limit information
+  selectedCountElement.textContent = `${selectedCount}/${MAX_INGREDIENTS_LIMIT}`;
+  
+  // Add visual indication when approaching or at limit
+  if (selectedCount >= MAX_INGREDIENTS_LIMIT) {
+    selectedCountElement.style.color = "#ff4444"; // Red when at limit
+  } else if (selectedCount >= MAX_INGREDIENTS_LIMIT - 1) {
+    selectedCountElement.style.color = "#ff8800"; // Orange when close to limit
+  } else {
+    selectedCountElement.style.color = "#359267"; // Green when under limit
+  }
+}
+
+// Function to update checkbox states based on current selection
+function updateCheckboxStates() {
+  const checkboxes = document.querySelectorAll('.ing-grid .checkbox');
+  const selectedCount = selectedIngredients.length;
+  
+  checkboxes.forEach(checkbox => {
+    const ingredientName = checkbox.closest('.ing-item').querySelector('p').textContent;
+    const isSelected = selectedIngredients.includes(ingredientName);
+    
+    if (isSelected) {
+      // Keep selected checkboxes enabled
+      checkbox.disabled = false;
+      checkbox.title = '';
+    } else {
+      // Disable unselected checkboxes if limit is reached
+      if (selectedCount >= MAX_INGREDIENTS_LIMIT) {
+        checkbox.disabled = true;
+        checkbox.title = `Maximum ${MAX_INGREDIENTS_LIMIT} ingredients allowed. Please deselect an ingredient first.`;
+      } else {
+        checkbox.disabled = false;
+        checkbox.title = '';
+      }
+    }
+  });
 }
 
 // Add event delegation to the ingredients container

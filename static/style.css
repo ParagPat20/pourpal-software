@@ -2456,3 +2456,25 @@ select,
         opacity: 1;
     }
 }
+
+/* Styling for disabled checkboxes when ingredient limit is reached */
+.checkbox:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.checkbox:disabled + img {
+    opacity: 0.5;
+    filter: grayscale(50%);
+}
+
+.checkbox:disabled + img + p {
+    opacity: 0.5;
+    color: #999;
+}
+
+/* Visual indicator for ingredient count */
+.fi-top p span {
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
