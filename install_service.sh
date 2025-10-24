@@ -5,9 +5,10 @@
 
 echo "=== PourPal Service Installation ==="
 
-# Check if running as root
-if [ "$EUID" -ne 0 ]; then
-    echo "Error: This script must be run as root (use sudo)"
+# Check if running as correct user
+if [ "$USER" != "ppl" ]; then
+    echo "Error: This script must be run as user 'ppl'"
+    echo "Current user: $USER"
     exit 1
 fi
 
@@ -31,27 +32,28 @@ fi
 
 echo "Installing PourPal service..."
 
-# Copy service file to systemd directory
-cp pourpal.service /etc/systemd/system/
-chmod 644 /etc/systemd/system/pourpal.service
+# Copy service file to systemd directory (requires sudo for system files)
+echo "Copying service file to systemd directory..."
+sudo cp pourpal.service /etc/systemd/system/
+sudo chmod 644 /etc/systemd/system/pourpal.service
 
 # Make management script executable
 chmod +x manage_pourpal.sh
 
 # Reload systemd daemon
-systemctl daemon-reload
+sudo systemctl daemon-reload
 
 # Enable the service
-systemctl enable pourpal
+sudo systemctl enable pourpal
 
 echo "Service installed successfully!"
 echo ""
 echo "Usage:"
-echo "  sudo ./manage_pourpal.sh start     # Start the service"
-echo "  sudo ./manage_pourpal.sh stop      # Stop the service"
-echo "  sudo ./manage_pourpal.sh status    # Check service status"
-echo "  sudo ./manage_pourpal.sh restart   # Restart the service"
-echo "  sudo ./manage_pourpal.sh logs      # View service logs"
-echo "  sudo ./manage_pourpal.sh help      # Show all commands"
+echo "  ./manage_pourpal.sh start     # Start the service"
+echo "  ./manage_pourpal.sh stop      # Stop the service"
+echo "  ./manage_pourpal.sh status    # Check service status"
+echo "  ./manage_pourpal.sh restart   # Restart the service"
+echo "  ./manage_pourpal.sh logs      # View service logs"
+echo "  ./manage_pourpal.sh help      # Show all commands"
 echo ""
 echo "The service will start automatically on boot."

@@ -32,10 +32,11 @@ print_header() {
     echo -e "${BLUE}=== PourPal Service Manager ===${NC}"
 }
 
-# Function to check if running as root
-check_root() {
-    if [ "$EUID" -ne 0 ]; then
-        print_error "This script must be run as root (use sudo)"
+# Function to check if running as correct user
+check_user() {
+    if [ "$USER" != "ppl" ]; then
+        print_error "This script must be run as user 'ppl'"
+        print_error "Current user: $USER"
         exit 1
     fi
 }
@@ -51,17 +52,18 @@ install_service() {
         exit 1
     fi
     
-    # Copy service file to systemd directory
-    cp "${SCRIPT_DIR}/pourpal.service" "${SERVICE_FILE}"
+    # Copy service file to systemd directory (requires sudo for system files)
+    print_status "Copying service file to systemd directory..."
+    sudo cp "${SCRIPT_DIR}/pourpal.service" "${SERVICE_FILE}"
     
     # Set proper permissions
-    chmod 644 "${SERVICE_FILE}"
+    sudo chmod 644 "${SERVICE_FILE}"
     
     # Reload systemd daemon
-    systemctl daemon-reload
+    sudo systemctl daemon-reload
     
     # Enable the service
-    systemctl enable "${SERVICE_NAME}"
+    sudo systemctl enable "${SERVICE_NAME}"
     
     print_status "Service installed and enabled successfully!"
     print_status "Service will start automatically on boot"
@@ -73,21 +75,21 @@ uninstall_service() {
     print_status "Uninstalling PourPal service..."
     
     # Stop the service if running
-    if systemctl is-active --quiet "${SERVICE_NAME}"; then
+    if sudo systemctl is-active --quiet "${SERVICE_NAME}"; then
         print_status "Stopping service..."
-        systemctl stop "${SERVICE_NAME}"
+        sudo systemctl stop "${SERVICE_NAME}"
     fi
     
     # Disable the service
-    systemctl disable "${SERVICE_NAME}"
+    sudo systemctl disable "${SERVICE_NAME}"
     
     # Remove service file
     if [ -f "${SERVICE_FILE}" ]; then
-        rm "${SERVICE_FILE}"
+        sudo rm "${SERVICE_FILE}"
     fi
     
     # Reload systemd daemon
-    systemctl daemon-reload
+    sudo systemctl daemon-reload
     
     print_status "Service uninstalled successfully!"
 }
@@ -97,16 +99,20 @@ start_service() {
     print_header
     print_status "Starting PourPal service..."
     
-    if systemctl is-active --quiet "${SERVICE_NAME}"; then
-        print_warning "Service is already running"
+    # Check if tmux session already exists
+    if tmux has-session -t myapp 2>/dev/null; then
+        print_warning "PourPal is already running in tmux session 'myapp'"
+        print_status "Use 'tmux attach -t myapp' to attach to the session"
+        return 0
+    fi
+    
+    # Start the service
+    sudo systemctl start "${SERVICE_NAME}"
+    if [ $? -eq 0 ]; then
+        print_status "Service started successfully!"
     else
-        systemctl start "${SERVICE_NAME}"
-        if [ $? -eq 0 ]; then
-            print_status "Service started successfully!"
-        else
-            print_error "Failed to start service"
-            exit 1
-        fi
+        print_error "Failed to start service"
+        exit 1
     fi
 }
 
@@ -115,16 +121,24 @@ stop_service() {
     print_header
     print_status "Stopping PourPal service..."
     
-    if ! systemctl is-active --quiet "${SERVICE_NAME}"; then
-        print_warning "Service is not running"
-    else
-        systemctl stop "${SERVICE_NAME}"
+    # First try to stop tmux session
+    if tmux has-session -t myapp 2>/dev/null; then
+        print_status "Stopping tmux session 'myapp'..."
+        tmux kill-session -t myapp
+        print_status "Tmux session stopped"
+    fi
+    
+    # Then stop the systemd service
+    if sudo systemctl is-active --quiet "${SERVICE_NAME}"; then
+        sudo systemctl stop "${SERVICE_NAME}"
         if [ $? -eq 0 ]; then
             print_status "Service stopped successfully!"
         else
             print_error "Failed to stop service"
             exit 1
         fi
+    else
+        print_warning "Service is not running"
     fi
 }
 
@@ -133,7 +147,14 @@ restart_service() {
     print_header
     print_status "Restarting PourPal service..."
     
-    systemctl restart "${SERVICE_NAME}"
+    # Stop tmux session if running
+    if tmux has-session -t myapp 2>/dev/null; then
+        print_status "Stopping existing tmux session..."
+        tmux kill-session -t myapp
+    fi
+    
+    # Restart the systemd service
+    sudo systemctl restart "${SERVICE_NAME}"
     if [ $? -eq 0 ]; then
         print_status "Service restarted successfully!"
     else
@@ -148,12 +169,21 @@ show_status() {
     print_status "PourPal Service Status:"
     echo ""
     
-    # Show systemctl status
-    systemctl status "${SERVICE_NAME}" --no-pager
+    # Check tmux session status
+    if tmux has-session -t myapp 2>/dev/null; then
+        print_status "✅ Tmux session 'myapp' is running"
+        print_status "Use 'tmux attach -t myapp' to attach to the session"
+    else
+        print_warning "❌ Tmux session 'myapp' is not running"
+    fi
+    
+    echo ""
+    print_status "Systemd Service Status:"
+    sudo systemctl status "${SERVICE_NAME}" --no-pager
     
     echo ""
     print_status "Service Logs (last 20 lines):"
-    journalctl -u "${SERVICE_NAME}" -n 20 --no-pager
+    sudo journalctl -u "${SERVICE_NAME}" -n 20 --no-pager
 }
 
 # Function to show service logs
@@ -164,9 +194,9 @@ show_logs() {
     
     if [ "$1" = "-f" ] || [ "$1" = "--follow" ]; then
         print_status "Following logs (Ctrl+C to exit)..."
-        journalctl -u "${SERVICE_NAME}" -f
+        sudo journalctl -u "${SERVICE_NAME}" -f
     else
-        journalctl -u "${SERVICE_NAME}" --no-pager
+        sudo journalctl -u "${SERVICE_NAME}" --no-pager
     fi
 }
 
@@ -176,11 +206,11 @@ toggle_autostart() {
     
     if [ "$1" = "enable" ]; then
         print_status "Enabling autostart on boot..."
-        systemctl enable "${SERVICE_NAME}"
+        sudo systemctl enable "${SERVICE_NAME}"
         print_status "Service will now start automatically on boot"
     elif [ "$1" = "disable" ]; then
         print_status "Disabling autostart on boot..."
-        systemctl disable "${SERVICE_NAME}"
+        sudo systemctl disable "${SERVICE_NAME}"
         print_status "Service will no longer start automatically on boot"
     else
         print_error "Invalid option. Use 'enable' or 'disable'"
@@ -207,46 +237,48 @@ show_help() {
     echo "  help        - Show this help message"
     echo ""
     echo "Examples:"
-    echo "  sudo $0 install    # Install the service"
-    echo "  sudo $0 start       # Start the service"
-    echo "  sudo $0 status      # Check service status"
-    echo "  sudo $0 logs -f     # Follow logs in real-time"
+    echo "  $0 install    # Install the service (run as user 'ppl')"
+    echo "  $0 start      # Start the service"
+    echo "  $0 status     # Check service status"
+    echo "  $0 logs -f    # Follow logs in real-time"
 }
 
 # Main script logic
 case "$1" in
     install)
-        check_root
+        check_user
         install_service
         ;;
     uninstall)
-        check_root
+        check_user
         uninstall_service
         ;;
     start)
-        check_root
+        check_user
         start_service
         ;;
     stop)
-        check_root
+        check_user
         stop_service
         ;;
     restart)
-        check_root
+        check_user
         restart_service
         ;;
     status)
+        check_user
         show_status
         ;;
     logs)
+        check_user
         show_logs "$2"
         ;;
     enable)
-        check_root
+        check_user
         toggle_autostart "enable"
         ;;
     disable)
-        check_root
+        check_user
         toggle_autostart "disable"
         ;;
     help|--help|-h)
