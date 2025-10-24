@@ -1,0 +1,27 @@
+[Unit]
+Description=PourPal Cocktail Mixing System
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=simple
+User=ppl
+Group=ppl
+WorkingDirectory=/home/ppl/pourpal-software
+ExecStart=/home/ppl/pourpal-software/start_at_boot.sh
+Restart=always
+RestartSec=10
+Environment=DISPLAY=:0
+Environment=HOME=/home/ppl
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pourpal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=graphical.target
