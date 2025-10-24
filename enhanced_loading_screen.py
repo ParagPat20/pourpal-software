@@ -111,7 +111,7 @@ class EnhancedLoadingScreen:
         self.system_label.pack(pady=5)
         
         # Loading status with fade effect
-        self.status_label = tk.Label(status_frame, text="", 
+        self.status_label = tk.Label(status_frame, text="Initializing...", 
                                     font=("Arial", 14, "bold"), 
                                     fg="#00ff9d", bg="#1a1a1a")
         self.status_label.pack(pady=10)
@@ -241,41 +241,56 @@ class EnhancedLoadingScreen:
         self.log_text.config(state=tk.DISABLED)
     
     def animate(self):
-        # Rotate loading circle
-        self.angle = (self.angle + 10) % 360
-        self.draw_loading_circle()
-        
-        # Update progress
-        if self.progress < 100:
-            self.progress += 0.5
-            self.progress_var.set(self.progress)
-        
-        # Update loading message with fade effect
-        if self.progress > 0 and int(self.progress) % 10 == 0 and self.message_index < len(self.loading_messages):
-            self.current_message = self.loading_messages[self.message_index]
-            self.status_label.config(text=self.current_message)
-            self.message_index += 1
+        try:
+            # Rotate loading circle
+            self.angle = (self.angle + 10) % 360
+            self.draw_loading_circle()
             
-            # Add to log
-            timestamp = time.strftime("%H:%M:%S")
-            self.add_log(f"[{timestamp}] {self.current_message}")
-        
-        # Fade effect for status message
-        self.fade_alpha += self.fade_direction * 0.05
-        if self.fade_alpha >= 1.0:
-            self.fade_alpha = 1.0
-            self.fade_direction = -1
-        elif self.fade_alpha <= 0.3:
-            self.fade_alpha = 0.3
-            self.fade_direction = 1
-        
-        # Apply fade effect to status label
-        alpha_hex = hex(int(self.fade_alpha * 255))[2:].zfill(2)
-        color = f"#00ff9d{alpha_hex}"
-        self.status_label.config(fg=color)
-        
-        # Continue animation
-        self.root.after(50, self.animate)
+            # Update progress
+            if self.progress < 100:
+                self.progress += 0.5
+                self.progress_var.set(self.progress)
+            
+            # Update loading message with fade effect
+            if self.progress > 0 and int(self.progress) % 10 == 0 and self.message_index < len(self.loading_messages):
+                self.current_message = self.loading_messages[self.message_index]
+                self.status_label.config(text=self.current_message)
+                self.message_index += 1
+                
+                # Add to log
+                timestamp = time.strftime("%H:%M:%S")
+                self.add_log(f"[{timestamp}] {self.current_message}")
+            
+            # Fade effect for status message
+            self.fade_alpha += self.fade_direction * 0.05
+            if self.fade_alpha >= 1.0:
+                self.fade_alpha = 1.0
+                self.fade_direction = -1
+            elif self.fade_alpha <= 0.3:
+                self.fade_alpha = 0.3
+                self.fade_direction = 1
+            
+            # Apply fade effect to status label using brightness
+            if self.fade_alpha > 0.8:
+                color = "#00ff9d"  # Bright green
+            elif self.fade_alpha > 0.6:
+                color = "#00cc7d"  # Medium green
+            elif self.fade_alpha > 0.4:
+                color = "#00995d"  # Darker green
+            else:
+                color = "#00663d"  # Dark green
+            
+            # Only update color if the widget still exists
+            if hasattr(self, 'status_label') and self.status_label.winfo_exists():
+                self.status_label.config(fg=color)
+            
+            # Continue animation
+            self.root.after(50, self.animate)
+            
+        except Exception as e:
+            print(f"Animation error: {e}")
+            # Continue animation even if there's an error
+            self.root.after(50, self.animate)
     
     def start_animations(self):
         self.animate()
