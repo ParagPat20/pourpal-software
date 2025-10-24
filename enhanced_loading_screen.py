@@ -37,6 +37,9 @@ class EnhancedLoadingScreen:
         self.display_info = ""
         self.system_info = ""
         self.loading_status = "Initializing..."
+        self.app_ready = False
+        self.start_time = time.time()
+        self.max_wait_time = 20  # Maximum wait time in seconds
         
         # Loading messages with fade effect
         self.loading_messages = [
@@ -208,10 +211,36 @@ class EnhancedLoadingScreen:
         except Exception as e:
             return f"System info unavailable: {str(e)}"
     
+    def check_app_ready(self):
+        """Check if the main application is ready"""
+        try:
+            # Check if HTTP server is responding
+            import urllib.request
+            response = urllib.request.urlopen('http://127.0.0.1:5000', timeout=2)
+            if response.getcode() == 200:
+                return True
+        except:
+            pass
+        
+        # Check if tmux session exists and is running
+        try:
+            result = subprocess.run(['tmux', 'has-session', '-t', 'myapp'], 
+                                 capture_output=True, text=True, timeout=2)
+            if result.returncode == 0:
+                # Check if the session is active
+                result = subprocess.run(['tmux', 'list-sessions', '-F', '#{session_name}:#{session_attached}'], 
+                                     capture_output=True, text=True, timeout=2)
+                if 'myapp:1' in result.stdout:
+                    return True
+        except:
+            pass
+        
+        return False
+    
     def start_status_monitoring(self):
         """Start monitoring system status in a separate thread"""
         def monitor():
-            while True:
+            while not self.app_ready:
                 try:
                     # Update display info
                     self.display_info = self.get_display_info()
@@ -221,6 +250,20 @@ class EnhancedLoadingScreen:
                     self.system_info = self.get_system_info()
                     self.system_label.config(text=self.system_info)
                     
+                    # Check if app is ready
+                    if self.check_app_ready():
+                        self.app_ready = True
+                        self.add_log(f"[{time.strftime('%H:%M:%S')}] ✅ Application is ready!")
+                        self.status_label.config(text="✅ Application Ready!")
+                        break
+                    
+                    # Check timeout
+                    elapsed = time.time() - self.start_time
+                    if elapsed > self.max_wait_time:
+                        self.add_log(f"[{time.strftime('%H:%M:%S')}] ⚠️ Timeout reached, closing loading screen...")
+                        self.app_ready = True
+                        break
+                    
                     # Add log entry
                     timestamp = time.strftime("%H:%M:%S")
                     self.add_log(f"[{timestamp}] {self.display_info}")
@@ -229,9 +272,21 @@ class EnhancedLoadingScreen:
                 except Exception as e:
                     self.add_log(f"Error in monitoring: {str(e)}")
                     time.sleep(5)
+            
+            # Close the loading screen after a short delay
+            if self.app_ready:
+                self.add_log(f"[{time.strftime('%H:%M:%S')}] 🎉 Closing loading screen...")
+                self.root.after(2000, self.close_loading_screen)  # Close after 2 seconds
         
         monitor_thread = threading.Thread(target=monitor, daemon=True)
         monitor_thread.start()
+    
+    def close_loading_screen(self):
+        """Close the loading screen"""
+        try:
+            self.root.destroy()
+        except:
+            pass
     
     def add_log(self, message):
         """Add a message to the log display"""
@@ -247,12 +302,12 @@ class EnhancedLoadingScreen:
             self.draw_loading_circle()
             
             # Update progress
-            if self.progress < 100:
+            if self.progress < 100 and not self.app_ready:
                 self.progress += 0.5
                 self.progress_var.set(self.progress)
             
             # Update loading message with fade effect
-            if self.progress > 0 and int(self.progress) % 10 == 0 and self.message_index < len(self.loading_messages):
+            if self.progress > 0 and int(self.progress) % 10 == 0 and self.message_index < len(self.loading_messages) and not self.app_ready:
                 self.current_message = self.loading_messages[self.message_index]
                 self.status_label.config(text=self.current_message)
                 self.message_index += 1
@@ -261,28 +316,29 @@ class EnhancedLoadingScreen:
                 timestamp = time.strftime("%H:%M:%S")
                 self.add_log(f"[{timestamp}] {self.current_message}")
             
-            # Fade effect for status message
-            self.fade_alpha += self.fade_direction * 0.05
-            if self.fade_alpha >= 1.0:
-                self.fade_alpha = 1.0
-                self.fade_direction = -1
-            elif self.fade_alpha <= 0.3:
-                self.fade_alpha = 0.3
-                self.fade_direction = 1
-            
-            # Apply fade effect to status label using brightness
-            if self.fade_alpha > 0.8:
-                color = "#00ff9d"  # Bright green
-            elif self.fade_alpha > 0.6:
-                color = "#00cc7d"  # Medium green
-            elif self.fade_alpha > 0.4:
-                color = "#00995d"  # Darker green
-            else:
-                color = "#00663d"  # Dark green
-            
-            # Only update color if the widget still exists
-            if hasattr(self, 'status_label') and self.status_label.winfo_exists():
-                self.status_label.config(fg=color)
+            # Fade effect for status message (only if app not ready)
+            if not self.app_ready:
+                self.fade_alpha += self.fade_direction * 0.05
+                if self.fade_alpha >= 1.0:
+                    self.fade_alpha = 1.0
+                    self.fade_direction = -1
+                elif self.fade_alpha <= 0.3:
+                    self.fade_alpha = 0.3
+                    self.fade_direction = 1
+                
+                # Apply fade effect to status label using brightness
+                if self.fade_alpha > 0.8:
+                    color = "#00ff9d"  # Bright green
+                elif self.fade_alpha > 0.6:
+                    color = "#00cc7d"  # Medium green
+                elif self.fade_alpha > 0.4:
+                    color = "#00995d"  # Darker green
+                else:
+                    color = "#00663d"  # Dark green
+                
+                # Only update color if the widget still exists
+                if hasattr(self, 'status_label') and self.status_label.winfo_exists():
+                    self.status_label.config(fg=color)
             
             # Continue animation
             self.root.after(50, self.animate)
