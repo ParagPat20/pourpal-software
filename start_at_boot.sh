@@ -32,6 +32,14 @@ while true; do
 
         # Launch the Python application in a new tmux session
         echo "Launching the Python application in tmux session 'myapp'..."
+        
+        # Check if tmux session already exists
+        if tmux has-session -t myapp 2>/dev/null; then
+            echo "Session 'myapp' already exists. Killing existing session..."
+            tmux kill-session -t myapp
+        fi
+        
+        # Create new session
         tmux new-session -d -s myapp 'cd /home/ppl/pourpal-software && python3 app.py'
         
         # Wait 4 seconds before killing the loading screen
