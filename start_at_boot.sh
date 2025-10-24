@@ -44,11 +44,15 @@ while true; do
         
         # Wait 4 seconds before killing the loading screen
         echo "Waiting 4 seconds before terminating the loading screen..."
-        kill "$LOADING_PID"
+        sleep 4
+        kill "$LOADING_PID" 2>/dev/null || true
         
         echo "Loading screen terminated."
         echo "Python application is running in tmux session 'myapp'."
-        break
+        
+        # Exit cleanly for systemd
+        echo "Service startup completed successfully."
+        exit 0
     else
         echo "Display not connected. Checking again in 1 second..."
         sleep 1
