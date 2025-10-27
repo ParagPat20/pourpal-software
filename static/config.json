@@ -1,29 +1,17 @@
 {
-  "numberOfPipes": 10,
+  "numberOfPipes": 8,
   "pipeConfig": {
-    "Pipe 1": "Gin",
-    "Pipe 2": "Tonic",
-    "Pipe 3": "Campari",
-    "Pipe 4": "Orange",
-    "Pipe 5": "Ice",
-    "Pipe 6": "Tequila Blanco",
-    "Pipe 7": "Salt",
-    "Pipe 8": "Lime",
-    "Pipe 9": "Triple Sec",
-    "Pipe 10": "Amaretto"
+    "Pipe 1": "7-Up",
+    "Pipe 2": "Cranberry Juice",
+    "Pipe 3": "Almond Syrup",
+    "Pipe 4": "Angostura Bitters",
+    "Pipe 5": "Apple Schnapps",
+    "Pipe 6": "Amaretto",
+    "Pipe 7": "Agave Nectar",
+    "Pipe 8": "Triple Sec"
   },
   "selectedIngredients": [
-    "Gin",
-    "Campari",
-    "Tonic",
-    "Orange",
-    "Ice",
-    "Tequila Blanco",
-    "Salt",
-    "Lime",
-    "Triple Sec",
-    "Amaretto",
-    "Cognac"
+    "7-Up"
   ],
   "pipeNotes": {
     "Pipe 1": "Motor1Pipe",

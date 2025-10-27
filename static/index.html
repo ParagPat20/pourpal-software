@@ -363,9 +363,6 @@
                     >
                       Reload
                     </button>
-                    <button id="customize" class="btn active btns">
-                      Customize
-                    </button>
                   </div>
                 </div>
                 <div
@@ -477,56 +474,30 @@
                       <label>
                         <input
                           type="radio"
-                          id="drink-type-light"
+                          id="drink-type-less-liquor"
                           name="drink-type"
-                          value="light"
+                          value="less-liquor"
                           checked
                         />
-                        Light
+                        Less Liquor
                       </label>
                       <label>
                         <input
                           type="radio"
-                          id="drink-type-medium"
+                          id="drink-type-regular"
                           name="drink-type"
-                          value="medium"
+                          value="regular"
                         />
-                        Medium
+                        Regular
                       </label>
                       <label>
                         <input
                           type="radio"
-                          id="drink-type-strong"
+                          id="drink-type-more-liquor"
                           name="drink-type"
-                          value="strong"
+                          value="more-liquor"
                         />
-                        Strong
-                      </label>
-                    </div>
-                  </div>
-                  <div class="cdr-txt">
-                    <h2>Alcohol Preference</h2>
-                    <div class="additional-option alc-pre">
-                      <label>
-                        <input
-                          type="checkbox"
-                          id="alcoholic"
-                          name="alcoholic"
-                          value="yes"
-                          checked
-                          onclick="toggleCheckbox(this)"
-                        />
-                        Alcoholic
-                      </label>
-                      <label>
-                        <input
-                          type="checkbox"
-                          id="non-alcoholic"
-                          name="non-alcoholic"
-                          value="yes"
-                          onclick="toggleCheckbox(this)"
-                        />
-                        Non-Alcoholic
+                        More Liquor
                       </label>
                     </div>
                   </div>
@@ -597,35 +568,6 @@
       </div>
     </div>
 
-    <!-- Popup for customization assign pipes-->
-    <div id="customizePopup" class="popupx2" style="display: none">
-      <div class="popup-contentx2">
-        <span id="closePopup" class="closex2">&times;</span>
-        <div class="num-pipes">
-          <label for="numPipes" class="txc"
-            >Select Number of Pipes to Assign:</label
-          >
-          <div class="aspi-div">
-            <div class="num-pipes-genrate form-group">
-              <input
-                type="number"
-                id="numPipes"
-                min="1"
-                max="100"
-                placeholder="Enter Number"
-              />
-              <button id="generate">Generate</button>
-            </div>
-
-            <div class="default-buttons">
-              <button class="default-num-btn" data-value="5">5</button>
-              <button class="default-num-btn" data-value="10">10</button>
-              <button class="default-num-btn" data-value="15">15</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- alert -->
     <div id="custom-alert" class="modal">

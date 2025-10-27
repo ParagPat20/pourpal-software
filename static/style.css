@@ -1808,17 +1808,20 @@ label.btn-checkbox p.not-selected {
 .pipe-dropdown-options .option.disabled {
   color: #999;
   background: #f5f5f5;
-  cursor: not-allowed;
+  cursor: pointer; /* Allow clicking even when disabled */
 }
 
 .pipe-dropdown-options .option.disabled:hover {
-  background: #f5f5f5;
+  background: #e8e8e8;
+  color: #666;
 }
 
+/* Removed pipe-error styling - pipes can now be left empty
 .pipe-error {
   box-shadow: 0 0 5px 2px #ff0000;
   animation: errorShake 0.4s ease-in-out;
 }
+*/
 
 @keyframes errorShake {
   0%,

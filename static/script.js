@@ -1,8 +1,9 @@
 // Constants
 const DEBOUNCE_DELAY = 300;
 const MAX_INGREDIENTS_LIMIT = 8; // Maximum number of ingredients that can be selected
+const FIXED_NUMBER_OF_PIPES = 8; // Fixed number of pipes
 
-let numberOfPipes = 0;
+let numberOfPipes = FIXED_NUMBER_OF_PIPES;
 
 // State management
 let ingredientsData = [];
@@ -744,13 +745,8 @@ function setupEventListeners() {
 
     showAssignPipe(); // This will display the Assign Pipeline section
 
-    // Get the number of pipes from the input field
-    const numPipes = parseInt(numPipesInput.value);
-
-    // If numPipes is not set or invalid, default to 1
-    if (isNaN(numPipes) || numPipes < 1 || numPipes > 100) {
-      numPipesInput.value = 1; // Reset to 1 if invalid
-    }
+    // Use fixed number of pipes (8)
+    numberOfPipes = FIXED_NUMBER_OF_PIPES;
 
     // Populate the dropdowns in the Assign Pipeline section with selected ingredients
     populateAssignPipeDropdowns();
@@ -1106,9 +1102,6 @@ async function sendPipesToPython(assignedPipes) {
     'input[name="drink-type"]:checked'
   ).value;
   console.log('Selected drink type:', drinkType);
-  
-  const isAlcoholic = document.getElementById("alcoholic").checked;
-  console.log('Is alcoholic:', isAlcoholic);
 
   // Get the cocktail details from products.json
   const response = await fetch('products.json');
@@ -1131,8 +1124,7 @@ async function sendPipesToPython(assignedPipes) {
       ...pipe,
       ingMl: ingredientMeasurements[pipe.name] || "50"  // Get measurement from cocktail ingredients, default to "50" if not found
     })),
-    drinkType: drinkType,
-    isAlcoholic: isAlcoholic
+    drinkType: drinkType
   };
   console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
   
@@ -2299,36 +2291,19 @@ document.getElementById("alert-ok").onclick = function () {
 ///Select Number Of Pipes To Assign & Searchable dropdown///
 ///////////////////////////////////////////////////////////
 
-const numPipesInput = document.getElementById("numPipes");
-const generateButton = document.getElementById("generate");
 const saveButton = document.getElementById("save");
 const pipeAssignContainer = document.getElementById("pipeAssignContainer");
-const errorMessage = document.getElementById("errorMessage");
 
-generateButton.addEventListener("click", () => {
-  const numPipes = parseInt(numPipesInput.value);
-  numberOfPipes = numPipes;
-
-  // Validate the number of pipes
-  if (isNaN(numPipes) || numPipes < 1 || numPipes > 100) {
-    showCustomAlert("Please enter a valid number between 1 and 100.");
-    return;
-  }
-
-  // Remove assignments for pipes that no longer exist
-  Object.keys(currentPipeAssignments).forEach((pipe) => {
-    const pipeNumber = parseInt(pipe.split(" ")[1]);
-    if (pipeNumber > numPipes) {
-      delete currentPipeAssignments[pipe];
-    }
-  });
-
+// Initialize with fixed 8 pipes
+function initializePipes() {
+  numberOfPipes = FIXED_NUMBER_OF_PIPES;
+  
   // Clear existing dropdowns in the container
   pipeAssignContainer.innerHTML = "";
 
   // Call the function to populate the dropdowns with the selected ingredients
   populateAssignPipeDropdowns();
-});
+}
 
 function populateAssignPipeDropdowns() {
   const pipeAssignContainer = document.getElementById("pipeAssignContainer");
@@ -2378,7 +2353,7 @@ function populateAssignPipeDropdowns() {
       updateRemarksDisplay();
 }
 
-// Check if ingredient is already assigned to any pipe
+// Check if ingredient is already assigned to any pipe (for visual indication only)
 function isIngredientAssigned(ingredient) {
   return Object.values(currentPipeAssignments).includes(ingredient);
 }
@@ -2450,10 +2425,7 @@ function setupPipeDropdown(pipeNumber) {
 
   // Handle option selection
   optionsContainer.addEventListener("click", (e) => {
-    if (
-      e.target.classList.contains("option") &&
-      !e.target.classList.contains("disabled")
-    ) {
+    if (e.target.classList.contains("option")) {
       const value = e.target.dataset.value;
       searchInput.value = e.target.textContent;
       currentPipeAssignments[`Pipe ${pipeNumber}`] = value;
@@ -2591,8 +2563,8 @@ loadConfig = async function () {
 };
 
 saveButton.addEventListener("click", () => {
-  // Call the saveConfig function with the current global variables
-  saveConfig(numberOfPipes, selectedIngredients);
+  // Call the saveConfig function with the fixed number of pipes
+  saveConfig(FIXED_NUMBER_OF_PIPES, selectedIngredients);
 });
 
 // Function to handle dropdown functionality
@@ -2657,97 +2629,22 @@ function resetDropdownOptions(container, originalOptions) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const customizeButton = document.getElementById("customize");
-  const popup = document.getElementById("customizePopup");
-  const closePopup = document.getElementById("closePopup");
-  const numPipesInput = document.getElementById("numPipes");
-  const generateButton = document.getElementById("generate");
-  const defaultButtons = document.querySelectorAll(".default-num-btn");
-
-  // Open the popup when "Customize" button is clicked
-  customizeButton.addEventListener("click", () => {
-    console.log("Customize button clicked");
-    popup.style.display = "flex";
-  });
-
-  // Close the popup when the close button is clicked
-  closePopup.addEventListener("click", () => {
-    console.log("Close button clicked");
-    popup.style.display = "none";
-  });
-
-  // Close the popup when clicking outside the content
-  window.addEventListener("click", (event) => {
-    if (event.target === popup) {
-      console.log("Clicked outside the popup");
-      popup.style.display = "none";
-    }
-  });
-
-  // Automatically close popup after generating custom pipes
-  generateButton.addEventListener("click", () => {
-    const numPipes = parseInt(numPipesInput.value);
-    console.log(`Generating ${numPipes} pipes`);
-
-    if (!isNaN(numPipes) && numPipes >= 1 && numPipes <= 100) {
-      popup.style.display = "none"; // Close the popup after generating
-    }
-  });
-
-  defaultButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      // Remove 'selected' class from all buttons
-      defaultButtons.forEach((btn) => btn.classList.remove("selected"));
-
-      // Add 'selected' class to the clicked button
-      event.target.classList.add("selected");
-      const numPipes = parseInt(event.target.getAttribute("data-value"));
-      numPipesInput.value = numPipes; // Set the input value
-      generateButton.click(); // Trigger the generate logic
-
-      popup.style.display = "none"; // Close the popup after selecting default
-    });
-  });
-});
+// Removed customize functionality - using fixed 8 pipes
 
 async function saveConfig(numberOfPipes, selectedIngredients) {
-  // Check if all pipes are assigned
-  let unassignedPipes = [];
-  for (let i = 1; i <= numberOfPipes; i++) {
-    const searchInput = document.getElementById(`pipeSearch${i}`);
+  // Remove error classes from all pipes (pipes can now be left empty)
+  for (let i = 1; i <= FIXED_NUMBER_OF_PIPES; i++) {
     const pipeContainer = document.getElementById(`pipeContainer${i}`);
-
-    if (!searchInput || !searchInput.value.trim()) {
-      unassignedPipes.push(i);
-      // Add error class to highlight unassigned pipe
-      if (pipeContainer) {
-        pipeContainer.classList.add("pipe-error");
-      }
-    } else {
-      // Remove error class if pipe is assigned
-      if (pipeContainer) {
-        pipeContainer.classList.remove("pipe-error");
-      }
+    if (pipeContainer) {
+      pipeContainer.classList.remove("pipe-error");
     }
-  }
-
-  if (unassignedPipes.length > 0) {
-    showCustomAlert(
-      `Please assign ingredients to all pipes.\nUnassigned pipes:\n ${unassignedPipes
-        .map(
-          (num) => `<span style="color:red;font-weight:bold">Pipe ${num}</span>`
-        )
-        .join(", ")}`
-    );
-    return;
   }
 
   // Update savedIngredients when saving
   savedIngredients = selectedIngredients;
 
   const configData = {
-    numberOfPipes: numberOfPipes,
+    numberOfPipes: FIXED_NUMBER_OF_PIPES, // Always save as 8 pipes
     pipeConfig: currentPipeAssignments,
     selectedIngredients: savedIngredients,
     pipeNotes: pipelineNotes, // Add pipe notes to config
@@ -2783,7 +2680,7 @@ async function loadConfig() {
     // Initialize both arrays from config
     savedIngredients = configData.selectedIngredients || [];
     selectedIngredients = [...savedIngredients]; // Copy saved ingredients to selected
-    numberOfPipes = configData.numberOfPipes || 0;
+    numberOfPipes = FIXED_NUMBER_OF_PIPES; // Always use fixed 8 pipes
 
     // Load pipe assignments
     currentPipeAssignments = configData.pipeConfig || {};
@@ -2957,16 +2854,7 @@ document
 
 // New Changes
 
-// Alcohol Preference Checkbox Single Value Selection
-function toggleCheckbox(clickedCheckbox) {
-  document
-    .querySelectorAll('.alc-pre input[type="checkbox"]')
-    .forEach((checkbox) => {
-      if (checkbox !== clickedCheckbox) {
-        checkbox.checked = false;
-      }
-    });
-}
+// Removed toggleCheckbox function - alcoholic/non-alcoholic tabs removed
 
 // Add event listener for the update button
 document.getElementById("update").addEventListener("click", async function() {
