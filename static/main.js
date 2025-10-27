@@ -1,4 +1,4 @@
-const { app, BrowserWindow, session } = require('electron');
+const { app, BrowserWindow, session, ipcMain } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -44,6 +44,13 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow);
+
+// Handle close window request from renderer
+ipcMain.on('close-window', () => {
+  if (mainWindow) {
+    mainWindow.close();
+  }
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

@@ -2828,9 +2828,14 @@ document
         });
 
         if (response.ok) {
-          // Close the window after a short delay to ensure the server has time to shut down
+          // Close the window using Electron API
           setTimeout(() => {
-            window.close();
+            if (window.electron && window.electron.closeWindow) {
+              window.electron.closeWindow();
+            } else {
+              // Fallback for non-Electron environments
+              window.close();
+            }
           }, 500);
         } else {
           showCustomAlert("Failed to shutdown server");

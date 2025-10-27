@@ -5,7 +5,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electron', {
     // Send a message to the main process
     sendMessage: (channel, data) => {
-        let validChannels = ['focus-in', 'focus-out', 'shutdown'];
+        let validChannels = ['focus-in', 'focus-out', 'shutdown', 'close-window'];
         if (validChannels.includes(channel)) {
             ipcRenderer.send(channel, data);
         }
@@ -19,4 +19,6 @@ contextBridge.exposeInMainWorld('electron', {
     },
     // Function to clear cache
     clearCache: () => ipcRenderer.invoke('clear-cache'),
+    // Function to close the window
+    closeWindow: () => ipcRenderer.send('close-window'),
 });
