@@ -511,10 +511,10 @@ class CustomHandler(SimpleHTTPRequestHandler):
             try:
                 with serial.Serial(port, 115200, timeout=2) as ser:
                     # Small delay, send START first, then actual command
-                    time.sleep(0.05)
+                    time.sleep(1)
                     ser.write(b"START\n")
                     ser.flush()
-                    time.sleep(0.05)
+                    time.sleep(1)
                     ser.write(command_line.encode())
 
                 # Schedule completion flag after the longest pour duration
