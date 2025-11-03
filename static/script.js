@@ -870,60 +870,9 @@ async function showAvailableCocktails() {
   document.getElementById("back-button-all-cocktail").style.display = "none";
   updateButtonStyles();
 
-  // Fetch both cocktails and ingredients data
-  const [cocktails, ingredients] = await Promise.all([
-    fetchCocktails(),
-    fetchIngredientsData()
-  ]);
-
-  // Create a map of ingredient names to their types for quick lookup
-  const ingredientTypes = {};
-  ingredients.forEach(ing => {
-    ingredientTypes[ing.ING_Name] = ing.ING_Type;
-  });
-
-  // Filter cocktails based on saved ingredients, only checking ml measurements
-  const filteredCocktails = cocktails.filter((cocktail) => {
-    return cocktail.PIng.every((ingredient) => {
-      // If it's a garnish ingredient, don't check if it's available
-      if (ingredientTypes[ingredient.ING_Name] === "Garnish") {
-        return true;
-      }
-      
-      // Check if the ingredient has ml measurement
-      const hasMLMeasurement = ingredient.ING_ML && ingredient.ING_ML.toLowerCase().includes('ml');
-      
-      // If it's not measured in ml, treat it as optional
-      if (!hasMLMeasurement) {
-        return true;
-      }
-      
-      // For ml measurements, check if the ingredient is available
-      return savedIngredients.includes(ingredient.ING_Name);
-    });
-  });
-
-  const cocktailListContainer = document.querySelector(
-    ".available-cocktails .cocktail-list2"
-  );
-  if (cocktailListContainer) {
-    cocktailListContainer.innerHTML = ""; // Clear existing content
-  }
-
-  // Check if there are any filtered cocktails
-  if (!cocktailListContainer) {
-    return;
-  }
-
-  if (filteredCocktails.length === 0) {
-    const noCocktailMessage = document.createElement("p");
-    noCocktailMessage.className = "no-cocktail-message";
-    noCocktailMessage.textContent = "No Cocktails Found, Please Assign Proper Ingredients";
-    cocktailListContainer.appendChild(noCocktailMessage);
-  } else {
-    // Display filtered cocktails in Available section only
-    displayAvailableCocktails(filteredCocktails);
-  }
+  // Fetch and render only for Available Cocktails via dedicated functions
+  const available = await fetchAvailableCocktails();
+  renderAvailableCocktailsList(available);
 }
 
 // Function to show the "Assign Pipe" section
@@ -2088,11 +2037,72 @@ function filterAndRenderAllCocktails() {
   displayCocktails(filtered);
 }
 
+// ================== Available Cocktails (separate flow) ==================
+async function fetchAvailableCocktails() {
+  const [cocktails, ingredients] = await Promise.all([
+    fetchCocktails(),
+    fetchIngredientsData()
+  ]);
+
+  const ingredientTypes = {};
+  ingredients.forEach((ing) => {
+    ingredientTypes[ing.ING_Name] = ing.ING_Type;
+  });
+
+  return cocktails.filter((cocktail) => {
+    return cocktail.PIng.every((ingredient) => {
+      if (ingredientTypes[ingredient.ING_Name] === "Garnish") {
+        return true;
+      }
+      const hasMLMeasurement =
+        ingredient.ING_ML && ingredient.ING_ML.toLowerCase().includes("ml");
+      if (!hasMLMeasurement) {
+        return true;
+      }
+      return savedIngredients.includes(ingredient.ING_Name);
+    });
+  });
+}
+
+function renderAvailableCocktailsList(cocktails) {
+  const container = document.querySelector(
+    ".available-cocktails .cocktail-list2"
+  );
+  if (!container) return;
+  container.innerHTML = "";
+
+  if (cocktails.length === 0) {
+    const noCocktailMessage = document.createElement("p");
+    noCocktailMessage.className = "no-cocktail-message";
+    noCocktailMessage.textContent = "No Cocktails Found, Please Assign Proper Ingredients";
+    container.appendChild(noCocktailMessage);
+    return;
+  }
+
+  cocktails.forEach((cocktail) => {
+    const cocktailItem = document.createElement("div");
+    cocktailItem.classList.add("cl-item");
+    cocktailItem.id = `available-cocktail-${cocktail.PID}`;
+
+    cocktailItem.innerHTML = `
+        <img src="${cocktail.PImage || 'img/upload/extra_cocktail.png'}" alt="${cocktail.PName}" />
+        <p>${cocktail.PName}</p>
+      `;
+
+    container.appendChild(cocktailItem);
+
+    cocktailItem.addEventListener("click", () => {
+      wshowCocktailDetails(cocktail);
+    });
+  });
+}
+
 async function wshowCocktailDetails(cocktail, highlightIngredients = []) {
   findIngSection.style.display = "none";
   addIngSection.style.display = "none";
   addCocktailSection.style.display = "none";
   allCocktailSection.style.display = "none";
+  availableCocktailsSection.style.display = "none";
   cocktailDetailsSection.style.display = "block"; // Show Cocktail Details section
   assignPipeSection.style.display = "none";
 
