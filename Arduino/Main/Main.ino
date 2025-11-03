@@ -14,6 +14,7 @@ bool systemStarted = false;
 void setup() {
   Serial.begin(115200);
   strip.begin();
+  strip.setBrightness(76); // ~30% brightness to reduce current draw
   strip.show();
 
   for (int i = 0; i < NUM_RINGS; i++) {

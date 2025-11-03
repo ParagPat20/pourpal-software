@@ -903,18 +903,26 @@ async function showAvailableCocktails() {
     });
   });
 
-  const cocktailListContainer = document.querySelector(".cocktail-list");
-  cocktailListContainer.innerHTML = ""; // Clear existing content
+  const cocktailListContainer = document.querySelector(
+    ".available-cocktails .cocktail-list2"
+  );
+  if (cocktailListContainer) {
+    cocktailListContainer.innerHTML = ""; // Clear existing content
+  }
 
   // Check if there are any filtered cocktails
+  if (!cocktailListContainer) {
+    return;
+  }
+
   if (filteredCocktails.length === 0) {
     const noCocktailMessage = document.createElement("p");
     noCocktailMessage.className = "no-cocktail-message";
     noCocktailMessage.textContent = "No Cocktails Found, Please Assign Proper Ingredients";
     cocktailListContainer.appendChild(noCocktailMessage);
   } else {
-    // Display filtered cocktails
-    displayCocktails(filteredCocktails);
+    // Display filtered cocktails in Available section only
+    displayAvailableCocktails(filteredCocktails);
   }
 }
 
@@ -1944,6 +1952,7 @@ async function fetchCocktails() {
 
 // Function to display cocktails in the UI
 function displayCocktails(cocktails) {
+  // Render only for All Cocktails section
   findIngSection.style.display = "none";
   addIngSection.style.display = "none";
   addCocktailSection.style.display = "none";
@@ -1968,9 +1977,44 @@ function displayCocktails(cocktails) {
     // Append the cocktail item to the cocktail list container
     cocktailListContainer.appendChild(cocktailItem);
 
-    // Add click event to show cocktail details
+    // Add click event to show cocktail details (no highlight list so both sections look identical)
     cocktailItem.addEventListener("click", () => {
-      wshowCocktailDetails(cocktail); // Show details of the clicked cocktail
+      wshowCocktailDetails(cocktail);
+    });
+  });
+}
+
+// Function to display cocktails in the Available Cocktails UI
+function displayAvailableCocktails(cocktails) {
+  findIngSection.style.display = "none";
+  addIngSection.style.display = "none";
+  addCocktailSection.style.display = "none";
+  allCocktailSection.style.display = "none";
+  cocktailDetailsSection.style.display = "none";
+  assignPipeSection.style.display = "none";
+  availableCocktailsSection.style.display = "block";
+
+  updateButtonStyles();
+  const container = document.querySelector(
+    ".available-cocktails .cocktail-list2"
+  );
+  if (!container) return;
+  container.innerHTML = "";
+
+  cocktails.forEach((cocktail) => {
+    const cocktailItem = document.createElement("div");
+    cocktailItem.classList.add("cl-item");
+    cocktailItem.id = `available-cocktail-${cocktail.PID}`;
+
+    cocktailItem.innerHTML = `
+        <img src="${cocktail.PImage || 'img/upload/extra_cocktail.png'}" alt="${cocktail.PName}" />
+        <p>${cocktail.PName}</p>
+      `;
+
+    container.appendChild(cocktailItem);
+
+    cocktailItem.addEventListener("click", () => {
+      wshowCocktailDetails(cocktail);
     });
   });
 }
@@ -2044,7 +2088,7 @@ function filterAndRenderAllCocktails() {
   displayCocktails(filtered);
 }
 
-async function wshowCocktailDetails(cocktail) {
+async function wshowCocktailDetails(cocktail, highlightIngredients = []) {
   findIngSection.style.display = "none";
   addIngSection.style.display = "none";
   addCocktailSection.style.display = "none";
@@ -2101,9 +2145,11 @@ async function wshowCocktailDetails(cocktail) {
     // Get complete ingredient details from the map
     const fullIngredient = ingredientMap[ingredient.ING_Name] || ingredient;
 
-    // Check if the ingredient is selected
-    const isSelected = selectedIngredients.includes(ingredient.ING_Name);
-    console.log(`checking ${ingredient.ING_Name} is ${isSelected}`);
+    // Determine highlighting behavior: if a highlight list is provided, use it; otherwise show all as selected
+    const useHighlight = Array.isArray(highlightIngredients) && highlightIngredients.length > 0;
+    const isSelected = useHighlight
+      ? highlightIngredients.includes(ingredient.ING_Name)
+      : true;
     const className = isSelected ? "" : "not-selected";
 
     ingredientItem.innerHTML = `
@@ -2837,14 +2883,9 @@ function updatePipesAndIngredients() {
   }
 }
 
-// Safely attach listener to numPipeInput if present
-const numPipesInput = document.getElementById("numPipeInput");
-if (numPipesInput) {
-  numPipesInput.addEventListener("input", () => {
-    const parsed = parseInt(numPipesInput.value, 10);
-    numberOfPipes = Number.isNaN(parsed) ? FIXED_NUMBER_OF_PIPES : parsed;
-  });
-}
+numPipesInput.addEventListener("input", () => {
+  numberOfPipes = parseInt(numPipesInput.value);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("ingredient-search");

@@ -2429,6 +2429,15 @@ select,
 }
 
 
+/* Compact alphabet filter in All Cocktails */
+.all-cocktail #all-cocktail-alphabet a {
+  padding: 6px 10px;
+  font-size: 14px;
+  min-height: 28px;
+  min-width: 28px;
+}
+
+
 
 .all-cocktail .cocktail-list::-webkit-scrollbar {
   width: 6px;

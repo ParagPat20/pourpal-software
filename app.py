@@ -177,7 +177,10 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
                 try:
                     with serial.Serial(port, 115200, timeout=5) as ser:
-                        # Send cancel command to Arduino
+                        # Send START preamble, then cancel command to Arduino
+                        ser.write(b"START\n")
+                        ser.flush()
+                        time.sleep(0.05)
                         ser.write(b"CANCEL\n")
                         
                         # Clear the processing complete flag
@@ -260,6 +263,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             else:
                 self.send_response(200)
                 self.end_headers()
+                
                 self.wfile.write(
                     b"Focus-in event received, but keyboard functionality is disabled on Windows."
                 )
@@ -506,7 +510,10 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
             try:
                 with serial.Serial(port, 115200, timeout=2) as ser:
-                    # Small delay to ensure Arduino is ready
+                    # Small delay, send START first, then actual command
+                    time.sleep(0.05)
+                    ser.write(b"START\n")
+                    ser.flush()
                     time.sleep(0.05)
                     ser.write(command_line.encode())
 
