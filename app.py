@@ -176,7 +176,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     return
 
                 try:
-                    with serial.Serial(port, 9600, timeout=5) as ser:
+                    with serial.Serial(port, 115200, timeout=5) as ser:
                         # Send cancel command to Arduino
                         ser.write(b"CANCEL\n")
                         
@@ -444,22 +444,59 @@ class CustomHandler(SimpleHTTPRequestHandler):
     def handle_send_pipes(self, post_data):
         try:
             data = json.loads(post_data)
-            
-            # Find the correct serial port
+
+            # Build command string for Arduino Main.ino
+            # Expecting data: { ingredients: [ { name, pipe, ingMl }, ... ], ... }
+            ingredients = data.get("ingredients", [])
+            commands = []
+            max_seconds = 0.0
+            for item in ingredients:
+                try:
+                    pipe_str = str(item.get("pipe", "")).strip()
+                    if not pipe_str:
+                        continue
+                    pipe_num = int(pipe_str)
+                    # Convert ml to seconds (10 ml per second) => 45 ml = 4.5 s
+                    ml_value = item.get("ingMl", "0")
+                    seconds = float(str(ml_value).strip().replace("ml", "")) / 10.0
+                    if seconds <= 0:
+                        continue
+                    # Use T for transition + relay timing per new firmware
+                    commands.append(f"{pipe_num}:T:{seconds}")
+                    if seconds > max_seconds:
+                        max_seconds = seconds
+                except Exception:
+                    continue
+
+            if not commands:
+                self.send_response(400)
+                self.end_headers()
+                self.wfile.write(b"No valid pipe commands to send")
+                return
+
+            command_line = ",".join(commands) + "\n"
+            print(f"Sending to Arduino: {command_line.strip()}")
+
+            # Detect serial port
             port = None
             if platform.system() == "Windows":
-                # On Windows, look for COM ports
-                for i in range(10):  # Check COM0 through COM9
+                for i in range(10):
                     try:
                         test_port = f"COM{i}"
-                        with serial.Serial(test_port, 9600, timeout=1) as ser:
+                        with serial.Serial(test_port, 115200, timeout=1) as _:
                             port = test_port
                             break
                     except serial.SerialException:
                         continue
             else:
-                # On Linux, use ttyUSB0
-                port = "/dev/ttyUSB0"
+                # On Linux, try ACM0 then USB0
+                for test_port in ("/dev/ttyACM0", "/dev/ttyUSB0"):
+                    try:
+                        with serial.Serial(test_port, 115200, timeout=1) as _:
+                            port = test_port
+                            break
+                    except serial.SerialException:
+                        continue
 
             if port is None:
                 self.send_response(500)
@@ -468,35 +505,32 @@ class CustomHandler(SimpleHTTPRequestHandler):
                 return
 
             try:
-                with serial.Serial(port, 9600, timeout=5) as ser:
-                    # Send the entire data as JSON
-                    ser.write(json.dumps(data).encode() + b"\n")
-                    
-                    # Wait for and read the response
-                    response = ser.readline().decode().strip()
-                    print(f"Arduino response: {response}")
-                    
-                    if response == "OK":
-                        # Wait for the COMPLETED response
-                        while True:
-                            response = ser.readline().decode().strip()
-                            print(f"Arduino status: {response}")
-                            if response == "COMPLETED":
-                                processing_complete.set()  # Set the completion flag
-                                self.send_response(200)
-                                self.end_headers()
-                                self.wfile.write(json.dumps({"status": "COMPLETED"}).encode())
-                                break
-                            elif response == "ERROR":
-                                raise Exception("Arduino reported an error")
-                    else:
-                        raise Exception(f"Unexpected response from Arduino: {response}")
-                
+                with serial.Serial(port, 115200, timeout=2) as ser:
+                    # Small delay to ensure Arduino is ready
+                    time.sleep(0.05)
+                    ser.write(command_line.encode())
+
+                # Schedule completion flag after the longest pour duration
+                def mark_complete_after(delay_seconds: float):
+                    try:
+                        time.sleep(max(0.0, delay_seconds))
+                        processing_complete.set()
+                    except Exception:
+                        pass
+
+                # Add a small buffer
+                buffer_seconds = 0.5
+                threading.Thread(target=mark_complete_after, args=(max_seconds + buffer_seconds,), daemon=True).start()
+
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "OK"}).encode())
+
             except serial.SerialException as e:
                 self.send_response(500)
                 self.end_headers()
                 self.wfile.write(f"Serial error: {str(e)}".encode())
-                
+
         except Exception as e:
             print(f"Error in handle_send_pipes: {e}")
             self.send_response(500)

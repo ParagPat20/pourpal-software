@@ -23,6 +23,10 @@ let currentPipeAssignments = {}; // Store current pipe assignments
 // Global variable to store ingredient remarks
 let ingredientRemarks = {};
 
+// All Cocktails search state
+let allCocktailsData = [];
+let allCocktailsHandlersInitialized = false;
+
 // Add event listener for the "Add Remark" button
 document.addEventListener("DOMContentLoaded", () => {
   const addRemarkButton = document.getElementById("add-remark-button");
@@ -847,10 +851,10 @@ async function showAvailableCocktails() {
   findIngSection.style.display = "none";
   addIngSection.style.display = "none";
   addCocktailSection.style.display = "none";
-  allCocktailSection.style.display = "block";
+  allCocktailSection.style.display = "none";
   cocktailDetailsSection.style.display = "none";
   assignPipeSection.style.display = "none";
-  availableCocktailsSection.style.display = "none";
+  availableCocktailsSection.style.display = "block";
   availableCocktailsBtn.classList.add("active");
   availableCocktailsBtn.classList.remove("deactive");
   assignPipeBtn.classList.add("deactive");
@@ -1914,11 +1918,16 @@ async function showAllCocktails(selectedIngredients = []) {
 
   document.getElementById("back-button-all-cocktail").style.display = "block";
 
-  // Fetch cocktails
+  // Fetch cocktails and cache
   const cocktails = await fetchCocktails();
-  // Display all cocktails if no ingredients are selected
+  allCocktailsData = cocktails || [];
+
+  // Initialize handlers once and render
+  setupAllCocktailsSearchHandlers();
+
+  // Reset extras and render with current filters
   extraIngredients = [];
-  displayCocktails(cocktails);
+  filterAndRenderAllCocktails();
 }
 
 // Function to fetch cocktails from products.json
@@ -1964,6 +1973,75 @@ function displayCocktails(cocktails) {
       wshowCocktailDetails(cocktail); // Show details of the clicked cocktail
     });
   });
+}
+
+// --- All Cocktails: search and alphabet filtering ---
+function setupAllCocktailsSearchHandlers() {
+  if (allCocktailsHandlersInitialized) return;
+
+  const searchInput = document.getElementById("all-cocktail-search");
+  const alphaContainer = document.getElementById("all-cocktail-alphabet");
+
+  if (searchInput) {
+    searchInput.addEventListener(
+      "input",
+      debounce(() => {
+        filterAndRenderAllCocktails();
+      }, DEBOUNCE_DELAY)
+    );
+    searchInput.addEventListener("click", function () {
+      this.value = "";
+      filterAndRenderAllCocktails();
+    });
+  }
+
+  if (alphaContainer) {
+    alphaContainer.addEventListener("click", (e) => {
+      const target = e.target.closest("a[data-letter]");
+      if (!target) return;
+      e.preventDefault();
+
+      const links = alphaContainer.querySelectorAll("a[data-letter]");
+      links.forEach((link) => {
+        link.classList.add("deactive");
+        link.classList.remove("active");
+      });
+      target.classList.remove("deactive");
+      target.classList.add("active");
+
+      filterAndRenderAllCocktails();
+    });
+  }
+
+  allCocktailsHandlersInitialized = true;
+}
+
+function getSelectedAlphabetLetter() {
+  const alphaContainer = document.getElementById("all-cocktail-alphabet");
+  if (!alphaContainer) return "all";
+  const active = alphaContainer.querySelector("a.active[data-letter]");
+  return active ? active.getAttribute("data-letter") : "all";
+}
+
+function filterAndRenderAllCocktails() {
+  const termInput = document.getElementById("all-cocktail-search");
+  const term = termInput ? termInput.value.trim().toLowerCase() : "";
+  const letter = getSelectedAlphabetLetter();
+
+  let filtered = allCocktailsData.slice();
+
+  if (letter && letter !== "all") {
+    filtered = filtered.filter((c) =>
+      (c.PName || "").toLowerCase().startsWith(letter.toLowerCase())
+    );
+  }
+  if (term) {
+    filtered = filtered.filter((c) =>
+      (c.PName || "").toLowerCase().includes(term)
+    );
+  }
+
+  displayCocktails(filtered);
 }
 
 async function wshowCocktailDetails(cocktail) {
@@ -2759,9 +2837,14 @@ function updatePipesAndIngredients() {
   }
 }
 
-numPipesInput.addEventListener("input", () => {
-  numberOfPipes = parseInt(numPipesInput.value);
-});
+// Safely attach listener to numPipeInput if present
+const numPipesInput = document.getElementById("numPipeInput");
+if (numPipesInput) {
+  numPipesInput.addEventListener("input", () => {
+    const parsed = parseInt(numPipesInput.value, 10);
+    numberOfPipes = Number.isNaN(parsed) ? FIXED_NUMBER_OF_PIPES : parsed;
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("ingredient-search");

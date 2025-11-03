@@ -6,9 +6,9 @@
 echo "=== PourPal Service Installation ==="
 
 # Check if running as correct user
-if [ "$USER" != "ppl" ]; then
+if [ "$(id -un)" != "ppl" ]; then
     echo "Error: This script must be run as user 'ppl'"
-    echo "Current user: $USER"
+    echo "Current user: $(id -un)"
     exit 1
 fi
 

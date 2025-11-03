@@ -4,15 +4,14 @@ After=graphical-session.target
 Wants=graphical-session.target
 
 [Service]
-Type=forking
+Type=oneshot
 User=ppl
 Group=ppl
 WorkingDirectory=/home/ppl/pourpal-software
 ExecStart=/home/ppl/pourpal-software/start_at_boot.sh
-ExecStop=/bin/bash -c "tmux kill-session -t myapp 2>/dev/null || true"
+ExecStop=/bin/bash -c "/usr/bin/tmux kill-session -t myapp 2>/dev/null || true"
 RemainAfterExit=yes
-Restart=on-failure
-RestartSec=30
+Restart=no
 Environment=DISPLAY=:0
 Environment=HOME=/home/ppl
 

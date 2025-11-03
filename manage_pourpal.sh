@@ -6,7 +6,7 @@
 SERVICE_NAME="pourpal"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 SCRIPT_DIR="/home/ppl/pourpal-software"
-USER="ppl"
+TMUX_BIN="/usr/bin/tmux"
 
 # Colors for output
 RED='\033[0;31m'
@@ -34,9 +34,10 @@ print_header() {
 
 # Function to check if running as correct user
 check_user() {
-    if [ "$USER" != "ppl" ]; then
+    CURRENT_USER="$(id -un)"
+    if [ "$CURRENT_USER" != "ppl" ]; then
         print_error "This script must be run as user 'ppl'"
-        print_error "Current user: $USER"
+        print_error "Current user: $CURRENT_USER"
         exit 1
     fi
 }
@@ -100,7 +101,7 @@ start_service() {
     print_status "Starting PourPal service..."
     
     # Check if tmux session already exists
-    if tmux has-session -t myapp 2>/dev/null; then
+    if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
         print_warning "PourPal is already running in tmux session 'myapp'"
         print_status "Use 'tmux attach -t myapp' to attach to the session"
         return 0
@@ -122,9 +123,9 @@ stop_service() {
     print_status "Stopping PourPal service..."
     
     # First try to stop tmux session
-    if tmux has-session -t myapp 2>/dev/null; then
+    if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
         print_status "Stopping tmux session 'myapp'..."
-        tmux kill-session -t myapp
+        "$TMUX_BIN" kill-session -t myapp
         print_status "Tmux session stopped"
     fi
     
@@ -170,7 +171,7 @@ show_status() {
     echo ""
     
     # Check tmux session status
-    if tmux has-session -t myapp 2>/dev/null; then
+    if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
         print_status "✅ Tmux session 'myapp' is running"
         print_status "Use 'tmux attach -t myapp' to attach to the session"
     else
