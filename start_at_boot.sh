@@ -53,32 +53,24 @@ if [ $WAIT_COUNT -ge $MAX_WAIT ]; then
     exit 1
 fi
 
-# Now display is ready - start loading screen
-LOADING_PID=$(start_loading_screen)
-echo "Loading screen started with PID: $LOADING_PID"
-
-# Check if the loading screen started successfully
-if [ -z "$LOADING_PID" ]; then
-    echo "WARNING: Failed to start loading screen. Continuing anyway..."
-fi
-
-# Give loading screen a moment to appear
-sleep 1
-
-# Launch the Python application in tmux session (app starts while loading screen is visible)
-echo "Launching the Python application in tmux session 'myapp'..."
-
-# Check if tmux session already exists
+# Now display is ready - check if tmux session already exists
 if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
     echo "Session 'myapp' already exists. Killing existing session..."
     "$TMUX_BIN" kill-session -t myapp
     sleep 1
 fi
 
-# Create new tmux session with the app running inside
+# Start loading screen AND app at the SAME TIME
+echo "Starting loading screen and app simultaneously..."
+
+# 1. Start loading screen in background
+LOADING_PID=$(start_loading_screen)
+echo "Loading screen started with PID: $LOADING_PID"
+
+# 2. Immediately start app in tmux (no sleep!)
 "$TMUX_BIN" new-session -d -s myapp "cd /home/ppl/pourpal-software && exec python3 app.py"
 
-# Give tmux a moment to start
+# Give both a moment to initialize
 sleep 1
 
 # Verify tmux session started
@@ -89,9 +81,24 @@ if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
     "$TMUX_BIN" list-sessions
     "$TMUX_BIN" list-panes -t myapp -F "Pane #{pane_id}: #{pane_current_command}"
     
-    # Wait for app to fully load (keep loading screen visible)
-    echo "Waiting for app to fully load (loading screen visible)..."
-    sleep 4
+    # Wait for app to fully initialize (HTTP server + Electron startup)
+    # App takes ~2 seconds for Electron + server startup time
+    echo "Waiting for app to fully initialize (loading screen stays visible)..."
+    
+    # Wait for HTTP server to be ready (check port 5000)
+    MAX_RETRIES=20
+    RETRY_COUNT=0
+    while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+        if netstat -tuln 2>/dev/null | grep -q ":5000 "; then
+            echo "HTTP server is ready on port 5000"
+            break
+        fi
+        sleep 0.5
+        ((RETRY_COUNT++))
+    done
+    
+    # Give Electron an extra moment to launch (total ~3-4 seconds)
+    sleep 2
     
     # Now kill the loading screen
     if [ -n "$LOADING_PID" ]; then

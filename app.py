@@ -590,7 +590,7 @@ def start_http_server():
 
 
 def start_electron_app():
-    time.sleep(2)
+    time.sleep(1)
     os.environ["DISPLAY"] = ":0"
 
     electron_executable = None
