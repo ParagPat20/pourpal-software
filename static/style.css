@@ -410,6 +410,13 @@ input[type="checkbox"]:checked::before {
   background: rgba(255, 255, 255, 0.5);
   color: #000;
 }
+.btn.deactive {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.btn.deactive:hover {
+  opacity: 0.8;
+}
 /* Modal Styles */
 .modal {
   display: none; /* Hidden by default */

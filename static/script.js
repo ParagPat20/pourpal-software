@@ -1013,6 +1013,13 @@ function showAddCocktail() {
 }
 
 document.getElementById("serial-out-button").addEventListener("click", () => {
+  // Check if all required ingredients are assigned
+  const btn = document.getElementById("serial-out-button");
+  if (btn.dataset.canMake === "false") {
+    showCustomAlert("Required ingredients are missing or not assigned to pipes.\n\nPlease ensure all ingredients with ML measurements are assigned to pipes before making the drink.");
+    return;
+  }
+
   // Get the cocktail ID from the hidden element
   const cocktailIDElement = document.getElementById("cocktail-id");
   if (!cocktailIDElement) {
@@ -1029,12 +1036,17 @@ document.getElementById("serial-out-button").addEventListener("click", () => {
   // Get the cocktail's ingredients and their assigned pipes
   const cocktailIngredients = [];
   const cocktail = document.querySelector(".cocktail-details");
-  const ingredients = cocktail.querySelectorAll(
-    "#cocktail-ingredients-container .ing-item p"
+  const ingredientItems = cocktail.querySelectorAll(
+    "#cocktail-ingredients-container .ing-item"
   );
 
-  ingredients.forEach((ingredientElem) => {
-    const ingredientName = ingredientElem.textContent;
+  ingredientItems.forEach((ingredientItem) => {
+    // Get the first <p> tag which contains the ingredient name (not the measurement)
+    const ingredientNameElem = ingredientItem.querySelector("p:not(.ingredient-measurement)");
+    if (!ingredientNameElem) return;
+    
+    const ingredientName = ingredientNameElem.textContent.trim();
+    
     // Find the pipe number for this ingredient from currentPipeAssignments
     let pipeNumber = null;
     for (const [pipe, ingredient] of Object.entries(currentPipeAssignments)) {
@@ -2147,6 +2159,15 @@ async function wshowCocktailDetails(cocktail, highlightIngredients = []) {
   // Clear previous ingredients
   cocktailIngredientsContainer.innerHTML = "";
 
+  // Build list of currently assigned ingredients from pipelines
+  const assignedIngredients = Object.values(currentPipeAssignments).filter(Boolean);
+
+  // Debug logging
+  console.log("Assigned ingredients from pipes:", assignedIngredients);
+
+  // Track required ingredients (those with ML measurements > 0)
+  const requiredIngredients = [];
+
   // Populate the ingredients with full details
   cocktail.PIng.forEach((ingredient) => {
     const ingredientItem = document.createElement("div");
@@ -2155,11 +2176,24 @@ async function wshowCocktailDetails(cocktail, highlightIngredients = []) {
     // Get complete ingredient details from the map
     const fullIngredient = ingredientMap[ingredient.ING_Name] || ingredient;
 
-    // Determine highlighting behavior: if a highlight list is provided, use it; otherwise show all as selected
+    // Check if this ingredient has a valid ML measurement (required ingredient)
+    const mlRaw = (ingredient.ING_ML || "0").toString().trim().toLowerCase();
+    // Check if it contains "ml" (case insensitive)
+    const hasMLUnit = mlRaw.includes("ml");
+    const mlNum = parseFloat(mlRaw.replace(/[^\d.]/g, "")) || 0;
+    const isRequired = hasMLUnit && mlNum > 0;
+    
+    if (isRequired) {
+      requiredIngredients.push(ingredient.ING_Name);
+      console.log(`Required ingredient: ${ingredient.ING_Name} (${ingredient.ING_ML})`);
+    }
+
+    // Determine highlighting behavior: if a highlight list is provided, use it; otherwise use pipeline assignments
     const useHighlight = Array.isArray(highlightIngredients) && highlightIngredients.length > 0;
+    const isAssignedToPipe = assignedIngredients.includes(ingredient.ING_Name);
     const isSelected = useHighlight
       ? highlightIngredients.includes(ingredient.ING_Name)
-      : true;
+      : isAssignedToPipe;
     const className = isSelected ? "" : "not-selected";
 
     ingredientItem.innerHTML = `
@@ -2179,6 +2213,31 @@ async function wshowCocktailDetails(cocktail, highlightIngredients = []) {
 
     cocktailIngredientsContainer.appendChild(ingredientItem);
   });
+
+  // Enable/disable Start Making button based on required ingredients
+  const serialOutButton = document.getElementById("serial-out-button");
+  const allRequiredAssigned = requiredIngredients.every((name) => assignedIngredients.includes(name));
+  
+  // Debug logging
+  console.log("Required ingredients:", requiredIngredients);
+  console.log("All required assigned?", allRequiredAssigned);
+  
+  // Check which required ingredients are missing
+  const missingIngredients = requiredIngredients.filter((name) => !assignedIngredients.includes(name));
+  if (missingIngredients.length > 0) {
+    console.log("Missing required ingredients:", missingIngredients);
+  }
+  
+  // Store validation state on the button element for the click handler to check
+  serialOutButton.dataset.canMake = (allRequiredAssigned && requiredIngredients.length > 0) ? "true" : "false";
+  
+  if (allRequiredAssigned && requiredIngredients.length > 0) {
+    serialOutButton.classList.remove("deactive");
+    serialOutButton.classList.add("active");
+  } else {
+    serialOutButton.classList.remove("active");
+    serialOutButton.classList.add("deactive");
+  }
 
   if (cocktail.PHtm && cocktail.PHtm.trim() !== "") {
     cocktailHtm.textContent = cocktail.PHtm;
@@ -2875,27 +2934,7 @@ function clearAllSelectedIngredients() {
   updateCheckboxStates(); // Update checkbox states to enable all checkboxes
 }
 
-function updatePipesAndIngredients() {
-  const numPipeInput = document.getElementById("numPipeInput").value; // Get the updated number of pipes
-  numberOfPipes = parseInt(numPipeInput, 10); // Update the global variable
-
-  selectedIngredients = []; // Reset selectedIngredients array
-
-  // Loop through each pipe dropdown and capture the selected ingredients
-  for (let i = 1; i <= numberOfPipes; i++) {
-    const dropdown = document.getElementById(`pipeDropdown${i}`);
-    if (dropdown) {
-      const ingredientName = dropdown.value;
-      if (ingredientName) {
-        selectedIngredients.push(ingredientName); // Update selectedIngredients
-      }
-    }
-  }
-}
-
-numPipesInput.addEventListener("input", () => {
-  numberOfPipes = parseInt(numPipesInput.value);
-});
+// Removed updatePipesAndIngredients and numPipesInput listener - using fixed 8 pipes
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("ingredient-search");
