@@ -2549,3 +2549,44 @@ select,
     font-weight: bold;
     transition: color 0.3s ease;
 }
+
+/* ML Preview Styles */
+.ml-preview-list {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.ml-preview-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.ml-preview-item:last-child {
+    margin-bottom: 0;
+}
+
+.ml-preview-item .ingredient-name {
+    font-weight: 500;
+    color: #3d3229;
+}
+
+.ml-preview-item .ingredient-ml {
+    font-weight: 600;
+    color: #359267;
+}
+
+.ml-preview-item.shot-size {
+    border-left: 3px solid #ff8800;
+}
+
+.ml-preview-item.shot-size .ingredient-ml {
+    color: #ff8800;
+}

@@ -511,6 +511,30 @@
                     <!-- Instructions will be dynamically populated -->
                   </div>
                   <div class="cdr-txt">
+                    <h2>Select Drink Size</h2>
+                    <div class="drink-type">
+                      <label>
+                        <input
+                          type="radio"
+                          id="drink-size-shot"
+                          name="drink-size"
+                          value="shot"
+                        />
+                        Shot (30ml)
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          id="drink-size-regular"
+                          name="drink-size"
+                          value="regular"
+                          checked
+                        />
+                        Regular (Full Size)
+                      </label>
+                    </div>
+                  </div>
+                  <div class="cdr-txt">
                     <h2>Select Drink Intensity</h2>
                     <div class="drink-type">
                       <label>
@@ -519,7 +543,6 @@
                           id="drink-type-less-liquor"
                           name="drink-type"
                           value="less-liquor"
-                          checked
                         />
                         Less Liquor
                       </label>
@@ -529,6 +552,7 @@
                           id="drink-type-regular"
                           name="drink-type"
                           value="regular"
+                          checked
                         />
                         Regular
                       </label>
@@ -541,6 +565,12 @@
                         />
                         More Liquor
                       </label>
+                    </div>
+                  </div>
+                  <div class="cdr-txt" id="ml-preview-section" style="display: none;">
+                    <h2>Ingredient Measurements</h2>
+                    <div id="ml-preview-container" class="ml-preview-list">
+                      <!-- ML preview will be populated here -->
                     </div>
                   </div>
                   <div class="footer-btn">

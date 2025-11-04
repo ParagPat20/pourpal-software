@@ -2,13 +2,21 @@
 
 # Set the display environment variable
 export DISPLAY=:0
+export HOME=/home/ppl
+export USER=ppl
+
+# Log file for debugging
+LOG_FILE="/home/ppl/pourpal-software/startup.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+echo "=== PourPal Startup Script Started at $(date) ==="
 
 # Use absolute path to tmux
 TMUX_BIN="/usr/bin/tmux"
 
 # Ensure tmux exists
 if [ ! -x "$TMUX_BIN" ]; then
-    echo "tmux not found at $TMUX_BIN. Please install tmux."
+    echo "ERROR: tmux not found at $TMUX_BIN. Please install tmux."
     exit 1
 fi
 
@@ -29,13 +37,15 @@ echo "Loading screen PID: $LOADING_PID"
 
 # Check if the loading screen started successfully
 if [ -z "$LOADING_PID" ]; then
-    echo "Failed to start loading screen. Exiting..."
-    exit 1
+    echo "WARNING: Failed to start loading screen. Continuing anyway..."
 fi
 
-# Loop until the display is connected
+# Loop until the display is connected (with timeout)
 echo "Waiting for the display to connect..."
-while true; do
+WAIT_COUNT=0
+MAX_WAIT=60  # Wait maximum 60 seconds
+
+while [ $WAIT_COUNT -lt $MAX_WAIT ]; do
     if is_display_connected; then
         echo "Display is connected."
 
@@ -46,37 +56,50 @@ while true; do
         if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
             echo "Session 'myapp' already exists. Killing existing session..."
             "$TMUX_BIN" kill-session -t myapp
+            sleep 1
         fi
         
-        # Create new session
-        "$TMUX_BIN" new-session -d -s myapp 'cd /home/ppl/pourpal-software && python3 app.py'
+        # Create new tmux session with the app running inside
+        "$TMUX_BIN" new-session -d -s myapp "cd /home/ppl/pourpal-software && exec python3 app.py"
+        
+        # Give tmux a moment to start
+        sleep 2
 
-        # Verify tmux session started (retry briefly)
-        for i in 1 2 3 4 5; do
-            if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
-                break
+        # Verify tmux session started
+        if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
+            echo "SUCCESS: tmux session 'myapp' is running"
+            
+            # Show tmux session info
+            "$TMUX_BIN" list-sessions
+            "$TMUX_BIN" list-panes -t myapp -F "Pane #{pane_id}: #{pane_current_command}"
+            
+            # Wait before killing the loading screen
+            if [ -n "$LOADING_PID" ]; then
+                echo "Waiting 4 seconds before terminating the loading screen..."
+                sleep 4
+                kill "$LOADING_PID" 2>/dev/null || true
+                echo "Loading screen terminated."
             fi
-            sleep 0.5
-        done
-
-        if ! "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
-            echo "Failed to start tmux session 'myapp'. Exiting with error."
+            
+            echo "Python application is running in tmux session 'myapp'."
+            echo "=== Service startup completed successfully at $(date) ==="
+            echo "To attach: tmux attach -t myapp"
+            
+            # Exit successfully - systemd will keep the service as "active (exited)"
+            exit 0
+        else
+            echo "ERROR: Failed to start tmux session 'myapp'"
+            [ -n "$LOADING_PID" ] && kill "$LOADING_PID" 2>/dev/null || true
             exit 1
         fi
-        
-        # Wait 4 seconds before killing the loading screen
-        echo "Waiting 4 seconds before terminating the loading screen..."
-        sleep 4
-        kill "$LOADING_PID" 2>/dev/null || true
-        
-        echo "Loading screen terminated."
-        echo "Python application is running in tmux session 'myapp'."
-        
-        # Exit cleanly for systemd
-        echo "Service startup completed successfully."
-        exit 0
     else
-        echo "Display not connected. Checking again in 1 second..."
+        echo "Display not connected. Waiting... ($WAIT_COUNT/$MAX_WAIT)"
         sleep 1
+        ((WAIT_COUNT++))
     fi
 done
+
+# Timeout reached
+echo "ERROR: Timeout waiting for display connection after $MAX_WAIT seconds"
+[ -n "$LOADING_PID" ] && kill "$LOADING_PID" 2>/dev/null || true
+exit 1

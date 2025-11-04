@@ -1,28 +1,30 @@
 [Unit]
 Description=PourPal Cocktail Mixing System
-After=graphical-session.target
-Wants=graphical-session.target
+After=graphical.target network-online.target
+Wants=graphical.target network-online.target
 
 [Service]
-Type=oneshot
+Type=forking
 User=ppl
 Group=ppl
 WorkingDirectory=/home/ppl/pourpal-software
 ExecStart=/home/ppl/pourpal-software/start_at_boot.sh
 ExecStop=/bin/bash -c "/usr/bin/tmux kill-session -t myapp 2>/dev/null || true"
 RemainAfterExit=yes
-Restart=no
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=300
 Environment=DISPLAY=:0
 Environment=HOME=/home/ppl
+Environment=XDG_RUNTIME_DIR=/run/user/1000
 
 # Logging
 StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=pourpal
 
-# Security settings
-NoNewPrivileges=true
-PrivateTmp=true
+# Allow the service to keep running after the script exits
+KillMode=process
 
 [Install]
 WantedBy=graphical.target

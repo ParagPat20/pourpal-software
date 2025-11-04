@@ -1071,10 +1071,16 @@ document.getElementById("serial-out-button").addEventListener("click", () => {
 async function sendPipesToPython(assignedPipes) {
   console.log('Starting sendPipesToPython with assigned pipes:', assignedPipes);
   
+  // Get drink type (intensity)
   const drinkType = document.querySelector(
     'input[name="drink-type"]:checked'
-  ).value;
-  console.log('Selected drink type:', drinkType);
+  )?.value || "regular";
+  console.log('Selected drink intensity:', drinkType);
+
+  // Get drink size
+  const drinkSizeShot = document.getElementById("drink-size-shot");
+  const drinkSize = drinkSizeShot?.checked ? "shot" : "regular";
+  console.log('Selected drink size:', drinkSize);
 
   // Get the cocktail details from products.json
   const response = await fetch('products.json');
@@ -1085,19 +1091,25 @@ async function sendPipesToPython(assignedPipes) {
     throw new Error('Selected cocktail not found');
   }
 
-  // Create a map of ingredient names to their measurements
+  // Calculate scaled measurements based on size and intensity
+  const scaledMeasurements = calculateScaledMeasurements(selectedCocktail, drinkSize, drinkType);
+  
+  // Create a map of ingredient names to their scaled measurements
   const ingredientMeasurements = {};
-  selectedCocktail.PIng.forEach(ingredient => {
-    ingredientMeasurements[ingredient.ING_Name] = ingredient.ING_ML;
+  scaledMeasurements.forEach(item => {
+    ingredientMeasurements[item.name] = item.scaledML.toString();
   });
+  
+  console.log('Scaled measurements:', ingredientMeasurements);
   
   const dataToSend = {
     productId: selectedCocktailID,
     ingredients: assignedPipes.map(pipe => ({
       ...pipe,
-      ingMl: ingredientMeasurements[pipe.name] || "50"  // Get measurement from cocktail ingredients, default to "50" if not found
+      ingMl: ingredientMeasurements[pipe.name] || "50"  // Get scaled measurement, default to "50" if not found
     })),
-    drinkType: drinkType
+    drinkType: drinkType,
+    drinkSize: drinkSize
   };
   console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
   
@@ -2247,6 +2259,188 @@ async function wshowCocktailDetails(cocktail, highlightIngredients = []) {
     htmTitle.style.display = "none";
     cocktailHtm.style.display = "none";
   }
+
+  // Setup drink size and intensity handlers
+  setupDrinkHandlers(cocktail);
+}
+
+// Function to calculate scaled measurements based on size and intensity
+function calculateScaledMeasurements(cocktail, drinkSize, drinkIntensity) {
+  const targetTotal = drinkSize === "shot" ? 30 : null; // 30ml for shot, original for regular
+  
+  // Get all ingredients with ML measurements
+  const ingredientsWithML = cocktail.PIng.filter(ing => {
+    const mlRaw = (ing.ING_ML || "0").toString().trim().toLowerCase();
+    return mlRaw.includes("ml");
+  });
+
+  // Separate liquor and non-liquor ingredients
+  const liquorTypes = ["Strong", "Soft"]; // Types considered as liquor
+  const liquorIngredients = [];
+  const nonLiquorIngredients = [];
+
+  ingredientsWithML.forEach(ing => {
+    const mlRaw = (ing.ING_ML || "0").toString().trim();
+    const mlNum = parseFloat(mlRaw.replace(/[^\d.]/g, "")) || 0;
+    
+    // Check ingredient type from db
+    const ingredientData = ingredientsData.find(i => i.ING_Name === ing.ING_Name);
+    const isLiquor = ingredientData && liquorTypes.includes(ingredientData.ING_Type);
+    
+    if (isLiquor) {
+      liquorIngredients.push({ ...ing, originalML: mlNum });
+    } else {
+      nonLiquorIngredients.push({ ...ing, originalML: mlNum });
+    }
+  });
+
+  let scaledMeasurements = [];
+
+  if (drinkSize === "shot") {
+    // Calculate total ML for proportional scaling
+    const totalML = ingredientsWithML.reduce((sum, ing) => {
+      const mlRaw = (ing.ING_ML || "0").toString().trim();
+      const mlNum = parseFloat(mlRaw.replace(/[^\d.]/g, "")) || 0;
+      return sum + mlNum;
+    }, 0);
+
+    if (totalML === 0) return [];
+
+    // Calculate scaling factor to make total = 30ml
+    const scalingFactor = targetTotal / totalML;
+
+    // Scale all ingredients proportionally
+    scaledMeasurements = ingredientsWithML.map(ing => {
+      const mlRaw = (ing.ING_ML || "0").toString().trim();
+      const mlNum = parseFloat(mlRaw.replace(/[^\d.]/g, "")) || 0;
+      const scaledML = Math.round(mlNum * scalingFactor * 10) / 10;
+      
+      return {
+        name: ing.ING_Name,
+        originalML: mlNum,
+        scaledML: scaledML
+      };
+    });
+  } else {
+    // Regular size - apply intensity adjustments
+    let intensityFactor = 1.0; // Regular = 1.0
+    
+    if (drinkIntensity === "less-liquor") {
+      intensityFactor = 0.85; // 15% less liquor
+    } else if (drinkIntensity === "more-liquor") {
+      intensityFactor = 1.15; // 15% more liquor
+    }
+
+    // Apply intensity only to liquor ingredients
+    scaledMeasurements = ingredientsWithML.map(ing => {
+      const mlRaw = (ing.ING_ML || "0").toString().trim();
+      const mlNum = parseFloat(mlRaw.replace(/[^\d.]/g, "")) || 0;
+      
+      const ingredientData = ingredientsData.find(i => i.ING_Name === ing.ING_Name);
+      const isLiquor = ingredientData && liquorTypes.includes(ingredientData.ING_Type);
+      
+      const scaledML = isLiquor ? Math.round(mlNum * intensityFactor * 10) / 10 : mlNum;
+      
+      return {
+        name: ing.ING_Name,
+        originalML: mlNum,
+        scaledML: scaledML,
+        isLiquor: isLiquor
+      };
+    });
+  }
+
+  return scaledMeasurements;
+}
+
+// Function to update ML preview display
+function updateMLPreview(cocktail) {
+  const drinkSizeShot = document.getElementById("drink-size-shot");
+  const drinkSizeRegular = document.getElementById("drink-size-regular");
+  const drinkIntensityInputs = document.querySelectorAll('input[name="drink-type"]');
+  
+  const drinkSize = drinkSizeShot?.checked ? "shot" : "regular";
+  let drinkIntensity = "regular";
+  
+  drinkIntensityInputs.forEach(input => {
+    if (input.checked) {
+      drinkIntensity = input.value;
+    }
+  });
+
+  const previewSection = document.getElementById("ml-preview-section");
+  const previewContainer = document.getElementById("ml-preview-container");
+  
+  // Safety check - if elements don't exist, exit gracefully
+  if (!previewSection || !previewContainer) {
+    console.warn("ML preview elements not found in DOM");
+    return;
+  }
+  
+  const scaledMeasurements = calculateScaledMeasurements(cocktail, drinkSize, drinkIntensity);
+  
+  if (scaledMeasurements.length === 0) {
+    previewSection.style.display = "none";
+    return;
+  }
+
+  previewSection.style.display = "block";
+  previewContainer.innerHTML = "";
+
+  let total = 0;
+  scaledMeasurements.forEach(item => {
+    total += item.scaledML;
+    const previewItem = document.createElement("div");
+    previewItem.className = "ml-preview-item";
+    
+    let displayText = `${item.scaledML}ml`;
+    if (drinkSize === "shot") {
+      displayText += ` <span style="color: #666; font-size: 0.9em;">(was ${item.originalML}ml)</span>`;
+    } else if (item.originalML !== item.scaledML) {
+      displayText += ` <span style="color: #ff8800; font-size: 0.9em;">(was ${item.originalML}ml)</span>`;
+    }
+    
+    previewItem.innerHTML = `
+      <span class="ingredient-name">${item.name}${item.isLiquor ? ' 🥃' : ''}</span>
+      <span class="ingredient-ml">${displayText}</span>
+    `;
+    previewContainer.appendChild(previewItem);
+  });
+
+  // Add total
+  const totalItem = document.createElement("div");
+  totalItem.className = "ml-preview-item";
+  totalItem.style.borderTop = drinkSize === "shot" ? "2px solid #ff8800" : "2px solid #359267";
+  totalItem.style.marginTop = "5px";
+  totalItem.style.fontWeight = "bold";
+  totalItem.innerHTML = `
+    <span class="ingredient-name">TOTAL ${drinkSize === "shot" ? "(SHOT)" : ""}</span>
+    <span class="ingredient-ml">${Math.round(total * 10) / 10}ml</span>
+  `;
+  previewContainer.appendChild(totalItem);
+}
+
+// Function to setup drink size and intensity handlers
+function setupDrinkHandlers(cocktail) {
+  // Initial display
+  updateMLPreview(cocktail);
+
+  // Add change listeners for drink size
+  const drinkSizeShot = document.getElementById("drink-size-shot");
+  const drinkSizeRegular = document.getElementById("drink-size-regular");
+  
+  if (drinkSizeShot) {
+    drinkSizeShot.addEventListener("change", () => updateMLPreview(cocktail));
+  }
+  if (drinkSizeRegular) {
+    drinkSizeRegular.addEventListener("change", () => updateMLPreview(cocktail));
+  }
+
+  // Add change listeners for drink intensity
+  const drinkIntensityInputs = document.querySelectorAll('input[name="drink-type"]');
+  drinkIntensityInputs.forEach(input => {
+    input.addEventListener("change", () => updateMLPreview(cocktail));
+  });
 }
 
 // Function to fetch all ingredients from db.json
