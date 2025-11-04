@@ -15,6 +15,13 @@ from image_handler import processing_complete
 base_dir = os.path.dirname(__file__)
 web_dir = os.path.join(base_dir, "static")  # Define `static` folder path
 
+# ==================== CONFIGURATION ====================
+# Pump calibration: How many seconds it takes to pour 1ml
+# Example: If 1ml takes 1.3 seconds, set SECONDS_PER_ML = 1.3
+# Example: If 10ml takes 1 second, set SECONDS_PER_ML = 0.1
+SECONDS_PER_ML = 1.3  # Adjust this value to calibrate your pumps
+# ======================================================
+
 
 class CustomHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
@@ -460,9 +467,11 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     if not pipe_str:
                         continue
                     pipe_num = int(pipe_str)
-                    # Convert ml to seconds (10 ml per second) => 45 ml = 4.5 s
+                    # Convert ml to seconds using SECONDS_PER_ML calibration
+                    # Example: 45ml * 1.3 seconds/ml = 58.5 seconds
                     ml_value = item.get("ingMl", "0")
-                    seconds = float(str(ml_value).strip().replace("ml", "")) / 10.0
+                    ml_float = float(str(ml_value).strip().replace("ml", ""))
+                    seconds = ml_float * SECONDS_PER_ML
                     if seconds <= 0:
                         continue
                     # Use T for transition + relay timing per new firmware
@@ -585,7 +594,13 @@ class CustomHandler(SimpleHTTPRequestHandler):
 def start_http_server():
     global httpd
     httpd = HTTPServer(("127.0.0.1", 5000), CustomHandler)
+    print("=" * 60)
     print("HTTP server running on http://127.0.0.1:5000")
+    print(f"Pump Calibration: {SECONDS_PER_ML} seconds per ml")
+    print(f"  → 30ml shot = {30 * SECONDS_PER_ML:.1f} seconds")
+    print(f"  → 60ml pour = {60 * SECONDS_PER_ML:.1f} seconds")
+    print("To change calibration, edit SECONDS_PER_ML in app.py")
+    print("=" * 60)
     httpd.serve_forever()
 
 
