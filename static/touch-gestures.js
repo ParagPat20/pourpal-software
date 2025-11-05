@@ -15,11 +15,9 @@ class TouchGestureHandler {
     }
     
     init() {
-        // Add touch event listeners to the document with passive: true for better performance
-        // This allows native scrolling and doesn't block browser defaults
-        document.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
-        document.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: true });
-        document.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true });
+        // DISABLED: Touch event listeners were interfering with native scrolling
+        // Native scrolling is more important than gesture detection
+        // The gesture tracking code is kept below for future reference but not activated
         
         // Only prevent text selection on non-input elements
         document.addEventListener('selectstart', (e) => {
@@ -28,7 +26,7 @@ class TouchGestureHandler {
             }
         });
         
-        // Add CSS to prevent text selection and improve touch behavior
+        // Add CSS to improve touch behavior WITHOUT interfering with scrolling
         this.addTouchCSS();
     }
     
@@ -232,7 +230,7 @@ class TouchGestureHandler {
     }
     
     addTouchCSS() {
-        // Add CSS to improve touch behavior
+        // Add CSS to improve touch behavior WITHOUT interfering with scrolling
         const style = document.createElement('style');
         style.textContent = `
             /* Prevent text selection on most elements */
@@ -263,16 +261,29 @@ class TouchGestureHandler {
                 -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
             }
             
-            /* Allow natural scrolling */
-            .cocktail-list, .ing-list, .scrollable {
-                touch-action: pan-y !important;
-                overflow-y: auto;
+            /* CRITICAL: Enable native scrolling everywhere */
+            * {
                 -webkit-overflow-scrolling: touch;
             }
             
-            /* Smooth scrolling for swipe gestures */
+            /* Allow natural scrolling on ALL potentially scrollable containers */
+            body, html, div, .cocktail-list, .ing-list, .scrollable,
+            .available-cocktails, .cocktail-details, .assign-pipe,
+            .add-ingredients, .add-cocktail {
+                touch-action: pan-y pan-x !important;
+                overflow: auto;
+            }
+            
+            /* Smooth scrolling */
             html {
                 scroll-behavior: smooth;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
             }
         `;
         document.head.appendChild(style);
@@ -282,5 +293,5 @@ class TouchGestureHandler {
 // Initialize touch gesture handler when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new TouchGestureHandler();
-    console.log('Touch Gesture Handler initialized');
+    console.log('Touch optimizations applied - Native scrolling enabled');
 });

@@ -1149,11 +1149,26 @@ async function sendPipesToPython(assignedPipes) {
   }
 }
 
+// Global flag to track if drink was cancelled
+let drinkCancelled = false;
+
 // Function to check completion status
 function checkCompletionStatus() {
+  // Don't check if drink was cancelled
+  if (drinkCancelled) {
+    console.log('Drink was cancelled, stopping completion check');
+    return;
+  }
+  
   fetch('/check-completion')
     .then(response => response.json())
     .then(data => {
+      // Check again if cancelled (in case it was cancelled during fetch)
+      if (drinkCancelled) {
+        console.log('Drink was cancelled during check, stopping');
+        return;
+      }
+      
       if (data.status === 'completed') {
         // Drink is ready, hide loading page
         hideLoadingPage();
@@ -1174,6 +1189,9 @@ function checkCompletionStatus() {
 
 // Function to show the loading page
 function showLoadingPage() {
+    // Reset cancellation flag for new drink
+    drinkCancelled = false;
+    
     const loadingPage = document.getElementById('loading-page');
     loadingPage.style.display = 'flex';
     
@@ -1183,14 +1201,24 @@ function showLoadingPage() {
 }
 
 function cancelDrink() {
+    console.log('Cancelling drink...');
+    
+    // Set the cancellation flag to stop completion checks immediately
+    drinkCancelled = true;
+    
     // Send cancel request to server
     fetch('/cancel-drink', { method: 'POST' })
         .then(response => {
             if (response.ok) {
+                // Also clear the processing flag on backend
+                fetch('/delete_processing_flag', { method: 'POST' })
+                    .catch(err => console.log('Error clearing flag:', err));
+                
                 // Hide loading page
                 hideLoadingPage();
                 // Show cancelled message
                 showMessage('Drink preparation cancelled', 'error');
+                console.log('Drink successfully cancelled');
             } else {
                 throw new Error('Failed to cancel drink');
             }
@@ -1198,6 +1226,8 @@ function cancelDrink() {
         .catch(error => {
             console.error('Error cancelling drink:', error);
             showMessage('Failed to cancel drink', 'error');
+            // Still hide the loading page even if cancel fails
+            hideLoadingPage();
         });
 }
 
