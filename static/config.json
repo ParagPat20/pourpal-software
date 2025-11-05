@@ -2,16 +2,23 @@
   "numberOfPipes": 8,
   "pipeConfig": {
     "Pipe 1": "7-Up",
-    "Pipe 2": "Cranberry Juice",
-    "Pipe 3": "Almond Syrup",
-    "Pipe 4": "Angostura Bitters",
-    "Pipe 5": "Apple Schnapps",
-    "Pipe 6": "Amaretto",
-    "Pipe 7": "Agave Nectar",
-    "Pipe 8": "Triple Sec"
+    "Pipe 2": "Tequila Gold",
+    "Pipe 3": "Vodka",
+    "Pipe 4": "Rye Whiskey",
+    "Pipe 5": "Pisco",
+    "Pipe 6": "Jack Daniels",
+    "Pipe 7": "J\u00e4germeister",
+    "Pipe 8": "Kirsch"
   },
   "selectedIngredients": [
-    "7-Up"
+    "7-Up",
+    "Tequila Gold",
+    "Vodka",
+    "Rye Whiskey",
+    "Pisco",
+    "Jack Daniels",
+    "J\u00e4germeister",
+    "Kirsch"
   ],
   "pipeNotes": {
     "Pipe 1": "Motor1Pipe",

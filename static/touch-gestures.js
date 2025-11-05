@@ -15,19 +15,29 @@ class TouchGestureHandler {
     }
     
     init() {
-        // Add touch event listeners to the document
-        document.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
-        document.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
-        document.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
+        // Add touch event listeners to the document with passive: true for better performance
+        // This allows native scrolling and doesn't block browser defaults
+        document.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
+        document.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: true });
+        document.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true });
         
-        // Prevent text selection on touch
-        document.addEventListener('selectstart', (e) => e.preventDefault());
+        // Only prevent text selection on non-input elements
+        document.addEventListener('selectstart', (e) => {
+            if (!e.target.matches('input, textarea, select')) {
+                e.preventDefault();
+            }
+        });
         
         // Add CSS to prevent text selection and improve touch behavior
         this.addTouchCSS();
     }
     
     handleTouchStart(e) {
+        // Don't interfere with input fields, textareas, or select elements
+        if (e.target.matches('input, textarea, select, option')) {
+            return;
+        }
+        
         const touch = e.touches[0];
         this.startX = touch.clientX;
         this.startY = touch.clientY;
@@ -38,6 +48,11 @@ class TouchGestureHandler {
     }
     
     handleTouchMove(e) {
+        // Don't interfere with input fields, textareas, or select elements
+        if (e.target.matches('input, textarea, select, option')) {
+            return;
+        }
+        
         const touch = e.touches[0];
         const deltaX = Math.abs(touch.clientX - this.startX);
         const deltaY = Math.abs(touch.clientY - this.startY);
@@ -45,11 +60,17 @@ class TouchGestureHandler {
         // If movement is significant, it's likely a swipe
         if (deltaX > this.touchThreshold || deltaY > this.touchThreshold) {
             this.isSwipe = true;
-            e.preventDefault(); // Prevent scrolling and other default behaviors
+            // Only prevent default for non-scrollable elements
+            // Allow natural scrolling behavior
         }
     }
     
     handleTouchEnd(e) {
+        // Don't interfere with input fields, textareas, or select elements
+        if (e.target.matches('input, textarea, select, option')) {
+            return;
+        }
+        
         const touch = e.changedTouches[0];
         const deltaX = touch.clientX - this.startX;
         const deltaY = touch.clientY - this.startY;
@@ -59,7 +80,7 @@ class TouchGestureHandler {
         
         // Determine if this was a swipe gesture
         if (this.isSwipe || (distance > this.minSwipeDistance && deltaTime < this.maxSwipeTime)) {
-            e.preventDefault(); // Prevent click events
+            // Don't prevent default - let natural behavior work
             
             // Determine swipe direction
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
@@ -106,19 +127,37 @@ class TouchGestureHandler {
     }
     
     scrollPage(direction) {
-        const scrollAmount = 100; // Adjust as needed
-        const currentScroll = window.pageYOffset;
+        // Get the currently visible scrollable container
+        const visibleSection = document.querySelector('[style*="display: block"]') || document.body;
+        const scrollContainer = visibleSection.querySelector('.scrollable, .cocktail-list, .ing-list') || visibleSection;
+        
+        const scrollAmount = 200; // Adjust as needed
+        const currentScroll = scrollContainer.scrollTop || window.pageYOffset;
         
         if (direction === 'up') {
-            window.scrollTo({
-                top: Math.max(0, currentScroll - scrollAmount),
-                behavior: 'smooth'
-            });
+            if (scrollContainer !== document.body && scrollContainer.scrollTop !== undefined) {
+                scrollContainer.scrollTo({
+                    top: Math.max(0, currentScroll - scrollAmount),
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: Math.max(0, currentScroll - scrollAmount),
+                    behavior: 'smooth'
+                });
+            }
         } else if (direction === 'down') {
-            window.scrollTo({
-                top: currentScroll + scrollAmount,
-                behavior: 'smooth'
-            });
+            if (scrollContainer !== document.body && scrollContainer.scrollTop !== undefined) {
+                scrollContainer.scrollTo({
+                    top: currentScroll + scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: currentScroll + scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
         }
     }
     
@@ -196,7 +235,8 @@ class TouchGestureHandler {
         // Add CSS to improve touch behavior
         const style = document.createElement('style');
         style.textContent = `
-            * {
+            /* Prevent text selection on most elements */
+            body, div, span, p, h1, h2, h3, h4, h5, h6 {
                 -webkit-touch-callout: none;
                 -webkit-user-select: none;
                 -khtml-user-select: none;
@@ -206,23 +246,28 @@ class TouchGestureHandler {
                 -webkit-tap-highlight-color: transparent;
             }
             
-            /* Allow text selection in input fields */
-            input, textarea {
-                -webkit-user-select: text;
-                -moz-user-select: text;
-                -ms-user-select: text;
-                user-select: text;
+            /* ALLOW text selection and interaction in input fields - CRITICAL for keyboard */
+            input, textarea, select {
+                -webkit-user-select: text !important;
+                -moz-user-select: text !important;
+                -ms-user-select: text !important;
+                user-select: text !important;
+                -webkit-touch-callout: default !important;
+                touch-action: auto !important;
+                pointer-events: auto !important;
             }
             
-            /* Improve touch responsiveness */
+            /* Improve touch responsiveness for buttons */
             button, .btn, .option, .cocktail-item, .ing-item {
                 touch-action: manipulation;
                 -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
             }
             
-            /* Prevent zoom on double tap */
-            html {
-                touch-action: manipulation;
+            /* Allow natural scrolling */
+            .cocktail-list, .ing-list, .scrollable {
+                touch-action: pan-y !important;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
             
             /* Smooth scrolling for swipe gestures */
