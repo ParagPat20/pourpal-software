@@ -7,7 +7,7 @@
 
 Adafruit_NeoPixel strip(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
 
-const int relayPins[NUM_RINGS] = {9, 8, 7, 6, 5, 4, 3, 2};
+const int relayPins[NUM_RINGS] = {8, 9, 6, 7, 4, 5, 2, 3};
 bool systemStarted = false;
 
 // ===== SETUP =====
