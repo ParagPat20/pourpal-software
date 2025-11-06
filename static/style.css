@@ -298,37 +298,43 @@ select {
   background: #3d3229; /* Darker color on hover */
 }
 
-/* Scrollbar buttons (arrows) - BIGGER with white background and dark arrows */
+/* Hide ALL buttons by default */
 .ing-grid::-webkit-scrollbar-button,
 ::-webkit-scrollbar-button {
-  display: block; /* Show buttons */
-  height: 24px; /* Bigger button height */
-  width: 24px; /* Bigger button width */
-  background: #ffffff; /* White background */
-  border: 2px solid #4b3d2e; /* Dark border */
-  border-radius: 4px; /* Slightly rounded */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 12px 12px; /* Bigger arrow */
-}
-
-.ing-grid::-webkit-scrollbar-button:hover,
-::-webkit-scrollbar-button:hover {
-  background-color: #f5f5f5; /* Light gray on hover */
-}
-
-/* ONLY show single-button mode - UP at start, DOWN at end */
-.ing-grid::-webkit-scrollbar-button:single-button,
-::-webkit-scrollbar-button:single-button {
-  display: block;
-}
-
-/* Hide double buttons (this prevents duplicate arrows) */
-.ing-grid::-webkit-scrollbar-button:double-button,
-::-webkit-scrollbar-button:double-button {
   display: none;
   height: 0;
   width: 0;
+}
+
+/* ONLY show the buttons with arrows */
+.ing-grid::-webkit-scrollbar-button:vertical:decrement:start,
+::-webkit-scrollbar-button:vertical:decrement:start,
+.ing-grid::-webkit-scrollbar-button:vertical:increment:end,
+::-webkit-scrollbar-button:vertical:increment:end,
+.ing-grid::-webkit-scrollbar-button:horizontal:decrement:start,
+::-webkit-scrollbar-button:horizontal:decrement:start,
+.ing-grid::-webkit-scrollbar-button:horizontal:increment:end,
+::-webkit-scrollbar-button:horizontal:increment:end {
+  display: block; /* Show ONLY these buttons */
+  height: 24px;
+  width: 24px;
+  background: #ffffff;
+  border: 2px solid #4b3d2e;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+.ing-grid::-webkit-scrollbar-button:vertical:decrement:start:hover,
+::-webkit-scrollbar-button:vertical:decrement:start:hover,
+.ing-grid::-webkit-scrollbar-button:vertical:increment:end:hover,
+::-webkit-scrollbar-button:vertical:increment:end:hover,
+.ing-grid::-webkit-scrollbar-button:horizontal:decrement:start:hover,
+::-webkit-scrollbar-button:horizontal:decrement:start:hover,
+.ing-grid::-webkit-scrollbar-button:horizontal:increment:end:hover,
+::-webkit-scrollbar-button:horizontal:increment:end:hover {
+  background-color: #f5f5f5;
 }
 
 /* UP arrow - dark triangle pointing UP (at START/TOP of scrollbar) */
@@ -2158,28 +2164,34 @@ select,
   border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Scrollbar buttons (arrows) for all elements - BIGGER with white background */
+/* Hide ALL buttons by default */
 ::-webkit-scrollbar-button {
-  display: block; /* Show buttons */
-  height: 24px; /* Bigger */
-  width: 24px; /* Bigger */
-  background: #ffffff; /* White background */
-  border: 2px solid #333333; /* Dark border */
-  border-radius: 4px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 12px 12px; /* Bigger arrow */
-}
-
-::-webkit-scrollbar-button:hover {
-  background-color: #f5f5f5; /* Light gray on hover */
-}
-
-/* Hide double buttons to show only one button per end */
-::-webkit-scrollbar-button:double-button {
   display: none;
   height: 0;
   width: 0;
+}
+
+/* ONLY show the buttons with arrows */
+::-webkit-scrollbar-button:vertical:decrement:start,
+::-webkit-scrollbar-button:vertical:increment:end,
+::-webkit-scrollbar-button:horizontal:decrement:start,
+::-webkit-scrollbar-button:horizontal:increment:end {
+  display: block;
+  height: 24px;
+  width: 24px;
+  background: #ffffff;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+::-webkit-scrollbar-button:vertical:decrement:start:hover,
+::-webkit-scrollbar-button:vertical:increment:end:hover,
+::-webkit-scrollbar-button:horizontal:decrement:start:hover,
+::-webkit-scrollbar-button:horizontal:increment:end:hover {
+  background-color: #f5f5f5;
 }
 
 /* UP arrow - dark triangle pointing UP (at START/TOP) */
@@ -2564,28 +2576,34 @@ select,
   border-radius: 8px;
 }
 
-/* Scrollbar buttons for cocktail list - BIGGER with white background */
+/* Hide ALL buttons by default */
 .all-cocktail .cocktail-list::-webkit-scrollbar-button {
-  display: block;
-  height: 24px; /* Bigger */
-  width: 24px; /* Bigger */
-  background: #ffffff; /* White background */
-  border: 2px solid #666666; /* Dark gray border */
-  border-radius: 4px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 12px 12px; /* Bigger arrow */
-}
-
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:hover {
-  background-color: #f5f5f5; /* Light gray on hover */
-}
-
-/* Hide double buttons */
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:double-button {
   display: none;
   height: 0;
   width: 0;
+}
+
+/* ONLY show the buttons with arrows */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:decrement:start,
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:increment:end,
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:decrement:start,
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:increment:end {
+  display: block;
+  height: 24px;
+  width: 24px;
+  background: #ffffff;
+  border: 2px solid #666666;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:decrement:start:hover,
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:increment:end:hover,
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:decrement:start:hover,
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:increment:end:hover {
+  background-color: #f5f5f5;
 }
 
 /* UP arrow - only at START/TOP */
