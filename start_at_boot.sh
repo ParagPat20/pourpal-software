@@ -56,8 +56,27 @@ fi
 # Hide the taskbar for kiosk mode
 echo "Hiding taskbar for kiosk mode..."
 
+# Check for labwc compositor (Latest Raspberry Pi OS)
+if pgrep -x "labwc" > /dev/null; then
+    echo "Detected labwc compositor (latest Raspberry Pi OS)"
+    
+    # Kill common panels used with labwc
+    pkill sfwbar 2>/dev/null || true
+    pkill yambar 2>/dev/null || true
+    pkill waybar 2>/dev/null || true
+    
+    # Also disable panel autostart
+    LABWC_AUTOSTART="/home/ppl/.config/labwc/autostart"
+    if [ -f "$LABWC_AUTOSTART" ]; then
+        cp "$LABWC_AUTOSTART" "${LABWC_AUTOSTART}.backup" 2>/dev/null || true
+        sed -i 's/^\([^#].*\(sfwbar\|yambar\|waybar\|panel\)\)/# \1/g' "$LABWC_AUTOSTART"
+        echo "Taskbar hidden successfully (labwc panel killed and autostart disabled)"
+    else
+        echo "Taskbar hidden successfully (labwc panel killed)"
+    fi
+    
 # Check for Wayfire panel (New Raspberry Pi OS Bookworm default)
-if pgrep -x "wf-panel-pi" > /dev/null || pgrep -x "wf-panel" > /dev/null; then
+elif pgrep -x "wf-panel-pi" > /dev/null || pgrep -x "wf-panel" > /dev/null; then
     echo "Detected Wayfire panel (new Raspberry Pi OS)"
     pkill wf-panel-pi 2>/dev/null || true
     pkill wf-panel 2>/dev/null || true

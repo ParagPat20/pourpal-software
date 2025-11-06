@@ -8,6 +8,8 @@ SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 SCRIPT_DIR="/home/ppl/pourpal-software"
 TMUX_BIN="/usr/bin/tmux"
 LXPANEL_CONFIG="/home/ppl/.config/lxpanel/LXDE-pi/panels/panel"
+LABWC_CONFIG="/home/ppl/.config/labwc/rc.xml"
+LABWC_AUTOSTART="/home/ppl/.config/labwc/autostart"
 
 # Colors for output
 RED='\033[0;31m'
@@ -225,8 +227,41 @@ hide_taskbar() {
     print_header
     print_status "Hiding taskbar..."
     
+    # Check for labwc compositor (Latest Raspberry Pi OS)
+    if pgrep -x "labwc" > /dev/null; then
+        print_status "Detected labwc compositor (latest Raspberry Pi OS)"
+        
+        # Check for common panels used with labwc
+        if pgrep -x "sfwbar" > /dev/null; then
+            print_status "Found sfwbar panel"
+            pkill sfwbar 2>/dev/null || true
+            print_status "✅ sfwbar panel hidden successfully!"
+        elif pgrep -x "yambar" > /dev/null; then
+            print_status "Found yambar panel"
+            pkill yambar 2>/dev/null || true
+            print_status "✅ yambar panel hidden successfully!"
+        elif pgrep -x "waybar" > /dev/null; then
+            print_status "Found waybar panel"
+            pkill waybar 2>/dev/null || true
+            print_status "✅ waybar panel hidden successfully!"
+        else
+            # No panel found, check autostart
+            if [ -f "$LABWC_AUTOSTART" ]; then
+                print_status "No panel process found, checking autostart..."
+                # Comment out panel launches in autostart
+                cp "$LABWC_AUTOSTART" "${LABWC_AUTOSTART}.backup" 2>/dev/null || true
+                sed -i 's/^\([^#].*\(sfwbar\|yambar\|waybar\|panel\)\)/# \1/g' "$LABWC_AUTOSTART"
+                print_status "✅ Panel autostart disabled"
+                print_status "Backup saved to ${LABWC_AUTOSTART}.backup"
+                print_status "Note: Reboot or restart labwc to apply changes"
+            else
+                print_warning "No panel found to hide"
+                print_status "labwc is running without a panel (already in kiosk mode)"
+            fi
+        fi
+        
     # Check for Wayfire panel (New Raspberry Pi OS Bookworm default)
-    if pgrep -x "wf-panel-pi" > /dev/null || pgrep -x "wf-panel" > /dev/null; then
+    elif pgrep -x "wf-panel-pi" > /dev/null || pgrep -x "wf-panel" > /dev/null; then
         print_status "Detected Wayfire panel (new Raspberry Pi OS)"
         
         # Kill the panel processes
@@ -289,8 +324,34 @@ unhide_taskbar() {
     print_header
     print_status "Showing taskbar..."
     
+    # Check for labwc compositor (Latest Raspberry Pi OS)
+    if pgrep -x "labwc" > /dev/null; then
+        print_status "Detected labwc compositor (latest Raspberry Pi OS)"
+        
+        # Try to start common panels
+        if command -v sfwbar &> /dev/null && ! pgrep -x "sfwbar" > /dev/null; then
+            sfwbar &
+            print_status "✅ Started sfwbar panel"
+        elif command -v yambar &> /dev/null && ! pgrep -x "yambar" > /dev/null; then
+            yambar &
+            print_status "✅ Started yambar panel"
+        elif command -v waybar &> /dev/null && ! pgrep -x "waybar" > /dev/null; then
+            waybar &
+            print_status "✅ Started waybar panel"
+        else
+            # Restore autostart if backup exists
+            if [ -f "${LABWC_AUTOSTART}.backup" ]; then
+                cp "${LABWC_AUTOSTART}.backup" "$LABWC_AUTOSTART"
+                print_status "✅ Panel autostart restored from backup"
+                print_status "Note: Reboot or restart labwc to see the panel"
+            else
+                print_warning "No panel command found to start"
+                print_status "You may need to manually configure a panel for labwc"
+            fi
+        fi
+        
     # Check for Wayfire panel (New Raspberry Pi OS Bookworm default)
-    if pgrep -x "wayfire" > /dev/null; then
+    elif pgrep -x "wayfire" > /dev/null; then
         print_status "Detected Wayfire compositor (new Raspberry Pi OS)"
         
         # Start the panel if not running
@@ -361,8 +422,26 @@ taskbar_status() {
     print_status "Taskbar Status:"
     echo ""
     
+    # Check for labwc compositor (Latest Raspberry Pi OS)
+    if pgrep -x "labwc" > /dev/null; then
+        print_status "✅ labwc compositor is running (latest Raspberry Pi OS)"
+        
+        if pgrep -x "sfwbar" > /dev/null; then
+            print_status "✅ sfwbar panel is running"
+            print_status "📍 Status: Visible"
+        elif pgrep -x "yambar" > /dev/null; then
+            print_status "✅ yambar panel is running"
+            print_status "📍 Status: Visible"
+        elif pgrep -x "waybar" > /dev/null; then
+            print_status "✅ waybar panel is running"
+            print_status "📍 Status: Visible"
+        else
+            print_warning "❌ No panel is running"
+            print_status "📍 Status: Hidden (kiosk mode)"
+        fi
+        
     # Check for Wayfire panel (New Raspberry Pi OS)
-    if pgrep -x "wayfire" > /dev/null; then
+    elif pgrep -x "wayfire" > /dev/null; then
         print_status "✅ Wayfire compositor is running"
         
         if pgrep -x "wf-panel-pi" > /dev/null; then
