@@ -27,6 +27,28 @@ let ingredientRemarks = {};
 let allCocktailsData = [];
 let allCocktailsHandlersInitialized = false;
 
+// ==================== KEYBOARD HANDLERS ====================
+// These functions trigger the on-screen keyboard on Raspberry Pi
+function handleInputFocus() {
+  console.log('Input focused - Starting keyboard');
+  fetch('/focus-in', { method: 'POST' })
+    .then(response => response.text())
+    .then(data => console.log('Keyboard start response:', data))
+    .catch(error => console.error('Error starting keyboard:', error));
+}
+
+function handleInputBlur() {
+  console.log('Input blurred - Stopping keyboard');
+  // Add a small delay to prevent keyboard from closing if user is switching between inputs
+  setTimeout(() => {
+    fetch('/focus-out', { method: 'POST' })
+      .then(response => response.text())
+      .then(data => console.log('Keyboard stop response:', data))
+      .catch(error => console.error('Error stopping keyboard:', error));
+  }, 200);
+}
+// ==========================================================
+
 // Add event listener for the "Add Remark" button
 document.addEventListener("DOMContentLoaded", () => {
   const addRemarkButton = document.getElementById("add-remark-button");

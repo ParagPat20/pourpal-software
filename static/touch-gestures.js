@@ -269,21 +269,30 @@ class TouchGestureHandler {
             /* Allow natural scrolling on ALL potentially scrollable containers */
             body, html, div, .cocktail-list, .ing-list, .scrollable,
             .available-cocktails, .cocktail-details, .assign-pipe,
-            .add-ingredients, .add-cocktail {
+            .add-ingredients, .add-cocktail, .app-pageview, .app-body,
+            .all-cocktail, .find-ing {
                 touch-action: pan-y pan-x !important;
-                overflow: auto;
             }
             
-            /* Smooth scrolling */
+            /* Override overflow: hidden to allow scrolling */
+            .app-body, .app-pageview {
+                overflow: auto !important;
+            }
+            
+            /* Enable overflow for scrollable lists */
+            .cocktail-list, .ing-list, .all-cocktail {
+                overflow-y: auto !important;
+                overflow-x: auto !important;
+            }
+            
+            /* Smooth scrolling - ALLOW horizontal scroll */
             html {
                 scroll-behavior: smooth;
-                overflow-y: auto;
-                overflow-x: hidden;
+                overflow: auto;  /* Allow both vertical and horizontal */
             }
             
             body {
-                overflow-y: auto;
-                overflow-x: hidden;
+                overflow: auto;  /* Allow both vertical and horizontal */
             }
         `;
         document.head.appendChild(style);
