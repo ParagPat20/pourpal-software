@@ -225,14 +225,26 @@ hide_taskbar() {
     print_header
     print_status "Hiding taskbar..."
     
-    # For LXDE/LXPanel (Raspberry Pi OS default)
-    if command -v lxpanelctl &> /dev/null; then
-        DISPLAY=:0 lxpanelctl restart
+    # Check for Wayfire panel (New Raspberry Pi OS Bookworm default)
+    if pgrep -x "wf-panel-pi" > /dev/null || pgrep -x "wf-panel" > /dev/null; then
+        print_status "Detected Wayfire panel (new Raspberry Pi OS)"
+        
+        # Kill the panel processes
+        pkill wf-panel-pi 2>/dev/null || true
+        pkill wf-panel 2>/dev/null || true
+        
+        print_status "✅ Wayfire panel hidden successfully!"
+        print_status "Note: Panel will restart on reboot unless Wayfire config is modified"
+        
+    # For LXDE/LXPanel (Old Raspberry Pi OS)
+    elif command -v lxpanelctl &> /dev/null && pgrep -x "lxpanel" > /dev/null; then
+        print_status "Detected LXPanel (old Raspberry Pi OS)"
+        DISPLAY=:0 lxpanelctl restart 2>/dev/null || true
         sleep 1
         # Hide the panel by setting autohide
         if [ -f "$LXPANEL_CONFIG" ]; then
             # Create backup
-            cp "$LXPANEL_CONFIG" "${LXPANEL_CONFIG}.backup"
+            cp "$LXPANEL_CONFIG" "${LXPANEL_CONFIG}.backup" 2>/dev/null || true
             
             # Set autohide=1 and heightwhenhidden=0
             sed -i 's/autohide=0/autohide=1/g' "$LXPANEL_CONFIG"
@@ -244,24 +256,30 @@ hide_taskbar() {
             fi
             
             # Restart panel to apply changes
-            DISPLAY=:0 lxpanelctl restart
-            print_status "✅ Taskbar hidden successfully!"
+            DISPLAY=:0 lxpanelctl restart 2>/dev/null || true
+            print_status "✅ LXPanel hidden successfully!"
             print_status "Backup saved to ${LXPANEL_CONFIG}.backup"
         else
             print_warning "LXPanel config file not found at $LXPANEL_CONFIG"
         fi
-    # For Wayfire/Waybar (alternative)
+        
+    # For Waybar (Standalone)
     elif pgrep -x "waybar" > /dev/null; then
-        pkill waybar
+        print_status "Detected Waybar"
+        pkill waybar 2>/dev/null || true
         print_status "✅ Waybar hidden successfully!"
+        
     # Generic X11 approach
     elif command -v xdotool &> /dev/null; then
+        print_status "Using xdotool fallback"
         # Try to hide any visible panels
         DISPLAY=:0 xdotool search --class "panel" windowunmap 2>/dev/null || true
         print_status "✅ Attempted to hide taskbar using xdotool"
+        
     else
         print_error "Could not detect taskbar/panel system"
-        print_error "Supported: LXPanel, Waybar, or xdotool"
+        print_warning "Please run: ./detect_desktop.sh to diagnose"
+        print_error "Supported: Wayfire panel, LXPanel, Waybar, or xdotool"
         exit 1
     fi
 }
@@ -271,16 +289,40 @@ unhide_taskbar() {
     print_header
     print_status "Showing taskbar..."
     
-    # For LXDE/LXPanel
-    if command -v lxpanelctl &> /dev/null; then
+    # Check for Wayfire panel (New Raspberry Pi OS Bookworm default)
+    if pgrep -x "wayfire" > /dev/null; then
+        print_status "Detected Wayfire compositor (new Raspberry Pi OS)"
+        
+        # Start the panel if not running
+        if ! pgrep -x "wf-panel-pi" > /dev/null && ! pgrep -x "wf-panel" > /dev/null; then
+            # Try wf-panel-pi first (Raspberry Pi specific)
+            if command -v wf-panel-pi &> /dev/null; then
+                wf-panel-pi &
+                print_status "✅ Started wf-panel-pi"
+            elif command -v wf-panel &> /dev/null; then
+                wf-panel &
+                print_status "✅ Started wf-panel"
+            else
+                print_warning "Panel command not found, trying wayfire restart"
+                killall wayfire 2>/dev/null || true
+                sleep 1
+                wayfire &
+            fi
+        else
+            print_status "Wayfire panel is already running"
+        fi
+        
+    # For LXDE/LXPanel (Old Raspberry Pi OS)
+    elif command -v lxpanelctl &> /dev/null; then
+        print_status "Detected LXPanel (old Raspberry Pi OS)"
         if [ -f "$LXPANEL_CONFIG" ]; then
             # Restore autohide settings
             sed -i 's/autohide=1/autohide=0/g' "$LXPANEL_CONFIG"
             sed -i 's/heightwhenhidden=0/heightwhenhidden=2/g' "$LXPANEL_CONFIG"
             
             # Restart panel
-            DISPLAY=:0 lxpanelctl restart
-            print_status "✅ Taskbar shown successfully!"
+            DISPLAY=:0 lxpanelctl restart 2>/dev/null || true
+            print_status "✅ LXPanel shown successfully!"
             
             # Check if backup exists
             if [ -f "${LXPANEL_CONFIG}.backup" ]; then
@@ -289,20 +331,26 @@ unhide_taskbar() {
         else
             print_warning "LXPanel config file not found"
         fi
-    # For Waybar
+        
+    # For Waybar (Standalone)
     elif command -v waybar &> /dev/null; then
+        print_status "Detected Waybar"
         if ! pgrep -x "waybar" > /dev/null; then
             DISPLAY=:0 waybar &
             print_status "✅ Waybar started successfully!"
         else
             print_status "Waybar is already running"
         fi
+        
     # Generic X11 approach
     elif command -v xdotool &> /dev/null; then
+        print_status "Using xdotool fallback"
         DISPLAY=:0 xdotool search --class "panel" windowmap 2>/dev/null || true
         print_status "✅ Attempted to show taskbar using xdotool"
+        
     else
         print_error "Could not detect taskbar/panel system"
+        print_warning "Please run: ./detect_desktop.sh to diagnose"
         exit 1
     fi
 }
@@ -313,25 +361,41 @@ taskbar_status() {
     print_status "Taskbar Status:"
     echo ""
     
-    if command -v lxpanelctl &> /dev/null; then
-        if pgrep -x "lxpanel" > /dev/null; then
-            print_status "✅ LXPanel is running"
-            
-            if [ -f "$LXPANEL_CONFIG" ]; then
-                AUTOHIDE=$(grep "autohide=" "$LXPANEL_CONFIG" | head -1 | cut -d'=' -f2)
-                if [ "$AUTOHIDE" = "1" ]; then
-                    print_status "📍 Status: Hidden (autohide enabled)"
-                else
-                    print_status "📍 Status: Visible (autohide disabled)"
-                fi
-            fi
+    # Check for Wayfire panel (New Raspberry Pi OS)
+    if pgrep -x "wayfire" > /dev/null; then
+        print_status "✅ Wayfire compositor is running"
+        
+        if pgrep -x "wf-panel-pi" > /dev/null; then
+            print_status "✅ wf-panel-pi is running"
+            print_status "📍 Status: Visible"
+        elif pgrep -x "wf-panel" > /dev/null; then
+            print_status "✅ wf-panel is running"
+            print_status "📍 Status: Visible"
         else
-            print_warning "❌ LXPanel is not running"
+            print_warning "❌ Wayfire panel is not running"
+            print_status "📍 Status: Hidden"
         fi
+        
+    # Check for LXPanel (Old Raspberry Pi OS)
+    elif pgrep -x "lxpanel" > /dev/null; then
+        print_status "✅ LXPanel is running"
+        
+        if [ -f "$LXPANEL_CONFIG" ]; then
+            AUTOHIDE=$(grep "autohide=" "$LXPANEL_CONFIG" | head -1 | cut -d'=' -f2)
+            if [ "$AUTOHIDE" = "1" ]; then
+                print_status "📍 Status: Hidden (autohide enabled)"
+            else
+                print_status "📍 Status: Visible (autohide disabled)"
+            fi
+        fi
+        
+    # Check for Waybar
     elif pgrep -x "waybar" > /dev/null; then
         print_status "✅ Waybar is running (visible)"
+        
     else
         print_warning "❌ No taskbar/panel detected"
+        print_warning "Run ./detect_desktop.sh for detailed diagnostics"
     fi
 }
 

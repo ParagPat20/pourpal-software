@@ -55,10 +55,19 @@ fi
 
 # Hide the taskbar for kiosk mode
 echo "Hiding taskbar for kiosk mode..."
-LXPANEL_CONFIG="/home/ppl/.config/lxpanel/LXDE-pi/panels/panel"
 
-# For LXDE/LXPanel (Raspberry Pi OS default)
-if command -v lxpanelctl &> /dev/null; then
+# Check for Wayfire panel (New Raspberry Pi OS Bookworm default)
+if pgrep -x "wf-panel-pi" > /dev/null || pgrep -x "wf-panel" > /dev/null; then
+    echo "Detected Wayfire panel (new Raspberry Pi OS)"
+    pkill wf-panel-pi 2>/dev/null || true
+    pkill wf-panel 2>/dev/null || true
+    echo "Taskbar hidden successfully (Wayfire panel killed)"
+    
+# For LXDE/LXPanel (Old Raspberry Pi OS)
+elif pgrep -x "lxpanel" > /dev/null && command -v lxpanelctl &> /dev/null; then
+    echo "Detected LXPanel (old Raspberry Pi OS)"
+    LXPANEL_CONFIG="/home/ppl/.config/lxpanel/LXDE-pi/panels/panel"
+    
     if [ -f "$LXPANEL_CONFIG" ]; then
         # Set autohide=1 and heightwhenhidden=0
         sed -i 's/autohide=0/autohide=1/g' "$LXPANEL_CONFIG"
@@ -75,12 +84,16 @@ if command -v lxpanelctl &> /dev/null; then
     else
         echo "LXPanel config not found, skipping taskbar hide"
     fi
+    
 # For Waybar
 elif pgrep -x "waybar" > /dev/null; then
+    echo "Detected Waybar"
     pkill waybar 2>/dev/null || true
-    echo "Waybar hidden successfully"
+    echo "Taskbar hidden successfully (Waybar killed)"
+    
 else
     echo "No supported taskbar detected, skipping taskbar hide"
+    echo "Run ./detect_desktop.sh for diagnostics"
 fi
 
 # Now display is ready - check if tmux session already exists
