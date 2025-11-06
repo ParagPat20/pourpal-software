@@ -298,31 +298,47 @@ select {
   background: #3d3229; /* Darker color on hover */
 }
 
-/* Scrollbar buttons (arrows) */
+/* Scrollbar buttons (arrows) - BIGGER with white background and dark arrows */
 .ing-grid::-webkit-scrollbar-button,
 ::-webkit-scrollbar-button {
   display: block; /* Show buttons */
-  height: 16px; /* Button height */
-  width: 16px; /* Button width */
-  background: #4b3d2e; /* Button background color */
-  border-radius: 3px; /* Slightly rounded */
+  height: 24px; /* Bigger button height */
+  width: 24px; /* Bigger button width */
+  background: #ffffff; /* White background */
+  border: 2px solid #4b3d2e; /* Dark border */
+  border-radius: 4px; /* Slightly rounded */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px; /* Bigger arrow */
 }
 
 .ing-grid::-webkit-scrollbar-button:hover,
 ::-webkit-scrollbar-button:hover {
-  background: #3d3229; /* Darker on hover */
+  background-color: #f5f5f5; /* Light gray on hover */
 }
 
-/* Up/Left arrow */
-.ing-grid::-webkit-scrollbar-button:decrement,
-::-webkit-scrollbar-button:decrement {
-  background: #4b3d2e;
+/* UP arrow - dark triangle pointing UP (at top of scrollbar) */
+.ing-grid::-webkit-scrollbar-button:vertical:decrement,
+::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M6 2 L2 9 L10 9 Z"/></svg>');
 }
 
-/* Down/Right arrow */
-.ing-grid::-webkit-scrollbar-button:increment,
-::-webkit-scrollbar-button:increment {
-  background: #4b3d2e;
+/* DOWN arrow - dark triangle pointing DOWN (at bottom of scrollbar) */
+.ing-grid::-webkit-scrollbar-button:vertical:increment,
+::-webkit-scrollbar-button:vertical:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M6 10 L2 3 L10 3 Z"/></svg>');
+}
+
+/* LEFT arrow - dark triangle pointing LEFT (at left of horizontal scrollbar) */
+.ing-grid::-webkit-scrollbar-button:horizontal:decrement,
+::-webkit-scrollbar-button:horizontal:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M2 6 L9 2 L9 10 Z"/></svg>');
+}
+
+/* RIGHT arrow - dark triangle pointing RIGHT (at right of horizontal scrollbar) */
+.ing-grid::-webkit-scrollbar-button:horizontal:increment,
+::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M10 6 L3 2 L3 10 Z"/></svg>');
 }
 
 /* For Firefox */
@@ -2128,26 +2144,41 @@ select,
   border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Scrollbar buttons (arrows) for all elements */
+/* Scrollbar buttons (arrows) for all elements - BIGGER with white background */
 ::-webkit-scrollbar-button {
   display: block; /* Show buttons */
-  height: 16px;
-  width: 16px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 24px; /* Bigger */
+  width: 24px; /* Bigger */
+  background: #ffffff; /* White background */
+  border: 2px solid #333333; /* Dark border */
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px; /* Bigger arrow */
 }
 
 ::-webkit-scrollbar-button:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background-color: #f5f5f5; /* Light gray on hover */
 }
 
-::-webkit-scrollbar-button:decrement {
-  background: rgba(0, 0, 0, 0.3);
+/* UP arrow - dark triangle pointing UP */
+::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M6 2 L2 9 L10 9 Z"/></svg>');
 }
 
-::-webkit-scrollbar-button:increment {
-  background: rgba(0, 0, 0, 0.3);
+/* DOWN arrow - dark triangle pointing DOWN */
+::-webkit-scrollbar-button:vertical:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M6 10 L2 3 L10 3 Z"/></svg>');
+}
+
+/* LEFT arrow - dark triangle pointing LEFT */
+::-webkit-scrollbar-button:horizontal:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M2 6 L9 2 L9 10 Z"/></svg>');
+}
+
+/* RIGHT arrow - dark triangle pointing RIGHT */
+::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M10 6 L3 2 L3 10 Z"/></svg>');
 }
 
 /* Add momentum scrolling for touch devices */
@@ -2512,26 +2543,41 @@ select,
   border-radius: 8px;
 }
 
-/* Scrollbar buttons for cocktail list */
+/* Scrollbar buttons for cocktail list - BIGGER with white background */
 .all-cocktail .cocktail-list::-webkit-scrollbar-button {
   display: block;
-  height: 16px;
-  width: 16px;
-  background: #999;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  height: 24px; /* Bigger */
+  width: 24px; /* Bigger */
+  background: #ffffff; /* White background */
+  border: 2px solid #666666; /* Dark gray border */
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px; /* Bigger arrow */
 }
 
 .all-cocktail .cocktail-list::-webkit-scrollbar-button:hover {
-  background: #777;
+  background-color: #f5f5f5; /* Light gray on hover */
 }
 
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:decrement {
-  background: #999;
+/* UP arrow */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M6 2 L2 9 L10 9 Z"/></svg>');
 }
 
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:increment {
-  background: #999;
+/* DOWN arrow */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M6 10 L2 3 L10 3 Z"/></svg>');
+}
+
+/* LEFT arrow */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M2 6 L9 2 L9 10 Z"/></svg>');
+}
+
+/* RIGHT arrow */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M10 6 L3 2 L3 10 Z"/></svg>');
 }
 
 .ingredient-measurement {
