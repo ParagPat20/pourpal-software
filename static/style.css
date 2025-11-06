@@ -273,7 +273,7 @@ select {
   height: 100%;
   padding-bottom: 70px;
 }
-/* Styles for the scrollbar in WebKit browsers - THICK for touch */
+/* Styles for the scrollbar in WebKit browsers - THICK for touch with BUTTONS */
 .ing-grid::-webkit-scrollbar,
 ::-webkit-scrollbar {
   width: 16px; /* Thick scrollbar for touch */
@@ -296,6 +296,33 @@ select {
 .ing-grid::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:hover {
   background: #3d3229; /* Darker color on hover */
+}
+
+/* Scrollbar buttons (arrows) */
+.ing-grid::-webkit-scrollbar-button,
+::-webkit-scrollbar-button {
+  display: block; /* Show buttons */
+  height: 16px; /* Button height */
+  width: 16px; /* Button width */
+  background: #4b3d2e; /* Button background color */
+  border-radius: 3px; /* Slightly rounded */
+}
+
+.ing-grid::-webkit-scrollbar-button:hover,
+::-webkit-scrollbar-button:hover {
+  background: #3d3229; /* Darker on hover */
+}
+
+/* Up/Left arrow */
+.ing-grid::-webkit-scrollbar-button:decrement,
+::-webkit-scrollbar-button:decrement {
+  background: #4b3d2e;
+}
+
+/* Down/Right arrow */
+.ing-grid::-webkit-scrollbar-button:increment,
+::-webkit-scrollbar-button:increment {
+  background: #4b3d2e;
 }
 
 /* For Firefox */
@@ -2084,7 +2111,7 @@ select,
   }
 }
 
-/* Improve scrollbar for touch devices - THICK */
+/* Improve scrollbar for touch devices - THICK with BUTTONS */
 ::-webkit-scrollbar {
   width: 16px;
   height: 16px;
@@ -2099,6 +2126,28 @@ select,
   background: rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar buttons (arrows) for all elements */
+::-webkit-scrollbar-button {
+  display: block; /* Show buttons */
+  height: 16px;
+  width: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-button:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-button:decrement {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-button:increment {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 /* Add momentum scrolling for touch devices */
@@ -2461,6 +2510,28 @@ select,
 .all-cocktail .cocktail-list::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
   border-radius: 8px;
+}
+
+/* Scrollbar buttons for cocktail list */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button {
+  display: block;
+  height: 16px;
+  width: 16px;
+  background: #999;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:hover {
+  background: #777;
+}
+
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:decrement {
+  background: #999;
+}
+
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:increment {
+  background: #999;
 }
 
 .ingredient-measurement {
