@@ -1373,30 +1373,30 @@ function checkFocus(event) {
   }
 }
 
-function updateFocusState(isFocused) {
-  if (lastFocusState === isFocused) return; // Avoid duplicate requests
+// function updateFocusState(isFocused) {
+//   if (lastFocusState === isFocused) return; // Avoid duplicate requests
 
-  lastFocusState = isFocused;
-  if (isFocused) {
-    fetch("/focus-in", {
-      method: "POST",
-    })
-      .then((response) => response.text())
-      .then((data) => console.log(data))
-      .catch((error) => console.error("Focus event error:", error));
-  } else {
-    // Only send focus-out if we're not focused on any tracked input
-    const activeElement = document.activeElement;
-    if (!elementsToTrack.includes(activeElement.id)) {
-      fetch("/focus-out", {
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Focus event error:", error));
-    }
-  }
-}
+//   lastFocusState = isFocused;
+//   if (isFocused) {
+//     fetch("/focus-in", {
+//       method: "POST",
+//     })
+//       .then((response) => response.text())
+//       .then((data) => console.log(data))
+//       .catch((error) => console.error("Focus event error:", error));
+//   } else {
+//     // Only send focus-out if we're not focused on any tracked input
+//     const activeElement = document.activeElement;
+//     if (!elementsToTrack.includes(activeElement.id)) {
+//       fetch("/focus-out", {
+//         method: "POST",
+//       })
+//         .then((response) => response.text())
+//         .then((data) => console.log(data))
+//         .catch((error) => console.error("Focus event error:", error));
+//     }
+//   }
+// }
 
 function pollFocusState() {
   const activeElement = document.activeElement;
