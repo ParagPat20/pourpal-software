@@ -317,27 +317,41 @@ select {
   background-color: #f5f5f5; /* Light gray on hover */
 }
 
-/* UP arrow - dark triangle pointing UP (at top of scrollbar) */
-.ing-grid::-webkit-scrollbar-button:vertical:decrement,
-::-webkit-scrollbar-button:vertical:decrement {
+/* ONLY show single-button mode - UP at start, DOWN at end */
+.ing-grid::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:single-button {
+  display: block;
+}
+
+/* Hide double buttons (this prevents duplicate arrows) */
+.ing-grid::-webkit-scrollbar-button:double-button,
+::-webkit-scrollbar-button:double-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+/* UP arrow - dark triangle pointing UP (at START/TOP of scrollbar) */
+.ing-grid::-webkit-scrollbar-button:vertical:decrement:start,
+::-webkit-scrollbar-button:vertical:decrement:start {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M6 2 L2 9 L10 9 Z"/></svg>');
 }
 
-/* DOWN arrow - dark triangle pointing DOWN (at bottom of scrollbar) */
-.ing-grid::-webkit-scrollbar-button:vertical:increment,
-::-webkit-scrollbar-button:vertical:increment {
+/* DOWN arrow - dark triangle pointing DOWN (at END/BOTTOM of scrollbar) */
+.ing-grid::-webkit-scrollbar-button:vertical:increment:end,
+::-webkit-scrollbar-button:vertical:increment:end {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M6 10 L2 3 L10 3 Z"/></svg>');
 }
 
-/* LEFT arrow - dark triangle pointing LEFT (at left of horizontal scrollbar) */
-.ing-grid::-webkit-scrollbar-button:horizontal:decrement,
-::-webkit-scrollbar-button:horizontal:decrement {
+/* LEFT arrow - dark triangle pointing LEFT (at START/LEFT of horizontal scrollbar) */
+.ing-grid::-webkit-scrollbar-button:horizontal:decrement:start,
+::-webkit-scrollbar-button:horizontal:decrement:start {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M2 6 L9 2 L9 10 Z"/></svg>');
 }
 
-/* RIGHT arrow - dark triangle pointing RIGHT (at right of horizontal scrollbar) */
-.ing-grid::-webkit-scrollbar-button:horizontal:increment,
-::-webkit-scrollbar-button:horizontal:increment {
+/* RIGHT arrow - dark triangle pointing RIGHT (at END/RIGHT of horizontal scrollbar) */
+.ing-grid::-webkit-scrollbar-button:horizontal:increment:end,
+::-webkit-scrollbar-button:horizontal:increment:end {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%234b3d2e" d="M10 6 L3 2 L3 10 Z"/></svg>');
 }
 
@@ -2161,23 +2175,30 @@ select,
   background-color: #f5f5f5; /* Light gray on hover */
 }
 
-/* UP arrow - dark triangle pointing UP */
-::-webkit-scrollbar-button:vertical:decrement {
+/* Hide double buttons to show only one button per end */
+::-webkit-scrollbar-button:double-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+/* UP arrow - dark triangle pointing UP (at START/TOP) */
+::-webkit-scrollbar-button:vertical:decrement:start {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M6 2 L2 9 L10 9 Z"/></svg>');
 }
 
-/* DOWN arrow - dark triangle pointing DOWN */
-::-webkit-scrollbar-button:vertical:increment {
+/* DOWN arrow - dark triangle pointing DOWN (at END/BOTTOM) */
+::-webkit-scrollbar-button:vertical:increment:end {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M6 10 L2 3 L10 3 Z"/></svg>');
 }
 
-/* LEFT arrow - dark triangle pointing LEFT */
-::-webkit-scrollbar-button:horizontal:decrement {
+/* LEFT arrow - dark triangle pointing LEFT (at START/LEFT) */
+::-webkit-scrollbar-button:horizontal:decrement:start {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M2 6 L9 2 L9 10 Z"/></svg>');
 }
 
-/* RIGHT arrow - dark triangle pointing RIGHT */
-::-webkit-scrollbar-button:horizontal:increment {
+/* RIGHT arrow - dark triangle pointing RIGHT (at END/RIGHT) */
+::-webkit-scrollbar-button:horizontal:increment:end {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333333" d="M10 6 L3 2 L3 10 Z"/></svg>');
 }
 
@@ -2560,23 +2581,30 @@ select,
   background-color: #f5f5f5; /* Light gray on hover */
 }
 
-/* UP arrow */
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:decrement {
+/* Hide double buttons */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:double-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+/* UP arrow - only at START/TOP */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:decrement:start {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M6 2 L2 9 L10 9 Z"/></svg>');
 }
 
-/* DOWN arrow */
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:increment {
+/* DOWN arrow - only at END/BOTTOM */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:vertical:increment:end {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M6 10 L2 3 L10 3 Z"/></svg>');
 }
 
-/* LEFT arrow */
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:decrement {
+/* LEFT arrow - only at START/LEFT */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:decrement:start {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M2 6 L9 2 L9 10 Z"/></svg>');
 }
 
-/* RIGHT arrow */
-.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:increment {
+/* RIGHT arrow - only at END/RIGHT */
+.all-cocktail .cocktail-list::-webkit-scrollbar-button:horizontal:increment:end {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23666666" d="M10 6 L3 2 L3 10 Z"/></svg>');
 }
 
