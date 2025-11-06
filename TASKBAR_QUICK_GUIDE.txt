@@ -1,0 +1,141 @@
+╔════════════════════════════════════════════════════════════════╗
+║          POURPAL TASKBAR MANAGEMENT - QUICK GUIDE              ║
+║                    Raspberry Pi 5                              ║
+╚════════════════════════════════════════════════════════════════╝
+
+📌 OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Taskbar automatically HIDES on every boot (kiosk mode)
+• Easy manual control via manage_pourpal.sh
+• Works with LXPanel (Raspberry Pi OS default)
+• Safe - creates backup before changes
+
+🚀 QUICK COMMANDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Hide Taskbar:
+  ./manage_pourpal.sh hide-taskbar
+
+Show Taskbar:
+  ./manage_pourpal.sh unhide-taskbar
+
+Check Status:
+  ./manage_pourpal.sh taskbar-status
+
+View Help:
+  ./manage_pourpal.sh help
+
+
+📋 TYPICAL USAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+KIOSK MODE (Default):
+  • Taskbar hidden on boot ✅
+  • Full-screen PourPal app
+  • No action needed!
+
+DEVELOPMENT MODE:
+  1. Show taskbar:
+     ./manage_pourpal.sh unhide-taskbar
+  
+  2. Do your work
+  
+  3. Hide again (optional):
+     ./manage_pourpal.sh hide-taskbar
+
+
+🔍 CHECKING IF IT WORKED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After boot:
+  cd /home/ppl/pourpal-software
+  ./manage_pourpal.sh taskbar-status
+
+Expected output:
+  ✅ LXPanel is running
+  📍 Status: Hidden (autohide enabled)
+
+
+📂 FILES MODIFIED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+manage_pourpal.sh
+  → Added: hide-taskbar, unhide-taskbar, taskbar-status commands
+
+start_at_boot.sh
+  → Added: Automatic taskbar hide on boot
+
+Config File:
+  ~/.config/lxpanel/LXDE-pi/panels/panel
+
+Backup:
+  ~/.config/lxpanel/LXDE-pi/panels/panel.backup
+
+
+🛠️ TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Taskbar Still Visible:
+  1. Run: ./manage_pourpal.sh hide-taskbar
+  2. Reboot: sudo reboot
+  3. Check logs: cat startup.log | grep taskbar
+
+Taskbar Won't Show:
+  1. Run: ./manage_pourpal.sh unhide-taskbar
+  2. Force restart: lxpanelctl restart
+
+Can't Find Commands:
+  cd /home/ppl/pourpal-software
+  chmod +x manage_pourpal.sh
+
+
+📊 WHAT HAPPENS ON BOOT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. System boots
+2. Systemd starts pourpal.service
+3. start_at_boot.sh executes
+4. Display detection waits for monitor
+5. ⭐ TASKBAR AUTOMATICALLY HIDDEN ⭐
+6. Loading screen shows
+7. PourPal app starts
+8. Loading screen closes
+9. Full-screen PourPal ready!
+
+
+✅ VERIFICATION CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After Setup:
+  □ Reboot Raspberry Pi
+  □ Check taskbar is hidden
+  □ Run: ./manage_pourpal.sh taskbar-status
+  □ Verify "Status: Hidden"
+  □ Test unhide: ./manage_pourpal.sh unhide-taskbar
+  □ Verify taskbar appears
+  □ Test hide: ./manage_pourpal.sh hide-taskbar
+  □ Verify taskbar disappears
+
+
+💡 PRO TIPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Taskbar auto-hides on EVERY boot
+• No need to manually hide after reboot
+• Safe to toggle anytime
+• Backup created automatically
+• Works seamlessly with PourPal service
+
+
+📖 FULL DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+See: TASKBAR_MANAGEMENT.md for complete details
+
+
+═══════════════════════════════════════════════════════════════
+
+Questions? Run: ./manage_pourpal.sh help
+
+═══════════════════════════════════════════════════════════════
+

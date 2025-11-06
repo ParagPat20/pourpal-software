@@ -7,6 +7,7 @@ SERVICE_NAME="pourpal"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 SCRIPT_DIR="/home/ppl/pourpal-software"
 TMUX_BIN="/usr/bin/tmux"
+LXPANEL_CONFIG="/home/ppl/.config/lxpanel/LXDE-pi/panels/panel"
 
 # Colors for output
 RED='\033[0;31m'
@@ -219,29 +220,149 @@ toggle_autostart() {
     fi
 }
 
+# Function to hide the taskbar
+hide_taskbar() {
+    print_header
+    print_status "Hiding taskbar..."
+    
+    # For LXDE/LXPanel (Raspberry Pi OS default)
+    if command -v lxpanelctl &> /dev/null; then
+        DISPLAY=:0 lxpanelctl restart
+        sleep 1
+        # Hide the panel by setting autohide
+        if [ -f "$LXPANEL_CONFIG" ]; then
+            # Create backup
+            cp "$LXPANEL_CONFIG" "${LXPANEL_CONFIG}.backup"
+            
+            # Set autohide=1 and heightwhenhidden=0
+            sed -i 's/autohide=0/autohide=1/g' "$LXPANEL_CONFIG"
+            sed -i 's/heightwhenhidden=[0-9]*/heightwhenhidden=0/g' "$LXPANEL_CONFIG"
+            
+            # If autohide doesn't exist, add it
+            if ! grep -q "autohide=" "$LXPANEL_CONFIG"; then
+                sed -i '/Global {/a\    autohide=1' "$LXPANEL_CONFIG"
+            fi
+            
+            # Restart panel to apply changes
+            DISPLAY=:0 lxpanelctl restart
+            print_status "✅ Taskbar hidden successfully!"
+            print_status "Backup saved to ${LXPANEL_CONFIG}.backup"
+        else
+            print_warning "LXPanel config file not found at $LXPANEL_CONFIG"
+        fi
+    # For Wayfire/Waybar (alternative)
+    elif pgrep -x "waybar" > /dev/null; then
+        pkill waybar
+        print_status "✅ Waybar hidden successfully!"
+    # Generic X11 approach
+    elif command -v xdotool &> /dev/null; then
+        # Try to hide any visible panels
+        DISPLAY=:0 xdotool search --class "panel" windowunmap 2>/dev/null || true
+        print_status "✅ Attempted to hide taskbar using xdotool"
+    else
+        print_error "Could not detect taskbar/panel system"
+        print_error "Supported: LXPanel, Waybar, or xdotool"
+        exit 1
+    fi
+}
+
+# Function to unhide/show the taskbar
+unhide_taskbar() {
+    print_header
+    print_status "Showing taskbar..."
+    
+    # For LXDE/LXPanel
+    if command -v lxpanelctl &> /dev/null; then
+        if [ -f "$LXPANEL_CONFIG" ]; then
+            # Restore autohide settings
+            sed -i 's/autohide=1/autohide=0/g' "$LXPANEL_CONFIG"
+            sed -i 's/heightwhenhidden=0/heightwhenhidden=2/g' "$LXPANEL_CONFIG"
+            
+            # Restart panel
+            DISPLAY=:0 lxpanelctl restart
+            print_status "✅ Taskbar shown successfully!"
+            
+            # Check if backup exists
+            if [ -f "${LXPANEL_CONFIG}.backup" ]; then
+                print_status "Backup available at ${LXPANEL_CONFIG}.backup"
+            fi
+        else
+            print_warning "LXPanel config file not found"
+        fi
+    # For Waybar
+    elif command -v waybar &> /dev/null; then
+        if ! pgrep -x "waybar" > /dev/null; then
+            DISPLAY=:0 waybar &
+            print_status "✅ Waybar started successfully!"
+        else
+            print_status "Waybar is already running"
+        fi
+    # Generic X11 approach
+    elif command -v xdotool &> /dev/null; then
+        DISPLAY=:0 xdotool search --class "panel" windowmap 2>/dev/null || true
+        print_status "✅ Attempted to show taskbar using xdotool"
+    else
+        print_error "Could not detect taskbar/panel system"
+        exit 1
+    fi
+}
+
+# Function to check taskbar status
+taskbar_status() {
+    print_header
+    print_status "Taskbar Status:"
+    echo ""
+    
+    if command -v lxpanelctl &> /dev/null; then
+        if pgrep -x "lxpanel" > /dev/null; then
+            print_status "✅ LXPanel is running"
+            
+            if [ -f "$LXPANEL_CONFIG" ]; then
+                AUTOHIDE=$(grep "autohide=" "$LXPANEL_CONFIG" | head -1 | cut -d'=' -f2)
+                if [ "$AUTOHIDE" = "1" ]; then
+                    print_status "📍 Status: Hidden (autohide enabled)"
+                else
+                    print_status "📍 Status: Visible (autohide disabled)"
+                fi
+            fi
+        else
+            print_warning "❌ LXPanel is not running"
+        fi
+    elif pgrep -x "waybar" > /dev/null; then
+        print_status "✅ Waybar is running (visible)"
+    else
+        print_warning "❌ No taskbar/panel detected"
+    fi
+}
+
 # Function to show help
 show_help() {
     print_header
     echo "Usage: $0 [COMMAND]"
     echo ""
     echo "Commands:"
-    echo "  install     - Install and enable the PourPal service"
-    echo "  uninstall   - Remove the PourPal service"
-    echo "  start       - Start the PourPal service"
-    echo "  stop        - Stop the PourPal service"
-    echo "  restart     - Restart the PourPal service"
-    echo "  status      - Show service status and recent logs"
-    echo "  logs        - Show service logs"
-    echo "  logs -f     - Follow service logs in real-time"
-    echo "  enable      - Enable autostart on boot"
-    echo "  disable     - Disable autostart on boot"
-    echo "  help        - Show this help message"
+    echo "  install        - Install and enable the PourPal service"
+    echo "  uninstall      - Remove the PourPal service"
+    echo "  start          - Start the PourPal service"
+    echo "  stop           - Stop the PourPal service"
+    echo "  restart        - Restart the PourPal service"
+    echo "  status         - Show service status and recent logs"
+    echo "  logs           - Show service logs"
+    echo "  logs -f        - Follow service logs in real-time"
+    echo "  enable         - Enable autostart on boot"
+    echo "  disable        - Disable autostart on boot"
+    echo "  hide-taskbar   - Hide the taskbar/panel"
+    echo "  unhide-taskbar - Show the taskbar/panel"
+    echo "  taskbar-status - Check taskbar visibility status"
+    echo "  help           - Show this help message"
     echo ""
     echo "Examples:"
-    echo "  $0 install    # Install the service (run as user 'ppl')"
-    echo "  $0 start      # Start the service"
-    echo "  $0 status     # Check service status"
-    echo "  $0 logs -f    # Follow logs in real-time"
+    echo "  $0 install         # Install the service (run as user 'ppl')"
+    echo "  $0 start           # Start the service"
+    echo "  $0 status          # Check service status"
+    echo "  $0 logs -f         # Follow logs in real-time"
+    echo "  $0 hide-taskbar    # Hide the taskbar for kiosk mode"
+    echo "  $0 unhide-taskbar  # Show the taskbar again"
 }
 
 # Main script logic
@@ -281,6 +402,18 @@ case "$1" in
     disable)
         check_user
         toggle_autostart "disable"
+        ;;
+    hide-taskbar)
+        check_user
+        hide_taskbar
+        ;;
+    unhide-taskbar)
+        check_user
+        unhide_taskbar
+        ;;
+    taskbar-status)
+        check_user
+        taskbar_status
         ;;
     help|--help|-h)
         show_help

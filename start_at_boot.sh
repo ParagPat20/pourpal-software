@@ -53,6 +53,36 @@ if [ $WAIT_COUNT -ge $MAX_WAIT ]; then
     exit 1
 fi
 
+# Hide the taskbar for kiosk mode
+echo "Hiding taskbar for kiosk mode..."
+LXPANEL_CONFIG="/home/ppl/.config/lxpanel/LXDE-pi/panels/panel"
+
+# For LXDE/LXPanel (Raspberry Pi OS default)
+if command -v lxpanelctl &> /dev/null; then
+    if [ -f "$LXPANEL_CONFIG" ]; then
+        # Set autohide=1 and heightwhenhidden=0
+        sed -i 's/autohide=0/autohide=1/g' "$LXPANEL_CONFIG"
+        sed -i 's/heightwhenhidden=[0-9]*/heightwhenhidden=0/g' "$LXPANEL_CONFIG"
+        
+        # If autohide doesn't exist, add it
+        if ! grep -q "autohide=" "$LXPANEL_CONFIG"; then
+            sed -i '/Global {/a\    autohide=1' "$LXPANEL_CONFIG"
+        fi
+        
+        # Restart panel to apply changes
+        DISPLAY=:0 lxpanelctl restart 2>/dev/null || true
+        echo "Taskbar hidden successfully (LXPanel autohide enabled)"
+    else
+        echo "LXPanel config not found, skipping taskbar hide"
+    fi
+# For Waybar
+elif pgrep -x "waybar" > /dev/null; then
+    pkill waybar 2>/dev/null || true
+    echo "Waybar hidden successfully"
+else
+    echo "No supported taskbar detected, skipping taskbar hide"
+fi
+
 # Now display is ready - check if tmux session already exists
 if "$TMUX_BIN" has-session -t myapp 2>/dev/null; then
     echo "Session 'myapp' already exists. Killing existing session..."
