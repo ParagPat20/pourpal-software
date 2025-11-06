@@ -259,7 +259,7 @@ select {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  scrollbar-width: thin;
+  scrollbar-width: auto; /* Thick scrollbar for Firefox */
   padding: 0px 15px;
   padding-bottom: 100px;
 }
@@ -273,16 +273,16 @@ select {
   height: 100%;
   padding-bottom: 70px;
 }
-/* Styles for the scrollbar in WebKit browsers */
+/* Styles for the scrollbar in WebKit browsers - THICK for touch */
 .ing-grid::-webkit-scrollbar,
 ::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-  height: 8px; /* Height of the scrollbar */
+  width: 16px; /* Thick scrollbar for touch */
+  height: 16px; /* Thick scrollbar for touch */
 }
 
 .ing-grid::-webkit-scrollbar-track,
 ::-webkit-scrollbar-track {
-  background: rgba(245, 222, 179, 0.1); /* Color of the track */
+  background: rgba(245, 222, 179, 0.2); /* Color of the track */
   border-radius: 10px; /* Rounded corners for the track */
 }
 
@@ -290,6 +290,7 @@ select {
 ::-webkit-scrollbar-thumb {
   background: #4b3d2e; /* Color of the scrollbar thumb */
   border-radius: 10px; /* Rounded corners for the thumb */
+  border: 2px solid rgba(245, 222, 179, 0.2); /* Add border for better visibility */
 }
 
 .ing-grid::-webkit-scrollbar-thumb:hover,
@@ -299,8 +300,8 @@ select {
 
 /* For Firefox */
 .ing-grid {
-  scrollbar-width: thin; /* Make the scrollbar thin */
-  scrollbar-color: #4b3d2e rgba(245, 222, 179, 0.1); /* Thumb color and track color */
+  scrollbar-width: auto; /* Thick scrollbar */
+  scrollbar-color: #4b3d2e rgba(245, 222, 179, 0.2); /* Thumb color and track color */
 }
 
 div#ingredients-container {
@@ -2083,20 +2084,21 @@ select,
   }
 }
 
-/* Improve scrollbar for touch devices */
+/* Improve scrollbar for touch devices - THICK */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 16px;
+  height: 16px;
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Add momentum scrolling for touch devices */
@@ -2447,12 +2449,18 @@ select,
 
 
 .all-cocktail .cocktail-list::-webkit-scrollbar {
-  width: 6px;
+  width: 16px;
 }
 
 .all-cocktail .cocktail-list::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
+  background: #999;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.all-cocktail .cocktail-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
 }
 
 .ingredient-measurement {
