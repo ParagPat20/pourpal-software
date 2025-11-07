@@ -19,6 +19,7 @@ bool systemStarted = false;
 enum IndicatorState { IDLE, RAINBOW, GREEN };
 IndicatorState indicatorState = IDLE;
 unsigned long indicatorStartTime = 0;
+unsigned long indicatorEndTime = 0;
 
 // ===== SETUP =====
 void setup() {
@@ -71,6 +72,7 @@ void loop() {
     if (input.equalsIgnoreCase("READY")) {
       Serial.println("READY command received - Setting indicator to GREEN");
       indicatorState = GREEN;
+      indicatorEndTime = 0; // Clear any pending auto-transition
       setIndicatorGreen();
       return;
     }
@@ -82,11 +84,6 @@ void loop() {
 
 // ===== PARSE MULTIPLE COMMANDS =====
 void parseAndExecuteCommands(String commandLine) {
-  // Start rainbow animation on indicator ring when drink command is received
-  Serial.println("Drink command received - Starting indicator RAINBOW");
-  indicatorState = RAINBOW;
-  indicatorStartTime = millis();
-
   struct Task {
     int relayIndex;
     String mode; // "R","G","B","T", etc.
@@ -103,6 +100,7 @@ void parseAndExecuteCommands(String commandLine) {
   int taskCount = 0;
 
   unsigned long now = millis();
+  float maxDuration = 0.0;
 
   int start = 0;
   while (start < commandLine.length()) {
@@ -138,6 +136,15 @@ void parseAndExecuteCommands(String commandLine) {
           Serial.print(duration);
           Serial.println(" seconds.");
 
+          // Track maximum duration for indicator ring
+          float actualDuration = duration;
+          if (colorCode == "T" && duration == 0) {
+            actualDuration = 5.0; // Transition mode with no relay uses 5 seconds
+          }
+          if (actualDuration > maxDuration) {
+            maxDuration = actualDuration;
+          }
+
           // Prepare tasks for execution
           if (colorCode == "T") {
             // Non-blocking transition; can run concurrently
@@ -170,6 +177,16 @@ void parseAndExecuteCommands(String commandLine) {
     start = commaIndex + 1;
   }
 
+  // Start rainbow animation on indicator ring for the maximum duration
+  if (maxDuration > 0) {
+    Serial.print("Starting indicator RAINBOW for ");
+    Serial.print(maxDuration);
+    Serial.println(" seconds");
+    indicatorState = RAINBOW;
+    indicatorStartTime = now;
+    indicatorEndTime = now + (unsigned long)(maxDuration * 1000);
+  }
+
   strip.show();
 
   // Wait and handle tasks (color + transition) concurrently
@@ -177,6 +194,9 @@ void parseAndExecuteCommands(String commandLine) {
   while (!allDone && taskCount > 0) {
     allDone = true;
     now = millis();
+
+    // Update indicator ring animation during task execution
+    updateIndicatorRing();
 
     for (int i = 0; i < taskCount; i++) {
       if (tasks[i].endTime != 0) {
@@ -318,11 +338,20 @@ void checkForStartCommand() {
 // ===== INDICATOR RING FUNCTIONS =====
 void updateIndicatorRing() {
   if (indicatorState == RAINBOW) {
+    unsigned long currentTime = millis();
+    
+    // Check if rainbow duration has elapsed
+    if (indicatorEndTime > 0 && currentTime >= indicatorEndTime) {
+      Serial.println("Indicator RAINBOW complete - Switching to GREEN");
+      indicatorState = GREEN;
+      setIndicatorGreen();
+      indicatorEndTime = 0;
+      return;
+    }
+    
     // Continuous rainbow animation
     static unsigned long lastUpdate = 0;
     static int rainbowOffset = 0;
-    
-    unsigned long currentTime = millis();
     
     // Update every 50ms for smooth animation
     if (currentTime - lastUpdate >= 50) {
