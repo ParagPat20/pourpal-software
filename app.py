@@ -573,7 +573,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     time.sleep(1)
                     ser.write(b"START\n")
                     ser.flush()
-                    time.sleep(1)
+                    time.sleep(1.5)
                     ser.write(command_line.encode())
 
                 # Schedule completion flag after the longest pour duration
@@ -666,10 +666,10 @@ def send_ready_to_arduino():
 
         if port:
             with serial.Serial(port, 115200, timeout=2) as ser:
-                time.sleep(2)  # Wait for Arduino to be ready
+                time.sleep(1.5)  # Wait for Arduino to be ready
                 ser.write(b"START\n")  # Send START to skip boot animation
                 ser.flush()
-                time.sleep(0.5)
+                time.sleep(1.5)
                 ser.write(b"READY\n")  # Send READY to start indicator ring
                 ser.flush()
                 print("✓ READY command sent to Arduino - Indicator ring rainbow activated")
