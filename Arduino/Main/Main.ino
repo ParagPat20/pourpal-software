@@ -24,6 +24,10 @@ unsigned long indicatorEndTime = 0;
 // ===== SETUP =====
 void setup() {
   Serial.begin(115200);
+  
+  // Small delay for serial to stabilize
+  delay(100);
+  
   strip.begin();
   strip.setBrightness(76); // ~30% brightness to reduce current draw
   strip.show();
@@ -39,10 +43,11 @@ void setup() {
     digitalWrite(relayPins[i], HIGH); // Relay OFF (active LOW)
   }
 
-  Serial.println("System booting... Type START to skip 10s rainbow loading.");
+  Serial.println("=== PourPal Arduino System ===");
+  Serial.println("Booting... Send START to skip boot sequence");
 
   unsigned long startTime = millis();
-  while (millis() - startTime < 20000 && !systemStarted) {
+  while (millis() - startTime < 10000 && !systemStarted) {
     rainbowCycle(2);
     checkForStartCommand();
   }
@@ -51,9 +56,12 @@ void setup() {
   strip.clear();
   strip.show();
 
-  Serial.println("\nReady! Send commands like:");
-  Serial.println("  1:R:3,2:G:4,5:T:0");
-  Serial.println("  Send READY for green indicator, drink commands start rainbow");
+  Serial.println("\n=== System Ready ===");
+  Serial.println("Commands:");
+  Serial.println("  READY - Set indicator to GREEN");
+  Serial.println("  [pipe]:[color]:[time] - Control relays");
+  Serial.println("  Example: 1:T:5,2:T:3");
+  Serial.println("Waiting for commands...");
 }
 
 // ===== MAIN LOOP =====
@@ -68,17 +76,43 @@ void loop() {
     input.trim();
     if (input.length() == 0) return;
 
-    // Check for READY command - set to solid GREEN
+    // Log received command
+    Serial.print("← Received: ");
+    Serial.println(input);
+
+    // Handle READY command - set to solid GREEN
     if (input.equalsIgnoreCase("READY")) {
-      Serial.println("READY command received - Setting indicator to GREEN");
+      Serial.println("✓ READY: Indicator → GREEN");
       indicatorState = GREEN;
       indicatorEndTime = 0; // Clear any pending auto-transition
       setIndicatorGreen();
       return;
     }
 
-    // For any other command (drink commands), start RAINBOW
-    parseAndExecuteCommands(input);
+    // Handle CANCEL command - stop all operations
+    if (input.equalsIgnoreCase("CANCEL")) {
+      Serial.println("✓ CANCEL: Stopping all operations");
+      stopAllOperations();
+      indicatorState = IDLE;
+      indicatorEndTime = 0;
+      indicatorRing.clear();
+      indicatorRing.show();
+      return;
+    }
+
+    // Handle START command (for boot skip)
+    if (input.equalsIgnoreCase("START")) {
+      Serial.println("✓ START acknowledged");
+      return;
+    }
+
+    // For drink commands (contains colon), parse and execute
+    if (input.indexOf(':') > 0) {
+      parseAndExecuteCommands(input);
+    } else {
+      Serial.print("⚠ Unknown command: ");
+      Serial.println(input);
+    }
   }
 }
 
@@ -128,13 +162,13 @@ void parseAndExecuteCommands(String commandLine) {
           tasks[taskCount].isTransition = (colorCode == "T");
           tasks[taskCount].relayActiveDuring = false;
 
-          Serial.print("Relay ");
+          Serial.print("  Relay ");
           Serial.print(relayNum);
-          Serial.print(" -> ");
+          Serial.print(": ");
           Serial.print(colorCode);
           Serial.print(" for ");
           Serial.print(duration);
-          Serial.println(" seconds.");
+          Serial.println("s");
 
           // Track maximum duration for indicator ring
           float actualDuration = duration;
@@ -149,12 +183,12 @@ void parseAndExecuteCommands(String commandLine) {
           if (colorCode == "T") {
             // Non-blocking transition; can run concurrently
             if (duration == 0) {
-              Serial.println("Transition mode only (no relay).");
+              Serial.println("    LED transition only (no pump)");
               tasks[taskCount].duration = 5; // 5 sec LED-only
               tasks[taskCount].endTime = now + (unsigned long)(tasks[taskCount].duration * 1000);
               tasks[taskCount].relayActiveDuring = false;
             } else {
-              Serial.println("Transition mode with relay ON.");
+              Serial.println("    Pump + LED transition");
               digitalWrite(relayPins[relayNum - 1], LOW);
               tasks[taskCount].relayActiveDuring = true;
             }
@@ -163,6 +197,7 @@ void parseAndExecuteCommands(String commandLine) {
             taskCount++;
           } else {
             // Normal color mode (non-blocking timing)
+            Serial.println("    Pump + static color");
             digitalWrite(relayPins[relayNum - 1], LOW);
             setRingColor(relayNum - 1, tasks[taskCount].color);
             tasks[taskCount].endTime = now + (unsigned long)(duration * 1000);
@@ -179,12 +214,14 @@ void parseAndExecuteCommands(String commandLine) {
 
   // Start rainbow animation on indicator ring for the maximum duration
   if (maxDuration > 0) {
-    Serial.print("Starting indicator RAINBOW for ");
+    Serial.print("🌈 Starting indicator RAINBOW for ");
     Serial.print(maxDuration);
     Serial.println(" seconds");
     indicatorState = RAINBOW;
     indicatorStartTime = now;
     indicatorEndTime = now + (unsigned long)(maxDuration * 1000);
+  } else {
+    Serial.println("⚠ No valid tasks to execute");
   }
 
   strip.show();
@@ -335,6 +372,20 @@ void checkForStartCommand() {
   }
 }
 
+// ===== STOP ALL OPERATIONS =====
+void stopAllOperations() {
+  // Turn off all relays
+  for (int i = 0; i < NUM_RINGS; i++) {
+    digitalWrite(relayPins[i], HIGH); // Relay OFF (active LOW)
+  }
+  
+  // Clear all LED rings
+  strip.clear();
+  strip.show();
+  
+  Serial.println("All relays OFF, LEDs cleared");
+}
+
 // ===== INDICATOR RING FUNCTIONS =====
 void updateIndicatorRing() {
   if (indicatorState == RAINBOW) {
@@ -342,7 +393,7 @@ void updateIndicatorRing() {
     
     // Check if rainbow duration has elapsed
     if (indicatorEndTime > 0 && currentTime >= indicatorEndTime) {
-      Serial.println("Indicator RAINBOW complete - Switching to GREEN");
+      Serial.println("✓ Drink complete! Indicator → GREEN");
       indicatorState = GREEN;
       setIndicatorGreen();
       indicatorEndTime = 0;

@@ -22,6 +22,77 @@ web_dir = os.path.join(base_dir, "static")  # Define `static` folder path
 SECONDS_PER_ML = 1.3  # Adjust this value to calibrate your pumps
 # ======================================================
 
+# ==================== PERSISTENT SERIAL CONNECTION ====================
+arduino_serial = None
+serial_lock = threading.Lock()
+
+def find_arduino_port():
+    """Find the Arduino serial port."""
+    if platform.system() == "Windows":
+        for i in range(10):
+            try:
+                test_port = f"COM{i}"
+                with serial.Serial(test_port, 115200, timeout=1) as _:
+                    return test_port
+            except serial.SerialException:
+                continue
+    else:
+        # On Linux, try ACM0 then USB0
+        for test_port in ("/dev/ttyACM0", "/dev/ttyUSB0"):
+            try:
+                with serial.Serial(test_port, 115200, timeout=1) as _:
+                    return test_port
+            except serial.SerialException:
+                continue
+    return None
+
+def init_serial_connection():
+    """Initialize persistent serial connection to Arduino."""
+    global arduino_serial
+    try:
+        port = find_arduino_port()
+        if port:
+            arduino_serial = serial.Serial(port, 115200, timeout=2)
+            time.sleep(2)  # Wait for Arduino to reset
+            print(f"✓ Serial connection established on {port}")
+            # Send START to skip boot animation
+            send_serial_command("START")
+            time.sleep(0.5)
+            return True
+        else:
+            print("⚠ Warning: No Arduino found")
+            return False
+    except Exception as e:
+        print(f"⚠ Error initializing serial: {e}")
+        return False
+
+def send_serial_command(command):
+    """Send command to Arduino via persistent serial connection."""
+    global arduino_serial
+    with serial_lock:
+        try:
+            if arduino_serial is None or not arduino_serial.is_open:
+                print("Serial connection lost, attempting to reconnect...")
+                if not init_serial_connection():
+                    return False
+            
+            arduino_serial.write(f"{command}\n".encode())
+            arduino_serial.flush()
+            print(f"→ Sent to Arduino: {command}")
+            return True
+        except Exception as e:
+            print(f"⚠ Error sending serial command: {e}")
+            # Try to reconnect
+            try:
+                if arduino_serial:
+                    arduino_serial.close()
+                arduino_serial = None
+                init_serial_connection()
+            except:
+                pass
+            return False
+# ======================================================================
+
 
 class CustomHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
@@ -167,39 +238,18 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
         elif self.path == "/cancel-drink":
             try:
-                # Find the appropriate serial port
-                port = None
-                available_ports = serial.tools.list_ports.comports()
-                
-                for p in available_ports:
-                    if p.device == "/dev/ttyACM0" or p.device == "/dev/ttyUSB0":
-                        port = p.device
-                        break
-
-                if port is None:
+                # Send CANCEL command via persistent connection
+                if send_serial_command("CANCEL"):
+                    # Clear the processing complete flag
+                    processing_complete.clear()
+                    
+                    self.send_response(200)
+                    self.end_headers()
+                    self.wfile.write(b"Drink cancelled successfully")
+                else:
                     self.send_response(500)
                     self.end_headers()
-                    self.wfile.write(b"Error: No suitable serial port found")
-                    return
-
-                try:
-                    with serial.Serial(port, 115200, timeout=5) as ser:
-                        # Send START preamble, then cancel command to Arduino
-                        ser.write(b"START\n")
-                        ser.flush()
-                        time.sleep(0.05)
-                        ser.write(b"CANCEL\n")
-                        
-                        # Clear the processing complete flag
-                        processing_complete.clear()
-                        
-                        self.send_response(200)
-                        self.end_headers()
-                        self.wfile.write(b"Drink cancelled successfully")
-                except serial.SerialException as e:
-                    self.send_response(500)
-                    self.end_headers()
-                    self.wfile.write(f"Serial error: {str(e)}".encode())
+                    self.wfile.write(b"Error: Failed to send cancel command to Arduino")
                     
             except Exception as e:
                 self.send_response(500)
@@ -209,47 +259,16 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
         elif self.path == "/send-ready":
             try:
-                # Find the appropriate serial port
-                port = None
-                if platform.system() == "Windows":
-                    for i in range(10):
-                        try:
-                            test_port = f"COM{i}"
-                            with serial.Serial(test_port, 115200, timeout=1) as _:
-                                port = test_port
-                                break
-                        except serial.SerialException:
-                            continue
+                # Send READY command via persistent connection
+                if send_serial_command("READY"):
+                    print("✓ READY command sent to Arduino - Indicator ring set to GREEN")
+                    self.send_response(200)
+                    self.end_headers()
+                    self.wfile.write(b"READY command sent successfully")
                 else:
-                    # On Linux, try ACM0 then USB0
-                    for test_port in ("/dev/ttyACM0", "/dev/ttyUSB0"):
-                        try:
-                            with serial.Serial(test_port, 115200, timeout=1) as _:
-                                port = test_port
-                                break
-                        except serial.SerialException:
-                            continue
-
-                if port is None:
                     self.send_response(500)
                     self.end_headers()
-                    self.wfile.write(b"Error: No suitable serial port found")
-                    return
-
-                try:
-                    with serial.Serial(port, 115200, timeout=2) as ser:
-                        time.sleep(0.1)
-                        ser.write(b"READY\n")
-                        ser.flush()
-                        print("✓ READY command sent to Arduino - Indicator ring set to GREEN")
-                        
-                        self.send_response(200)
-                        self.end_headers()
-                        self.wfile.write(b"READY command sent successfully")
-                except serial.SerialException as e:
-                    self.send_response(500)
-                    self.end_headers()
-                    self.wfile.write(f"Serial error: {str(e)}".encode())
+                    self.wfile.write(b"Error: Failed to send READY command to Arduino")
                     
             except Exception as e:
                 self.send_response(500)
@@ -537,65 +556,45 @@ class CustomHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(b"No valid pipe commands to send")
                 return
 
-            command_line = ",".join(commands) + "\n"
-            print(f"Sending to Arduino: {command_line.strip()}")
+            command_line = ",".join(commands)
+            print(f"📤 Sending drink command to Arduino: {command_line}")
+            print(f"⏱️  Estimated completion time: {max_seconds:.1f} seconds")
 
-            # Detect serial port
-            port = None
-            if platform.system() == "Windows":
-                for i in range(10):
-                    try:
-                        test_port = f"COM{i}"
-                        with serial.Serial(test_port, 115200, timeout=1) as _:
-                            port = test_port
-                            break
-                    except serial.SerialException:
-                        continue
-            else:
-                # On Linux, try ACM0 then USB0
-                for test_port in ("/dev/ttyACM0", "/dev/ttyUSB0"):
-                    try:
-                        with serial.Serial(test_port, 115200, timeout=1) as _:
-                            port = test_port
-                            break
-                    except serial.SerialException:
-                        continue
-
-            if port is None:
+            # Send command via persistent connection
+            if not send_serial_command(command_line):
                 self.send_response(500)
                 self.end_headers()
-                self.wfile.write(b"Error: No suitable serial port found")
+                self.wfile.write(b"Error: Failed to send command to Arduino")
                 return
 
-            try:
-                with serial.Serial(port, 115200, timeout=2) as ser:
-                    # Small delay, send START first, then actual command
-                    time.sleep(1)
-                    ser.write(b"START\n")
-                    ser.flush()
-                    time.sleep(1.5)
-                    ser.write(command_line.encode())
+            # Schedule completion flag and auto-send READY after drink is done
+            def mark_complete_and_ready(delay_seconds: float):
+                try:
+                    # Wait for drink to complete
+                    time.sleep(max(0.0, delay_seconds))
+                    
+                    # Mark as complete
+                    processing_complete.set()
+                    print("✅ Drink preparation complete")
+                    
+                    # Auto-send READY to turn indicator ring green
+                    time.sleep(0.5)  # Small delay before sending READY
+                    send_serial_command("READY")
+                    
+                except Exception as e:
+                    print(f"⚠ Error in completion handler: {e}")
 
-                # Schedule completion flag after the longest pour duration
-                def mark_complete_after(delay_seconds: float):
-                    try:
-                        time.sleep(max(0.0, delay_seconds))
-                        processing_complete.set()
-                    except Exception:
-                        pass
+            # Add a small buffer to ensure drink is fully complete
+            buffer_seconds = 0.5
+            threading.Thread(
+                target=mark_complete_and_ready, 
+                args=(max_seconds + buffer_seconds,), 
+                daemon=True
+            ).start()
 
-                # Add a small buffer
-                buffer_seconds = 0.5
-                threading.Thread(target=mark_complete_after, args=(max_seconds + buffer_seconds,), daemon=True).start()
-
-                self.send_response(200)
-                self.end_headers()
-                self.wfile.write(json.dumps({"status": "OK"}).encode())
-
-            except serial.SerialException as e:
-                self.send_response(500)
-                self.end_headers()
-                self.wfile.write(f"Serial error: {str(e)}".encode())
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(json.dumps({"status": "OK"}).encode())
 
         except Exception as e:
             print(f"Error in handle_send_pipes: {e}")
@@ -641,42 +640,6 @@ class CustomHandler(SimpleHTTPRequestHandler):
         os._exit(0)
 
 
-def send_ready_to_arduino():
-    """Send READY command to Arduino to start indicator ring rainbow glow."""
-    try:
-        port = None
-        if platform.system() == "Windows":
-            for i in range(10):
-                try:
-                    test_port = f"COM{i}"
-                    with serial.Serial(test_port, 115200, timeout=1) as _:
-                        port = test_port
-                        break
-                except serial.SerialException:
-                    continue
-        else:
-            # On Linux, try ACM0 then USB0
-            for test_port in ("/dev/ttyACM0", "/dev/ttyUSB0"):
-                try:
-                    with serial.Serial(test_port, 115200, timeout=1) as _:
-                        port = test_port
-                        break
-                except serial.SerialException:
-                    continue
-
-        if port:
-            with serial.Serial(port, 115200, timeout=2) as ser:
-                time.sleep(1.5)  # Wait for Arduino to be ready
-                ser.write(b"START\n")  # Send START to skip boot animation
-                ser.flush()
-                time.sleep(1.5)
-                ser.write(b"READY\n")  # Send READY to start indicator ring
-                ser.flush()
-                print("✓ READY command sent to Arduino - Indicator ring rainbow activated")
-        else:
-            print("⚠ Warning: No Arduino found, indicator ring not activated")
-    except Exception as e:
-        print(f"⚠ Warning: Could not send READY to Arduino: {e}")
 
 def start_http_server():
     global httpd
@@ -772,14 +735,19 @@ if __name__ == "__main__":
     # # Sync images with Firebase Storage at startup
     # sync_images()
     
+    # Initialize persistent serial connection to Arduino
+    print("Initializing Arduino connection...")
+    if init_serial_connection():
+        # Send READY command to set indicator ring to GREEN
+        time.sleep(0.5)
+        send_serial_command("READY")
+        print("✓ System ready - Indicator ring set to GREEN")
+    
     # Start the HTTP server in a separate thread
     http_thread = threading.Thread(target=start_http_server)
     http_thread.start()
 
     start_image_handler()
-
-    # Send READY command to Arduino to activate indicator ring
-    threading.Thread(target=send_ready_to_arduino, daemon=True).start()
 
     # Start the Electron app after a slight delay to ensure the server is up
     start_electron_app()
