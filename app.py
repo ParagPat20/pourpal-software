@@ -207,6 +207,56 @@ class CustomHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(f"Error: {str(e)}".encode())
             return
 
+        elif self.path == "/send-ready":
+            try:
+                # Find the appropriate serial port
+                port = None
+                if platform.system() == "Windows":
+                    for i in range(10):
+                        try:
+                            test_port = f"COM{i}"
+                            with serial.Serial(test_port, 115200, timeout=1) as _:
+                                port = test_port
+                                break
+                        except serial.SerialException:
+                            continue
+                else:
+                    # On Linux, try ACM0 then USB0
+                    for test_port in ("/dev/ttyACM0", "/dev/ttyUSB0"):
+                        try:
+                            with serial.Serial(test_port, 115200, timeout=1) as _:
+                                port = test_port
+                                break
+                        except serial.SerialException:
+                            continue
+
+                if port is None:
+                    self.send_response(500)
+                    self.end_headers()
+                    self.wfile.write(b"Error: No suitable serial port found")
+                    return
+
+                try:
+                    with serial.Serial(port, 115200, timeout=2) as ser:
+                        time.sleep(0.1)
+                        ser.write(b"READY\n")
+                        ser.flush()
+                        print("✓ READY command sent to Arduino - Indicator ring set to GREEN")
+                        
+                        self.send_response(200)
+                        self.end_headers()
+                        self.wfile.write(b"READY command sent successfully")
+                except serial.SerialException as e:
+                    self.send_response(500)
+                    self.end_headers()
+                    self.wfile.write(f"Serial error: {str(e)}".encode())
+                    
+            except Exception as e:
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(f"Error: {str(e)}".encode())
+            return
+
         elif self.path == "/shutdown":
             self.send_response(200)
             self.end_headers()
@@ -591,6 +641,43 @@ class CustomHandler(SimpleHTTPRequestHandler):
         os._exit(0)
 
 
+def send_ready_to_arduino():
+    """Send READY command to Arduino to start indicator ring rainbow glow."""
+    try:
+        port = None
+        if platform.system() == "Windows":
+            for i in range(10):
+                try:
+                    test_port = f"COM{i}"
+                    with serial.Serial(test_port, 115200, timeout=1) as _:
+                        port = test_port
+                        break
+                except serial.SerialException:
+                    continue
+        else:
+            # On Linux, try ACM0 then USB0
+            for test_port in ("/dev/ttyACM0", "/dev/ttyUSB0"):
+                try:
+                    with serial.Serial(test_port, 115200, timeout=1) as _:
+                        port = test_port
+                        break
+                except serial.SerialException:
+                    continue
+
+        if port:
+            with serial.Serial(port, 115200, timeout=2) as ser:
+                time.sleep(2)  # Wait for Arduino to be ready
+                ser.write(b"START\n")  # Send START to skip boot animation
+                ser.flush()
+                time.sleep(0.5)
+                ser.write(b"READY\n")  # Send READY to start indicator ring
+                ser.flush()
+                print("✓ READY command sent to Arduino - Indicator ring rainbow activated")
+        else:
+            print("⚠ Warning: No Arduino found, indicator ring not activated")
+    except Exception as e:
+        print(f"⚠ Warning: Could not send READY to Arduino: {e}")
+
 def start_http_server():
     global httpd
     httpd = HTTPServer(("127.0.0.1", 5000), CustomHandler)
@@ -690,6 +777,9 @@ if __name__ == "__main__":
     http_thread.start()
 
     start_image_handler()
+
+    # Send READY command to Arduino to activate indicator ring
+    threading.Thread(target=send_ready_to_arduino, daemon=True).start()
 
     # Start the Electron app after a slight delay to ensure the server is up
     start_electron_app()

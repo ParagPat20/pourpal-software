@@ -5,10 +5,20 @@
 #define LEDS_PER_RING 8
 #define NUM_LEDS (NUM_RINGS * LEDS_PER_RING)
 
+// New indicator ring on Pin 11
+#define INDICATOR_PIN 11
+#define INDICATOR_LEDS 16
+
 Adafruit_NeoPixel strip(NUM_LEDS, DATA_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel indicatorRing(INDICATOR_LEDS, INDICATOR_PIN, NEO_GRB + NEO_KHZ800);
 
 const int relayPins[NUM_RINGS] = {8, 9, 6, 7, 4, 5, 2, 3};
 bool systemStarted = false;
+
+// Indicator ring states
+enum IndicatorState { IDLE, RAINBOW, GREEN };
+IndicatorState indicatorState = IDLE;
+unsigned long indicatorStartTime = 0;
 
 // ===== SETUP =====
 void setup() {
@@ -16,6 +26,12 @@ void setup() {
   strip.begin();
   strip.setBrightness(76); // ~30% brightness to reduce current draw
   strip.show();
+
+  // Initialize indicator ring
+  indicatorRing.begin();
+  indicatorRing.setBrightness(76);
+  indicatorRing.clear();
+  indicatorRing.show();
 
   for (int i = 0; i < NUM_RINGS; i++) {
     pinMode(relayPins[i], OUTPUT);
@@ -36,23 +52,41 @@ void setup() {
 
   Serial.println("\nReady! Send commands like:");
   Serial.println("  1:R:3,2:G:4,5:T:0");
+  Serial.println("  Send READY for green indicator, drink commands start rainbow");
 }
 
 // ===== MAIN LOOP =====
 void loop() {
   if (!systemStarted) return;
 
+  // Update indicator ring based on current state
+  updateIndicatorRing();
+
   if (Serial.available()) {
     String input = Serial.readStringUntil('\n');
     input.trim();
     if (input.length() == 0) return;
 
+    // Check for READY command - set to solid GREEN
+    if (input.equalsIgnoreCase("READY")) {
+      Serial.println("READY command received - Setting indicator to GREEN");
+      indicatorState = GREEN;
+      setIndicatorGreen();
+      return;
+    }
+
+    // For any other command (drink commands), start RAINBOW
     parseAndExecuteCommands(input);
   }
 }
 
 // ===== PARSE MULTIPLE COMMANDS =====
 void parseAndExecuteCommands(String commandLine) {
+  // Start rainbow animation on indicator ring when drink command is received
+  Serial.println("Drink command received - Starting indicator RAINBOW");
+  indicatorState = RAINBOW;
+  indicatorStartTime = millis();
+
   struct Task {
     int relayIndex;
     String mode; // "R","G","B","T", etc.
@@ -279,6 +313,42 @@ void checkForStartCommand() {
       input += c;
     }
   }
+}
+
+// ===== INDICATOR RING FUNCTIONS =====
+void updateIndicatorRing() {
+  if (indicatorState == RAINBOW) {
+    // Continuous rainbow animation
+    static unsigned long lastUpdate = 0;
+    static int rainbowOffset = 0;
+    
+    unsigned long currentTime = millis();
+    
+    // Update every 50ms for smooth animation
+    if (currentTime - lastUpdate >= 50) {
+      lastUpdate = currentTime;
+      
+      // Apply rainbow effect to all LEDs in the indicator ring
+      for (int i = 0; i < INDICATOR_LEDS; i++) {
+        int pixelHue = (rainbowOffset + (i * 65536 / INDICATOR_LEDS)) % 65536;
+        indicatorRing.setPixelColor(i, indicatorRing.gamma32(indicatorRing.ColorHSV(pixelHue)));
+      }
+      indicatorRing.show();
+      
+      // Increment offset for next frame (wraps around at 65536)
+      rainbowOffset = (rainbowOffset + 256) % 65536;
+    }
+  }
+  // GREEN state is handled by setIndicatorGreen() and stays static
+  // IDLE state means LEDs are off
+}
+
+void setIndicatorGreen() {
+  // Set all LEDs in indicator ring to solid green
+  for (int i = 0; i < INDICATOR_LEDS; i++) {
+    indicatorRing.setPixelColor(i, indicatorRing.Color(0, 255, 0));
+  }
+  indicatorRing.show();
 }
 
 // ===== COLOR WHEEL =====

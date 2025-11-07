@@ -1155,6 +1155,10 @@ async function sendPipesToPython(assignedPipes) {
         console.log("Drink preparation completed");
         hideLoadingPage();
         showCustomAlert("Your drink is ready!");
+        // Send READY command to Arduino to turn indicator ring green
+        fetch('/send-ready', { method: 'POST' })
+          .then(() => console.log('READY signal sent to Arduino'))
+          .catch(error => console.error('Error sending READY signal:', error));
       } else {
         console.log("Received OK from Python. Starting completion check...");
         checkCompletionStatus();
@@ -1195,6 +1199,10 @@ function checkCompletionStatus() {
         // Drink is ready, hide loading page
         hideLoadingPage();
         showCustomAlert("Your drink is ready!");
+        // Send READY command to Arduino to turn indicator ring green
+        fetch('/send-ready', { method: 'POST' })
+          .then(() => console.log('READY signal sent to Arduino'))
+          .catch(error => console.error('Error sending READY signal:', error));
         // Clear the completion status for next time
         fetch('/delete_processing_flag', { method: 'POST' });
       } else {
@@ -1235,6 +1243,11 @@ function cancelDrink() {
                 // Also clear the processing flag on backend
                 fetch('/delete_processing_flag', { method: 'POST' })
                     .catch(err => console.log('Error clearing flag:', err));
+                
+                // Send READY command to Arduino to turn indicator ring green
+                fetch('/send-ready', { method: 'POST' })
+                    .then(() => console.log('READY signal sent to Arduino after cancel'))
+                    .catch(error => console.error('Error sending READY signal:', error));
                 
                 // Hide loading page
                 hideLoadingPage();
