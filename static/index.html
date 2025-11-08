@@ -364,6 +364,94 @@
               </div>
             </div>
 
+            <!-- Cleanup Section -->
+            <div class="cleanup-section">
+              <div class="cleanup-box">
+                <div class="cleanup-header">
+                  <h2>System Cleanup</h2>
+                  <p>Select pipes to clean and set duration</p>
+                </div>
+                
+                <div class="cleanup-controls">
+                  <div class="time-control">
+                    <label for="cleanup-time">Cleanup Duration (seconds):</label>
+                    <input 
+                      type="number" 
+                      id="cleanup-time" 
+                      value="15" 
+                      min="1" 
+                      max="120"
+                      class="cleanup-time-input"
+                    />
+                  </div>
+                  
+                  <div class="cleanup-buttons">
+                    <button class="btn active btns" id="select-all-pipes-btn">
+                      Select All
+                    </button>
+                    <button class="btn active btns" id="default-cleanup-btn">
+                      Default (15s)
+                    </button>
+                  </div>
+                </div>
+
+                <div class="pipes-selection">
+                  <h3>Select Pipes to Clean:</h3>
+                  <div class="pipes-grid">
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="1">
+                      <span class="pipe-label">Pipe 1</span>
+                    </label>
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="2">
+                      <span class="pipe-label">Pipe 2</span>
+                    </label>
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="3">
+                      <span class="pipe-label">Pipe 3</span>
+                    </label>
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="4">
+                      <span class="pipe-label">Pipe 4</span>
+                    </label>
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="5">
+                      <span class="pipe-label">Pipe 5</span>
+                    </label>
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="6">
+                      <span class="pipe-label">Pipe 6</span>
+                    </label>
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="7">
+                      <span class="pipe-label">Pipe 7</span>
+                    </label>
+                    <label class="pipe-checkbox">
+                      <input type="checkbox" class="cleanup-pipe-checkbox" data-pipe="8">
+                      <span class="pipe-label">Pipe 8</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="cleanup-status" id="cleanup-status">
+                  <p>Ready to clean. Select pipes and press Start Cleanup.</p>
+                </div>
+
+                <div class="footer-btn">
+                  <button 
+                    id="back-to-home-btn" 
+                    class="btn deactive"
+                    onclick="showAvailableCocktails()"
+                  >
+                    Back
+                  </button>
+                  <button id="start-cleanup-btn" class="btn active">
+                    Start Cleanup
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <!-- Assign Pipeline Section -->
             <div class="assign-pipe">
               <div class="aspi-box">

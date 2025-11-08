@@ -2761,3 +2761,189 @@ select,
 .ml-preview-item.shot-size .ingredient-ml {
     color: #ff8800;
 }
+
+/* ==================== CLEANUP SECTION ==================== */
+.cleanup-section {
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.cleanup-box {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.cleanup-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cleanup-header h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.cleanup-header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+}
+
+.cleanup-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.time-control {
+  flex: 1;
+  min-width: 250px;
+}
+
+.time-control label {
+  display: block;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.cleanup-time-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1.2rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.3s;
+}
+
+.cleanup-time-input:focus {
+  outline: none;
+  border-color: #8b4513;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cleanup-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pipes-selection {
+  margin-bottom: 30px;
+}
+
+.pipes-selection h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.pipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.pipe-checkbox {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  user-select: none;
+}
+
+.pipe-checkbox:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #8b4513;
+  transform: translateY(-2px);
+}
+
+.pipe-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  accent-color: #8b4513;
+}
+
+.pipe-checkbox input[type="checkbox"]:checked + .pipe-label {
+  color: #8b4513;
+  font-weight: bold;
+}
+
+.pipe-label {
+  color: #fff;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.cleanup-status {
+  padding: 20px;
+  background: rgba(139, 69, 19, 0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cleanup-status p {
+  color: #fff;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.cleanup-status.cleaning {
+  background: rgba(255, 165, 0, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.cleanup-status.success {
+  background: rgba(0, 255, 0, 0.2);
+}
+
+.cleanup-status.error {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 768px) {
+  .cleanup-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .cleanup-buttons {
+    width: 100%;
+  }
+  
+  .cleanup-buttons .btn {
+    flex: 1;
+  }
+  
+  .pipes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1006,6 +1006,44 @@ function showCocktailDetails() {
   updateButtonStyles();
 }
 
+// Function to show the "Cleanup" section
+function showCleanup() {
+  const cleanupSection = document.querySelector('.cleanup-section');
+  const findIngSection = document.querySelector('.findIng');
+  const addIngSection = document.querySelector('.addIngredient');
+  const addCocktailSection = document.querySelector('.add-cocktail');
+  const allCocktailSection = document.querySelector('.all-cocktail');
+  const cocktailDetailsSection = document.querySelector('.cocktail-details');
+  const assignPipeSection = document.querySelector('.assign-pipe');
+  
+  findIngSection.style.display = "none";
+  addIngSection.style.display = "none";
+  addCocktailSection.style.display = "none";
+  allCocktailSection.style.display = "none";
+  cocktailDetailsSection.style.display = "none";
+  assignPipeSection.style.display = "none";
+  cleanupSection.style.display = "block";
+
+  // Update button styles
+  const cleanupBtn = document.getElementById('cleanupBtn');
+  const availableCocktailsBtn = document.getElementById('availableCocktailsBtn');
+  const selectIngBtn = document.getElementById('selectIngBtn');
+  const allCocktailsBtn = document.getElementById('allCocktailsBtn');
+  const addIngredientsBtn = document.getElementById('addIngredientsBtn');
+  const addCocktailBtn = document.getElementById('addCocktailBtn');
+  
+  cleanupBtn.classList.remove("deactive");
+  cleanupBtn.classList.add("active");
+  availableCocktailsBtn.classList.remove("active");
+  availableCocktailsBtn.classList.add("deactive");
+  selectIngBtn.classList.add("deactive");
+  allCocktailsBtn.classList.add("deactive");
+  addIngredientsBtn.classList.add("deactive");
+  addCocktailBtn.classList.add("deactive");
+  
+  updateButtonStyles();
+}
+
 // Function to show the "Add Cocktail" section
 function showAddCocktail() {
   findIngSection.style.display = "none";
@@ -3389,6 +3427,162 @@ function showUpdatePopup(message) {
   popupContent.appendChild(buttonContainer);
   popupContainer.appendChild(popupContent);
   document.body.appendChild(popupContainer);
+}
+
+// ==================== CLEANUP FUNCTIONALITY ====================
+
+// Cleanup button event listener
+document.getElementById('cleanupBtn')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  showCleanup();
+});
+
+// Select All Pipes button
+document.getElementById('select-all-pipes-btn')?.addEventListener('click', () => {
+  const checkboxes = document.querySelectorAll('.cleanup-pipe-checkbox');
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = true;
+  });
+  updateCleanupStatus();
+});
+
+// Default button (Select all + set 15 seconds)
+document.getElementById('default-cleanup-btn')?.addEventListener('click', () => {
+  // Select all pipes
+  const checkboxes = document.querySelectorAll('.cleanup-pipe-checkbox');
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = true;
+  });
+  
+  // Set time to 15 seconds
+  document.getElementById('cleanup-time').value = 15;
+  
+  updateCleanupStatus();
+});
+
+// Update status when checkboxes change
+document.querySelectorAll('.cleanup-pipe-checkbox').forEach(checkbox => {
+  checkbox.addEventListener('change', updateCleanupStatus);
+});
+
+function updateCleanupStatus() {
+  const checkboxes = document.querySelectorAll('.cleanup-pipe-checkbox:checked');
+  const statusDiv = document.getElementById('cleanup-status');
+  
+  if (checkboxes.length === 0) {
+    statusDiv.innerHTML = '<p>No pipes selected. Please select at least one pipe.</p>';
+    statusDiv.className = 'cleanup-status';
+  } else {
+    statusDiv.innerHTML = `<p>${checkboxes.length} pipe(s) selected for cleaning.</p>`;
+    statusDiv.className = 'cleanup-status';
+  }
+}
+
+// Start Cleanup button
+document.getElementById('start-cleanup-btn')?.addEventListener('click', async () => {
+  const checkboxes = document.querySelectorAll('.cleanup-pipe-checkbox:checked');
+  const timeInput = document.getElementById('cleanup-time');
+  const cleanupTime = parseInt(timeInput.value) || 15;
+  
+  if (checkboxes.length === 0) {
+    showCustomAlert('Please select at least one pipe to clean!');
+    return;
+  }
+  
+  // Collect selected pipes
+  const selectedPipes = Array.from(checkboxes).map(cb => parseInt(cb.dataset.pipe));
+  
+  console.log('Starting cleanup for pipes:', selectedPipes, 'Time:', cleanupTime, 'seconds');
+  
+  // Process pipes in batches of 2
+  await processCleanupBatches(selectedPipes, cleanupTime);
+});
+
+async function processCleanupBatches(pipes, cleanupTime) {
+  const statusDiv = document.getElementById('cleanup-status');
+  const startButton = document.getElementById('start-cleanup-btn');
+  
+  // Disable the button
+  startButton.disabled = true;
+  startButton.textContent = 'Cleaning...';
+  
+  statusDiv.className = 'cleanup-status cleaning';
+  
+  // Process 2 pipes at a time
+  for (let i = 0; i < pipes.length; i += 2) {
+    const batch = pipes.slice(i, i + 2);
+    const batchNumber = Math.floor(i / 2) + 1;
+    const totalBatches = Math.ceil(pipes.length / 2);
+    
+    statusDiv.innerHTML = `<p>Cleaning batch ${batchNumber}/${totalBatches}: Pipes ${batch.join(', ')}</p>`;
+    
+    // Build command string for Arduino (e.g., "1:R:15,2:R:15")
+    const commands = batch.map(pipe => `${pipe}:R:${cleanupTime}`).join(',');
+    
+    console.log(`Sending cleanup command: ${commands}`);
+    
+    try {
+      // Send command to Arduino via Python backend
+      const response = await fetch('/send-pipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ingredients: batch.map(pipe => ({
+            pipe: pipe.toString(),
+            ingMl: cleanupTime * (1 / SECONDS_PER_ML || 1) // Convert time to ml based on calibration
+          }))
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send cleanup command');
+      }
+      
+      console.log(`Batch ${batchNumber} sent successfully`);
+      
+      // Wait for cleanup time + small buffer before sending next batch
+      if (i + 2 < pipes.length) {
+        const waitTime = (cleanupTime + 1) * 1000; // +1 second buffer
+        statusDiv.innerHTML = `<p>Batch ${batchNumber}/${totalBatches} cleaning... Next batch in ${cleanupTime}s</p>`;
+        
+        // Countdown timer
+        for (let countdown = cleanupTime; countdown > 0; countdown--) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          statusDiv.innerHTML = `<p>Batch ${batchNumber}/${totalBatches} complete. Next batch in ${countdown - 1}s...</p>`;
+        }
+      }
+      
+    } catch (error) {
+      console.error('Error during cleanup:', error);
+      statusDiv.className = 'cleanup-status error';
+      statusDiv.innerHTML = `<p>Error cleaning pipes ${batch.join(', ')}. Please try again.</p>`;
+      startButton.disabled = false;
+      startButton.textContent = 'Start Cleanup';
+      return;
+    }
+  }
+  
+  // All batches complete
+  statusDiv.className = 'cleanup-status success';
+  statusDiv.innerHTML = '<p>✅ Cleanup complete! All selected pipes have been cleaned.</p>';
+  
+  // Re-enable button
+  startButton.disabled = false;
+  startButton.textContent = 'Start Cleanup';
+  
+  // Uncheck all checkboxes
+  document.querySelectorAll('.cleanup-pipe-checkbox').forEach(cb => {
+    cb.checked = false;
+  });
+  
+  // Show success message
+  setTimeout(() => {
+    showCustomAlert('Cleanup completed successfully!');
+    statusDiv.className = 'cleanup-status';
+    statusDiv.innerHTML = '<p>Ready to clean. Select pipes and press Start Cleanup.</p>';
+  }, 2000);
 }
 
 // Update popup functionality
