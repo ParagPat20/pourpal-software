@@ -19,7 +19,7 @@ web_dir = os.path.join(base_dir, "static")  # Define `static` folder path
 # Pump calibration: How many seconds it takes to pour 1ml
 # Example: If 1ml takes 1.3 seconds, set SECONDS_PER_ML = 1.3
 # Example: If 10ml takes 1 second, set SECONDS_PER_ML = 0.1
-SECONDS_PER_ML = 0.5  # Adjust this value to calibrate your pumps
+SECONDS_PER_ML = 0.45  # Adjust this value to calibrate your pumps
 # ======================================================
 
 # ==================== PERSISTENT SERIAL CONNECTION ====================
@@ -275,6 +275,21 @@ class CustomHandler(SimpleHTTPRequestHandler):
                     self.end_headers()
                     self.wfile.write(b"Error: Failed to send READY command to Arduino")
                     
+            except Exception as e:
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(f"Error: {str(e)}".encode())
+            return
+
+        elif self.path == "/get-calibration":
+            try:
+                # Return SECONDS_PER_ML calibration value
+                calibration_data = {
+                    "secondsPerMl": SECONDS_PER_ML
+                }
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(json.dumps(calibration_data).encode())
             except Exception as e:
                 self.send_response(500)
                 self.end_headers()
