@@ -1231,7 +1231,22 @@ async function sendPipesToPython(assignedPipes) {
   };
   console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
   
-  showLoadingPage();
+  // Calculate max time from ingredients (SECONDS_PER_ML = 1.3)
+  const SECONDS_PER_ML = 1.3;
+  let maxSeconds = 0;
+  dataToSend.ingredients.forEach(item => {
+    const ml = parseFloat(item.ingMl) || 0;
+    const seconds = ml * SECONDS_PER_ML;
+    if (seconds > maxSeconds) {
+      maxSeconds = seconds;
+    }
+  });
+  
+  // Add buffer time (2 seconds)
+  const totalWaitTime = Math.ceil(maxSeconds) + 2;
+  console.log(`Max drink time: ${maxSeconds}s, Total wait: ${totalWaitTime}s`);
+  
+  showLoadingPage(totalWaitTime);
   console.log('Loading page displayed');
   
   try {
@@ -1247,15 +1262,13 @@ async function sendPipesToPython(assignedPipes) {
     if (response.ok) {
       const data = await response.json();
       console.log('Response data:', data);
-      if (data.status === "COMPLETED") {
-        console.log("Drink preparation completed");
-        hideLoadingPage();
-        showCustomAlert("Your drink is ready!");
-        // Backend automatically sends READY when drink completes
-      } else {
-        console.log("Received OK from Python. Starting completion check...");
-        checkCompletionStatus();
-      }
+      
+      // Wait for the full max time before checking completion
+      console.log(`Waiting ${totalWaitTime} seconds before checking completion...`);
+      await new Promise(resolve => setTimeout(resolve, totalWaitTime * 1000));
+      
+      // Now check if it's actually complete
+      checkCompletionStatus();
     } else {
       const errorText = await response.text();
       console.error('Server returned error:', errorText);
@@ -1271,11 +1284,18 @@ async function sendPipesToPython(assignedPipes) {
 // Global flag to track if drink was cancelled
 let drinkCancelled = false;
 
+// Global flag to track if cleanup is in progress (prevents drink completion checks)
+let cleanupInProgress = false;
+
 // Function to check completion status
 function checkCompletionStatus() {
-  // Don't check if drink was cancelled
-  if (drinkCancelled) {
-    console.log('Drink was cancelled, stopping completion check');
+  // Don't check if drink was cancelled or cleanup is in progress
+  if (drinkCancelled || cleanupInProgress) {
+    if (cleanupInProgress) {
+      console.log('Cleanup in progress, skipping completion check');
+    } else {
+      console.log('Drink was cancelled, stopping completion check');
+    }
     return;
   }
   
@@ -1308,52 +1328,41 @@ function checkCompletionStatus() {
 }
 
 // Function to show the loading page
-function showLoadingPage() {
+function showLoadingPage(totalWaitTime = 10) {
     // Reset cancellation flag for new drink
     drinkCancelled = false;
     
     const loadingPage = document.getElementById('loading-page');
     loadingPage.style.display = 'flex';
     
-    // Reset progress bar
-    const progressBar = document.getElementById('drink-progress-bar');
-    const progressText = document.getElementById('progress-status');
+    const timeDisplay = document.getElementById('drink-time-display');
     
-    if (progressBar) {
-        progressBar.style.width = '0%';
-        progressBar.style.animation = 'none';
-        // Force reflow
-        void progressBar.offsetWidth;
-        progressBar.style.animation = 'progress-shimmer 2s linear infinite, progress-fill 10s ease-out forwards';
+    // Start countdown timer
+    let remainingTime = totalWaitTime;
+    if (timeDisplay) {
+        timeDisplay.textContent = `${remainingTime}s`;
     }
     
-    // Update status messages with animation
-    const statusMessages = [
-        'Preparing ingredients...',
-        'Mixing your cocktail...',
-        'Adding the perfect touch...',
-        'Almost ready...'
-    ];
-    
-    let messageIndex = 0;
-    if (progressText) {
-        progressText.textContent = statusMessages[0];
-    }
-    
-    // Update status message every 2.5 seconds
-    const statusInterval = setInterval(() => {
-        if (!drinkCancelled && messageIndex < statusMessages.length - 1) {
-            messageIndex++;
-            if (progressText) {
-                progressText.textContent = statusMessages[messageIndex];
-            }
-        } else {
-            clearInterval(statusInterval);
+    // Update countdown every second
+    const countdownInterval = setInterval(() => {
+        if (drinkCancelled) {
+            clearInterval(countdownInterval);
+            return;
         }
-    }, 2500);
+        
+        remainingTime--;
+        if (timeDisplay) {
+            if (remainingTime > 0) {
+                timeDisplay.textContent = `${remainingTime}s`;
+            } else {
+                timeDisplay.textContent = '0s';
+                clearInterval(countdownInterval);
+            }
+        }
+    }, 1000);
     
     // Store interval ID to clear it if needed
-    loadingPage.dataset.statusInterval = statusInterval;
+    loadingPage.dataset.countdownInterval = countdownInterval;
     
     // Add click handler for cancel button
     const cancelButton = document.getElementById('cancel-drink-button');
@@ -1368,17 +1377,11 @@ function cancelDrink() {
     // Set the cancellation flag to stop completion checks immediately
     drinkCancelled = true;
     
-    // Clear status interval
+    // Clear countdown interval
     const loadingPage = document.getElementById('loading-page');
-    if (loadingPage && loadingPage.dataset.statusInterval) {
-        clearInterval(parseInt(loadingPage.dataset.statusInterval));
-        delete loadingPage.dataset.statusInterval;
-    }
-    
-    // Update status text
-    const progressText = document.getElementById('progress-status');
-    if (progressText) {
-        progressText.textContent = 'Cancelling...';
+    if (loadingPage && loadingPage.dataset.countdownInterval) {
+        clearInterval(parseInt(loadingPage.dataset.countdownInterval));
+        delete loadingPage.dataset.countdownInterval;
     }
     
     // Send cancel request to server
@@ -1414,26 +1417,14 @@ function cancelDrink() {
 function hideLoadingPage() {
     const loadingPage = document.getElementById('loading-page');
     
-    // Clear status interval if it exists
-    if (loadingPage.dataset.statusInterval) {
-        clearInterval(parseInt(loadingPage.dataset.statusInterval));
-        delete loadingPage.dataset.statusInterval;
+    // Clear countdown interval if it exists
+    if (loadingPage && loadingPage.dataset.countdownInterval) {
+        clearInterval(parseInt(loadingPage.dataset.countdownInterval));
+        delete loadingPage.dataset.countdownInterval;
     }
     
-    // Complete progress bar animation
-    const progressBar = document.getElementById('drink-progress-bar');
-    if (progressBar) {
-        progressBar.style.width = '100%';
-        const progressText = document.getElementById('progress-status');
-        if (progressText) {
-            progressText.textContent = 'Complete!';
-        }
-    }
-    
-    // Hide after a brief delay to show completion
-    setTimeout(() => {
-        loadingPage.style.display = 'none';
-    }, 500);
+    // Hide immediately
+    loadingPage.style.display = 'none';
 }
 
 function showMessage(message, type = 'success') {
@@ -3652,11 +3643,21 @@ async function processCleanupBatches(pipes, cleanupTime) {
   const statusDiv = document.getElementById('cleanup-status');
   const startButton = document.getElementById('start-cleanup-btn');
   
+  // Set cleanup flag to prevent drink completion checks
+  cleanupInProgress = true;
+  
   // Disable the button
   startButton.disabled = true;
   startButton.textContent = 'Cleaning...';
   
   statusDiv.className = 'cleanup-status cleaning';
+  
+  // Clear any existing processing flags to prevent interference
+  try {
+    await fetch('/delete_processing_flag', { method: 'POST' });
+  } catch (e) {
+    console.log('Could not clear processing flag:', e);
+  }
   
   // Process 2 pipes at a time
   for (let i = 0; i < pipes.length; i += 2) {
@@ -3665,11 +3666,6 @@ async function processCleanupBatches(pipes, cleanupTime) {
     const totalBatches = Math.ceil(pipes.length / 2);
     
     statusDiv.innerHTML = `<p>Cleaning batch ${batchNumber}/${totalBatches}: Pipes ${batch.join(', ')}</p>`;
-    
-    // Build command string for Arduino (e.g., "1:R:15,2:R:15")
-    const commands = batch.map(pipe => `${pipe}:R:${cleanupTime}`).join(',');
-    
-    console.log(`Sending cleanup command: ${commands}`);
     
     try {
       // Send command to Arduino via Python backend
@@ -3694,19 +3690,27 @@ async function processCleanupBatches(pipes, cleanupTime) {
       
       console.log(`Batch ${batchNumber} sent successfully`);
       
-      // Wait for cleanup time with countdown
+      // IMPORTANT: Wait for the FULL cleanup time with countdown
+      // The backend will schedule completion, but we ignore it and wait our full time
       statusDiv.innerHTML = `<p>Cleaning batch ${batchNumber}/${totalBatches}: Pipes ${batch.join(', ')}...</p>`;
       
-      // Countdown timer for current batch
+      // Countdown timer for current batch - wait the FULL cleanup time
       for (let countdown = cleanupTime; countdown > 0; countdown--) {
         await new Promise(resolve => setTimeout(resolve, 1000));
         if (i + 2 < pipes.length) {
           // Not the last batch - show next batch message
-          statusDiv.innerHTML = `<p>Batch ${batchNumber}/${totalBatches} complete. Next batch in ${countdown - 1}s...</p>`;
+          statusDiv.innerHTML = `<p>Batch ${batchNumber}/${totalBatches} cleaning... Next batch in ${countdown - 1}s...</p>`;
         } else {
           // Last batch - show completion countdown
           statusDiv.innerHTML = `<p>Cleaning batch ${batchNumber}/${totalBatches}... ${countdown - 1}s remaining</p>`;
         }
+      }
+      
+      // Clear processing flag after each batch to prevent interference
+      try {
+        await fetch('/delete_processing_flag', { method: 'POST' });
+      } catch (e) {
+        // Ignore errors
       }
       
     } catch (error) {
@@ -3715,11 +3719,22 @@ async function processCleanupBatches(pipes, cleanupTime) {
       statusDiv.innerHTML = `<p>Error cleaning pipes ${batch.join(', ')}. Please try again.</p>`;
       startButton.disabled = false;
       startButton.textContent = 'Start Cleanup';
+      // Reset cleanup flag on error
+      cleanupInProgress = false;
       return;
     }
   }
   
-  // All batches complete
+  // All batches complete - clear the flag
+  cleanupInProgress = false;
+  
+  // Clear processing flag one final time
+  try {
+    await fetch('/delete_processing_flag', { method: 'POST' });
+  } catch (e) {
+    // Ignore errors
+  }
+  
   statusDiv.className = 'cleanup-status success';
   statusDiv.innerHTML = '<p>✅ Cleanup complete! All selected pipes have been cleaned.</p>';
   
