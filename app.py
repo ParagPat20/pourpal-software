@@ -19,7 +19,7 @@ web_dir = os.path.join(base_dir, "static")  # Define `static` folder path
 # Pump calibration: How many seconds it takes to pour 1ml
 # Example: If 1ml takes 1.3 seconds, set SECONDS_PER_ML = 1.3
 # Example: If 10ml takes 1 second, set SECONDS_PER_ML = 0.1
-SECONDS_PER_ML = 1.3  # Adjust this value to calibrate your pumps
+SECONDS_PER_ML = 0.75  # Adjust this value to calibrate your pumps
 # ======================================================
 
 # ==================== PERSISTENT SERIAL CONNECTION ====================

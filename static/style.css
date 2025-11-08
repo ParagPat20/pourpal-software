@@ -1847,26 +1847,78 @@ input#product-id {
   cursor: pointer;
 }
 .dropdowns-parent-container {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(302px, 1fr));
-  gap: 25px;
+  display: flex !important;
+  justify-content: center;
+  gap: 40px;
   width: 100%;
   height: auto;
-  padding-top: 5px;
+  padding-top: 20px;
   margin-bottom: 25px;
+  flex-wrap: wrap;
 }
+
+.pipe-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 320px;
+  max-width: 380px;
+  flex: 1;
+}
+
+.pipe-column-left {
+  order: 1;
+}
+
+.pipe-column-right {
+  order: 2;
+}
+
+.column-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #359267;
+  text-align: center;
+  padding: 12px;
+  background: rgba(53, 146, 103, 0.1);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid rgba(53, 146, 103, 0.3);
+}
+
 .pipe-dropdown-container {
-  padding: 25px;
+  padding: 20px;
   border-radius: 15px;
-  background: #ffffff50;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(53, 146, 103, 0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
+
+.pipe-dropdown-container:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(53, 146, 103, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(53, 146, 103, 0.2);
+}
+
 .pipe-dropdown-container label {
   text-transform: uppercase;
   color: #359267;
+  font-weight: 600;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
 }
+
 .pipe-dropdown-wrapper {
   margin-top: 15px;
 }
+
 .pipe-dropdown-options {
   border-radius: 0px 0px 5px 5px;
 }
@@ -3176,5 +3228,27 @@ select,
 
   .pipe-checkbox {
     padding: 15px;
+  }
+  
+  /* Pipe columns responsive */
+  .dropdowns-parent-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .pipe-column {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .dropdowns-parent-container {
+    gap: 30px;
+  }
+  
+  .pipe-column {
+    min-width: 280px;
+    max-width: 340px;
   }
 }

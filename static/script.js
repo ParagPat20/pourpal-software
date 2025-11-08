@@ -2928,50 +2928,92 @@ function initializePipes() {
 
 function populateAssignPipeDropdowns() {
   const pipeAssignContainer = document.getElementById("pipeAssignContainer");
+  
+  // Check if container exists
+  if (!pipeAssignContainer) {
+    console.warn("pipeAssignContainer not found, skipping pipe dropdown population");
+    return;
+  }
+  
   pipeAssignContainer.innerHTML = "";
 
-  for (let i = 1; i <= numberOfPipes; i++) {
-    const dropdownContainer = document.createElement("div");
-    dropdownContainer.className = "pipe-dropdown-container";
-    dropdownContainer.id = `pipeContainer${i}`; // Add ID for targeting
+  // Create two column containers for physical pipe arrangement
+  // Right side: Pipes 1-4 (top to bottom)
+  // Left side: Pipes 5-8 (bottom to top)
+  const rightColumn = document.createElement("div");
+  rightColumn.className = "pipe-column pipe-column-right";
+  rightColumn.innerHTML = '<div class="column-label">Right Side</div>';
+  
+  const leftColumn = document.createElement("div");
+  leftColumn.className = "pipe-column pipe-column-left";
+  leftColumn.innerHTML = '<div class="column-label">Left Side</div>';
 
-    // Create dropdown with search input
-    dropdownContainer.innerHTML = `
-          <label for="pipeDropdown${i}">Pipe ${i}</label>
-          <div class="pipe-dropdown-wrapper">
-              <div class="search-input-container">
-                  <input type="text" 
-                      class="pipe-dropdown-search" 
-                      id="pipeSearch${i}" 
-                      placeholder="Search ingredient..."
-                  />
-                  <button class="clear-pipe-search" id="clearSearch${i}">x</button>
-              </div>
-              <div class="pipe-dropdown-options" id="pipeOptions${i}">
-                  <div class="option" data-value="">Select Ingredient</div>
-                  ${selectedIngredients
-                    .map((ingredient) => {
-                      const isAssigned = isIngredientAssigned(ingredient);
-                      return `<div class="option ${
-                        isAssigned ? "disabled" : ""
-                      }" 
-                          data-value="${ingredient}"
-                          title="${
-                            isAssigned ? "Already assigned to another pipe" : ""
-                          }"
-                          >${ingredient}</div>`;
-                    })
-                    .join("")}
-              </div>
-          </div>
-      `;
-
-    pipeAssignContainer.appendChild(dropdownContainer);
-    setupPipeDropdown(i);
+  // Right side pipes: 1, 2, 3, 4 (top to bottom)
+  for (let i = 1; i <= 4; i++) {
+    const dropdownContainer = createPipeContainer(i, selectedIngredients);
+    rightColumn.appendChild(dropdownContainer);
   }
-      // Update UI to show notes and remarks
-      updatePipelineRemarksDisplay();
-      updateRemarksDisplay();
+
+  // Left side pipes: 8, 7, 6, 5 (bottom to top, so reverse order)
+  for (let i = 8; i >= 5; i--) {
+    const dropdownContainer = createPipeContainer(i, selectedIngredients);
+    leftColumn.appendChild(dropdownContainer);
+  }
+
+  // Append columns to container (left first, then right for visual layout)
+  pipeAssignContainer.appendChild(leftColumn);
+  pipeAssignContainer.appendChild(rightColumn);
+
+  // Setup dropdowns after DOM is updated - use setTimeout to ensure elements are in DOM
+  setTimeout(() => {
+    for (let i = 1; i <= 8; i++) {
+      setupPipeDropdown(i);
+    }
+    
+    // Update UI to show notes and remarks
+    updatePipelineRemarksDisplay();
+    updateRemarksDisplay();
+  }, 0);
+}
+
+// Helper function to create pipe container
+function createPipeContainer(pipeNumber, selectedIngredients) {
+  const dropdownContainer = document.createElement("div");
+  dropdownContainer.className = "pipe-dropdown-container";
+  dropdownContainer.id = `pipeContainer${pipeNumber}`;
+  dropdownContainer.setAttribute("data-pipe-number", pipeNumber);
+
+  dropdownContainer.innerHTML = `
+    <label for="pipeDropdown${pipeNumber}">Pipe ${pipeNumber}</label>
+    <div class="pipe-dropdown-wrapper">
+      <div class="search-input-container">
+        <input type="text" 
+          class="pipe-dropdown-search" 
+          id="pipeSearch${pipeNumber}" 
+          placeholder="Search ingredient..."
+        />
+        <button class="clear-pipe-search" id="clearSearch${pipeNumber}">x</button>
+      </div>
+      <div class="pipe-dropdown-options" id="pipeOptions${pipeNumber}">
+        <div class="option" data-value="">Select Ingredient</div>
+        ${selectedIngredients
+          .map((ingredient) => {
+            const isAssigned = isIngredientAssigned(ingredient);
+            return `<div class="option ${
+              isAssigned ? "disabled" : ""
+            }" 
+              data-value="${ingredient}"
+              title="${
+                isAssigned ? "Already assigned to another pipe" : ""
+              }"
+            >${ingredient}</div>`;
+          })
+          .join("")}
+      </div>
+    </div>
+  `;
+
+  return dropdownContainer;
 }
 
 // Check if ingredient is already assigned to any pipe (for visual indication only)
@@ -2984,16 +3026,26 @@ function setupPipeDropdown(pipeNumber) {
   const optionsContainer = document.getElementById(`pipeOptions${pipeNumber}`);
   const clearButton = document.getElementById(`clearSearch${pipeNumber}`);
 
+  // Check if all required elements exist before adding event listeners
+  if (!searchInput || !optionsContainer || !clearButton) {
+    console.warn(`Pipe ${pipeNumber} elements not found, skipping setup`);
+    return;
+  }
+
   // Show options on focus
   searchInput.addEventListener("focus", () => {
-    optionsContainer.style.display = "block";
-    // Immediately update remarks displays after selection
-    updatePipelineRemarksDisplay();
-    updateRemarksDisplay();
+    if (optionsContainer) {
+      optionsContainer.style.display = "block";
+      // Immediately update remarks displays after selection
+      updatePipelineRemarksDisplay();
+      updateRemarksDisplay();
+    }
   });
 
   // Handle search
   searchInput.addEventListener("input", () => {
+    if (!optionsContainer || !clearButton) return;
+    
     const searchTerm = searchInput.value.toLowerCase();
     const options = optionsContainer.querySelectorAll(
       ".option:not(.no-results)"
@@ -3028,7 +3080,9 @@ function setupPipeDropdown(pipeNumber) {
   });
 
   // Handle clear button click
-  clearButton.addEventListener("click", () => {
+  clearButton.addEventListener("click", (event) => {
+    if (!searchInput || !clearButton) return;
+    
     // Get the current assignment before clearing
     const currentAssignment = currentPipeAssignments[`Pipe ${pipeNumber}`];
 
@@ -3041,11 +3095,15 @@ function setupPipeDropdown(pipeNumber) {
     populateAssignPipeDropdowns();
 
     // Stop event propagation to prevent dropdown from showing
-    event.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
   });
 
   // Handle option selection
   optionsContainer.addEventListener("click", (e) => {
+    if (!searchInput || !optionsContainer || !clearButton) return;
+    
     if (e.target.classList.contains("option")) {
       const value = e.target.dataset.value;
       searchInput.value = e.target.textContent;
@@ -3074,6 +3132,8 @@ function setupPipeDropdown(pipeNumber) {
 
   // Close options when clicking outside
   document.addEventListener("click", (e) => {
+    if (!searchInput || !optionsContainer || !clearButton) return;
+    
     if (
       !searchInput.contains(e.target) &&
       !optionsContainer.contains(e.target) &&
@@ -3086,8 +3146,10 @@ function setupPipeDropdown(pipeNumber) {
   // Set previous value if exists
   const previousAssignment = currentPipeAssignments[`Pipe ${pipeNumber}`];
   if (previousAssignment && selectedIngredients.includes(previousAssignment)) {
-    searchInput.value = previousAssignment;
-    clearButton.style.display = "block";
+    if (searchInput && clearButton) {
+      searchInput.value = previousAssignment;
+      clearButton.style.display = "block";
+    }
   }
 
   // Add the note button after setting up the dropdown
@@ -3296,6 +3358,9 @@ async function saveConfig(numberOfPipes, selectedIngredients) {
 async function loadConfig() {
   try {
     const response = await fetch("config.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const configData = await response.json();
 
     // Initialize both arrays from config
@@ -3313,8 +3378,9 @@ async function loadConfig() {
     await fetchIngredients();
     updateSelectedCount();
 
-    // Populate dropdowns with current assignments
-    if (configData.pipeConfig) {
+    // Check if pipeAssignContainer exists before populating
+    const pipeAssignContainer = document.getElementById("pipeAssignContainer");
+    if (pipeAssignContainer && configData.pipeConfig) {
       populateAssignPipeDropdowns();
     }
 
