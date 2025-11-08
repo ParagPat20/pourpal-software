@@ -49,39 +49,44 @@ def find_arduino_port():
 def init_serial_connection():
     """Initialize persistent serial connection to Arduino."""
     global arduino_serial
+    
+    # Skip Arduino connection on Windows (for debugging)
+    if platform.system() == "Windows":
+        arduino_serial = None
+        return False
+    
     try:
         port = find_arduino_port()
         if port:
             arduino_serial = serial.Serial(port, 115200, timeout=2)
             time.sleep(2)  # Wait for Arduino to reset
-            print(f"✓ Serial connection established on {port}")
             # Send START to skip boot animation
             send_serial_command("START")
             time.sleep(0.5)
             return True
         else:
-            print("⚠ Warning: No Arduino found")
             return False
     except Exception as e:
-        print(f"⚠ Error initializing serial: {e}")
         return False
 
 def send_serial_command(command):
     """Send command to Arduino via persistent serial connection."""
     global arduino_serial
+    
+    # Skip on Windows (debug mode)
+    if platform.system() == "Windows":
+        return True  # Return True to prevent errors in the flow
+    
     with serial_lock:
         try:
             if arduino_serial is None or not arduino_serial.is_open:
-                print("Serial connection lost, attempting to reconnect...")
                 if not init_serial_connection():
                     return False
             
             arduino_serial.write(f"{command}\n".encode())
             arduino_serial.flush()
-            print(f"→ Sent to Arduino: {command}")
             return True
         except Exception as e:
-            print(f"⚠ Error sending serial command: {e}")
             # Try to reconnect
             try:
                 if arduino_serial:
@@ -644,13 +649,6 @@ class CustomHandler(SimpleHTTPRequestHandler):
 def start_http_server():
     global httpd
     httpd = HTTPServer(("127.0.0.1", 5000), CustomHandler)
-    print("=" * 60)
-    print("HTTP server running on http://127.0.0.1:5000")
-    print(f"Pump Calibration: {SECONDS_PER_ML} seconds per ml")
-    print(f"  → 30ml shot = {30 * SECONDS_PER_ML:.1f} seconds")
-    print(f"  → 60ml pour = {60 * SECONDS_PER_ML:.1f} seconds")
-    print("To change calibration, edit SECONDS_PER_ML in app.py")
-    print("=" * 60)
     httpd.serve_forever()
 
 
@@ -730,24 +728,33 @@ def start_image_handler():
 
 
 if __name__ == "__main__":
-    # Sync data with Firebase Storage at startup
-    # sync_data()
-    # # Sync images with Firebase Storage at startup
-    # sync_images()
+    # Display clean loading screen
+    print("\n" * 2)
+    print("    ██████╗  ██████╗ ██╗   ██╗██████╗ ██████╗  █████╗ ██╗     ")
+    print("    ██╔══██╗██╔═══██╗██║   ██║██╔══██╗██╔══██╗██╔══██╗██║     ")
+    print("    ██████╔╝██║   ██║██║   ██║██████╔╝██████╔╝███████║██║     ")
+    print("    ██╔═══╝ ██║   ██║██║   ██║██╔══██╗██╔═══╝ ██╔══██║██║     ")
+    print("    ██║     ╚██████╔╝╚██████╔╝██║  ██║██║     ██║  ██║███████╗")
+    print("    ╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚══════╝")
+    print("\n")
+    print("                  ⚙  Initializing System...  ⚙")
+    print()
     
-    # Initialize persistent serial connection to Arduino
-    print("Initializing Arduino connection...")
-    if init_serial_connection():
-        # Send READY command to set indicator ring to GREEN
-        time.sleep(0.5)
-        send_serial_command("READY")
-        print("✓ System ready - Indicator ring set to GREEN")
+    # Initialize persistent serial connection to Arduino (silently)
+    if platform.system() != "Windows":
+        if init_serial_connection():
+            time.sleep(0.5)
+            send_serial_command("READY")
     
     # Start the HTTP server in a separate thread
     http_thread = threading.Thread(target=start_http_server)
     http_thread.start()
 
     start_image_handler()
+
+    # Show completion message
+    print("                      ✓ System Ready")
+    print("\n" * 2)
 
     # Start the Electron app after a slight delay to ensure the server is up
     start_electron_app()
