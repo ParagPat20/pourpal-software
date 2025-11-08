@@ -1315,9 +1315,51 @@ function showLoadingPage() {
     const loadingPage = document.getElementById('loading-page');
     loadingPage.style.display = 'flex';
     
+    // Reset progress bar
+    const progressBar = document.getElementById('drink-progress-bar');
+    const progressText = document.getElementById('progress-status');
+    
+    if (progressBar) {
+        progressBar.style.width = '0%';
+        progressBar.style.animation = 'none';
+        // Force reflow
+        void progressBar.offsetWidth;
+        progressBar.style.animation = 'progress-shimmer 2s linear infinite, progress-fill 10s ease-out forwards';
+    }
+    
+    // Update status messages with animation
+    const statusMessages = [
+        'Preparing ingredients...',
+        'Mixing your cocktail...',
+        'Adding the perfect touch...',
+        'Almost ready...'
+    ];
+    
+    let messageIndex = 0;
+    if (progressText) {
+        progressText.textContent = statusMessages[0];
+    }
+    
+    // Update status message every 2.5 seconds
+    const statusInterval = setInterval(() => {
+        if (!drinkCancelled && messageIndex < statusMessages.length - 1) {
+            messageIndex++;
+            if (progressText) {
+                progressText.textContent = statusMessages[messageIndex];
+            }
+        } else {
+            clearInterval(statusInterval);
+        }
+    }, 2500);
+    
+    // Store interval ID to clear it if needed
+    loadingPage.dataset.statusInterval = statusInterval;
+    
     // Add click handler for cancel button
     const cancelButton = document.getElementById('cancel-drink-button');
-    cancelButton.onclick = cancelDrink;
+    if (cancelButton) {
+        cancelButton.onclick = cancelDrink;
+    }
 }
 
 function cancelDrink() {
@@ -1325,6 +1367,19 @@ function cancelDrink() {
     
     // Set the cancellation flag to stop completion checks immediately
     drinkCancelled = true;
+    
+    // Clear status interval
+    const loadingPage = document.getElementById('loading-page');
+    if (loadingPage && loadingPage.dataset.statusInterval) {
+        clearInterval(parseInt(loadingPage.dataset.statusInterval));
+        delete loadingPage.dataset.statusInterval;
+    }
+    
+    // Update status text
+    const progressText = document.getElementById('progress-status');
+    if (progressText) {
+        progressText.textContent = 'Cancelling...';
+    }
     
     // Send cancel request to server
     fetch('/cancel-drink', { method: 'POST' })
@@ -1358,7 +1413,27 @@ function cancelDrink() {
 
 function hideLoadingPage() {
     const loadingPage = document.getElementById('loading-page');
-    loadingPage.style.display = 'none';
+    
+    // Clear status interval if it exists
+    if (loadingPage.dataset.statusInterval) {
+        clearInterval(parseInt(loadingPage.dataset.statusInterval));
+        delete loadingPage.dataset.statusInterval;
+    }
+    
+    // Complete progress bar animation
+    const progressBar = document.getElementById('drink-progress-bar');
+    if (progressBar) {
+        progressBar.style.width = '100%';
+        const progressText = document.getElementById('progress-status');
+        if (progressText) {
+            progressText.textContent = 'Complete!';
+        }
+    }
+    
+    // Hide after a brief delay to show completion
+    setTimeout(() => {
+        loadingPage.style.display = 'none';
+    }, 500);
 }
 
 function showMessage(message, type = 'success') {
