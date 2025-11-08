@@ -228,9 +228,26 @@ void parseAndExecuteCommands(String commandLine) {
 
   // Wait and handle tasks (color + transition) concurrently
   bool allDone = false;
-  while (!allDone && taskCount > 0) {
+  bool cancelled = false;
+  while (!allDone && taskCount > 0 && !cancelled) {
     allDone = true;
     now = millis();
+
+    // Check for CANCEL command during execution
+    if (Serial.available()) {
+      String input = Serial.readStringUntil('\n');
+      input.trim();
+      if (input.equalsIgnoreCase("CANCEL")) {
+        Serial.println("⚠ CANCEL received during drink preparation");
+        cancelled = true;
+        stopAllOperations();
+        indicatorState = IDLE;
+        indicatorEndTime = 0;
+        indicatorRing.clear();
+        indicatorRing.show();
+        return; // Exit immediately
+      }
+    }
 
     // Update indicator ring animation during task execution
     updateIndicatorRing();

@@ -329,7 +329,11 @@ function setupPipeDropdown(pipeNumber) {
 let pipelineNotes = {};
 
 // Function to add the "Add Note" button to each pipe dropdown container
+// DISABLED: Removed to save space and prevent scrolling
 function addNoteButtonToPipeDropdown(pipeNumber) {
+  // Note functionality disabled to optimize screen space
+  return;
+  
   const pipeContainer = document.getElementById(`pipeContainer${pipeNumber}`);
   if (!pipeContainer) return;
 
@@ -1392,36 +1396,44 @@ function showLoadingPage(totalWaitTime = 10) {
 }
 
 function cancelDrink() {
-    console.log('Cancelling drink...');
+    console.log('🛑 Cancel button pressed - initiating cancellation...');
     
     // Set the cancellation flag to stop completion checks immediately
     drinkCancelled = true;
+    console.log('✓ Cancellation flag set');
     
     // Clear countdown interval
     const loadingPage = document.getElementById('loading-page');
     if (loadingPage && loadingPage.dataset.countdownInterval) {
         clearInterval(parseInt(loadingPage.dataset.countdownInterval));
         delete loadingPage.dataset.countdownInterval;
+        console.log('✓ Countdown interval cleared');
     }
     
     // Send cancel request to server (backend will send CANCEL to Arduino and then READY)
+    console.log('📤 Sending cancel request to backend...');
     fetch('/cancel-drink', { method: 'POST' })
         .then(response => {
             if (response.ok) {
-                console.log('Drink cancelled - CANCEL sent to Arduino');
-                
-                // Hide loading page
-                hideLoadingPage();
-                // Show cancelled message
-                showMessage('Drink preparation cancelled', 'error');
-                console.log('Drink successfully cancelled');
+                return response.text();
             } else {
-                throw new Error('Failed to cancel drink');
+                throw new Error(`Server returned ${response.status}`);
             }
         })
+        .then(data => {
+            console.log('✓ Server response:', data);
+            console.log('✓ Drink cancelled - CANCEL sent to Arduino');
+            
+            // Hide loading page
+            hideLoadingPage();
+            
+            // Show cancelled message
+            showCustomAlert('Drink preparation cancelled');
+            console.log('✓ Drink successfully cancelled');
+        })
         .catch(error => {
-            console.error('Error cancelling drink:', error);
-            showMessage('Failed to cancel drink', 'error');
+            console.error('⚠ Error cancelling drink:', error);
+            showCustomAlert('Failed to cancel drink: ' + error.message);
             // Still hide the loading page even if cancel fails
             hideLoadingPage();
         });
@@ -2955,11 +2967,11 @@ function populateAssignPipeDropdowns() {
   // Left side: Pipes 5-8 (bottom to top)
   const rightColumn = document.createElement("div");
   rightColumn.className = "pipe-column pipe-column-right";
-  rightColumn.innerHTML = '<div class="column-label">Right Side</div>';
+  // Column label removed to save space
   
   const leftColumn = document.createElement("div");
   leftColumn.className = "pipe-column pipe-column-left";
-  leftColumn.innerHTML = '<div class="column-label">Left Side</div>';
+  // Column label removed to save space
 
   // Right side pipes: 1, 2, 3, 4 (top to bottom)
   for (let i = 1; i <= 4; i++) {

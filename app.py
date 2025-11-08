@@ -243,26 +243,33 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
         elif self.path == "/cancel-drink":
             try:
+                print("🛑 Cancel drink request received")
+                
                 # Clear the processing complete flag first to stop any scheduled tasks
                 processing_complete.clear()
                 
                 # Send CANCEL command via persistent connection
                 if send_serial_command("CANCEL"):
-                    # Small delay to ensure CANCEL is processed
-                    time.sleep(0.3)
+                    print("✓ CANCEL command sent to Arduino")
+                    
+                    # Longer delay to ensure CANCEL is processed and all operations stop
+                    time.sleep(0.5)
                     
                     # Send READY to turn indicator ring green after cancel
                     send_serial_command("READY")
+                    print("✓ READY command sent to Arduino (indicator → GREEN)")
                     
                     self.send_response(200)
                     self.end_headers()
                     self.wfile.write(b"Drink cancelled successfully")
                 else:
+                    print("⚠ Failed to send CANCEL command to Arduino")
                     self.send_response(500)
                     self.end_headers()
                     self.wfile.write(b"Error: Failed to send cancel command to Arduino")
                     
             except Exception as e:
+                print(f"⚠ Error in cancel-drink handler: {e}")
                 self.send_response(500)
                 self.end_headers()
                 self.wfile.write(f"Error: {str(e)}".encode())

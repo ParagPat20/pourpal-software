@@ -1848,21 +1848,21 @@ input#product-id {
 }
 .dropdowns-parent-container {
   display: flex !important;
-  justify-content: center;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 10px;
   width: 100%;
   height: auto;
-  padding-top: 20px;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
+  padding-top: 5px;
+  margin-bottom: 5px;
+  flex-wrap: nowrap;
 }
 
 .pipe-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-width: 320px;
-  max-width: 380px;
+  gap: 10px;
+  min-width: 45%;
+  max-width: 48%;
   flex: 1;
 }
 
@@ -1875,22 +1875,13 @@ input#product-id {
 }
 
 .column-label {
-  font-size: 18px;
-  font-weight: 600;
-  color: #359267;
-  text-align: center;
-  padding: 12px;
-  background: rgba(53, 146, 103, 0.1);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid rgba(53, 146, 103, 0.3);
+  /* Column labels removed to save space - hide if any exist */
+  display: none !important;
 }
 
 .pipe-dropdown-container {
-  padding: 20px;
-  border-radius: 15px;
+  padding: 12px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(53, 146, 103, 0.2);
@@ -1909,14 +1900,14 @@ input#product-id {
   text-transform: uppercase;
   color: #359267;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   letter-spacing: 0.5px;
 }
 
 .pipe-dropdown-wrapper {
-  margin-top: 15px;
+  margin-top: 6px;
 }
 
 .pipe-dropdown-options {
@@ -1937,12 +1928,13 @@ button.default-num-btn.selected {
 }
 .aspi-box,
 .cocktail-box2 {
-  padding: 25px;
-  overflow-y: scroll;
+  padding: 10px 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
 }
 .pipe-assign {
-  padding-bottom: 60px;
+  padding-bottom: 0px;
 }
 .cocktail-list2 {
   padding-bottom: 75px;
@@ -2008,7 +2000,7 @@ button.default-num-btn.selected {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 .ax-txt {
   width: 50%;
