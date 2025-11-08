@@ -3619,15 +3619,18 @@ async function processCleanupBatches(pipes, cleanupTime) {
       
       console.log(`Batch ${batchNumber} sent successfully`);
       
-      // Wait for cleanup time + small buffer before sending next batch
-      if (i + 2 < pipes.length) {
-        const waitTime = (cleanupTime + 1) * 1000; // +1 second buffer
-        statusDiv.innerHTML = `<p>Batch ${batchNumber}/${totalBatches} cleaning... Next batch in ${cleanupTime}s</p>`;
-        
-        // Countdown timer
-        for (let countdown = cleanupTime; countdown > 0; countdown--) {
-          await new Promise(resolve => setTimeout(resolve, 1000));
+      // Wait for cleanup time with countdown
+      statusDiv.innerHTML = `<p>Cleaning batch ${batchNumber}/${totalBatches}: Pipes ${batch.join(', ')}...</p>`;
+      
+      // Countdown timer for current batch
+      for (let countdown = cleanupTime; countdown > 0; countdown--) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        if (i + 2 < pipes.length) {
+          // Not the last batch - show next batch message
           statusDiv.innerHTML = `<p>Batch ${batchNumber}/${totalBatches} complete. Next batch in ${countdown - 1}s...</p>`;
+        } else {
+          // Last batch - show completion countdown
+          statusDiv.innerHTML = `<p>Cleaning batch ${batchNumber}/${totalBatches}... ${countdown - 1}s remaining</p>`;
         }
       }
       
