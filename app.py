@@ -243,10 +243,16 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
         elif self.path == "/cancel-drink":
             try:
+                # Clear the processing complete flag first to stop any scheduled tasks
+                processing_complete.clear()
+                
                 # Send CANCEL command via persistent connection
                 if send_serial_command("CANCEL"):
-                    # Clear the processing complete flag
-                    processing_complete.clear()
+                    # Small delay to ensure CANCEL is processed
+                    time.sleep(0.3)
+                    
+                    # Send READY to turn indicator ring green after cancel
+                    send_serial_command("READY")
                     
                     self.send_response(200)
                     self.end_headers()

@@ -5,6 +5,9 @@ const FIXED_NUMBER_OF_PIPES = 8; // Fixed number of pipes
 
 let numberOfPipes = FIXED_NUMBER_OF_PIPES;
 
+// Calibration value from backend (will be fetched on initialization)
+let SECONDS_PER_ML = 1.3; // Default fallback value
+
 // State management
 let ingredientsData = [];
 let selectedIngredients = [];
@@ -461,7 +464,25 @@ function checkActiveMenu() {
   }
 }
 
+// Function to fetch calibration value from backend
+async function fetchCalibration() {
+  try {
+    const response = await fetch('/get-calibration');
+    if (response.ok) {
+      const data = await response.json();
+      SECONDS_PER_ML = data.secondsPerMl || 1.3;
+      console.log(`Calibration loaded: ${SECONDS_PER_ML} seconds per ml`);
+    } else {
+      console.warn('Failed to fetch calibration, using default:', SECONDS_PER_ML);
+    }
+  } catch (error) {
+    console.error('Error fetching calibration:', error);
+    console.warn('Using default calibration:', SECONDS_PER_ML);
+  }
+}
+
 function initializeApp() {
+  fetchCalibration(); // Fetch calibration from backend
   fetchIngredients();
   setupEventListeners();
   checkActiveMenu();
@@ -1231,8 +1252,7 @@ async function sendPipesToPython(assignedPipes) {
   };
   console.log('Prepared data to send:', JSON.stringify(dataToSend, null, 2));
   
-  // Calculate max time from ingredients (SECONDS_PER_ML = 1.3)
-  const SECONDS_PER_ML = 1.3;
+  // Calculate max time from ingredients using calibration from backend
   let maxSeconds = 0;
   dataToSend.ingredients.forEach(item => {
     const ml = parseFloat(item.ingMl) || 0;
@@ -1384,18 +1404,11 @@ function cancelDrink() {
         delete loadingPage.dataset.countdownInterval;
     }
     
-    // Send cancel request to server
+    // Send cancel request to server (backend will send CANCEL to Arduino and then READY)
     fetch('/cancel-drink', { method: 'POST' })
         .then(response => {
             if (response.ok) {
-                // Also clear the processing flag on backend
-                fetch('/delete_processing_flag', { method: 'POST' })
-                    .catch(err => console.log('Error clearing flag:', err));
-                
-                // Send READY command to Arduino to turn indicator ring green after cancel
-                fetch('/send-ready', { method: 'POST' })
-                    .then(() => console.log('READY signal sent to Arduino after cancel'))
-                    .catch(error => console.error('Error sending READY signal:', error));
+                console.log('Drink cancelled - CANCEL sent to Arduino');
                 
                 // Hide loading page
                 hideLoadingPage();
@@ -3736,7 +3749,7 @@ async function processCleanupBatches(pipes, cleanupTime) {
     try {
       // Send command to Arduino via Python backend
       // For cleanup, we send time directly (converted to ML based on calibration)
-      // SECONDS_PER_ML from app.py is 1.3, so we reverse: ml = time / 1.3
+      // Convert seconds to ml using inverse of calibration: ml = time / SECONDS_PER_ML
       const response = await fetch('/send-pipes', {
         method: 'POST',
         headers: {
@@ -3745,7 +3758,7 @@ async function processCleanupBatches(pipes, cleanupTime) {
         body: JSON.stringify({
           ingredients: batch.map(pipe => ({
             pipe: pipe.toString(),
-            ingMl: Math.round(cleanupTime / 1.3) // Convert seconds to ml (inverse of calibration)
+            ingMl: Math.round(cleanupTime / SECONDS_PER_ML) // Convert seconds to ml (inverse of calibration)
           }))
         })
       });
