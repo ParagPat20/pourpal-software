@@ -913,6 +913,11 @@ function showAssignPipe() {
   cocktailDetailsSection.style.display = "none"; // Hide Cocktail Details section
   assignPipeSection.style.display = "block";
   availableCocktailsSection.style.display = "none";
+  
+  // Hide cleanup section
+  const cleanupSection = document.querySelector('.cleanup-section');
+  if (cleanupSection) cleanupSection.style.display = "none";
+  
   document.getElementById("pipeAssignContainer").style.display = "block"; // Show the Assign Pipeline section
 
   assignPipeBtn.classList.add("active");
@@ -928,6 +933,14 @@ function showAssignPipe() {
   allCocktailsBtn.classList.add("deactive");
   cotailInfoBtn.classList.remove("active"); // Remove active from Cocktail Info
   cotailInfoBtn.classList.add("deactive");
+  
+  // Update cleanup button style
+  const cleanupBtn = document.getElementById('cleanupBtn');
+  if (cleanupBtn) {
+    cleanupBtn.classList.remove("active");
+    cleanupBtn.classList.add("deactive");
+  }
+  
   updateButtonStyles();
 }
 
@@ -941,6 +954,11 @@ function showSelectIng() {
   allCocktailSection.style.display = "none";
   cocktailDetailsSection.style.display = "none"; // Hide Cocktail Details section
   availableCocktailsSection.style.display = "none";
+  
+  // Hide cleanup section
+  const cleanupSection = document.querySelector('.cleanup-section');
+  if (cleanupSection) cleanupSection.style.display = "none";
+  
   availableCocktailsBtn.classList.remove("active");
   availableCocktailsBtn.classList.add("deactive");
   assignPipeSection.style.display = "none";
@@ -956,6 +974,13 @@ function showSelectIng() {
   allCocktailsBtn.classList.add("deactive");
   cotailInfoBtn.classList.remove("active"); // Remove active from Cocktail Info
   cotailInfoBtn.classList.add("deactive");
+  
+  // Update cleanup button style
+  const cleanupBtn = document.getElementById('cleanupBtn');
+  if (cleanupBtn) {
+    cleanupBtn.classList.remove("active");
+    cleanupBtn.classList.add("deactive");
+  }
 
   updateButtonStyles();
 }
@@ -968,6 +993,11 @@ function showAddIngredients() {
   allCocktailSection.style.display = "none";
   cocktailDetailsSection.style.display = "none";
   availableCocktailsSection.style.display = "none";
+  
+  // Hide cleanup section
+  const cleanupSection = document.querySelector('.cleanup-section');
+  if (cleanupSection) cleanupSection.style.display = "none";
+  
   availableCocktailsBtn.classList.remove("active");
   availableCocktailsBtn.classList.add("deactive");
   assignPipeSection.style.display = "none";
@@ -983,6 +1013,14 @@ function showAddIngredients() {
   allCocktailsBtn.classList.add("deactive");
   cotailInfoBtn.classList.remove("active");
   cotailInfoBtn.classList.add("deactive");
+  
+  // Update cleanup button style
+  const cleanupBtn = document.getElementById('cleanupBtn');
+  if (cleanupBtn) {
+    cleanupBtn.classList.remove("active");
+    cleanupBtn.classList.add("deactive");
+  }
+  
   updateButtonStyles();
   fetchIngredientsID();
 }
@@ -1015,21 +1053,17 @@ function showCocktailDetails() {
 
 // Function to show the "Cleanup" section
 function showCleanup() {
+  // Use existing global variables
   const cleanupSection = document.querySelector('.cleanup-section');
-  const findIngSection = document.querySelector('.findIng');
-  const addIngSection = document.querySelector('.addIngredient');
-  const addCocktailSection = document.querySelector('.add-cocktail');
-  const allCocktailSection = document.querySelector('.all-cocktail');
-  const cocktailDetailsSection = document.querySelector('.cocktail-details');
-  const assignPipeSection = document.querySelector('.assign-pipe');
   
-  findIngSection.style.display = "none";
-  addIngSection.style.display = "none";
-  addCocktailSection.style.display = "none";
-  allCocktailSection.style.display = "none";
-  cocktailDetailsSection.style.display = "none";
-  assignPipeSection.style.display = "none";
-  cleanupSection.style.display = "block";
+  if (findIngSection) findIngSection.style.display = "none";
+  if (addIngSection) addIngSection.style.display = "none";
+  if (addCocktailSection) addCocktailSection.style.display = "none";
+  if (allCocktailSection) allCocktailSection.style.display = "none";
+  if (cocktailDetailsSection) cocktailDetailsSection.style.display = "none";
+  if (assignPipeSection) assignPipeSection.style.display = "none";
+  if (availableCocktailsSection) availableCocktailsSection.style.display = "none";
+  if (cleanupSection) cleanupSection.style.display = "block";
 
   // Update button styles
   const cleanupBtn = document.getElementById('cleanupBtn');
@@ -1039,14 +1073,18 @@ function showCleanup() {
   const addIngredientsBtn = document.getElementById('addIngredientsBtn');
   const addCocktailBtn = document.getElementById('addCocktailBtn');
   
-  cleanupBtn.classList.remove("deactive");
-  cleanupBtn.classList.add("active");
-  availableCocktailsBtn.classList.remove("active");
-  availableCocktailsBtn.classList.add("deactive");
-  selectIngBtn.classList.add("deactive");
-  allCocktailsBtn.classList.add("deactive");
-  addIngredientsBtn.classList.add("deactive");
-  addCocktailBtn.classList.add("deactive");
+  if (cleanupBtn) {
+    cleanupBtn.classList.remove("deactive");
+    cleanupBtn.classList.add("active");
+  }
+  if (availableCocktailsBtn) {
+    availableCocktailsBtn.classList.remove("active");
+    availableCocktailsBtn.classList.add("deactive");
+  }
+  if (selectIngBtn) selectIngBtn.classList.add("deactive");
+  if (allCocktailsBtn) allCocktailsBtn.classList.add("deactive");
+  if (addIngredientsBtn) addIngredientsBtn.classList.add("deactive");
+  if (addCocktailBtn) addCocktailBtn.classList.add("deactive");
   
   updateButtonStyles();
 }
@@ -1059,6 +1097,11 @@ function showAddCocktail() {
   allCocktailSection.style.display = "none";
   cocktailDetailsSection.style.display = "none";
   availableCocktailsSection.style.display = "none";
+  
+  // Hide cleanup section
+  const cleanupSection = document.querySelector('.cleanup-section');
+  if (cleanupSection) cleanupSection.style.display = "none";
+  
   availableCocktailsBtn.classList.remove("active");
   availableCocktailsBtn.classList.add("deactive");
   assignPipeSection.style.display = "none";
@@ -1076,6 +1119,14 @@ function showAddCocktail() {
   allCocktailsBtn.classList.add("deactive");
   cotailInfoBtn.classList.remove("active");
   cotailInfoBtn.classList.add("deactive");
+  
+  // Update cleanup button style
+  const cleanupBtn = document.getElementById('cleanupBtn');
+  if (cleanupBtn) {
+    cleanupBtn.classList.remove("active");
+    cleanupBtn.classList.add("deactive");
+  }
+  
   updateButtonStyles();
 }
 
@@ -1984,6 +2035,11 @@ async function showAllCocktails(selectedIngredients = []) {
   cocktailDetailsSection.style.display = "none";
   assignPipeSection.style.display = "none";
   availableCocktailsSection.style.display = "none";
+  
+  // Hide cleanup section
+  const cleanupSection = document.querySelector('.cleanup-section');
+  if (cleanupSection) cleanupSection.style.display = "none";
+  
   availableCocktailsBtn.classList.remove("active");
   availableCocktailsBtn.classList.add("deactive");
   assignPipeSection.style.display = "none";
@@ -1999,6 +2055,14 @@ async function showAllCocktails(selectedIngredients = []) {
   addCocktailBtn.classList.add("deactive");
   cotailInfoBtn.classList.remove("active");
   cotailInfoBtn.classList.add("deactive");
+  
+  // Update cleanup button style
+  const cleanupBtn = document.getElementById('cleanupBtn');
+  if (cleanupBtn) {
+    cleanupBtn.classList.remove("active");
+    cleanupBtn.classList.add("deactive");
+  }
+  
   updateButtonStyles();
 
   document.getElementById("back-button-all-cocktail").style.display = "block";
@@ -3264,7 +3328,8 @@ function updateAllDropdowns() {
   populateAssignPipeDropdowns();
 }
 
-// Exit button handler
+// Exit button handler - DISABLED per user request
+/*
 document
   .getElementById("exit-button")
   .addEventListener("click", async function () {
@@ -3327,12 +3392,14 @@ document
       document.getElementById("custom-alert").style.display = "none";
     };
   });
+*/
 
 // New Changes
 
 // Removed toggleCheckbox function - alcoholic/non-alcoholic tabs removed
 
-// Add event listener for the update button
+// Add event listener for the update button - DISABLED per user request
+/*
 document.getElementById("update").addEventListener("click", async function() {
   try {
     // Show a loading popup
@@ -3365,6 +3432,7 @@ document.getElementById("update").addEventListener("click", async function() {
     showPopup("Error checking for updates. Please try again later.", true);
   }
 });
+*/
 
 // Function to show update popup with pull button
 function showUpdatePopup(message) {
@@ -3613,7 +3681,8 @@ function showPopup(message, isError = false) {
     }
 }
 
-// Close popup when clicking the close button
+// Close popup when clicking the close button - DISABLED per user request
+/*
 document.getElementById('closeUpdatePopup').addEventListener('click', () => {
     document.getElementById('updatePopup').style.display = 'none';
 });
@@ -3623,4 +3692,32 @@ document.getElementById('updatePopup').addEventListener('click', (e) => {
     if (e.target === document.getElementById('updatePopup')) {
         document.getElementById('updatePopup').style.display = 'none';
     }
+});
+*/
+
+// ==================== LOGO TOGGLE FUNCTIONALITY ====================
+
+let currentLogo = 'white'; // Track current logo state
+
+// Logo toggle handler
+document.getElementById('app-logo')?.addEventListener('click', () => {
+  const logoImage = document.getElementById('logo-image');
+  
+  if (currentLogo === 'white') {
+    // Switch to regular logo
+    logoImage.src = 'img/pourpal_logo.png';
+    currentLogo = 'regular';
+    console.log('Logo switched to regular');
+  } else {
+    // Switch back to white logo
+    logoImage.src = 'img/pourpal_logo_white.png';
+    currentLogo = 'white';
+    console.log('Logo switched to white');
+  }
+  
+  // Add a small animation effect
+  logoImage.style.transform = 'scale(0.9)';
+  setTimeout(() => {
+    logoImage.style.transform = 'scale(1)';
+  }, 150);
 });

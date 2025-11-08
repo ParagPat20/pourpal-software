@@ -13,14 +13,15 @@
   </head>
 
   <body>
-    <div id="exit-button" class="exit-btn">
+    <!-- Exit button hidden per user request -->
+    <!-- <div id="exit-button" class="exit-btn">
       <i class="fas fa-times"></i>
-    </div>
+    </div> -->
     <div class="app">
       <div class="app-content">
         <div class="app-topbar bg">
-          <div class="app-logo">
-            <img src="img/logo.png" alt="Logo" />
+          <div class="app-logo" id="app-logo">
+            <img src="img/pourpal_logo_white.png" alt="PourPal Logo" id="logo-image" />
           </div>
           <!-- <button id="open-color-picker" class="modern-button btn">
           Change Background
@@ -28,9 +29,10 @@
           <div class="picker-setting" id="open-color-picker">
             <img src="img/color-picker.png" alt="" />
           </div>
-          <div class="update-setting" id="update">
+          <!-- Git Update button removed per user request -->
+          <!-- <div class="update-setting" id="update">
             <img src="img/update.png" alt="" />
-          </div>
+          </div> -->
         </div>
         <div class="app-body">
           <div class="app-sidebar bg">
@@ -366,7 +368,7 @@
 
             <!-- Cleanup Section -->
             <div class="cleanup-section">
-              <div class="cleanup-box">
+              <div class="cleanup-content">
                 <div class="cleanup-header">
                   <h2>System Cleanup</h2>
                   <p>Select pipes to clean and set duration</p>
@@ -436,19 +438,19 @@
                 <div class="cleanup-status" id="cleanup-status">
                   <p>Ready to clean. Select pipes and press Start Cleanup.</p>
                 </div>
-
-                <div class="footer-btn">
-                  <button 
-                    id="back-to-home-btn" 
-                    class="btn deactive"
-                    onclick="showAvailableCocktails()"
-                  >
-                    Back
-                  </button>
-                  <button id="start-cleanup-btn" class="btn active">
-                    Start Cleanup
-                  </button>
-                </div>
+              </div>
+              
+              <div class="footer-btn blurx">
+                <button 
+                  id="back-to-home-btn" 
+                  class="btn deactive"
+                  onclick="showAvailableCocktails()"
+                >
+                  Back
+                </button>
+                <button id="start-cleanup-btn" class="btn active">
+                  Start Cleanup
+                </button>
               </div>
             </div>
 

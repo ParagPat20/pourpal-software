@@ -116,11 +116,42 @@ select {
   object-position: center;
 }
 
+.app-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
+}
+
+.app-logo:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(139, 69, 19, 0.5);
+  box-shadow: 0 0 20px rgba(139, 69, 19, 0.3);
+}
+
+.app-logo:active {
+  transform: scale(0.95);
+}
+
 .app-logo img {
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: invert(1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.app-logo:hover img {
+  transform: scale(1.05);
 }
 
 .app-body {
@@ -2767,42 +2798,43 @@ select,
   display: none;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  position: relative;
+}
+
+.cleanup-content {
+  width: 100%;
+  height: calc(100% - 70px);
+  padding: 30px;
   overflow-y: auto;
 }
 
-.cleanup-box {
-  max-width: 800px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  padding: 30px;
-  backdrop-filter: blur(10px);
-}
-
 .cleanup-header {
-  text-align: center;
   margin-bottom: 30px;
 }
 
 .cleanup-header h2 {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  color: #359267;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .cleanup-header p {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .cleanup-controls {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   gap: 20px;
   margin-bottom: 30px;
   flex-wrap: wrap;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
 }
 
 .time-control {
@@ -2812,26 +2844,27 @@ select,
 
 .time-control label {
   display: block;
-  color: #fff;
-  font-size: 1rem;
-  margin-bottom: 10px;
+  color: #359267;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .cleanup-time-input {
   width: 100%;
   padding: 12px 15px;
-  font-size: 1.2rem;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.1rem;
+  border: 2px solid rgba(53, 146, 103, 0.3);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
   transition: all 0.3s;
 }
 
 .cleanup-time-input:focus {
   outline: none;
-  border-color: #8b4513;
-  background: rgba(255, 255, 255, 0.15);
+  border-color: #359267;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .cleanup-buttons {
@@ -2840,84 +2873,156 @@ select,
   flex-wrap: wrap;
 }
 
+.cleanup-buttons .btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.cleanup-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cleanup footer buttons */
+.cleanup-section .footer-btn {
+  padding: 15px 25px;
+  z-index: 3;
+}
+
+.cleanup-section .footer-btn button {
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #fff;
+}
+
+.cleanup-section #back-to-home-btn {
+  background: #fff;
+  color: #333;
+}
+
+.cleanup-section #back-to-home-btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+#start-cleanup-btn {
+  background: #359267;
+  color: #fff;
+}
+
+#start-cleanup-btn:hover {
+  background: #2d7a56;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(53, 146, 103, 0.4);
+}
+
+#start-cleanup-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#start-cleanup-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .pipes-selection {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .pipes-selection h3 {
-  color: #fff;
-  font-size: 1.3rem;
-  margin-bottom: 20px;
+  color: #359267;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  font-weight: 500;
 }
 
 .pipes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
 .pipe-checkbox {
   display: flex;
   align-items: center;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(53, 146, 103, 0.2);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   user-select: none;
 }
 
 .pipe-checkbox:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #8b4513;
+  background: rgba(53, 146, 103, 0.15);
+  border-color: #359267;
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(53, 146, 103, 0.2);
 }
 
 .pipe-checkbox input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  width: 22px;
+  height: 22px;
+  margin-right: 12px;
   cursor: pointer;
-  accent-color: #8b4513;
+  accent-color: #359267;
 }
 
 .pipe-checkbox input[type="checkbox"]:checked + .pipe-label {
-  color: #8b4513;
-  font-weight: bold;
+  color: #359267;
+  font-weight: 600;
 }
 
 .pipe-label {
-  color: #fff;
-  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
   transition: all 0.3s;
 }
 
 .cleanup-status {
-  padding: 20px;
-  background: rgba(139, 69, 19, 0.2);
+  padding: 18px 25px;
+  background: rgba(53, 146, 103, 0.15);
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
+  border: 1px solid rgba(53, 146, 103, 0.3);
 }
 
 .cleanup-status p {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   margin: 0;
 }
 
 .cleanup-status.cleaning {
-  background: rgba(255, 165, 0, 0.3);
+  background: rgba(255, 165, 0, 0.2);
+  border-color: rgba(255, 165, 0, 0.4);
   animation: pulse 2s infinite;
 }
 
 .cleanup-status.success {
-  background: rgba(0, 255, 0, 0.2);
+  background: rgba(53, 146, 103, 0.25);
+  border-color: rgba(53, 146, 103, 0.5);
 }
 
 .cleanup-status.error {
-  background: rgba(255, 0, 0, 0.2);
+  background: rgba(255, 82, 82, 0.2);
+  border-color: rgba(255, 82, 82, 0.4);
 }
 
 @keyframes pulse {
@@ -2929,7 +3034,17 @@ select,
   }
 }
 
+@media (max-width: 1200px) {
+  .pipes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  .cleanup-content {
+    padding: 20px;
+  }
+
   .cleanup-controls {
     flex-direction: column;
     align-items: stretch;
@@ -2945,5 +3060,10 @@ select,
   
   .pipes-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .pipe-checkbox {
+    padding: 15px;
   }
 }
