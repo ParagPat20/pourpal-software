@@ -6,7 +6,7 @@ const FIXED_NUMBER_OF_PIPES = 8; // Fixed number of pipes
 let numberOfPipes = FIXED_NUMBER_OF_PIPES;
 
 // Calibration value from backend (will be fetched on initialization)
-let SECONDS_PER_ML = 1.3; // Default fallback value
+let SECONDS_PER_ML = 0.465; // Default fallback value
 
 // State management
 let ingredientsData = [];
