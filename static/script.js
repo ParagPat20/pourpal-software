@@ -876,6 +876,8 @@ async function showAvailableCocktails() {
   allCocktailSection.style.display = "none";
   cocktailDetailsSection.style.display = "none";
   assignPipeSection.style.display = "none";
+  const cleanupSection = document.querySelector('.cleanup-section');
+  if (cleanupSection) cleanupSection.style.display = "none";
   availableCocktailsSection.style.display = "block";
   availableCocktailsBtn.classList.add("active");
   availableCocktailsBtn.classList.remove("deactive");
@@ -885,6 +887,11 @@ async function showAvailableCocktails() {
   addIngredientsBtn.classList.add("deactive");
   addCocktailBtn.classList.remove("active");
   addCocktailBtn.classList.add("deactive");
+  const cleanupBtn = document.getElementById('cleanupBtn');
+  if (cleanupBtn) {
+    cleanupBtn.classList.remove("active");
+    cleanupBtn.classList.add("deactive");
+  }
   allCocktailsBtn.classList.remove("active");
   allCocktailsBtn.classList.add("deactive");
   cotailInfoBtn.classList.remove("active");
@@ -3523,6 +3530,8 @@ async function processCleanupBatches(pipes, cleanupTime) {
     
     try {
       // Send command to Arduino via Python backend
+      // For cleanup, we send time directly (converted to ML based on calibration)
+      // SECONDS_PER_ML from app.py is 1.3, so we reverse: ml = time / 1.3
       const response = await fetch('/send-pipes', {
         method: 'POST',
         headers: {
@@ -3531,7 +3540,7 @@ async function processCleanupBatches(pipes, cleanupTime) {
         body: JSON.stringify({
           ingredients: batch.map(pipe => ({
             pipe: pipe.toString(),
-            ingMl: cleanupTime * (1 / SECONDS_PER_ML || 1) // Convert time to ml based on calibration
+            ingMl: Math.round(cleanupTime / 1.3) // Convert seconds to ml (inverse of calibration)
           }))
         })
       });
