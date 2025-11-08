@@ -11,8 +11,25 @@ class EnhancedLoadingScreen:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("PourPal")
-        self.root.attributes("-fullscreen", True)
+        
+        # Remove window decorations and force fullscreen
+        self.root.overrideredirect(True)  # Remove window decorations
+        
+        # Platform-specific fullscreen setup
+        if platform.system() == "Linux":
+            # For Raspberry Pi / Linux, use multiple methods to ensure fullscreen
+            self.root.attributes("-fullscreen", True)
+            self.root.attributes("-zoomed", True)  # Alternative fullscreen method
+        else:
+            self.root.attributes("-fullscreen", True)
+        
         self.root.configure(bg="#1a1a1a")  # Dark background
+        
+        # Make sure window is on top
+        self.root.attributes("-topmost", True)
+        
+        # Disable window resizing
+        self.root.resizable(False, False)
         
         # Add ESC key to exit
         self.root.bind('<Escape>', lambda e: self.root.destroy())
@@ -27,9 +44,14 @@ class EnhancedLoadingScreen:
         self.start_time = time.time()
         self.max_wait_time = 20  # Maximum wait time in seconds
         
+        # Force initial fullscreen setup
+        self.root.update_idletasks()
+        self.root.geometry(f"{self.root.winfo_screenwidth()}x{self.root.winfo_screenheight()}+0+0")
+        
         self.setup_ui()
         self.start_animations()
         self.start_status_monitoring()
+        self.start_fullscreen_monitor()
         
     def setup_ui(self):
         # Load and display logo
@@ -145,6 +167,50 @@ class EnhancedLoadingScreen:
     
     def start_animations(self):
         self.animate()
+    
+    def check_and_force_fullscreen(self):
+        """Check if window is fullscreen and force it if not"""
+        if not self.app_ready:
+            try:
+                # Always enforce fullscreen - don't just check, force it every time
+                # This ensures it stays fullscreen even if something tries to change it
+                self.root.overrideredirect(True)  # Remove window decorations
+                
+                # Platform-specific fullscreen enforcement
+                if platform.system() == "Linux":
+                    # For Raspberry Pi / Linux, use multiple methods
+                    self.root.attributes("-fullscreen", True)
+                    self.root.attributes("-zoomed", True)  # Alternative fullscreen method
+                else:
+                    self.root.attributes("-fullscreen", True)
+                
+                self.root.attributes("-topmost", True)
+                self.root.resizable(False, False)
+                
+                # Get screen dimensions and set geometry
+                screen_width = self.root.winfo_screenwidth()
+                screen_height = self.root.winfo_screenheight()
+                self.root.geometry(f"{screen_width}x{screen_height}+0+0")
+                
+                # Ensure window is raised to top
+                self.root.lift()
+                self.root.focus_force()
+                
+            except Exception as e:
+                # If enforcement fails, try basic fullscreen
+                try:
+                    self.root.attributes("-fullscreen", True)
+                    self.root.overrideredirect(True)
+                except:
+                    pass
+            
+            # Schedule next check in 1 second (always continue checking)
+            self.root.after(1000, self.check_and_force_fullscreen)
+    
+    def start_fullscreen_monitor(self):
+        """Start monitoring fullscreen state every second"""
+        # Initial check after a short delay to ensure window is created
+        self.root.after(500, self.check_and_force_fullscreen)
         
     def run(self):
         self.root.mainloop()
