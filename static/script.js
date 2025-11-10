@@ -6,7 +6,7 @@ const FIXED_NUMBER_OF_PIPES = 8; // Fixed number of pipes
 let numberOfPipes = FIXED_NUMBER_OF_PIPES;
 
 // Calibration value from backend (will be fetched on initialization)
-let SECONDS_PER_ML = 0.465; // Default fallback value
+let SECONDS_PER_ML = 0.485; // Default fallback value
 
 // State management
 let ingredientsData = [];
@@ -3057,10 +3057,17 @@ function setupPipeDropdown(pipeNumber) {
     return;
   }
 
+  // Get the pipe container for z-index management
+  const pipeContainer = document.getElementById(`pipeContainer${pipeNumber}`);
+
   // Show options on focus
   searchInput.addEventListener("focus", () => {
     if (optionsContainer) {
       optionsContainer.style.display = "block";
+      // Add active class to bring container to front
+      if (pipeContainer) {
+        pipeContainer.classList.add("dropdown-active");
+      }
       // Immediately update remarks displays after selection
       updatePipelineRemarksDisplay();
       updateRemarksDisplay();
@@ -3136,12 +3143,10 @@ function setupPipeDropdown(pipeNumber) {
       optionsContainer.style.display = "none";
       clearButton.style.display = value ? "block" : "none";
 
-      // Remove error class when assigning an ingredient
-      const pipeContainer = document.getElementById(
-        `pipeContainer${pipeNumber}`
-      );
+      // Remove error class and dropdown-active class when assigning an ingredient
       if (pipeContainer) {
         pipeContainer.classList.remove("pipe-error");
+        pipeContainer.classList.remove("dropdown-active");
       }
 
       populateAssignPipeDropdowns();
@@ -3165,6 +3170,10 @@ function setupPipeDropdown(pipeNumber) {
       !clearButton.contains(e.target)
     ) {
       optionsContainer.style.display = "none";
+      // Remove dropdown-active class when closing
+      if (pipeContainer) {
+        pipeContainer.classList.remove("dropdown-active");
+      }
     }
   });
 

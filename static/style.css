@@ -1743,8 +1743,9 @@ input#product-id {
   background: white;
   border: 1px solid #ccc;
   border-radius: 0 0 5px 5px;
-  z-index: 1000;
+  z-index: 9999;
   margin-top: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .pipe-dropdown-options .option {
@@ -1887,6 +1888,7 @@ input#product-id {
   border: 2px solid rgba(53, 146, 103, 0.2);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }
 
 .pipe-dropdown-container:hover {
@@ -1894,6 +1896,21 @@ input#product-id {
   border-color: rgba(53, 146, 103, 0.4);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(53, 146, 103, 0.2);
+}
+
+/* Increase z-index when dropdown is active/focused */
+.pipe-dropdown-container:focus-within {
+  z-index: 1001;
+}
+
+/* Ensure active dropdown wrapper is on top */
+.pipe-dropdown-wrapper:has(.pipe-dropdown-options[style*="display: block"]) {
+  z-index: 9999;
+}
+
+/* Add explicit class for active state (can be toggled via JS) */
+.pipe-dropdown-container.dropdown-active {
+  z-index: 1001 !important;
 }
 
 .pipe-dropdown-container label {
