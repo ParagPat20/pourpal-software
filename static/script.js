@@ -6,7 +6,7 @@ const FIXED_NUMBER_OF_PIPES = 8; // Fixed number of pipes
 let numberOfPipes = FIXED_NUMBER_OF_PIPES;
 
 // Calibration value from backend (will be fetched on initialization)
-let SECONDS_PER_ML = 0.485; // Default fallback value
+let SECONDS_PER_ML = 0.49; // Default fallback value
 
 // State management
 let ingredientsData = [];
@@ -3023,13 +3023,16 @@ function createPipeContainer(pipeNumber, selectedIngredients) {
         <div class="option" data-value="">Select Ingredient</div>
         ${selectedIngredients
           .map((ingredient) => {
-            const isAssigned = isIngredientAssigned(ingredient);
+            // Check if ingredient is assigned to OTHER pipes (not this one)
+            const isAssignedToOtherPipe = isIngredientAssignedToOtherPipe(ingredient, pipeNumber);
+            const assignedToPipe = getIngredientAssignedPipe(ingredient);
             return `<div class="option ${
-              isAssigned ? "disabled" : ""
+              isAssignedToOtherPipe ? "disabled" : ""
             }" 
               data-value="${ingredient}"
+              data-disabled="${isAssignedToOtherPipe}"
               title="${
-                isAssigned ? "Already assigned to another pipe" : ""
+                isAssignedToOtherPipe ? `Already assigned to ${assignedToPipe}` : ""
               }"
             >${ingredient}</div>`;
           })
@@ -3041,9 +3044,34 @@ function createPipeContainer(pipeNumber, selectedIngredients) {
   return dropdownContainer;
 }
 
-// Check if ingredient is already assigned to any pipe (for visual indication only)
+// Check if ingredient is already assigned to any pipe (for any purpose)
 function isIngredientAssigned(ingredient) {
   return Object.values(currentPipeAssignments).includes(ingredient);
+}
+
+// Check if ingredient is assigned to a pipe OTHER than the specified pipe number
+function isIngredientAssignedToOtherPipe(ingredient, currentPipeNumber) {
+  for (const [pipeName, assignedIngredient] of Object.entries(currentPipeAssignments)) {
+    if (assignedIngredient === ingredient) {
+      // Extract pipe number from "Pipe X" format
+      const assignedPipeNumber = parseInt(pipeName.replace('Pipe ', ''));
+      // Return true only if it's assigned to a DIFFERENT pipe
+      if (assignedPipeNumber !== currentPipeNumber) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// Get which pipe an ingredient is assigned to (returns pipe name like "Pipe 1")
+function getIngredientAssignedPipe(ingredient) {
+  for (const [pipeName, assignedIngredient] of Object.entries(currentPipeAssignments)) {
+    if (assignedIngredient === ingredient) {
+      return pipeName;
+    }
+  }
+  return null;
 }
 
 function setupPipeDropdown(pipeNumber) {
@@ -3137,6 +3165,18 @@ function setupPipeDropdown(pipeNumber) {
     if (!searchInput || !optionsContainer || !clearButton) return;
     
     if (e.target.classList.contains("option")) {
+      // Check if the option is disabled (already assigned to another pipe)
+      const isDisabled = e.target.dataset.disabled === "true" || e.target.classList.contains("disabled");
+      
+      if (isDisabled) {
+        // Show a warning that this ingredient is already assigned
+        const ingredientName = e.target.textContent;
+        const assignedPipe = e.target.getAttribute("title");
+        console.log(`Cannot assign ${ingredientName} - ${assignedPipe}`);
+        // Don't allow selection
+        return;
+      }
+      
       const value = e.target.dataset.value;
       searchInput.value = e.target.textContent;
       currentPipeAssignments[`Pipe ${pipeNumber}`] = value;
