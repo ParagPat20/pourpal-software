@@ -1613,6 +1613,10 @@ select:focus-visible {
   backdrop-filter: blur(5px); */
   padding: 15px;
   z-index: 3;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .all-cocktail .footer-btn::after,
 .blurx::after {
@@ -2751,10 +2755,25 @@ select,
 
 
 .all-cocktail .cocktail-box {
-  max-height: 500px; /* Adjust height as needed */
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
+/* Top section with search and filters */
+.all-cocktail .fi-top {
+  flex-shrink: 0;
+}
+
+/* Cocktail list takes remaining space */
+.all-cocktail .cocktail-list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 85px; /* Space for footer buttons */
+  margin-bottom: 0;
+}
 
 /* Compact alphabet filter in All Cocktails */
 .all-cocktail #all-cocktail-alphabet a {
