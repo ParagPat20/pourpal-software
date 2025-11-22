@@ -2654,9 +2654,9 @@ function updateMLPreview(cocktail) {
     
     let displayText = `${item.scaledML}ml`;
     if (drinkSize === "shot") {
-      displayText += ` <span style="color: #666; font-size: 0.9em;">(was ${item.originalML}ml)</span>`;
+      displayText += ` <span style="color: rgba(0, 0, 0, 0.5); font-size: 0.85em; font-weight: 500;">(was ${item.originalML}ml)</span>`;
     } else if (item.originalML !== item.scaledML) {
-      displayText += ` <span style="color: #ff8800; font-size: 0.9em;">(was ${item.originalML}ml)</span>`;
+      displayText += ` <span style="color: #ff8800; font-size: 0.85em; font-weight: 500;">(was ${item.originalML}ml)</span>`;
     }
     
     previewItem.innerHTML = `
@@ -2668,10 +2668,11 @@ function updateMLPreview(cocktail) {
 
   // Add total
   const totalItem = document.createElement("div");
-  totalItem.className = "ml-preview-item";
+  totalItem.className = "ml-preview-item ml-preview-total";
   totalItem.style.borderTop = drinkSize === "shot" ? "2px solid #ff8800" : "2px solid #359267";
-  totalItem.style.marginTop = "5px";
+  totalItem.style.marginTop = "10px";
   totalItem.style.fontWeight = "bold";
+  totalItem.style.background = drinkSize === "shot" ? "rgba(255, 136, 0, 0.15)" : "rgba(53, 146, 103, 0.15)";
   totalItem.innerHTML = `
     <span class="ingredient-name">TOTAL ${drinkSize === "shot" ? "(SHOT)" : ""}</span>
     <span class="ingredient-ml">${Math.round(total * 10) / 10}ml</span>
