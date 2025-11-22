@@ -1,6 +1,18 @@
 const { app, BrowserWindow, session, ipcMain } = require('electron');
 const path = require('path');
 
+// Disable hardware acceleration to fix GPU errors on Linux/Raspberry Pi
+app.disableHardwareAcceleration();
+
+// Add command line switches for better compatibility
+app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('disable-software-rasterizer');
+app.commandLine.appendSwitch('disable-dev-shm-usage');
+app.commandLine.appendSwitch('disable-gpu-compositing');
+app.commandLine.appendSwitch('disable-accelerated-2d-canvas');
+app.commandLine.appendSwitch('disable-accelerated-video-decode');
+app.commandLine.appendSwitch('use-gl', 'swiftshader');
+
 let mainWindow;
 
 function createWindow() {
@@ -14,7 +26,10 @@ function createWindow() {
       contextIsolation: true,
       sandbox: true,
       preload: path.join(__dirname, 'preload.js'),
-      webSecurity: true
+      webSecurity: true,
+      // Disable hardware acceleration for compatibility with systems that have GPU issues
+      hardwareAcceleration: false,
+      offscreen: false
     },
     autoHideMenuBar: true,
     icon: path.join(__dirname, 'img/logo.png'),

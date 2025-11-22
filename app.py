@@ -742,20 +742,32 @@ def start_electron_app():
     else:
         raise EnvironmentError("Unsupported operating system")
 
-    # Disable caching by adding the --no-cache flag to the Electron process
+    # Disable GPU acceleration and hardware features for compatibility (especially on Linux/Raspberry Pi)
+    electron_flags = [
+        "--disable-gpu",
+        "--disable-software-rasterizer",
+        "--disable-dev-shm-usage",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-gpu-compositing",
+        "--disable-accelerated-2d-canvas",
+        "--disable-accelerated-video-decode",
+        "--use-gl=swiftshader",
+    ]
+    
     if electron_executable == "npx":
         electron_process = subprocess.Popen(
             [
                 "npx", "electron",
                 os.path.join(web_dir, "main.js"),
-            ]
+            ] + electron_flags
         )
     else:
         electron_process = subprocess.Popen(
             [
                 electron_executable,
                 os.path.join(web_dir, "main.js"),
-            ]
+            ] + electron_flags
         )
     electron_process.communicate()
 
