@@ -46,15 +46,37 @@ void setup() {
   Serial.println("=== PourPal Arduino System ===");
   Serial.println("Booting... Send START to skip boot sequence");
 
+  // 20-second bootup with red-to-green animation on both main LEDs and indicator ring
   unsigned long startTime = millis();
-  while (millis() - startTime < 10000 && !systemStarted) {
-    rainbowCycle(2);
+  while (millis() - startTime < 20000 && !systemStarted) {
+    float progress = (float)(millis() - startTime) / 20000.0;
+    
+    // Red → Green transition
+    int r = int(255 * (1.0 - progress));
+    int g = int(255 * progress);
+    int b = 0;
+    
+    // Apply to all main LED rings
+    for (int i = 0; i < NUM_LEDS; i++) {
+      strip.setPixelColor(i, strip.Color(r, g, b));
+    }
+    strip.show();
+    
+    // Apply to indicator ring
+    for (int i = 0; i < INDICATOR_LEDS; i++) {
+      indicatorRing.setPixelColor(i, indicatorRing.Color(r, g, b));
+    }
+    indicatorRing.show();
+    
+    delay(50);
     checkForStartCommand();
   }
 
   systemStarted = true;
   strip.clear();
   strip.show();
+  indicatorRing.clear();
+  indicatorRing.show();
 
   Serial.println("\n=== System Ready ===");
   Serial.println("Commands:");
@@ -266,9 +288,10 @@ void parseAndExecuteCommands(String commandLine) {
             tasks[i].endTime = 0;
           } else {
             float progress = float(elapsed) / float(durationMs);
-            int r = 0;
+            // Red → Green transition
+            int r = int(255 * (1.0 - progress));
             int g = int(255 * progress);
-            int b = int(255 * (1.0 - progress));
+            int b = 0;
             setRingColor(tasks[i].relayIndex, strip.Color(r, g, b));
             allDone = false;
           }
@@ -298,10 +321,10 @@ void ledTransition(int ringIndex, float seconds) {
 
   while ((now = millis()) - startTime < duration) {
     float progress = float(now - startTime) / duration;
-    // Blue → Green transition
-    int r = 0;
+    // Red → Green transition
+    int r = int(255 * (1.0 - progress));
     int g = int(255 * progress);
-    int b = int(255 * (1.0 - progress));
+    int b = 0;
 
     setRingColor(ringIndex, strip.Color(r, g, b));
     strip.show();
@@ -321,9 +344,10 @@ void ledTransitionOnly(int ringIndex, float seconds) {
 
   while ((now = millis()) - startTime < duration) {
     float progress = float(now - startTime) / duration;
-    int r = 0;
+    // Red → Green transition
+    int r = int(255 * (1.0 - progress));
     int g = int(255 * progress);
-    int b = int(255 * (1.0 - progress));
+    int b = 0;
 
     setRingColor(ringIndex, strip.Color(r, g, b));
     strip.show();
@@ -354,7 +378,7 @@ uint32_t getColorFromCode(String code) {
   if (code == "M") return strip.Color(255, 0, 255);
   if (code == "W") return strip.Color(255, 255, 255);
   if (code == "O") return strip.Color(255, 128, 0);
-  if (code == "T") return strip.Color(0, 0, 255); // starting blue
+  if (code == "T") return strip.Color(255, 0, 0); // starting red
   return strip.Color(128, 128, 128);
 }
 
