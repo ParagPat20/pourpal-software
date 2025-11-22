@@ -499,18 +499,27 @@ input[type="checkbox"]:checked::before {
   color: #fff;
 }
 .btn.active {
-  background: #3d3229;
+  background: #359267;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(53, 146, 103, 0.3);
 }
-.btn.deactive {
-  background: rgba(255, 255, 255, 0.5);
-  color: #000;
+
+.btn.active:hover {
+  background: #2a7655;
+  box-shadow: 0 6px 16px rgba(53, 146, 103, 0.4);
 }
+
 .btn.deactive {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  color: #2a5f4a;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  opacity: 0.6;
 }
+
 .btn.deactive:hover {
-  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 /* Modal Styles */
 .modal {
@@ -893,11 +902,21 @@ button#back-button {
   font-size: 20px;
 }
 button#back-button1 {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
   border: none;
-  padding: 15px 25px;
-  border-radius: 10px;
+  padding: 15px 30px;
+  border-radius: 12px;
   font-size: 20px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+button#back-button1:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 button#back-button2 {
   background: #fff;
@@ -1653,9 +1672,19 @@ label {
 button#serial-out-button,
 button#submit-button,
 button#add-cocktail-button {
-  padding: 15px 25px;
+  padding: 15px 30px;
   font-size: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+button#serial-out-button:hover,
+button#submit-button:hover,
+button#add-cocktail-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 span#ingredient-id,
 input#product-id {
@@ -2599,11 +2628,8 @@ select,
   position: absolute;
   bottom: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: transparent;
   padding: 15px;
-  border-radius: 10px 0 0 0;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   z-index: 10;
 }
 /* .cd-right {
