@@ -83,8 +83,17 @@ def send_serial_command(command):
                 if not init_serial_connection():
                     return False
             
+            # Clear any pending data in input buffer before sending new command
+            if arduino_serial.in_waiting > 0:
+                arduino_serial.reset_input_buffer()
+            
+            # Send command
             arduino_serial.write(f"{command}\n".encode())
             arduino_serial.flush()
+            
+            # Small delay to ensure command is received
+            time.sleep(0.05)
+            
             return True
         except Exception as e:
             # Try to reconnect

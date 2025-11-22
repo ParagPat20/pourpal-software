@@ -3853,6 +3853,24 @@ async function processCleanupBatches(pipes, cleanupTime) {
         // Ignore errors
       }
       
+      // Send CANCEL command to stop any pending operations and clear Arduino state
+      try {
+        console.log(`Sending CANCEL to reset Arduino after batch ${batchNumber}...`);
+        await fetch('/cancel-drink', { method: 'POST' });
+        // Small delay after CANCEL
+        await new Promise(resolve => setTimeout(resolve, 500));
+      } catch (e) {
+        console.log('Could not send CANCEL:', e);
+      }
+      
+      // Add buffer delay between batches to ensure Arduino is ready for next command
+      // This allows Arduino to complete processing and clear its serial buffer
+      if (i + 2 < pipes.length) {
+        console.log(`Adding 1.5-second buffer delay before next batch...`);
+        statusDiv.innerHTML = `<p>Preparing next batch...</p>`;
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+      
     } catch (error) {
       console.error('Error during cleanup:', error);
       statusDiv.className = 'cleanup-status error';
@@ -3873,6 +3891,14 @@ async function processCleanupBatches(pipes, cleanupTime) {
     await fetch('/delete_processing_flag', { method: 'POST' });
   } catch (e) {
     // Ignore errors
+  }
+  
+  // Send READY command to set indicator ring to green after cleanup
+  try {
+    console.log('Cleanup complete - sending READY to set indicator green');
+    await fetch('/send-ready', { method: 'POST' });
+  } catch (e) {
+    console.log('Could not send READY:', e);
   }
   
   statusDiv.className = 'cleanup-status success';

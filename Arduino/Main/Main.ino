@@ -46,29 +46,10 @@ void setup() {
   Serial.println("=== PourPal Arduino System ===");
   Serial.println("Booting... Send START to skip boot sequence");
 
-  // 20-second bootup with red-to-green animation on both main LEDs and indicator ring
+  // 20-second bootup with rainbow animation on both main LEDs and indicator ring
   unsigned long startTime = millis();
   while (millis() - startTime < 20000 && !systemStarted) {
-    float progress = (float)(millis() - startTime) / 20000.0;
-    
-    // Red → Green transition
-    int r = int(255 * (1.0 - progress));
-    int g = int(255 * progress);
-    int b = 0;
-    
-    // Apply to all main LED rings
-    for (int i = 0; i < NUM_LEDS; i++) {
-      strip.setPixelColor(i, strip.Color(r, g, b));
-    }
-    strip.show();
-    
-    // Apply to indicator ring
-    for (int i = 0; i < INDICATOR_LEDS; i++) {
-      indicatorRing.setPixelColor(i, indicatorRing.Color(r, g, b));
-    }
-    indicatorRing.show();
-    
-    delay(50);
+    rainbowCycleWithIndicator(2);
     checkForStartCommand();
   }
 
@@ -382,13 +363,34 @@ uint32_t getColorFromCode(String code) {
   return strip.Color(128, 128, 128);
 }
 
-// ===== RAINBOW BOOT ANIMATION =====
+// ===== RAINBOW BOOT ANIMATION (Main LEDs Only) =====
 void rainbowCycle(uint8_t wait) {
   for (int j = 0; j < 256; j++) {
     for (int i = 0; i < NUM_LEDS; i++) {
       strip.setPixelColor(i, Wheel((i * 256 / NUM_LEDS + j) & 255));
     }
     strip.show();
+    delay(wait);
+    checkForStartCommand();
+    if (systemStarted) return;
+  }
+}
+
+// ===== RAINBOW BOOT ANIMATION (Main LEDs + Indicator Ring) =====
+void rainbowCycleWithIndicator(uint8_t wait) {
+  for (int j = 0; j < 256; j++) {
+    // Apply to main LED rings
+    for (int i = 0; i < NUM_LEDS; i++) {
+      strip.setPixelColor(i, Wheel((i * 256 / NUM_LEDS + j) & 255));
+    }
+    strip.show();
+    
+    // Apply to indicator ring
+    for (int i = 0; i < INDICATOR_LEDS; i++) {
+      indicatorRing.setPixelColor(i, Wheel((i * 256 / INDICATOR_LEDS + j) & 255));
+    }
+    indicatorRing.show();
+    
     delay(wait);
     checkForStartCommand();
     if (systemStarted) return;
