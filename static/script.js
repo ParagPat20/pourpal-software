@@ -2684,15 +2684,41 @@ function setupDrinkHandlers(cocktail) {
   // Initial display
   updateMLPreview(cocktail);
 
-  // Add change listeners for drink size
+  // Get references to elements
   const drinkSizeShot = document.getElementById("drink-size-shot");
   const drinkSizeRegular = document.getElementById("drink-size-regular");
+  const drinkIntensitySection = document.getElementById("drink-intensity-section");
   
+  // Function to toggle drink intensity section visibility
+  function toggleDrinkIntensity() {
+    if (drinkSizeShot && drinkSizeShot.checked) {
+      // Hide intensity section when Shot is selected
+      if (drinkIntensitySection) {
+        drinkIntensitySection.style.display = "none";
+      }
+    } else {
+      // Show intensity section when Regular is selected
+      if (drinkIntensitySection) {
+        drinkIntensitySection.style.display = "block";
+      }
+    }
+  }
+  
+  // Set initial state
+  toggleDrinkIntensity();
+
+  // Add change listeners for drink size
   if (drinkSizeShot) {
-    drinkSizeShot.addEventListener("change", () => updateMLPreview(cocktail));
+    drinkSizeShot.addEventListener("change", () => {
+      toggleDrinkIntensity();
+      updateMLPreview(cocktail);
+    });
   }
   if (drinkSizeRegular) {
-    drinkSizeRegular.addEventListener("change", () => updateMLPreview(cocktail));
+    drinkSizeRegular.addEventListener("change", () => {
+      toggleDrinkIntensity();
+      updateMLPreview(cocktail);
+    });
   }
 
   // Add change listeners for drink intensity
