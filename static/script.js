@@ -1765,8 +1765,18 @@ async function fetchIngredients(searchTerm = "") {
     const data = await response.json();
     ingredientsData = data;
 
-    // Sort ingredients alphabetically by name
-    ingredientsData.sort((a, b) => a.ING_Name.localeCompare(b.ING_Name));
+    // Sort ingredients: selected ones first, then alphabetically within each group
+    ingredientsData.sort((a, b) => {
+      const aSelected = selectedIngredients.includes(a.ING_Name);
+      const bSelected = selectedIngredients.includes(b.ING_Name);
+      
+      // If one is selected and the other isn't, selected comes first
+      if (aSelected && !bSelected) return -1;
+      if (!aSelected && bSelected) return 1;
+      
+      // If both are selected or both are not selected, sort alphabetically
+      return a.ING_Name.localeCompare(b.ING_Name);
+    });
 
     // Update the ingredientRemarks object with remarks from the loaded ingredients
     ingredientsData.forEach((ingredient) => {
@@ -1778,8 +1788,11 @@ async function fetchIngredients(searchTerm = "") {
     const container = document.getElementById("ingredients-container");
     container.innerHTML = ""; // Clear existing ingredients
 
+    // Track if we've added the divider
+    let dividerAdded = false;
+
     // Loop through each ingredient and create divs
-    ingredientsData.forEach((ingredient) => {
+    ingredientsData.forEach((ingredient, index) => {
       const ingredientName = ingredient.ING_Name.toLowerCase();
 
       // Check if searchTerm is empty or if the ingredient name includes the search term
@@ -1787,8 +1800,26 @@ async function fetchIngredients(searchTerm = "") {
         searchTerm === "" ||
         ingredientName.includes(searchTerm.toLowerCase())
       ) {
+        // Add divider between selected and unselected ingredients
+        const isSelected = selectedIngredients.includes(ingredient.ING_Name);
+        if (!dividerAdded && !isSelected && selectedIngredients.length > 0) {
+          const divider = document.createElement("div");
+          divider.className = "ingredients-divider";
+          divider.innerHTML = `
+            <div class="divider-line"></div>
+            <span class="divider-text">All Ingredients</span>
+            <div class="divider-line"></div>
+          `;
+          container.appendChild(divider);
+          dividerAdded = true;
+        }
         const ingDiv = document.createElement("div");
         ingDiv.classList.add("ing-item");
+        
+        // Add a class for selected ingredients
+        if (isSelected) {
+          ingDiv.classList.add("selected-ingredient");
+        }
 
         const label = document.createElement("label");
         label.classList.add("btn-checkbox");
@@ -1838,6 +1869,9 @@ async function fetchIngredients(searchTerm = "") {
             // Update states immediately after adding
             updateSelectedCount();
             updateCheckboxStates();
+            // Re-fetch to move selected items to top
+            const searchInput = document.getElementById("ingredient-search");
+            fetchIngredients(searchInput ? searchInput.value : "");
           } else {
             // If unchecked, remove from selectedIngredients
             selectedIngredients = selectedIngredients.filter(
@@ -1846,6 +1880,9 @@ async function fetchIngredients(searchTerm = "") {
             // Update states immediately after removing
             updateSelectedCount();
             updateCheckboxStates();
+            // Re-fetch to move item back to alphabetical position
+            const searchInput = document.getElementById("ingredient-search");
+            fetchIngredients(searchInput ? searchInput.value : "");
           }
         });
 

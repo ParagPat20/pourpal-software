@@ -3053,6 +3053,41 @@ select,
     font-weight: 800;
 }
 
+/* Ingredients list divider */
+.ingredients-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 10px 0;
+}
+
+.ingredients-divider .divider-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(53, 146, 103, 0.3), transparent);
+}
+
+.ingredients-divider .divider-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #359267;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* Selected ingredient highlight */
+.ing-item.selected-ingredient {
+  background: rgba(53, 146, 103, 0.08);
+  border-left: 3px solid #359267;
+  padding-left: 12px;
+}
+
+.ing-item.selected-ingredient label {
+  font-weight: 500;
+}
+
 /* ==================== CLEANUP SECTION ==================== */
 .cleanup-section {
   display: none;
